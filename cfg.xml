@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<nextbase>
+    <hostname></hostname>
+    <port></port>  
+    <orgname>Avanti</orgname>
+    <applications>
+       <app>
+            <name mode="on">Administrator</name>
+        </app>            
+    </applications>
+    <langs>
+    	<!-- https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes  -->
+		<entry>RUS</entry>
+		<entry>KAZ</entry>
+		<entry>ENG</entry>
+	</langs>
+    <mailagent mode="ON">
+    	<smtphost>smtp.mail.ru</smtphost>
+		<defaultsender>mynameis.m@mail.ru</defaultsender>
+		<auth>true</auth>
+		<smtpport>465</smtpport>
+		<smtpuser>mynameis.m@mail.ru</smtpuser>
+		<smtppassword>mynameis.mmynameis.m</smtppassword>     
+    </mailagent>
+   <ssl mode="OFF">
+        <port>38789</port>
+        <keypass>123456</keypass>
+        <keystore>c:\tmp\ssl\aikonamedia.jks</keystore>
+        <clientauth mode="OFF">
+            <truststorepass>123456</truststorepass>
+            <truststorefile>c:\tmp\ssl\truststore.jks</truststorefile>
+        </clientauth>
+    </ssl>
+</nextbase>

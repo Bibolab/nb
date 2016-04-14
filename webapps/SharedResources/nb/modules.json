@@ -1,0 +1,22 @@
+[{
+    "name": "Administrator",
+    "path": "../../Administrator"
+}, {
+    "name": "Reference",
+    "path": "../../../../Officeframe/webapps/Reference"
+}, {
+    "name": "Staff",
+    "path": "../../../../Officeframe/webapps/Staff"
+}, {
+    "name": "Accountant",
+    "path": "../../../../ComProperty/webapps/Accountant"
+}, {
+    "name": "MunicipalProperty",
+    "path": "../../../../ComProperty/webapps/MunicipalProperty"
+}, {
+    "name": "PropertyLeasing",
+    "path": "../../../../ComProperty/webapps/PropertyLeasing"
+}, {
+    "name": "Registry",
+    "path": "../../../../ComProperty/webapps/Registry"
+}]

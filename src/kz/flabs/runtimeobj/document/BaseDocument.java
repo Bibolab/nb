@@ -42,8 +42,8 @@ import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.FieldType;
 import kz.flabs.webrule.form.ISaveField;
 import kz.flabs.webrule.form.SaveFieldRule;
-import kz.lof.appenv.AppEnv;
-import kz.lof.env.Environment;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
 import kz.nextbase.script._Exception;
 import kz.nextbase.script._Helper;
 

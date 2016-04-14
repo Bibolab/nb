@@ -27,7 +27,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

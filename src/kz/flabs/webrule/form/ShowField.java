@@ -6,7 +6,7 @@ import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;
 import kz.flabs.webrule.constants.TagPublicationFormatType;
 import kz.flabs.webrule.constants.ValueSourceType;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.codehaus.groovy.control.MultipleCompilationErrorsException;
 import org.w3c.dom.Node;

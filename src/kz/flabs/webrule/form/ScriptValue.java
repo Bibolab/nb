@@ -2,7 +2,7 @@ package kz.flabs.webrule.form;
 
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.codehaus.groovy.control.MultipleCompilationErrorsException;
 

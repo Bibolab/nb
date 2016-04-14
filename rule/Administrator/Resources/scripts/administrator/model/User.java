@@ -16,16 +16,16 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import kz.flabs.util.Util;
-import kz.lof.localization.LanguageCode;
-import kz.lof.scripting.IPOJOObject;
-import kz.lof.scripting._Session;
-import kz.lof.user.IUser;
-
 import org.eclipse.persistence.annotations.Cache;
 import org.eclipse.persistence.config.CacheIsolationType;
 
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting.IPOJOObject;
+import com.exponentus.scripting._Session;
+import com.exponentus.user.IUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import kz.flabs.util.Util;
 
 @Entity
 @Table(name = "_users")
@@ -58,7 +58,7 @@ public class User implements IUser<Long>, IPOJOObject {
 	private String pwdHash;
 
 	@ManyToMany
-	@JoinTable(name = "_allowed_apps", joinColumns = @JoinColumn(name = "app_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+	@JoinTable(name = "_allowed_apps", joinColumns = @JoinColumn(name = "app_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") )
 	private List<Application> allowedApps;
 
 	private int status;

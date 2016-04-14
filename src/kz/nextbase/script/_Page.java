@@ -1,7 +1,7 @@
 package kz.nextbase.script;
 
 import kz.flabs.runtimeobj.page.Page;
-import kz.lof.scripting._WebFormData;
+import com.exponentus.scripting._WebFormData;
 
 public class _Page implements _IXMLContent {
 	private Page baseElement;

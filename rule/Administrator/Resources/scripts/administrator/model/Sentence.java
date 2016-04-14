@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import kz.lof.common.model.SimpleEntity;
+import com.exponentus.common.model.SimpleEntity;
 
 @Entity
 @Table(name = "_sentences")

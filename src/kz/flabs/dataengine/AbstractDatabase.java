@@ -17,7 +17,7 @@ import kz.flabs.runtimeobj.document.Document;
 import kz.flabs.users.User;
 import kz.flabs.util.PageResponse;
 import kz.flabs.webrule.constants.TagPublicationFormatType;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 public abstract class AbstractDatabase implements IDatabase {
 	protected AppEnv env;

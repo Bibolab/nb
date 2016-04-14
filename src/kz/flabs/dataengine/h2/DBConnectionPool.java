@@ -11,7 +11,7 @@ import kz.flabs.dataengine.DatabasePoolException;
 import kz.flabs.dataengine.DatabasePoolExceptionType;
 import kz.flabs.dataengine.DatabaseUtil;
 import kz.flabs.dataengine.IDBConnectionPool;
-import kz.lof.server.Server;
+import com.exponentus.server.Server;
 
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;

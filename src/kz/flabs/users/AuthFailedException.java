@@ -15,8 +15,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import kz.lof.appenv.AppEnv;
-import kz.lof.server.Server;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.server.Server;
 
 public class AuthFailedException extends Exception {
 	public AuthFailedExceptionType type;

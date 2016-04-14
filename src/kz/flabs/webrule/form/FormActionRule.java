@@ -7,7 +7,7 @@ import kz.flabs.webrule.RuleUser;
 import kz.flabs.webrule.constants.ActionType;
 import kz.flabs.webrule.constants.RunMode;
 import kz.flabs.webrule.constants.ValueSourceType;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

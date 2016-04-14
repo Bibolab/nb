@@ -25,10 +25,10 @@ import kz.flabs.servlets.ProviderResult;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.servlets.ServletUtil;
 import kz.flabs.servlets.sitefiles.AttachmentHandler;
-import kz.lof.appenv.AppEnv;
-import kz.lof.env.Environment;
-import kz.lof.log.LogFiles;
-import kz.lof.server.Server;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
+import com.exponentus.log.LogFiles;
+import com.exponentus.server.Server;
 import kz.nextbase.script._Exception;
 
 public class AdminProvider extends HttpServlet implements Const {

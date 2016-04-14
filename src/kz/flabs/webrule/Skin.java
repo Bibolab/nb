@@ -4,7 +4,7 @@ import java.io.File;
 
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;
-import kz.lof.server.Server;
+import com.exponentus.server.Server;
 
 import org.w3c.dom.Node;
 

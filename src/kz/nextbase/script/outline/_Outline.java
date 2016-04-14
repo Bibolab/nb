@@ -3,7 +3,7 @@ package kz.nextbase.script.outline;
 import java.util.ArrayList;
 
 import kz.flabs.webrule.constants.RunMode;
-import kz.lof.scriptprocessor.page.IOutcomeObject;
+import com.exponentus.scriptprocessor.page.IOutcomeObject;
 
 public class _Outline implements IOutcomeObject {
 	public RunMode isOn = RunMode.ON;

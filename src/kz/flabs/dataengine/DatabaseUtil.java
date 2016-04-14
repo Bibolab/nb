@@ -9,7 +9,7 @@ import java.util.Collection;
 
 import kz.flabs.runtimeobj.document.BaseDocument;
 import kz.flabs.webrule.constants.QueryType;
-import kz.lof.server.Server;
+import com.exponentus.server.Server;
 
 public class DatabaseUtil implements Const {
 

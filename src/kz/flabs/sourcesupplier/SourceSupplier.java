@@ -16,9 +16,9 @@ import kz.flabs.users.User;
 import kz.flabs.util.Util;
 import kz.flabs.webrule.constants.TagPublicationFormatType;
 import kz.flabs.webrule.constants.ValueSourceType;
-import kz.lof.appenv.AppEnv;
-import kz.lof.scripting._Session;
-import kz.lof.user.AnonymousUser;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.scripting._Session;
+import com.exponentus.user.AnonymousUser;
 
 @Deprecated
 public class SourceSupplier implements Const {

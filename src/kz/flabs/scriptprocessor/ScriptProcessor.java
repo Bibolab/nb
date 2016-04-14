@@ -1,8 +1,9 @@
 package kz.flabs.scriptprocessor;
 
+import com.exponentus.log.ILogger;
+import com.exponentus.server.Server;
+
 import groovy.lang.GroovyObject;
-import kz.lof.log.ILogger;
-import kz.lof.server.Server;
 
 public class ScriptProcessor implements IScriptProcessor {
 	public static ILogger logger = Server.logger;

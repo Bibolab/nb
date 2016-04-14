@@ -1,12 +1,13 @@
 package administrator.page.view;
 
+import com.exponentus.dataengine.jpa.ViewPage;
+import com.exponentus.log.LogFiles;
+import com.exponentus.scripting._POJOListWrapper;
+import com.exponentus.scripting._Session;
+import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.event._DoPage;
+
 import kz.flabs.runtimeobj.RuntimeObjUtil;
-import kz.lof.dataengine.jpa.ViewPage;
-import kz.lof.log.LogFiles;
-import kz.lof.scripting._POJOListWrapper;
-import kz.lof.scripting._Session;
-import kz.lof.scripting._WebFormData;
-import kz.lof.scripting.event._DoPage;
 
 public class LogView extends _DoPage {
 

@@ -3,20 +3,21 @@ package kz.flabs.runtimeobj.page;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.http.HttpStatus;
+
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.rule.page.ElementRule;
+import com.exponentus.rule.page.PageRule;
+import com.exponentus.scripting._Session;
+import com.exponentus.scripting._WebFormData;
+import com.exponentus.scriptprocessor.page.DoProcessor;
+import com.exponentus.scriptprocessor.page.PageOutcome;
+
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.RuleException;
 import kz.flabs.util.PageResponse;
 import kz.flabs.webrule.Caption;
-import kz.lof.appenv.AppEnv;
-import kz.lof.localization.LanguageCode;
-import kz.lof.rule.page.ElementRule;
-import kz.lof.rule.page.PageRule;
-import kz.lof.scripting._Session;
-import kz.lof.scripting._WebFormData;
-import kz.lof.scriptprocessor.page.DoProcessor;
-import kz.lof.scriptprocessor.page.PageOutcome;
-
-import org.apache.http.HttpStatus;
 
 public class Page implements Const {
 	public boolean fileGenerated;

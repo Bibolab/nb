@@ -1,8 +1,8 @@
 package kz.nextbase.script;
 
-import kz.lof.appenv.AppEnv;
-import kz.lof.scripting._Session;
-import kz.lof.server.Server;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.scripting._Session;
+import com.exponentus.server.Server;
 
 //import kz.nextbase.script.struct._Employer;
 

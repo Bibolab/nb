@@ -1,10 +1,8 @@
 package kz.flabs.dataengine;
 
-import kz.lof.dataengine.jpadatabase.ftengine.FTEntity;
-import kz.lof.scripting._Session;
-import kz.lof.dataengine.jpa.ViewPage;
-
-import java.util.List;
+import com.exponentus.dataengine.jpa.ViewPage;
+import com.exponentus.dataengine.jpadatabase.ftengine.FTEntity;
+import com.exponentus.scripting._Session;
 
 public interface IFTIndexEngine {
 

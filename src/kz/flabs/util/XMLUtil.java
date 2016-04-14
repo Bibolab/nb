@@ -24,7 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import kz.lof.server.Server;
+import com.exponentus.server.Server;
 
 public class XMLUtil {
 

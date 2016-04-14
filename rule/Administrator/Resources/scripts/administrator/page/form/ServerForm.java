@@ -1,10 +1,11 @@
 package administrator.page.form;
 
+import com.exponentus.common.page.form.Form;
+import com.exponentus.env.Environment;
+import com.exponentus.scripting._Session;
+import com.exponentus.scripting._WebFormData;
+
 import kz.flabs.util.Util;
-import kz.lof.common.page.form.Form;
-import kz.lof.env.Environment;
-import kz.lof.scripting._Session;
-import kz.lof.scripting._WebFormData;
 
 public class ServerForm extends Form {
 

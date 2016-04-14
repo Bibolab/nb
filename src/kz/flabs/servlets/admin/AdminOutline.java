@@ -1,9 +1,9 @@
 package kz.flabs.servlets.admin;
 
 import kz.flabs.dataengine.IDatabase;
-import kz.lof.appenv.AppEnv;
-import kz.lof.env.Environment;
-import kz.lof.server.Server;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
+import com.exponentus.server.Server;
 
 public class AdminOutline {
 	private String XMLText = "";

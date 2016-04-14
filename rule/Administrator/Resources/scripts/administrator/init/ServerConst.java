@@ -4,14 +4,15 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.exponentus.dataengine.jpa.constants.AppCode;
+import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
+import com.exponentus.env.Site;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.server.Server;
+
 import administrator.model.Application;
 import administrator.model.Language;
-import kz.lof.dataengine.jpa.constants.AppCode;
-import kz.lof.env.EnvConst;
-import kz.lof.env.Environment;
-import kz.lof.env.Site;
-import kz.lof.localization.LanguageCode;
-import kz.lof.server.Server;
 
 public class ServerConst {
 

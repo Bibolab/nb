@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting._POJOListWrapper;
+import com.exponentus.scripting._Session;
+import com.exponentus.scripting._Validation;
+import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.event._DoPage;
+
 import administrator.dao.ApplicationDAO;
 import administrator.dao.UserDAO;
 import administrator.model.Application;
 import administrator.model.User;
-import kz.lof.localization.LanguageCode;
-import kz.lof.scripting._POJOListWrapper;
-import kz.lof.scripting._Session;
-import kz.lof.scripting._Validation;
-import kz.lof.scripting._WebFormData;
-import kz.lof.scripting.event._DoPage;
 import kz.nextbase.script._Exception;
 import kz.nextbase.script._Validator;
 import kz.nextbase.script.actions._Action;

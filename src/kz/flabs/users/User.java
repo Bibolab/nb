@@ -13,7 +13,7 @@ import kz.flabs.runtimeobj.RuntimeObjUtil;
 import kz.flabs.runtimeobj.document.BaseDocument;
 import kz.flabs.runtimeobj.document.BlobFile;
 import kz.flabs.util.Util;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.apache.catalina.realm.RealmBase;
 

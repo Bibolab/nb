@@ -1,7 +1,7 @@
 package kz.nextbase.script;
 
 import kz.flabs.runtimeobj.xml.XMLDocument;
-import kz.lof.scriptprocessor.page.IOutcomeObject;
+import com.exponentus.scriptprocessor.page.IOutcomeObject;
 
 @Deprecated
 public class _XMLDocument implements _IXMLContent, IOutcomeObject {

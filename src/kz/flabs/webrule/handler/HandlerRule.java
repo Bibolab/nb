@@ -16,7 +16,7 @@ import kz.flabs.webrule.constants.RunMode;
 import kz.flabs.webrule.constants.ValueSourceType;
 import kz.flabs.webrule.scheduler.RunUnderUser;
 import kz.flabs.webrule.scheduler.ScheduleSettings;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.control.CompilerConfiguration;

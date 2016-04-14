@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import kz.flabs.dataengine.IDatabase;
 import kz.flabs.servlets.FileUploadListener;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;

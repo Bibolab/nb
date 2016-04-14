@@ -6,13 +6,14 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.jpa.DAO;
+import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
+import com.exponentus.scripting._Session;
+import com.exponentus.user.SuperUser;
+
 import administrator.model.Application;
-import kz.lof.appenv.AppEnv;
-import kz.lof.dataengine.jpa.DAO;
-import kz.lof.env.EnvConst;
-import kz.lof.env.Environment;
-import kz.lof.scripting._Session;
-import kz.lof.user.SuperUser;
 
 public class ApplicationDAO extends DAO<Application, UUID> {
 

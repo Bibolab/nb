@@ -19,8 +19,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import kz.lof.env.Environment;
-import kz.lof.server.Server;
+import com.exponentus.env.Environment;
+import com.exponentus.server.Server;
 
 public class Memo {
 

@@ -4,7 +4,7 @@ import kz.flabs.dataengine.Const;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.FieldType;
 import kz.flabs.webrule.constants.ValueSourceType;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 import org.w3c.dom.Node;
 

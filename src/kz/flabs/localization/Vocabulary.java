@@ -2,12 +2,13 @@ package kz.flabs.localization;
 
 import java.util.HashMap;
 
-import kz.flabs.util.XMLUtil;
-import kz.lof.localization.LanguageCode;
-import kz.lof.log.Log4jLogger;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.log.Log4jLogger;
+
+import kz.flabs.util.XMLUtil;
 
 public class Vocabulary {
 	public HashMap<String, Sentence> words;

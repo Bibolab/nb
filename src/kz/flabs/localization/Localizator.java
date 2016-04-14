@@ -10,8 +10,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import kz.flabs.dataengine.Const;
-import kz.lof.appenv.AppEnv;
-import kz.lof.env.Environment;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;

@@ -1,9 +1,10 @@
 package kz.nextbase.script.actions;
 
+import com.exponentus.scripting._Session;
+
 import kz.flabs.localization.Vocabulary;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;
-import kz.lof.scripting._Session;
 
 public class _Action {
 	public RunMode isOn = RunMode.ON;

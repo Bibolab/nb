@@ -1,6 +1,6 @@
 package kz.flabs.runtimeobj;
 
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 public class Application {
 	public String orgName = "org_name";

@@ -10,11 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting._Session;
+
 import administrator.dao.LanguageDAO;
 import kz.flabs.util.Util;
-import kz.lof.dataengine.jpa.AppEntity;
-import kz.lof.localization.LanguageCode;
-import kz.lof.scripting._Session;
 
 @Entity
 @Table(name = "_langs")

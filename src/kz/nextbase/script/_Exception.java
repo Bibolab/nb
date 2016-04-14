@@ -3,8 +3,8 @@ package kz.nextbase.script;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import kz.lof.appenv.AppEnv;
-import kz.lof.scripting._Session;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.scripting._Session;
 
 public class _Exception extends Exception {
 	private static final long serialVersionUID = -6047450542781990205L;

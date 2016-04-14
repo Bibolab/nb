@@ -2,7 +2,7 @@ package kz.nextbase.script;
 
 import java.text.SimpleDateFormat;
 
-import kz.lof.scripting._Session;
+import com.exponentus.scripting._Session;
 
 public class _ViewEntryCollectionParam {
 

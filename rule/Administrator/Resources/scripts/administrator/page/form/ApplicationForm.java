@@ -5,16 +5,17 @@ import java.util.UUID;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
 
+import com.exponentus.common.page.form.Form;
+import com.exponentus.dataengine.jpa.constants.AppCode;
+import com.exponentus.exception.SecureException;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting._Session;
+import com.exponentus.scripting._Validation;
+import com.exponentus.scripting._WebFormData;
+
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
 import kz.flabs.util.Util;
-import kz.lof.common.page.form.Form;
-import kz.lof.dataengine.jpa.constants.AppCode;
-import kz.lof.exception.SecureException;
-import kz.lof.localization.LanguageCode;
-import kz.lof.scripting._Session;
-import kz.lof.scripting._Validation;
-import kz.lof.scripting._WebFormData;
 import kz.nextbase.script._EnumWrapper;
 import kz.nextbase.script.actions._Action;
 import kz.nextbase.script.actions._ActionBar;

@@ -6,8 +6,8 @@ import java.util.Date;
 
 import kz.flabs.runtimeobj.xml.Tag;
 import kz.flabs.util.Util;
-import kz.lof.scripting.IPOJOObject;
-import kz.lof.scripting._Session;
+import com.exponentus.scripting.IPOJOObject;
+import com.exponentus.scripting._Session;
 
 @Deprecated
 public class _Tag<UUID> implements IPOJOObject {

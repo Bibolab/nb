@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kz.flabs.users.User;
-import kz.lof.dataengine.system.IEmployeeDAO;
+import com.exponentus.dataengine.system.IEmployeeDAO;
 
 public interface ISystemDatabase {
 	User checkUser(String userID, String pwd, User user);

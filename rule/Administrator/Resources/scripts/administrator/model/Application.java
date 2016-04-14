@@ -12,12 +12,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.dataengine.jpa.constants.AppCode;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting._Session;
+
 import administrator.dao.LanguageDAO;
 import kz.flabs.util.Util;
-import kz.lof.dataengine.jpa.AppEntity;
-import kz.lof.dataengine.jpa.constants.AppCode;
-import kz.lof.localization.LanguageCode;
-import kz.lof.scripting._Session;
 
 @Entity
 @Table(name = "_apps")

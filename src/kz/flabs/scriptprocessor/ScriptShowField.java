@@ -1,11 +1,12 @@
 package kz.flabs.scriptprocessor;
 
+import com.exponentus.scriptprocessor.page.IOutcomeObject;
+
 import groovy.lang.GroovyObject;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.TagPublicationFormatType;
 import kz.flabs.webrule.constants.ValueSourceType;
 import kz.flabs.webrule.form.IShowField;
-import kz.lof.scriptprocessor.page.IOutcomeObject;
 import kz.nextbase.script._Exception;
 import kz.nextbase.script._IXMLContent;
 

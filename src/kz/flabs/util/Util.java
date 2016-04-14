@@ -24,9 +24,9 @@ import java.util.regex.Pattern;
 
 import kz.flabs.exception.ConversionError;
 import kz.flabs.exception.DataConversionException;
-import kz.lof.appenv.AppEnv;
-import kz.lof.dataengine.jpa.AppEntity;
-import kz.lof.server.Server;
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.server.Server;
 
 public class Util {
 	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm:ss");

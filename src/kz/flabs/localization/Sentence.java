@@ -3,8 +3,8 @@ package kz.flabs.localization;
 import java.util.HashMap;
 
 import kz.flabs.util.XMLUtil;
-import kz.lof.localization.LanguageCode;
-import kz.lof.server.Server;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.server.Server;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

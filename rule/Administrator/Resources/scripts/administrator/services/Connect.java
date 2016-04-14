@@ -4,18 +4,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.system.IEmployee;
+import com.exponentus.dataengine.system.IEmployeeDAO;
+import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
+import com.exponentus.scripting._Session;
+import com.exponentus.server.Server;
+import com.exponentus.user.AnonymousUser;
+import com.exponentus.user.IUser;
+import com.exponentus.user.SuperUser;
+import com.exponentus.util.StringUtil;
+
 import administrator.dao.UserDAO;
-import kz.lof.appenv.AppEnv;
-import kz.lof.dataengine.system.IEmployee;
-import kz.lof.dataengine.system.IEmployeeDAO;
-import kz.lof.env.EnvConst;
-import kz.lof.env.Environment;
-import kz.lof.scripting._Session;
-import kz.lof.server.Server;
-import kz.lof.user.AnonymousUser;
-import kz.lof.user.IUser;
-import kz.lof.user.SuperUser;
-import kz.lof.util.StringUtil;
 
 public class Connect {
 	private AppEnv env = Environment.getAppEnv(EnvConst.ADMINISTRATOR_APP_NAME);

@@ -15,16 +15,17 @@ import javax.persistence.criteria.Root;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
 
+import com.exponentus.dataengine.jpa.ViewPage;
+import com.exponentus.env.Environment;
+import com.exponentus.scripting._Session;
+import com.exponentus.user.AnonymousUser;
+import com.exponentus.user.IUser;
+import com.exponentus.user.SuperUser;
+import com.exponentus.util.StringUtil;
+
 import administrator.model.User;
 import kz.flabs.dataengine.IDatabase;
 import kz.flabs.runtimeobj.RuntimeObjUtil;
-import kz.lof.dataengine.jpa.ViewPage;
-import kz.lof.env.Environment;
-import kz.lof.scripting._Session;
-import kz.lof.user.AnonymousUser;
-import kz.lof.user.IUser;
-import kz.lof.user.SuperUser;
-import kz.lof.util.StringUtil;
 
 public class UserDAO {
 	private IUser<Long> user;

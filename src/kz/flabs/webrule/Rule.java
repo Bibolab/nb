@@ -11,6 +11,16 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.io.FilenameUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.rule.page.ElementRule;
+import com.exponentus.rule.page.IElement;
+
 import kz.flabs.exception.RuleException;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.XMLUtil;
@@ -19,15 +29,6 @@ import kz.flabs.webrule.constants.RuleType;
 import kz.flabs.webrule.constants.RunMode;
 import kz.flabs.webrule.form.FormActionRule;
 import kz.flabs.webrule.scheduler.ScheduleSettings;
-import kz.lof.appenv.AppEnv;
-import kz.lof.rule.page.ElementRule;
-import kz.lof.rule.page.IElement;
-
-import org.apache.commons.io.FilenameUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 public abstract class Rule implements IElement, IRule {
 	public RunMode isOn = RunMode.ON;

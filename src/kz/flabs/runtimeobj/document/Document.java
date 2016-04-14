@@ -3,7 +3,7 @@ package kz.flabs.runtimeobj.document;
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.IDatabase;
 import kz.flabs.users.User;
-import kz.lof.appenv.AppEnv;
+import com.exponentus.appenv.AppEnv;
 
 public class Document extends BaseDocument implements Const {
 

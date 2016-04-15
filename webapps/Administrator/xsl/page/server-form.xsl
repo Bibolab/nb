@@ -13,7 +13,9 @@
     <xsl:template match="response">
         <form name="{@entity}" action="" data-edit="{@editable}">
             <header class="content-header">
+
                 <h1 class="header-title">
+
                     Server <xsl:value-of select="content/hostname"/>
                 </h1>
                 <div class="content-actions">

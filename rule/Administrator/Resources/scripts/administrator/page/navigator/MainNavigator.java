@@ -22,7 +22,7 @@ public class MainNavigator extends _DoPage {
 		List<IOutcomeObject> list = new ArrayList<IOutcomeObject>();
 
 		_Outline common_outline = new _Outline(getLocalizedWord("Server settings", lang), "common");
-		common_outline.addEntry(new _OutlineEntry("Server", "Server settings", "server", "p?id=server-form"));
+		common_outline.addEntry(new _OutlineEntry("Server parameters", "General server parameters", "server", "p?id=server-form"));
 		common_outline.addEntry(new _OutlineEntry("User", "user-view"));
 		common_outline.addEntry(new _OutlineEntry("Applications", "application-view"));
 		common_outline.addEntry(new _OutlineEntry("Languages", "language-view"));

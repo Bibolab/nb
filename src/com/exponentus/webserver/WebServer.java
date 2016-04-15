@@ -50,12 +50,14 @@ public class WebServer {
 	}
 
 	public Context initSharedResources(String URLPath) throws LifecycleException, MalformedURLException {
-		String db = null;
+		File docBase = null;
 		if (Environment.isDevMode()) {
-			db = new File(Environment.getKernelDir() + "webapps" + File.separator + EnvConst.SHARED_RESOURCES_APP_NAME).getAbsolutePath();
+			docBase = new File(Environment.getKernelDir() + "webapps" + File.separator + EnvConst.SHARED_RESOURCES_APP_NAME);
 		} else {
-			db = new File("webapps" + File.separator + EnvConst.SHARED_RESOURCES_APP_NAME).getAbsolutePath();
+			docBase = new File("webapps" + File.separator + EnvConst.SHARED_RESOURCES_APP_NAME);
 		}
+		System.out.println(docBase.exists());
+		String db = docBase.getAbsolutePath();
 		Context sharedResContext = tomcat.addContext(URLPath, db);
 		sharedResContext.setDisplayName(EnvConst.SHARED_RESOURCES_APP_NAME);
 

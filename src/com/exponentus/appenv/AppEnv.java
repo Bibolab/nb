@@ -58,7 +58,7 @@ public class AppEnv extends PageCacheAdapter implements Const {
 		}
 
 		loadVocabulary();
-		// compileScenarios();
+		compileScenarios();
 	}
 
 	public IDatabase getDataBase() {
@@ -89,11 +89,11 @@ public class AppEnv extends PageCacheAdapter implements Const {
 		ClassLoader parent = getClass().getClassLoader();
 		CompilerConfiguration compiler = new CompilerConfiguration();
 		String scriptDirPath = rulePath + File.separator + appName + File.separator + "Resources" + File.separator + "scripts";
-		if (Environment.isDevMode()) {
-			compiler.setTargetDirectory("bin");
-		} else {
-			compiler.setTargetDirectory(scriptDirPath);
-		}
+		// if (Environment.isDevMode()) {
+		compiler.setTargetDirectory("bin");
+		// } else {
+		compiler.setTargetDirectory(scriptDirPath);
+		// }
 		GroovyClassLoader loader = new GroovyClassLoader(parent, compiler);
 
 		File cur = new File(scriptDirPath);

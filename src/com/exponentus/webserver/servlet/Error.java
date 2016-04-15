@@ -26,7 +26,11 @@ public class Error extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String type = request.getParameter("type");
 		String msg = request.getParameter("msg");
-		String xslt = Environment.getKernelDir() + "xsl" + File.separator + "error.xsl";
+		String xslt = "xsl" + File.separator + "error.xsl";
+		File errorXslt = new File(xslt);
+		if (!errorXslt.exists()) {
+			xslt = Environment.getKernelDir() + "xsl" + File.separator + "error.xsl";
+		}
 		try {
 			request.setCharacterEncoding(EnvConst.SUPPOSED_CODE_PAGE);
 			String outputContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
@@ -34,7 +38,11 @@ public class Error extends HttpServlet {
 			if (type != null) {
 				if (type.equals("ws_auth_error")) {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					xslt = Environment.getKernelDir() + "xsl" + File.separator + "authfailed.xsl";
+					xslt = "xsl" + File.separator + "authfailed.xsl";
+					errorXslt = new File(xslt);
+					if (!errorXslt.exists()) {
+						xslt = Environment.getKernelDir() + "xsl" + File.separator + "authfailed.xsl";
+					}
 					outputContent = outputContent + "<request><error type=\"authfailed\"><message>" + msg + "</message><version>"
 					        + Server.serverVersion + "</version></error></request>";
 				} else if (type.equals("application_was_restricted")) {
@@ -78,7 +86,7 @@ public class Error extends HttpServlet {
 				out.close();
 			} else {
 				response.setContentType("text/html");
-				File errorXslt = new File(xslt);
+
 				new SaxonTransformator().toTrans(response, errorXslt, outputContent);
 			}
 		} catch (UnsupportedEncodingException e) {

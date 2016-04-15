@@ -12,7 +12,7 @@
                 <style>
                     <![CDATA[
                     body {
-                        background-image: url(/SharedResources/img/classic/f.gif);
+                       // background-image: url(/SharedResources/img/classic/f.gif);
                         font-family: arial;
                         padding-top: 5%;
                     }
@@ -45,27 +45,26 @@
                         <td style="padding-right:1.3em;text-align:right;width:20%">
                             <h1>NextBase</h1>
                             <p>
-                                <xsl:value-of select="concat('Version ', version, ' &#169; Lab of the Future 2015')"/>
+                                <xsl:value-of select="concat('Version ', version, ' &#169; Exponentus 2016')"/>
                             </p>
                         </td>
                         <td style="background:#ffcc00;width:2px"></td>
                         <td style="padding-left:1.3em">
-                            <h1>Ошибка авторизации</h1>
+                            <h1>Authorization error</h1>
                             <ul>
-                                <li>Проверьте правильность написания имени пользователя</li>
+                               <!--  <li>Проверьте правильность написания имени пользователя</li>
                                 <li>Убедитесь, что пароль вводится на том же языке, что и при регистрации</li>
-                                <li>Убедитесь, не нажат ли [CapsLock]</li>
+                                <li>Убедитесь, не нажат ли [CapsLock]</li> -->
                                 <li>
-                                    <a href="Logout">Повторить попытку авторизации</a>
+                                    <a href="Logout">Try again...</a>
                                 </li>
                             </ul>
                         </td>
                     </tr>
                 </table>
                 <footer>
-                    <a href="http://www.flabs.kz" target="_blank">Lab of the Future</a>
-                    <span>&#8226;</span>
-                    <a href="http://flabser.com" target="_blank">Feedback</a>
+                    <a href="http://dev.exponentus.com" target="_blank">Exponentus</a>
+                  
                 </footer>
             </body>
         </html>

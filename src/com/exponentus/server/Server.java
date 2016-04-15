@@ -33,7 +33,8 @@ public class Server {
 			logger.warningLogEntry("debug logging is turned on");
 		}
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
-		logger.infoLogEntry("Copyright(c) Lab of the Future 2015. All Right Reserved");
+		// logger.infoLogEntry("Copyright(c) Lab of the Future 2015. All Right
+		// Reserved");
 
 		Environment.init();
 

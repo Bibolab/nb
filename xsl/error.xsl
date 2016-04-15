@@ -13,14 +13,14 @@
 			   	  		window.history.back();
 					}
 					function goToLogin(){
-					 	window.location = "Provider?type=static&id=start&autologin=0";					
+					 	window.location = "p?type=static&id=start&autologin=0";					
 					}
 					function reloadPage(){
 					 	window.location.reload()					
 					}
 					
 					function loadXmlPage(){
-			   	  		window.location.href = window.location + "&onlyxml=1"
+			   	  		window.location.href = window.location + "&as=xml"
 					}
 				]]>
 			</script>
@@ -32,7 +32,7 @@
 						<font style="font-size:1.9em;">NextBase</font>
 						<div style="clear:both; height:10px"/>
 						<font style="font-size:1.1em;">
-							version <xsl:value-of select="error/message/version"/> &#169; Lab of the Future 2015
+							version <xsl:value-of select="error/message/version"/> &#169; Exponentus 2016
 						</font>
 						<br/>
 					</td>
@@ -177,7 +177,7 @@
 						</td>
 					</tr>
 				</table>
-				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://www.flabs.kz" target="_blank">Lab of the Future</a>&#xA0; &#8226; &#xA0;<a href="http://www.flabser.com" target="_blank">Feedback</a></div>
+				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://dev.exponentus.com" target="_blank">Exponentus</a>&#xA0; &#8226; &#xA0;</div>
 			</body>
 		</html>
 	</xsl:template>

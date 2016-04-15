@@ -12,7 +12,7 @@ import com.exponentus.localization.LanguageCode;
 
 // TODO need to secure this class
 public class EnvConst {
-	public static final String FRAMEWORK_NAME = "NB3";
+	public static final String FRAMEWORK_NAME = "nb";
 	public static final String SUPPOSED_CODE_PAGE = "utf-8";
 	public static final String DEFAULT_XML_ENC = "utf-8";
 	public static final String APP_ATTR = "app";

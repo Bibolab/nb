@@ -58,7 +58,7 @@ public class AppEnv extends PageCacheAdapter implements Const {
 		}
 
 		loadVocabulary();
-		compileScenarios();
+		// compileScenarios();
 	}
 
 	public IDatabase getDataBase() {

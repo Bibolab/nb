@@ -16,7 +16,6 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.postgresql.util.PSQLException;
 
-import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpadatabase.ftengine.FTSearchEngine;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -105,8 +104,7 @@ public class Database extends DatabaseCore implements IDatabase, Const {
 
 			if (isNascence) {
 				Server.logger.infoLogEntry("Loading primary data...");
-				AppEnv env = new AppEnv(EnvConst.ADMINISTRATOR_APP_NAME, this);
-				_Session ses = new _Session(env, new SuperUser());
+				_Session ses = new _Session(Environment.adminApplication, new SuperUser());
 				Server.logger.infoLogEntry("setup localization environment...");
 				LanguageDAO dao = new LanguageDAO(ses);
 				for (LanguageCode lc : Environment.langs) {

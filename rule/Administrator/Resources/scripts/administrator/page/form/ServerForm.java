@@ -18,13 +18,14 @@ public class ServerForm extends Form {
 		addValue("port", Environment.httpPort);
 		addValue("tmpdir", Environment.tmpDir);
 		addValue("orgname", Environment.orgName);
-		addValue("database", Environment.dataBase.getInfo());
+		addValue("database", Environment.adminApplication.getDataBase().getInfo());
 		addValue("devmode", Environment.isDevMode());
 		addValue("officeframe", Environment.getOfficeFrameDir());
 		addValue("kernel", Environment.getKernelDir());
 		addValue("starttime", Util.convertDataTimeToString(Environment.startTime));
+		addValue("devmode", Environment.isDevMode());
 		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action(getLocalizedWord("close", session.getLang()), "", _ActionType.CLOSE));
+		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
 	}
 

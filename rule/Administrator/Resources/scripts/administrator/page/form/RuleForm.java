@@ -4,8 +4,11 @@ import java.util.UUID;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
 
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.rule.page.PageRule;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
@@ -13,29 +16,30 @@ import com.exponentus.scripting.event._DoPage;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
+import kz.flabs.exception.RuleException;
 import kz.nextbase.script.actions._Action;
 import kz.nextbase.script.actions._ActionBar;
 import kz.nextbase.script.actions._ActionType;
 
-public class LanguageForm extends _DoPage {
+public class RuleForm extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
 		LanguageCode lang = session.getLang();
 		String id = formData.getValueSilently("docid");
-		Language entity;
-		if (!id.isEmpty()) {
-			LanguageDAO dao = new LanguageDAO(session);
-			entity = dao.findById(UUID.fromString(id));
-		} else {
-			entity = new Language();
+		String application = formData.getValueSilently("application");
+		AppEnv appEnv = Environment.getApplication(application);
+		try {
+			PageRule rule = appEnv.ruleProvider.getRule(id);
+			addContent(rule);
+			_ActionBar actionBar = new _ActionBar(session);
+			actionBar.addAction(new _Action("Save &amp; close", "Save and close form", _ActionType.SAVE_AND_CLOSE));
+			actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
+			addContent(actionBar);
+		} catch (RuleException e) {
+			error(e);
+			setBadRequest();
 		}
-		addContent(entity);
-		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
-		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
-		addContent(actionBar);
-		startSaveFormTransact(entity);
 	}
 
 	@Override

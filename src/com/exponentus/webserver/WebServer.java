@@ -31,7 +31,7 @@ public class WebServer {
 	// private static final String defaultWelcomeList[] = { "index.html",
 	// "index.htm" };
 
-	public void init(String defaultHostName) throws MalformedURLException, LifecycleException {
+	public boolean init(String defaultHostName) throws MalformedURLException, LifecycleException {
 		Server.logger.debugLogEntry("init webserver ...");
 
 		tomcat = new Tomcat();
@@ -44,30 +44,37 @@ public class WebServer {
 		AprLifecycleListener listener = new AprLifecycleListener();
 		server.addLifecycleListener(listener);
 
-		initSharedResources("/" + EnvConst.SHARED_RESOURCES_APP_NAME);
+		if (!initSharedResources("/" + EnvConst.SHARED_RESOURCES_APP_NAME)) {
+			Server.logger.fatalLogEntry("there is no \"" + EnvConst.SHARED_RESOURCES_APP_NAME + "\" resource");
+			return false;
+		}
 		initDefaultURL();
+		return true;
 
 	}
 
-	public Context initSharedResources(String URLPath) throws LifecycleException, MalformedURLException {
+	public boolean initSharedResources(String URLPath) throws LifecycleException, MalformedURLException {
 		File docBase = null;
 		if (Environment.isDevMode()) {
 			docBase = new File(Environment.getKernelDir() + "webapps" + File.separator + EnvConst.SHARED_RESOURCES_APP_NAME);
 		} else {
 			docBase = new File("webapps" + File.separator + EnvConst.SHARED_RESOURCES_APP_NAME);
 		}
-		System.out.println(docBase.exists());
-		String db = docBase.getAbsolutePath();
-		Context sharedResContext = tomcat.addContext(URLPath, db);
-		sharedResContext.setDisplayName(EnvConst.SHARED_RESOURCES_APP_NAME);
+		if (docBase.exists()) {
+			String db = docBase.getAbsolutePath();
+			Context sharedResContext = tomcat.addContext(URLPath, db);
+			sharedResContext.setDisplayName(EnvConst.SHARED_RESOURCES_APP_NAME);
 
-		Tomcat.addServlet(sharedResContext, "default", "org.apache.catalina.servlets.DefaultServlet");
-		sharedResContext.addServletMapping("/", "default");
+			Tomcat.addServlet(sharedResContext, "default", "org.apache.catalina.servlets.DefaultServlet");
+			sharedResContext.addServletMapping("/", "default");
 
-		sharedResContext.addMimeMapping("css", "text/css");
-		sharedResContext.addMimeMapping("js", "text/javascript");
+			sharedResContext.addMimeMapping("css", "text/css");
+			sharedResContext.addMimeMapping("js", "text/javascript");
+			return true;
+		} else {
+			return false;
+		}
 
-		return sharedResContext;
 	}
 
 	public Host addApplication(String siteName, String URLPath, String docBase) throws LifecycleException, MalformedURLException {

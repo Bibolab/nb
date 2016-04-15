@@ -32,7 +32,7 @@ public class UserDAO {
 	private EntityManagerFactory emf;
 
 	public UserDAO(_Session ses) {
-		IDatabase db = Environment.dataBase;
+		IDatabase db = Environment.adminApplication.getDataBase();
 		emf = db.getEntityManagerFactory();
 		user = ses.getUser();
 	}
@@ -43,7 +43,7 @@ public class UserDAO {
 	}
 
 	public UserDAO() {
-		IDatabase db = Environment.dataBase;
+		IDatabase db = Environment.adminApplication.getDataBase();
 		emf = db.getEntityManagerFactory();
 		user = new AnonymousUser();
 	}

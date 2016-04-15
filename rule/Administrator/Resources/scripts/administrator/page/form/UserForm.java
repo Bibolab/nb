@@ -43,8 +43,8 @@ public class UserForm extends _DoPage {
 		addContent(entity);
 		addContent(new _POJOListWrapper(new ApplicationDAO(session).findAll(), session));
 		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action(getLocalizedWord("save_close", lang), "", _ActionType.SAVE_AND_CLOSE));
-		actionBar.addAction(new _Action(getLocalizedWord("close", lang), "", _ActionType.CLOSE));
+		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
+		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
 	}
 

@@ -53,10 +53,6 @@ public class Log4jLogger implements ILogger {
 
 	}
 
-	public boolean getLoggingMode() {
-		return false;
-	}
-
 	public static String getErrorStackString(StackTraceElement stack[]) {
 		StringBuffer addErrorMessage = new StringBuffer(1000);
 		for (int i = 0; i < stack.length; i++) {

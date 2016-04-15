@@ -33,27 +33,28 @@ public class Server {
 			logger.warningLogEntry("debug logging is turned on");
 		}
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
-		// logger.infoLogEntry("Copyright(c) Lab of the Future 2015. All Right
-		// Reserved");
 
 		Environment.init();
 
 		webServerInst = new WebServer();
-		webServerInst.init(Environment.hostName);
+		if (webServerInst.init(Environment.hostName)) {
 
-		for (Site webApp : Environment.webAppToStart.values()) {
-			webServerInst.addApplication(webApp.siteName, "/" + webApp.name, webApp.name);
+			for (Site webApp : Environment.webAppToStart.values()) {
+				webServerInst.addApplication(webApp.siteName, "/" + webApp.name, webApp.name);
+			}
+
+			String info = webServerInst.initConnectors();
+			Server.logger.debugLogEntry("web server started (" + info + ")");
+			webServerInst.startContainer();
+
+			Environment.periodicalServices = new PeriodicalServices();
+
+			Thread thread = new Thread(new Console());
+			thread.setPriority(Thread.MIN_PRIORITY);
+			thread.start();
+		} else {
+			shutdown();
 		}
-
-		String info = webServerInst.initConnectors();
-		Server.logger.debugLogEntry("web server started (" + info + ")");
-		webServerInst.startContainer();
-
-		Environment.periodicalServices = new PeriodicalServices();
-
-		Thread thread = new Thread(new Console());
-		thread.setPriority(Thread.MIN_PRIORITY);
-		thread.start();
 	}
 
 	public static void main(String[] arg) {

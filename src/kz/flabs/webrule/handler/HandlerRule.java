@@ -1,11 +1,15 @@
 package kz.flabs.webrule.handler;
 
-import groovy.lang.GroovyClassLoader;
-import groovy.lang.GroovyObject;
-
 import java.io.File;
 import java.io.IOException;
 
+import org.codehaus.groovy.control.MultipleCompilationErrorsException;
+import org.w3c.dom.Node;
+
+import com.exponentus.appenv.AppEnv;
+
+import groovy.lang.GroovyClassLoader;
+import groovy.lang.GroovyObject;
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.RuleException;
 import kz.flabs.sourcesupplier.DocumentCollectionMacro;
@@ -16,12 +20,6 @@ import kz.flabs.webrule.constants.RunMode;
 import kz.flabs.webrule.constants.ValueSourceType;
 import kz.flabs.webrule.scheduler.RunUnderUser;
 import kz.flabs.webrule.scheduler.ScheduleSettings;
-import com.exponentus.appenv.AppEnv;
-
-import org.codehaus.groovy.control.CompilationFailedException;
-import org.codehaus.groovy.control.CompilerConfiguration;
-import org.codehaus.groovy.control.MultipleCompilationErrorsException;
-import org.w3c.dom.Node;
 
 public class HandlerRule extends Rule implements Const {
 	public RunUnderUser runUnderUser;
@@ -62,7 +60,7 @@ public class HandlerRule extends Rule implements Const {
 			script = XMLUtil.getTextContent(doc, "/rule/script");
 
 			Node qsNode = XMLUtil.getNode(doc, "/rule/events/trigger", true);
-			handlerClassName = getClassName(qsNode);
+			// handlerClassName = getClassName(qsNode);
 			if (isOn != RunMode.OFF) {
 				if (handlerClassName != null) {
 					scriptIsValid = true;
@@ -143,52 +141,6 @@ public class HandlerRule extends Rule implements Const {
 			return "Unknown trigger";
 		}
 
-	}
-
-	private String getClassName(Node node) {
-		ClassLoader parent = getClass().getClassLoader();
-
-		String value = XMLUtil.getTextContent(node, ".", true);
-		qsSourceType = ValueSourceType.valueOf(XMLUtil.getTextContent(node, "@source", true, "STATIC", true));
-		try {
-			Class<GroovyObject> querySave = null;
-			if (qsSourceType == ValueSourceType.STATIC) {
-				if (!value.equals("")) {
-
-				}
-			} else if (qsSourceType == ValueSourceType.FILE) {
-				CompilerConfiguration compiler = new CompilerConfiguration();
-				compiler.setTargetDirectory(scriptDirPath);
-				compiler.setClasspath(scriptDirPath);
-				GroovyClassLoader loader = new GroovyClassLoader(parent, compiler);
-				File groovyFile = new File(scriptDirPath + File.separator + value.replace(".", File.separator) + ".groovy");
-				if (groovyFile.exists()) {
-					try {
-						querySave = loader.parseClass(groovyFile);
-						return querySave.getName();
-					} catch (CompilationFailedException e) {
-						AppEnv.logger.errorLogEntry(e);
-					} catch (IOException e) {
-						AppEnv.logger.errorLogEntry(e);
-					}
-				} else {
-					AppEnv.logger.errorLogEntry("File \"" + groovyFile.getAbsolutePath() + "\" not found");
-				}
-
-			}
-		} catch (MultipleCompilationErrorsException e) {
-			AppEnv.logger.errorLogEntry("Script compilation error at form rule compiling=" + id + ", node=" + node.getBaseURI());
-			AppEnv.logger.errorLogEntry(e.getMessage());
-		}
-		return null;
-	}
-
-	public String getScript() {
-		if (script.contains("doHandler")) {
-			return script;
-		} else {
-			return getSignature(trigger) + script + "}";
-		}
 	}
 
 }

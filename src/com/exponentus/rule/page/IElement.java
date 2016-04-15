@@ -11,8 +11,6 @@ public interface IElement {
 
 	AppEnv getAppEnv();
 
-	String getScriptDirPath();
-
 	ArrayList<Caption> getCaptions();
 
 }

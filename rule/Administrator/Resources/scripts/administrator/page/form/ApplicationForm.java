@@ -39,8 +39,8 @@ public class ApplicationForm extends Form {
 		addContent(entity);
 		addContent(new _EnumWrapper<>(AppCode.class.getEnumConstants()));
 		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action(getLocalizedWord("save_close", lang), "", _ActionType.SAVE_AND_CLOSE));
-		actionBar.addAction(new _Action(getLocalizedWord("close", lang), "", _ActionType.CLOSE));
+		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
+		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
 		startSaveFormTransact(entity);
 	}

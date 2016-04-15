@@ -50,6 +50,8 @@ public class AppEnv extends PageCacheAdapter implements Const {
 			}
 		}
 
+		rulePath += File.separator + appName;
+
 		try {
 			ruleProvider = new RuleProvider(this);
 			isValid = true;
@@ -81,33 +83,35 @@ public class AppEnv extends PageCacheAdapter implements Const {
 
 	private void loadVocabulary() {
 		Localizator l = new Localizator();
-		String vocabuarFilePath = getRulePath() + File.separator + appName + File.separator + "Resources" + File.separator + "vocabulary.xml";
+		String vocabuarFilePath = getRulePath() + File.separator + "Resources" + File.separator + "vocabulary.xml";
 		vocabulary = l.populate(appName, vocabuarFilePath);
 	}
 
 	private void compileScenarios() {
 		ClassLoader parent = getClass().getClassLoader();
 		CompilerConfiguration compiler = new CompilerConfiguration();
-		String scriptDirPath = rulePath + File.separator + appName + File.separator + "Resources" + File.separator + "scripts";
-		// if (Environment.isDevMode()) {
-		compiler.setTargetDirectory("bin");
-		// } else {
-		compiler.setTargetDirectory(scriptDirPath);
-		// }
+		String scriptDirPath = rulePath + File.separator + "Resources" + File.separator + "scripts";
+		if (Environment.isDevMode()) {
+			compiler.setTargetDirectory("bin");
+		} else {
+			compiler.setTargetDirectory(scriptDirPath);
+		}
 		GroovyClassLoader loader = new GroovyClassLoader(parent, compiler);
 
 		File cur = new File(scriptDirPath);
 
-		// System.out.println(cur.getAbsolutePath());
-		Collection<File> scipts = FileUtils.listFiles(cur, extensions, true);
-		for (File groovyFile : scipts) {
-			try {
-				Server.logger.debugLogEntry("recompile " + groovyFile.getAbsolutePath() + "...");
-				Class<GroovyObject> clazz = loader.parseClass(groovyFile);
-			} catch (CompilationFailedException e) {
-				AppEnv.logger.errorLogEntry(e);
-			} catch (IOException e) {
-				AppEnv.logger.errorLogEntry(e);
+		System.out.println(cur.getAbsolutePath());
+		if (cur.exists() && cur.isDirectory()) {
+			Collection<File> scipts = FileUtils.listFiles(cur, extensions, true);
+			for (File groovyFile : scipts) {
+				try {
+					Server.logger.debugLogEntry("recompile " + groovyFile.getAbsolutePath() + "...");
+					Class<GroovyObject> clazz = loader.parseClass(groovyFile);
+				} catch (CompilationFailedException e) {
+					AppEnv.logger.errorLogEntry(e);
+				} catch (IOException e) {
+					AppEnv.logger.errorLogEntry(e);
+				}
 			}
 		}
 	}

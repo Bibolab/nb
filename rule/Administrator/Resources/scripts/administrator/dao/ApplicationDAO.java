@@ -6,9 +6,7 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.DAO;
-import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.SuperUser;
@@ -18,7 +16,7 @@ import administrator.model.Application;
 public class ApplicationDAO extends DAO<Application, UUID> {
 
 	public ApplicationDAO() {
-		super(Application.class, new _Session(new AppEnv(EnvConst.ADMINISTRATOR_APP_NAME, Environment.dataBase), new SuperUser()));
+		super(Application.class, new _Session(Environment.adminApplication, new SuperUser()));
 	}
 
 	public ApplicationDAO(_Session session) {

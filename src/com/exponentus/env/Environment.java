@@ -60,7 +60,7 @@ public class Environment implements Const, ICache {
 	public static String hostName;
 	public static int httpPort = EnvConst.DEFAULT_HTTP_PORT;
 	public static String httpSchema = "http";
-	public static IDatabase dataBase;
+	public static AppEnv adminApplication;
 	public static String defaultSender = "";
 	public static HashMap<String, String> mimeHash = new HashMap<String, String>();
 	public static HashMap<String, Site> webAppToStart = new HashMap<String, Site>();
@@ -107,7 +107,8 @@ public class Environment implements Const, ICache {
 			IDatabase db = new Database();
 			IDatabaseDeployer dd = new DatabaseDeployer(db);
 			dd.deploy();
-			Environment.dataBase = db;
+			adminApplication = new AppEnv(EnvConst.ADMINISTRATOR_APP_NAME, db);
+
 		} catch (Exception e) {
 			Server.logger.errorLogEntry(e);
 			Server.shutdown();

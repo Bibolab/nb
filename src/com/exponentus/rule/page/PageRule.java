@@ -1,7 +1,6 @@
 package com.exponentus.rule.page;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.w3c.dom.NodeList;
@@ -9,6 +8,8 @@ import org.w3c.dom.NodeList;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.scripting.IPOJOObject;
+import com.exponentus.scripting._Session;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.RuleException;
@@ -16,13 +17,11 @@ import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.Rule;
 import kz.flabs.webrule.constants.RuleType;
-import kz.flabs.webrule.constants.RunMode;;
+import kz.flabs.webrule.constants.RunMode;
+import kz.flabs.webrule.constants.ValueSourceType;;
 
-public class PageRule extends Rule implements IElement, Const {
+public class PageRule extends Rule implements IElement, Const, IPOJOObject {
 	public boolean isValid;
-	public ArrayList<ElementRule> elements = new ArrayList<ElementRule>();
-	public boolean qoEnable;
-	public String qoClassName;
 	public CachingStrategyType caching = CachingStrategyType.NO_CACHING;
 
 	public PageRule(AppEnv env, File ruleFile) throws RuleException {
@@ -90,6 +89,95 @@ public class PageRule extends Rule implements IElement, Const {
 	@Override
 	public String toString() {
 		return "PAGE id=" + id + ", ison=" + isOn;
+	}
+
+	@Override
+	public String getIdentifier() {
+		return id;
+	}
+
+	@Override
+	public String getURL() {
+		return "p?id=rule-form&amp;application=" + env.appName + "&amp;docid=" + id;
+	}
+
+	@Override
+	public String getFullXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(1000);
+		chunk.append("<id>" + id + "</id>");
+		chunk.append("<ison>" + isOn.name() + "</ison>");
+		chunk.append("<xsltfile>" + xsltFile + "</xsltfile>");
+		chunk.append("<issecured>" + isSecured + "</issecured>");
+		chunk.append("<caching>" + caching.name() + "</caching>");
+		chunk.append("<description>" + description + "</description>");
+		chunk.append("<elements>");
+		for (ElementRule e : elements) {
+			chunk.append("<element>");
+			chunk.append("<name>" + e.name + "</name>");
+			chunk.append("<type>" + e.type.name() + "</type>");
+			if (e.type == ElementType.SCRIPT) {
+				chunk.append("<scripttype>" + e.doClassName.getType() + "</scripttype>");
+				chunk.append("<classname>" + e.doClassName.getClassName() + "</classname>");
+				if (e.doClassName.getType() == ValueSourceType.GROOVY_FILE) {
+					chunk.append("<code>" + e.doClassName.getType() + "</code>");
+				}
+			} else if (e.type == ElementType.INCLUDED_PAGE) {
+				try {
+					PageRule rule = env.ruleProvider.getRule(e.value);
+					chunk.append("<url>" + rule.getURL() + "</url>");
+				} catch (RuleException e1) {
+					chunk.append("<error>" + e1.toString() + "</error>");
+				}
+			}
+
+			chunk.append("</element>");
+		}
+		chunk.append("</elements>");
+		return chunk.toString();
+
+	}
+
+	@Override
+	public String getShortXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(1000);
+		chunk.append("<id>" + id + "</id>");
+		chunk.append("<ison>" + isOn.name() + "</ison>");
+		chunk.append("<issecured>" + isSecured + "</issecured>");
+		chunk.append("<caching>" + caching.name() + "</caching>");
+		chunk.append("<elements>");
+		for (ElementRule e : elements) {
+			chunk.append("<element>");
+			chunk.append("<name>" + e.name + "</name>");
+			chunk.append("<type>" + e.type.name() + "</type>");
+			if (e.type == ElementType.SCRIPT) {
+				chunk.append("<scripttype>" + e.doClassName.getType() + "</scripttype>");
+				chunk.append("<classname>" + e.doClassName.getClassName() + "</classname>");
+				if (e.doClassName.getType() == ValueSourceType.GROOVY_FILE) {
+					chunk.append("<url>" + "p?id=code-form&amp;class=" + e.doClassName.getClassName() + "</url>");
+				}
+			} else if (e.type == ElementType.INCLUDED_PAGE) {
+				try {
+					PageRule rule = env.ruleProvider.getRule(e.value);
+					chunk.append("<url>" + rule.getURL() + "</url>");
+				} catch (RuleException e1) {
+					chunk.append("<error>" + e1.toString() + "</error>");
+				}
+			}
+
+			chunk.append("</element>");
+		}
+		chunk.append("</elements>");
+		return chunk.toString();
+	}
+
+	@Override
+	public Object getJSONObj(_Session ses) {
+		return this;
+	}
+
+	@Override
+	public boolean isEditable() {
+		return true;
 	}
 
 }

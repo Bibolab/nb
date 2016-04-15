@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,11 +22,8 @@ import com.exponentus.rule.page.IElement;
 import kz.flabs.exception.RuleException;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.constants.ActionType;
 import kz.flabs.webrule.constants.RuleType;
 import kz.flabs.webrule.constants.RunMode;
-import kz.flabs.webrule.form.FormActionRule;
-import kz.flabs.webrule.scheduler.ScheduleSettings;
 
 public abstract class Rule implements IElement, IRule {
 	public RunMode isOn = RunMode.ON;
@@ -36,18 +31,10 @@ public abstract class Rule implements IElement, IRule {
 	public String description;
 	public String id = "unknown";
 	public String xsltFile;
+	@Deprecated
 	public PublishAsType publishAs = PublishAsType.XML;
-	public String app;
-	public Date lastUpdate = new Date();
-	public Date regDate = new Date();
-	public String filePath;
-	public String parentDirPath;
-	public String scriptDirPath;
 	public int hits;
 	public ArrayList<Caption> captions = new ArrayList<Caption>();
-	public HashMap<ActionType, FormActionRule> defaultActionsMap = new HashMap<ActionType, FormActionRule>();
-	public HashMap<ActionType, FormActionRule> showActionsMap = new HashMap<ActionType, FormActionRule>();
-	public ScheduleSettings scheduleSettings;
 	public boolean isSecured;
 	public AppEnv env;
 	public ArrayList<ElementRule> elements = new ArrayList<ElementRule>();
@@ -63,9 +50,6 @@ public abstract class Rule implements IElement, IRule {
 			DocumentBuilder pageBuilder = pageFactory.newDocumentBuilder();
 			Document xmlFileDoc = pageBuilder.parse(docFile.toString());
 			doc = xmlFileDoc;
-			filePath = docFile.getAbsolutePath();
-			parentDirPath = docFile.getParentFile().getAbsolutePath();
-			scriptDirPath = "rule" + File.separator + env.appName + File.separator + "Resources" + File.separator + "scripts";
 			id = XMLUtil.getTextContent(doc, "/rule/@id", true);
 			if (id.equals("")) {
 				id = FilenameUtils.removeExtension(docFile.getName());
@@ -136,7 +120,7 @@ public abstract class Rule implements IElement, IRule {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " id=" + id + ", file=" + filePath;
+		return getClass().getSimpleName() + " id=" + id;
 	}
 
 	public String getXSLT() {
@@ -165,11 +149,6 @@ public abstract class Rule implements IElement, IRule {
 	@Override
 	public AppEnv getAppEnv() {
 		return env;
-	}
-
-	@Override
-	public String getScriptDirPath() {
-		return scriptDirPath;
 	}
 
 	@Override

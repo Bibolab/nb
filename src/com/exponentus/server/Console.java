@@ -57,7 +57,7 @@ public class Console implements Runnable {
 			System.out.println("jvm=" + System.getProperty("java.version"));
 			System.out.println("started at=" + Util.convertDataTimeToString(Environment.startTime));
 			System.out.println("application server name=" + EnvConst.APP_NAME);
-			System.out.println("database=" + Environment.dataBase.getInfo());
+			System.out.println("database=" + Environment.adminApplication.getDataBase().getInfo());
 			System.out.println("web server port=" + Environment.httpPort);
 			System.out.println("default language=" + EnvConst.DEFAULT_LANG);
 			System.out.println("languages=" + Environment.langs);

@@ -6,6 +6,9 @@ import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 
 import kz.flabs.util.Util;
+import kz.nextbase.script.actions._Action;
+import kz.nextbase.script.actions._ActionBar;
+import kz.nextbase.script.actions._ActionType;
 
 public class ServerForm extends Form {
 
@@ -20,6 +23,9 @@ public class ServerForm extends Form {
 		addValue("officeframe", Environment.getOfficeFrameDir());
 		addValue("kernel", Environment.getKernelDir());
 		addValue("starttime", Util.convertDataTimeToString(Environment.startTime));
+		_ActionBar actionBar = new _ActionBar(session);
+		actionBar.addAction(new _Action(getLocalizedWord("close", session.getLang()), "", _ActionType.CLOSE));
+		addContent(actionBar);
 	}
 
 	@Override

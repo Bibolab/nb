@@ -46,7 +46,11 @@ public class MainNavigator extends _DoPage {
         list.add(rules_outline);
         list.add(st_outline);
 
-        addContent("outline_current", formData.getValueSilently("id").replace("-form", "-view"));
+        String app = formData.getValueSilently("application");
+        if (!app.isEmpty()) {
+            addValue("request_param", "application=" + app);
+        }
+        addValue("outline_current", formData.getValueSilently("id").replace("-form", "-view"));
         addContent(list);
     }
 }

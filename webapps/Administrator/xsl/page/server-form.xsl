@@ -13,10 +13,9 @@
     <xsl:template match="response">
         <form name="{@entity}" action="" data-edit="{@editable}">
             <header class="content-header">
-
                 <h1 class="header-title">
-
-                    Server <xsl:value-of select="content/hostname"/>
+                    Server
+                    <xsl:value-of select="content/hostname"/>
                 </h1>
                 <div class="content-actions">
                     <xsl:apply-templates select="//actionbar"/>
@@ -26,10 +25,10 @@
                 <fieldset class="fieldset">
                     <div class="form-group">
                         <div class="control-label">
-                           Hostname
+                            Hostname
                         </div>
                         <div class="controls">
-                            <input type="text" name="name" value="{content/hostname}" class="span3" disabled="disabled"/>
+                            <input type="text" name="name" value="{content/hostname}" class="span3"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,17 +36,15 @@
                             Tmpdir
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/tmpdir}" class="span6"
-                                   disabled="disabled"/>
+                            <input type="text" name="appcode" value="{content/tmpdir}" class="span6"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                           Orgname
+                            Orgname
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/orgname}" class="span6"
-                                   disabled="disabled"/>
+                            <input type="text" name="appcode" value="{content/orgname}" class="span6"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,8 +52,7 @@
                             Database
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/database}" class="span6"
-                                   disabled="disabled"/>
+                            <input type="text" name="appcode" value="{content/database}" class="span6"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -64,8 +60,7 @@
                             Officeframe
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/officeframe}" class="span6"
-                                   disabled="disabled"/>
+                            <input type="text" name="appcode" value="{content/officeframe}" class="span6"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,8 +68,7 @@
                             Kernel
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/kernel}" class="span6"
-                                   disabled="disabled"/>
+                            <input type="text" name="appcode" value="{content/kernel}" class="span6"/>
                         </div>
                     </div>
                     <div class="form-group">

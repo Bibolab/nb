@@ -1,4 +1,4 @@
-package kz.pchelka.reminder;
+package com.exponentus.scripting.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;

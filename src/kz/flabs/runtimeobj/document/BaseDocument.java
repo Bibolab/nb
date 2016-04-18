@@ -26,9 +26,17 @@ import java.util.regex.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+import org.apache.commons.dbcp.DelegatingConnection;
+import org.postgresql.largeobject.LargeObject;
+import org.postgresql.largeobject.LargeObjectManager;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
+
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.DatabaseUtil;
-import kz.flabs.dataengine.IDBConnectionPool;
 import kz.flabs.dataengine.IDatabase;
 import kz.flabs.exception.DocumentException;
 import kz.flabs.exception.DocumentExceptionType;
@@ -42,17 +50,8 @@ import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.FieldType;
 import kz.flabs.webrule.form.ISaveField;
 import kz.flabs.webrule.form.SaveFieldRule;
-import com.exponentus.appenv.AppEnv;
-import com.exponentus.env.Environment;
 import kz.nextbase.script._Exception;
 import kz.nextbase.script._Helper;
-
-import org.apache.commons.dbcp.DelegatingConnection;
-import org.apache.commons.lang3.StringUtils;
-import org.postgresql.largeobject.LargeObject;
-import org.postgresql.largeobject.LargeObjectManager;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class BaseDocument implements Const, Serializable {
@@ -125,8 +124,8 @@ public class BaseDocument implements Const, Serializable {
 				LargeObject obj = lobj.open(oid, LargeObjectManager.WRITE);
 				InputStream is = obj.getInputStream();
 
-				FileOutputStream out = new FileOutputStream(toPutFolder + File.separator + folderIdx + File.separator
-				        + attachResultSet.getString("ORIGINALNAME"));
+				FileOutputStream out = new FileOutputStream(
+				        toPutFolder + File.separator + folderIdx + File.separator + attachResultSet.getString("ORIGINALNAME"));
 				byte[] b = new byte[1048576];
 				int len = 0;
 				while ((len = is.read(b)) > 0) {
@@ -138,60 +137,6 @@ public class BaseDocument implements Const, Serializable {
 			DatabaseUtil.errorPrint(dbID, e);
 		}
 		db.getConnectionPool().returnConnection(conn);
-	}
-
-	public void getAttachments(String fieldName, String toPutFolder, ArrayList<String> attachIDS) {
-		if (attachIDS.isEmpty()) {
-			return;
-		}
-		if (!new File(toPutFolder).exists()) {
-			new File(toPutFolder).mkdirs();
-		}
-
-		int folderIdx = 0;
-		IDBConnectionPool pool;
-		String tableName = "";
-		switch (this.docType) {
-
-		default:
-			tableName = "MAINDOCS";
-			pool = db.getConnectionPool();
-			break;
-		}
-		Connection conn = pool.getConnection();
-		try {
-			Statement attachStatement = conn.createStatement();
-			ResultSet attachResultSet = attachStatement.executeQuery("select * from CUSTOM_BLOBS_" + tableName + " where CUSTOM_BLOBS_" + tableName
-			        + ".ID IN (" + StringUtils.join(attachIDS, ",") + ") " + " AND CUSTOM_BLOBS_" + tableName + ".NAME = '" + fieldName + "' ");
-			while (attachResultSet.next()) {
-				if (attachResultSet.getLong("VALUE_OID") == 0) {
-					continue;
-				}
-
-				folderIdx++;
-				if (!new File(toPutFolder + File.separator + folderIdx).exists()) {
-					new File(toPutFolder + File.separator + folderIdx).mkdirs();
-				}
-
-				LargeObjectManager lobj = ((org.postgresql.PGConnection) ((DelegatingConnection) conn).getInnermostDelegate()).getLargeObjectAPI();
-				long oid = attachResultSet.getLong("VALUE_OID");
-				LargeObject obj = lobj.open(oid, LargeObjectManager.WRITE);
-				InputStream is = obj.getInputStream();
-
-				FileOutputStream out = new FileOutputStream(toPutFolder + File.separator + folderIdx + File.separator
-				        + attachResultSet.getString("ORIGINALNAME"));
-				byte[] b = new byte[1048576];
-				int len = 0;
-				while ((len = is.read(b)) > 0) {
-					out.write(b, 0, len);
-				}
-				out.close();
-			}
-		} catch (Exception e) {
-			DatabaseUtil.errorPrint(dbID, e);
-		} finally {
-			pool.returnConnection(conn);
-		}
 	}
 
 	public void setCurrentUserID(String currentID) {
@@ -1107,8 +1052,8 @@ public class BaseDocument implements Const, Serializable {
 		return "form:" + form + ",docid:" + docID + ",docType:" + docType + "ddbid:" + ddbID + ":" + fieldsMap;
 	}
 
-	public void parseXml(org.w3c.dom.Document xmlDoc, int pDocId) throws IllegalAccessException, InstantiationException, ClassNotFoundException,
-	        _Exception {
+	public void parseXml(org.w3c.dom.Document xmlDoc, int pDocId)
+	        throws IllegalAccessException, InstantiationException, ClassNotFoundException, _Exception {
 		// setParentDocumentID(String.valueOf(pDocId));
 
 		docType = Integer.parseInt(XMLUtil.getTextContent(xmlDoc, "document/@doctype"));
@@ -1206,12 +1151,11 @@ public class BaseDocument implements Const, Serializable {
 		String[] viewTextList = getViewTextList().toArray(new String[getViewTextList().size()]);
 		String viewTexts = "";
 		for (int i = 0; i < viewTextList.length; i++) {
-			viewTexts += " viewtext"
-			        + i
-			        + "=\""
+			viewTexts += " viewtext" + i + "=\""
 			        + (viewTextList[i] != null && viewTextList[i].trim().length() > 0 ? viewTextList[i].trim().replace("&amp;", "&")
 			                .replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", "\"").replace("&apos;", "'").replace("&", "&amp;")
-			                .replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;") : "null") + "\" ";
+			                .replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;") : "null")
+			        + "\" ";
 		}
 		viewTexts = viewTexts.replace("viewtext0", "viewtext");
 

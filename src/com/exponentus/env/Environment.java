@@ -36,6 +36,7 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpadatabase.Database;
 import com.exponentus.dataengine.jpadatabase.DatabaseDeployer;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.rest.RestType;
 import com.exponentus.scheduler.PeriodicalServices;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
@@ -51,6 +52,7 @@ import kz.flabs.localization.Vocabulary;
 import kz.flabs.runtimeobj.caching.ICache;
 import kz.flabs.runtimeobj.page.Page;
 import kz.flabs.util.XMLUtil;
+import kz.flabs.webrule.constants.RunMode;
 import net.sf.saxon.s9api.SaxonApiException;
 
 public class Environment implements Const, ICache {
@@ -157,6 +159,23 @@ public class Environment implements Const, ICache {
 						Site site = new Site();
 						site.name = appName;
 						site.siteName = XMLUtil.getTextContent(appNode, "name/@sitename", false);
+						String restMode = XMLUtil.getTextContent(appNode, "rest/@mode");
+						if (restMode.equalsIgnoreCase("on")) {
+							site.setRestIsOn(RunMode.ON);
+							Server.logger.infoLogEntry("rest service is on");
+							site.setRestUrlMapping(XMLUtil.getTextContent(appNode, "rest/urlmapping"));
+							site.setRestType(RestType.JERSEY);
+							List<String> restServices = new ArrayList<String>();
+							NodeList servicesList = XMLUtil.getNodeList(appNode, "rest/services");
+							for (int i1 = 0; i1 < servicesList.getLength(); i1++) {
+								String serviceName = XMLUtil.getTextContent(servicesList.item(i1), "class", false);
+								if (!serviceName.isEmpty()) {
+									restServices.add(serviceName);
+									Server.logger.infoLogEntry("rest service \"" + serviceName + "\" was added");
+								}
+							}
+							site.setRestServices(restServices);
+						}
 						webAppToStart.put(appName, site);
 					}
 				}
@@ -419,4 +438,5 @@ public class Environment implements Const, ICache {
 	public static String getKernelDir() {
 		return kernelDir;
 	}
+
 }

@@ -16,13 +16,19 @@ import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.tomcat.util.descriptor.web.ErrorPage;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
 
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.env.Site;
+import com.exponentus.rest.ResourceLoader;
 import com.exponentus.server.Server;
 import com.exponentus.webserver.valve.Logging;
 import com.exponentus.webserver.valve.Secure;
 import com.exponentus.webserver.valve.Unsecure;
+
+import kz.flabs.webrule.constants.RunMode;
 
 public class WebServer {
 	private static Tomcat tomcat;
@@ -77,9 +83,23 @@ public class WebServer {
 
 	}
 
-	public Host addApplication(String siteName, String URLPath, String docBase) throws LifecycleException, MalformedURLException {
-		Context context = null;
+	public boolean initRestService(Site site, Context context) throws LifecycleException, MalformedURLException {
+		if (site.getRestIsOn() == RunMode.ON) {
+			ResourceConfig rc = new ResourceConfig(new ResourceLoader(site).getClasses());
+			Wrapper w1 = Tomcat.addServlet(context, "REST", new ServletContainer(rc));
+			w1.setLoadOnStartup(1);
+			w1.addInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
+			context.addServletMapping(site.getRestUrlMapping(), "REST");
+		}
+		return true;
 
+	}
+
+	public Host addApplication(Site site) throws LifecycleException, MalformedURLException {
+
+		Context context = null;
+		String docBase = site.name;
+		String URLPath = "/" + docBase;
 		String db = null;
 		if (Environment.isDevMode()) {
 			if (EnvConst.ADMINISTRATOR_APP_NAME.equals(docBase)) {
@@ -126,6 +146,8 @@ public class WebServer {
 		context.addMimeMapping("js", "text/javascript");
 
 		initErrorPages(context);
+
+		initRestService(site, context);
 
 		return null;
 	}

@@ -33,7 +33,7 @@ public class MainNavigator extends _DoPage {
         _Outline rules_outline = new _Outline(getLocalizedWord("Rules of the applications", lang), "rules");
 
         for (Application app : new ApplicationDAO(session).findAll()) {
-            rules_outline.addEntry(new _OutlineEntry(app.getName(), app.getLocalizedName().toString(), "rule-view" + app.getId(),
+            rules_outline.addEntry(new _OutlineEntry(app.getName(), "", "rule-view" + app.getId(),
                     "p?id=rule-view&application=" + app.getName()));
         }
 

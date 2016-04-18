@@ -7,15 +7,17 @@
     </xsl:template>
 
     <xsl:template name="_content">
-        <xsl:apply-templates select="//request[@id = 'server-form']/page/response"/>
+        <xsl:apply-templates select="//document[@entity = 'pagerule']"/>
     </xsl:template>
 
-    <xsl:template match="response">
+    <xsl:template match="document">
         <form name="{@entity}" action="" data-edit="{@editable}">
             <header class="content-header">
                 <h1 class="header-title">
-                    Server
-                    <xsl:value-of select="content/hostname"/>
+                    <span>Page rule</span>
+                    <span class="text-muted">
+                        <xsl:value-of select="concat(' ', @docid)"/>
+                    </span>
                 </h1>
                 <div class="content-actions">
                     <xsl:apply-templates select="//actionbar"/>
@@ -25,59 +27,56 @@
                 <fieldset class="fieldset">
                     <div class="form-group">
                         <div class="control-label">
-                            Hostname
+                            is on
                         </div>
                         <div class="controls">
-                            <input type="text" name="name" value="{content/hostname}" class="span3"/>
+                            <div class="input-placeholder">
+                                <input type="checkbox" name="ison" value="1">
+                                    <xsl:if test="fields/ison = 'ON'">
+                                        <xsl:attribute name="checked" select="'checked'"/>
+                                    </xsl:if>
+                                </input>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                            Tmpdir
+                            xslt
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/tmpdir}" class="span6"/>
+                            <input type="text" name="xslt" value="{fields/xslt}" class="span8"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                            Orgname
+                            is secured
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/orgname}" class="span6"/>
+                            <div class="input-placeholder">
+                                <input type="checkbox" name="issecured" value="1">
+                                    <xsl:if test="fields/issecured = 'true'">
+                                        <xsl:attribute name="checked" select="'checked'"/>
+                                    </xsl:if>
+                                </input>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                            Database
+                            caching
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/database}" class="span6"/>
+                            <input type="text" name="caching" value="{fields/caching}" class="span8"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                            Officeframe
+                            Description
                         </div>
                         <div class="controls">
-                            <input type="text" name="appcode" value="{content/officeframe}" class="span6"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="control-label">
-                            Kernel
-                        </div>
-                        <div class="controls">
-                            <input type="text" name="appcode" value="{content/kernel}" class="span6"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="control-label">
-                            Starttime
-                        </div>
-                        <div class="controls">
-                            <input type="text" name="appcode" value="{content/starttime}" class="span3"
-                                   disabled="disabled"/>
+                            <textarea name="description" class="span8">
+                                <xsl:value-of select="fields/description"/>
+                            </textarea>
                         </div>
                     </div>
                 </fieldset>

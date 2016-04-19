@@ -100,7 +100,7 @@ public class AppEnv extends PageCacheAdapter implements Const {
 
 		File cur = new File(scriptDirPath);
 
-		System.out.println(cur.getAbsolutePath());
+		// System.out.println(cur.getAbsolutePath());
 		if (cur.exists() && cur.isDirectory()) {
 			Collection<File> scipts = FileUtils.listFiles(cur, extensions, true);
 			for (File groovyFile : scipts) {

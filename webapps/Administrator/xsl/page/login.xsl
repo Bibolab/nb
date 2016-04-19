@@ -22,28 +22,25 @@
     <xsl:template name="_content">
         <form class="sign-in" action="Login" method="post">
             <h1>
-                <xsl:value-of select="//captions/sign_in/@caption"/>
+                Sign In
             </h1>
             <label class="login">
                 <i class="fa fa-user"></i>
-                <input type="text" name="login" value="" required="required">
-                    <xsl:attribute name="placeholder" select="//captions/user/@caption"/>
-                </input>
+                <input type="text" name="login" value="" required="required" placeholder="Login"/>
+                 
             </label>
             <label class="pwd">
                 <i class="fa fa-lock"></i>
-                <input type="password" name="pwd" value="" required="required">
-                    <xsl:attribute name="placeholder" select="//captions/password/@caption"/>
-                </input>
+                <input type="password" name="pwd" value="" required="required" placeholder="Password"/>                   
             </label>
             <label class="noauth">
                 <input type="checkbox" name="noauth" value="1"/>
                 <span>
-                    <xsl:value-of select="//captions/another_comp/@caption"/>
+                   Another computer
                 </span>
             </label>
             <button class="btn" type="submit">
-                <xsl:value-of select="//captions/login/@caption"/>
+                Log In
             </button>
         </form>
     </xsl:template>

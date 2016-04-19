@@ -16,16 +16,21 @@ import javax.ws.rs.core.Response;
 
 import org.omg.CORBA.UserException;
 
+import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.SessionPool;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
-import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
+import com.exponentus.webserver.servlet.Cookies;
 
-import administrator.model.User;
 import administrator.services.Connect;
 import kz.flabs.dataengine.DatabasePoolException;
+import kz.flabs.exception.PortalException;
+import kz.flabs.servlets.ProviderExceptionType;
+import kz.flabs.servlets.PublishAsType;
+import kz.flabs.users.AuthFailedException;
+import kz.flabs.users.AuthFailedExceptionType;
 
 @Path("/session")
 public class SessionService extends RestProvider {
@@ -41,56 +46,42 @@ public class SessionService extends RestProvider {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createSession(User authUser) throws ClassNotFoundException, InstantiationException, DatabasePoolException, UserException,
+	public Response createSession(Credentials authUser) throws ClassNotFoundException, InstantiationException, DatabasePoolException, UserException,
 	        IllegalAccessException, SQLException, URISyntaxException {
-		_Session session = getSession();
-		LanguageCode lang = session.getLang();
+		HttpSession jses;
+		_Session ses = getSession();
+		LanguageCode lang = ses.getLang();
+		Cookies appCookies = new Cookies(request);
 		String login = authUser.getLogin();
-		IUser<Long> user = new Connect().getUser(login, authUser.getPwd());
-		authUser.setPwd(null);
-		if (!user.isAuthorized()) {
-			Server.logger.warningLogEntry("signin of " + login + " was failed");
-			// authUser.setError(AuthFailedExceptionType.PASSWORD_OR_LOGIN_INCORRECT,
-			// lang);
+		try {
+			IUser<Long> user = new Connect().getUser(login, authUser.getPwd());
+
+			if (user != null && user.isAuthorized()) {
+				jses = request.getSession(true);
+				ses = new _Session(getAppEnv(), user);
+
+				ses.setLang(LanguageCode.valueOf(appCookies.currentLang));
+
+				AppEnv.logger.infoLogEntry(user.getUserID() + " has connected");
+
+				jses.setAttribute(EnvConst.SESSION_ATTR, ses);
+				int maxAge = -1;
+				String token = SessionPool.put(ses);
+				NewCookie cookie = new NewCookie(EnvConst.AUTH_COOKIE_NAME, token, "/", null, null, maxAge, false);
+				return Response.status(HttpServletResponse.SC_OK).entity(authUser).cookie(cookie).build();
+			} else {
+				AppEnv.logger.infoLogEntry("Authorization failed, login or password is incorrect -");
+				throw new AuthFailedException(AuthFailedExceptionType.PASSWORD_INCORRECT, login);
+			}
+
+		} catch (AuthFailedException e) {
+			authUser.setError(AuthFailedExceptionType.PASSWORD_INCORRECT, lang);
 			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
+		} catch (Exception e) {
+			new PortalException(e, response, ProviderExceptionType.INTERNAL, PublishAsType.HTML);
 		}
 
-		String userID = user.getLogin();
-		HttpSession jses = request.getSession(true);
-
-		Server.logger.infoLogEntry(userID + " has connected");
-		/*
-		 * session.setUser(user); if (user.getStatus() ==
-		 * UserStatusType.REGISTERED) { authUser = session.getAppUser(); //
-		 * authUser.setAppId(appID); } else if (user.getStatus() ==
-		 * UserStatusType.WAITING_FIRST_ENTERING) {
-		 * authUser.setRedirect("tochangepwd"); } else if (user.getStatus() ==
-		 * UserStatusType.NOT_VERIFIED) {
-		 * authUser.setError(AuthFailedExceptionType.INCOMPLETE_REGISTRATION,
-		 * lang); return
-		 * Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser)
-		 * .build(); } else if (user.getStatus() ==
-		 * UserStatusType.WAITING_FOR_VERIFYCODE) {
-		 * authUser.setError(AuthFailedExceptionType.INCOMPLETE_REGISTRATION,
-		 * lang); return
-		 * Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser)
-		 * .build(); } else if (user.getStatus() ==
-		 * UserStatusType.USER_WAS_DELETED) {
-		 * authUser.setError(AuthFailedExceptionType.USER_WAS_DELETED, lang);
-		 * return
-		 * Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser)
-		 * .build(); } else {
-		 * authUser.setError(AuthFailedExceptionType.UNKNOWN_STATUS, lang);
-		 * return
-		 * Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser)
-		 * .build(); }
-		 */
-		String token = SessionPool.put(session);
-		jses.setAttribute(EnvConst.SESSION_ATTR, session);
-		int maxAge = -1;
-
-		NewCookie cookie = new NewCookie(EnvConst.AUTH_COOKIE_NAME, token, "/", null, null, maxAge, false);
-		return Response.status(HttpServletResponse.SC_OK).entity(authUser).cookie(cookie).build();
+		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
 	}
 
 }

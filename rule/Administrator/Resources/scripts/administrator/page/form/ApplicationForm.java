@@ -93,4 +93,14 @@ public class ApplicationForm extends Form {
 
 		return ve;
 	}
+
+	@Override
+	public void doPUT(_Session session, _WebFormData formData) {
+
+	}
+
+	@Override
+	public void doDELETE(_Session session, _WebFormData formData) {
+
+	}
 }

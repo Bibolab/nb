@@ -33,4 +33,10 @@ public abstract class Form extends _DoPage {
 
 	@Override
 	public abstract void doPOST(_Session session, _WebFormData formData);
+
+	@Override
+	public abstract void doPUT(_Session session, _WebFormData formData);
+
+	@Override
+	public abstract void doDELETE(_Session session, _WebFormData formData);
 }

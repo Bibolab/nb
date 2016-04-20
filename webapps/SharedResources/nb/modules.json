@@ -19,4 +19,10 @@
 }, {
     "name": "Registry",
     "path": "../../../../ComProperty/webapps/Registry"
+}, {
+    "name": "DataFixer",
+    "path": "../../../../ComProperty/webapps/DataFixer"
+}, {
+    "name": "GisServProvider",
+    "path": "../../../../ComProperty/webapps/GisServProvider"
 }]

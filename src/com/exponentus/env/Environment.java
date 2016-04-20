@@ -279,7 +279,11 @@ public class Environment implements Const, ICache {
 	}
 
 	public static String getFullHostName() {
-		return httpSchema + "://" + Environment.hostName + ":" + Environment.httpPort;
+		String port = "";
+		if (Environment.httpPort != 80) {
+			port = ":" + Environment.httpPort;
+		}
+		return httpSchema + "://" + Environment.hostName + port;
 	}
 
 	public static String getWorkspaceURL() {

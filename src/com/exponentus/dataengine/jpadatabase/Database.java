@@ -61,10 +61,10 @@ public class Database extends DatabaseCore implements IDatabase, Const {
 		String sysDbURL = "jdbc:postgresql://" + EnvConst.DATABASE_HOST + ":" + EnvConst.CONN_PORT + "/postgres";
 
 		try {
-			if (!hasDatabase(EnvConst.APP_NAME, sysDbURL, props)) {
-				Server.logger.infoLogEntry("creating database \"" + EnvConst.APP_NAME + "\"...");
+			if (!hasDatabase(EnvConst.DATABASE_NAME, sysDbURL, props)) {
+				Server.logger.infoLogEntry("creating database \"" + EnvConst.DATABASE_NAME + "\"...");
 				registerUser(dbUser, dbPwd, sysDbURL, props);
-				if (createDatabase(EnvConst.APP_NAME, dbUser, sysDbURL, props) == 0) {
+				if (createDatabase(EnvConst.DATABASE_NAME, dbUser, sysDbURL, props) == 0) {
 					Server.logger.infoLogEntry("the database has been created");
 					isNascence = true;
 				}
@@ -73,7 +73,7 @@ public class Database extends DatabaseCore implements IDatabase, Const {
 			Server.logger.errorLogEntry(e);
 		}
 
-		connectionURL = "jdbc:postgresql://" + EnvConst.DATABASE_HOST + ":" + EnvConst.CONN_PORT + "/" + EnvConst.APP_NAME;
+		connectionURL = "jdbc:postgresql://" + EnvConst.DATABASE_HOST + ":" + EnvConst.CONN_PORT + "/" + EnvConst.DATABASE_NAME;
 
 		dbPool = new DBConnectionPool();
 		try {

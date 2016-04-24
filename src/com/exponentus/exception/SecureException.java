@@ -23,7 +23,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 public class SecureException extends Exception implements IOutcomeObject {
 	private static final long serialVersionUID = 1L;
 	private String location;
-	private String type = EnvConst.APP_NAME;
+	private String type = EnvConst.APP_ID;
 	private String servletName = "Provider";
 	private String exception;
 	private String appType;

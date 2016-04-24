@@ -132,7 +132,7 @@ public class Environment implements Const, ICache {
 
 			orgName = XMLUtil.getTextContent(xmlDocument, "/nextbase/orgname");
 			if (orgName.isEmpty()) {
-				hostName = EnvConst.APP_NAME;
+				hostName = EnvConst.APP_ID;
 			}
 
 			hostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/hostname");

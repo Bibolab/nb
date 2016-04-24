@@ -1,9 +1,10 @@
 package kz.flabs.runtimeobj.document;
 
+import com.exponentus.appenv.AppEnv;
+
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.IDatabase;
 import kz.flabs.users.User;
-import com.exponentus.appenv.AppEnv;
 
 public class Document extends BaseDocument implements Const {
 
@@ -21,7 +22,7 @@ public class Document extends BaseDocument implements Const {
 	public Document(AppEnv env, User currentUser) {
 		docType = Const.DOCTYPE_MAIN;
 		this.env = env;
-		db = env.getDataBase();
+
 		// dbID = db == null ? "" : db.getDbID();
 		this.currentUserID = currentUser.getUserID();
 		setNewDoc(true);

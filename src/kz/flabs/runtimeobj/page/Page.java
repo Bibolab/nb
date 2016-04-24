@@ -16,7 +16,6 @@ import com.exponentus.scriptprocessor.page.PageOutcome;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.RuleException;
-import kz.flabs.util.PageResponse;
 import kz.flabs.webrule.Caption;
 
 public class Page implements Const {
@@ -27,7 +26,6 @@ public class Page implements Const {
 	public int status = HttpStatus.SC_OK;
 	protected AppEnv env;
 	protected PageRule rule;
-	public PageResponse response;
 
 	protected _WebFormData fields;
 

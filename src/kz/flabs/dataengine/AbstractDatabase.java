@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import com.exponentus.appenv.AppEnv;
 
 import kz.flabs.exception.DocumentException;
 import kz.flabs.runtimeobj.DocumentCollection;
@@ -15,9 +16,7 @@ import kz.flabs.runtimeobj.document.BaseDocument;
 import kz.flabs.runtimeobj.document.DocID;
 import kz.flabs.runtimeobj.document.Document;
 import kz.flabs.users.User;
-import kz.flabs.util.PageResponse;
 import kz.flabs.webrule.constants.TagPublicationFormatType;
-import com.exponentus.appenv.AppEnv;
 
 public abstract class AbstractDatabase implements IDatabase {
 	protected AppEnv env;
@@ -148,19 +147,14 @@ public abstract class AbstractDatabase implements IDatabase {
 		return false;
 	}
 
-	public void deleteDocument(int docType, int docID, User user, boolean completely) throws DocumentException, SQLException, DatabasePoolException,
-	        InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public void deleteDocument(int docType, int docID, User user, boolean completely)
+	        throws DocumentException, SQLException, DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 	}
 
-	public void deleteDocument(String id, boolean completely, User user) throws DocumentException, SQLException, DatabasePoolException,
-	        InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public void deleteDocument(String id, boolean completely, User user)
+	        throws DocumentException, SQLException, DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
-	}
-
-	public PageResponse deleteDocuments(List<DocID> docID, boolean completely, User user) {
-
-		return null;
 	}
 
 	public boolean unDeleteDocument(String id, User user) {
@@ -171,11 +165,6 @@ public abstract class AbstractDatabase implements IDatabase {
 	public boolean unDeleteDocument(int aid, User user) throws DocumentException {
 
 		return false;
-	}
-
-	public PageResponse unDeleteDocuments(List<DocID> docID, User user) {
-
-		return null;
 	}
 
 	public Document getMainDocumentByID(int docID, Set<String> complexUserID, String absoluteUserID) {

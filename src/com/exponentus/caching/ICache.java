@@ -1,4 +1,4 @@
-package kz.flabs.runtimeobj.caching;
+package com.exponentus.caching;
 
 import java.io.IOException;
 

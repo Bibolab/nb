@@ -17,8 +17,6 @@ import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
 
 import kz.flabs.dataengine.IDatabase;
-import kz.nextbase.script._AppEntourage;
-import kz.nextbase.script._ViewEntryCollectionParam;
 import kz.nextbase.script.actions._ActionBar;
 
 public class _Session extends PageCacheAdapter {
@@ -69,10 +67,6 @@ public class _Session extends PageCacheAdapter {
 
 	public _ActionBar createActionBar() {
 		return new _ActionBar(this);
-	}
-
-	public _ViewEntryCollectionParam createViewEntryCollectionParam() {
-		return new _ViewEntryCollectionParam(this);
 	}
 
 	public IDatabase getDatabase() {

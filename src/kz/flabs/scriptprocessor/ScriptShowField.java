@@ -7,8 +7,6 @@ import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.TagPublicationFormatType;
 import kz.flabs.webrule.constants.ValueSourceType;
 import kz.flabs.webrule.form.IShowField;
-import kz.nextbase.script._Exception;
-import kz.nextbase.script._IXMLContent;
 
 public class ScriptShowField implements IShowField, IOutcomeObject {
 	private String name;
@@ -21,12 +19,6 @@ public class ScriptShowField implements IShowField, IOutcomeObject {
 		this.name = name;
 		this.value = value;
 		XMLPiece = "<" + name + ">" + (noConvert ? value : XMLUtil.getAsTagValue(value)) + "</" + name + ">";
-	}
-
-	public ScriptShowField(String name, _IXMLContent value) throws _Exception {
-		this.name = name;
-		this.value = value.toString();
-		XMLPiece = "<" + name + ">" + value.toXML() + "</" + name + ">";
 	}
 
 	public ScriptShowField(String name, String value) {

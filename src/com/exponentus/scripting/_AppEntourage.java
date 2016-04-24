@@ -1,10 +1,8 @@
-package kz.nextbase.script;
+package com.exponentus.scripting;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
-
-//import kz.nextbase.script.struct._Employer;
 
 public class _AppEntourage {
 	private AppEnv env;

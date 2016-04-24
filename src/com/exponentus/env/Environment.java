@@ -33,6 +33,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.caching.ICache;
 import com.exponentus.dataengine.jpadatabase.Database;
 import com.exponentus.dataengine.jpadatabase.DatabaseDeployer;
 import com.exponentus.localization.LanguageCode;
@@ -49,7 +50,6 @@ import kz.flabs.dataengine.IDatabaseDeployer;
 import kz.flabs.exception.RuleException;
 import kz.flabs.localization.Localizator;
 import kz.flabs.localization.Vocabulary;
-import kz.flabs.runtimeobj.caching.ICache;
 import kz.flabs.runtimeobj.page.Page;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;

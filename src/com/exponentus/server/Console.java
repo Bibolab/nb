@@ -20,11 +20,11 @@ import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
+import com.exponentus.localization.Localizator;
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.scheduler.SchedulerHelper;
 import com.exponentus.util.StringUtil;
 
-import kz.flabs.localization.Localizator;
-import kz.flabs.localization.Vocabulary;
 import kz.flabs.util.Util;
 
 public class Console implements Runnable {

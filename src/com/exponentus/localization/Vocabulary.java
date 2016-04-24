@@ -1,4 +1,4 @@
-package kz.flabs.localization;
+package com.exponentus.localization;
 
 import java.util.HashMap;
 

@@ -2,10 +2,10 @@ package com.exponentus.scriptprocessor;
 
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 
-import kz.flabs.localization.Vocabulary;
 import kz.flabs.scriptprocessor.ScriptProcessor;
 
 public class ScriptHelper {

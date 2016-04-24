@@ -5,13 +5,11 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,20 +36,13 @@ import com.exponentus.env.Environment;
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.DatabaseUtil;
 import kz.flabs.dataengine.IDatabase;
-import kz.flabs.exception.DocumentException;
-import kz.flabs.exception.DocumentExceptionType;
-import kz.flabs.exception.WebFormValueException;
 import kz.flabs.runtimeobj.DocumentCollection;
 import kz.flabs.runtimeobj.RuntimeObjUtil;
 import kz.flabs.users.User;
-import kz.flabs.util.ListConvertor;
 import kz.flabs.util.Util;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.FieldType;
-import kz.flabs.webrule.form.ISaveField;
-import kz.flabs.webrule.form.SaveFieldRule;
 import kz.nextbase.script._Exception;
-import kz.nextbase.script._Helper;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class BaseDocument implements Const, Serializable {
@@ -375,7 +366,7 @@ public class BaseDocument implements Const, Serializable {
 				field = fieldsMap.get(name);
 				field.valuesAsStringList.clear();
 				field.valuesAsStringList.addAll(value);
-				field.valueAsText = ListConvertor.listToString(field.valuesAsStringList);
+
 				field.setType(FieldType.LIST);
 			} else {
 				addListField(name, value);
@@ -490,7 +481,7 @@ public class BaseDocument implements Const, Serializable {
 		}
 	}
 
-	public String[] getValueAsString(String fieldName) throws DocumentException {
+	public String[] getValueAsString(String fieldName) {
 
 		Field field = fieldsMap.get(fieldName);
 		if (field != null) {
@@ -517,13 +508,14 @@ public class BaseDocument implements Const, Serializable {
 				String[] res = blobField.getFileNames().toArray(new String[ms]);
 				return res;
 			} else {
-				throw new DocumentException(DocumentExceptionType.FIELD_NOT_FOUND, fieldName);
+
 			}
 		}
+		return null;
 
 	}
 
-	public String getValue(String fieldName) throws DocumentException {
+	public String getValue(String fieldName) {
 
 		Field field = fieldsMap.get(fieldName);
 		if (field != null) {
@@ -542,38 +534,30 @@ public class BaseDocument implements Const, Serializable {
 		}
 	}
 
-	public Collection<String> getValueAsList(String fieldName) throws DocumentException {
-		Field field = fieldsMap.get(fieldName);
-		if (field != null) {
-			return ListConvertor.stringToList(field.valueAsText);
-			// return field.valuesAsStringList;
-		} else {
-			return new HashSet<String>();
-		}
-	}
-
-	public int getValueAsInteger(String fieldName) throws DocumentException {
+	public int getValueAsInteger(String fieldName) {
 		Field field = getFields().get(fieldName);
 		if (field != null) {
 			if (field.getType() == FieldType.NUMBER) {
 				return field.valueAsNumber.intValue();
 			} else {
-				throw new DocumentException(DocumentExceptionType.NUMBER_VALUE_INCORRECT, fieldName);
+
 			}
 		} else {
-			throw new DocumentException(DocumentExceptionType.FIELD_NOT_FOUND, fieldName);
+
 		}
+		return docID;
 
 	}
 
-	public Date getValueAsDate(String fieldName) throws DocumentException {
+	public Date getValueAsDate(String fieldName) {
 		try {
 			Field field = getFields().get(fieldName);
 			return field.valueAsDate;
 		} catch (Exception e) {
 			AppEnv.logger.errorLogEntry("Cannot get value as Date: (" + fieldName + ")");
-			throw new DocumentException(DocumentExceptionType.CANNOT_GET_VALUE_AS_DATA, fieldName);
+
 		}
+		return lastUpdate;
 	}
 
 	public void setAuthor(String author) {
@@ -660,177 +644,8 @@ public class BaseDocument implements Const, Serializable {
 		}
 	}
 
-	public String getViewIcon() throws DocumentException {
+	public String getViewIcon() {
 		return viewIcon;
-	}
-
-	public void setAccessRelatedFields(kz.flabs.runtimeobj.document.BaseDocument doc, HashMap<String, SaveFieldRule> saveFieldsMap,
-	        HashMap<String, String[]> fields) throws WebFormValueException {
-		for (SaveFieldRule saveField : saveFieldsMap.values()) {
-			Field val = null;
-			switch (saveField.valueSourceType) {
-			case STATIC:
-				val = getStaticContent(saveField);
-				break;
-			case QUERY:
-				break;
-			case SCRIPT:
-				val = getDoScriptResult(saveField);
-				break;
-			case WEBFORMFIELD:
-				val = getWebFormValue(saveField, fields);
-				break;
-			case MACRO:
-
-			}
-			if (saveField.type == FieldType.AUTHOR) {
-				if (val.getType() == FieldType.TEXTLIST) {
-					addEditors(val.valuesAsStringList);
-					addReaders(val.valuesAsStringList);
-				} else {
-					addEditor(val.valueAsText);
-
-				}
-			} else if (saveField.type == FieldType.READER) {
-				if (val.getType() == FieldType.TEXTLIST) {
-					addReaders(val.valuesAsStringList);
-				} else {
-
-				}
-			}
-		}
-	}
-
-	public void fillFieldsToSave(HashMap<String, ISaveField> saveFieldsMap, HashMap<String, String[]> fields) throws WebFormValueException {
-		for (ISaveField saveField : saveFieldsMap.values()) {
-			switch (saveField.getSourceType()) {
-			case STATIC:
-				addField(getStaticContent(saveField));
-				break;
-			case QUERY:
-
-				break;
-			case SCRIPT:
-				addField(getDoScriptResult(saveField));
-				break;
-			case WEBFORMFIELD:
-				addField(getWebFormValue(saveField, fields));
-				break;
-			case WEBFORMFILE:
-				blobDataProcess(saveField, fields);
-				String filesToDelete[] = fields.get("delete" + saveField.getName() + "name");
-				if (filesToDelete != null) {
-					for (String fileName : filesToDelete) {
-						try {
-							String originalAttachName1 = new String(fileName.getBytes("ISO-8859-1"), "windows-1251");
-							String attachmentName = new String(originalAttachName1.getBytes("cp1251"), "UTF-8");
-							BlobField targetBlob = this.blobFieldsMap.get(saveField.getName());
-							if (targetBlob == null) {
-								continue;
-							}
-							targetBlob.removeFile(attachmentName);
-						} catch (UnsupportedEncodingException ue) {
-
-							continue;
-						}
-					}
-				}
-				String formSesID = fields.get("formsesid")[0];
-				String tmpFolder = Environment.tmpDir + File.separator + formSesID + File.separator + saveField.getName() + File.separator;
-				HashMap<String, BlobFile> uploadedFiles = new RuntimeObjUtil().getUploadedFiles(fields);
-
-				if (uploadedFiles.size() == 0) {
-					continue;
-				}
-				if (blobFieldsMap.containsKey(saveField.getName())) {
-					BlobField existingBlob = blobFieldsMap.get(saveField.getName());
-					existingBlob.addFiles(uploadedFiles);
-
-				} else {
-					BlobField newBlob = new BlobField(saveField.getName());
-					newBlob.addFiles(uploadedFiles);
-					blobFieldsMap.put(newBlob.name, newBlob);
-					// replaceStringField("", (String[])fields.get(newBlob.));
-				}
-
-				// String commentField =
-				// ((String[])fields.get(SiteFileUtil.getCommentFieldName(originalName,
-				// fullName, size)))[0];
-				toDeleteAfterSave = Environment.tmpDir + File.separator + formSesID;
-				break;
-			case MACRO:
-			}
-		}
-	}
-
-	protected void blobDataProcess(ISaveField saveField, HashMap<String, String[]> fields) {
-		String filesToDelete[] = fields.get("delete" + saveField.getName() + "name");
-		String formSesID = fields.get("formsesid")[0];
-		String tmpFolder = Environment.tmpDir + File.separator + formSesID + File.separator + saveField.getName() + File.separator;
-		if (filesToDelete != null) {
-			RuntimeObjUtil.checkUploadedFiles(tmpFolder, Arrays.asList(filesToDelete));
-			for (String fileName : filesToDelete) {
-				BlobField targetBlob = this.blobFieldsMap.get(saveField.getName());
-				if (targetBlob == null) {
-					continue;
-				}
-				if (!targetBlob.removeFile(fileName)) {
-					AppEnv.logger.warningLogEntry("Attachment \"" + fileName + "\" has not been deleted from " + getComplexID());
-				}
-			}
-		}
-
-		HashMap<String, BlobFile> uploadedFiles = new RuntimeObjUtil().getUploadedFiles(fields);
-
-		for (BlobField blob : blobFieldsMap.values()) {
-			for (BlobFile file : blob.getFiles()) {
-				String parName = "comment" + file.checkHash;
-				String parValue[] = fields.get(parName);
-				if (parValue != null && parValue.length > 0) {
-					file.comment = parValue[0];
-				}
-			}
-		}
-
-		if (uploadedFiles.size() == 0) {
-			return;
-		}
-		if (blobFieldsMap.containsKey(saveField.getName())) {
-			BlobField existingBlob = blobFieldsMap.get(saveField.getName());
-			existingBlob.addFiles(uploadedFiles);
-
-		} else {
-			BlobField newBlob = new BlobField(saveField.getName());
-			newBlob.addFiles(uploadedFiles);
-			blobFieldsMap.put(newBlob.name, newBlob);
-		}
-		toDeleteAfterSave = Environment.tmpDir + File.separator + formSesID;
-	}
-
-	protected Field getValueForDoc(Map<String, ISaveField> saveFieldsMap, String ruleID, Map<String, String[]> fields) throws WebFormValueException {
-		ISaveField saveField = saveFieldsMap.get(ruleID);
-		Field field = null;
-		if (saveField != null) {
-			field = getSaveFieldValue(saveField, fields);
-		} else {
-			AppEnv.logger.warningLogEntry("Did not found a description of the \"" + ruleID + "\" field, during saving");
-			field = new Field("error", "error", FieldType.UNKNOWN);
-		}
-		return field;
-	}
-
-	protected Field getSaveFieldValue(ISaveField saveField, Map<String, String[]> fields) throws WebFormValueException {
-		switch (saveField.getSourceType()) {
-		case STATIC:
-			return getStaticContent(saveField);
-		case SCRIPT:
-			return getDoScriptResult(saveField);
-		case WEBFORMFIELD:
-			return getWebFormValue(saveField, fields);
-		case MACRO:
-
-		}
-		return null;
 	}
 
 	protected String[] getWebFormValue(String fieldName, Map<String, String[]> fields, String defaultValue) {
@@ -847,35 +662,6 @@ public class BaseDocument implements Const, Serializable {
 			AppEnv.logger.errorLogEntry("Unable to get field \"" + fieldName + "\" from webform, have to return default value");
 			String val[] = { defaultValue };
 			return val;
-		}
-	}
-
-	private Field getStaticContent(ISaveField saveField) {
-		return new Field(saveField.getName(), saveField.getValue(), saveField.getType());
-	}
-
-	private Field getDoScriptResult(ISaveField saveField) {
-		return new Field(saveField.getName(), saveField.getValue(), saveField.getType());
-	}
-
-	private Field getWebFormValue(ISaveField saveField, Map<String, String[]> fields) throws WebFormValueException {
-		try {
-			String valueToSave[] = fields.get(saveField.getValue());
-			if (valueToSave.length > 1) {
-				return new Field(saveField.getName(), valueToSave);
-			} else {
-				return new Field(saveField.getName(), valueToSave[0], saveField.getType());
-			}
-
-		} catch (Exception e) {
-			if (saveField.getIfErrorValue().equals("")) {
-				// throw new
-				// WebFormValueException(WebFormValueExceptionType.FORMDATA_INCORRECT,
-				// saveField.getValue());
-				return new Field(saveField.getName(), "", saveField.getType());
-			} else {
-				return new Field(saveField.getName(), saveField.getIfErrorValue(), saveField.getType());
-			}
 		}
 	}
 
@@ -927,7 +713,7 @@ public class BaseDocument implements Const, Serializable {
 		return editors;
 	}
 
-	public ArrayList<BaseDocument> getResponses(int docID, int docType, Set<String> complexUserID, String absoluteUserID) throws DocumentException {
+	public ArrayList<BaseDocument> getResponses(int docID, int docType, Set<String> complexUserID, String absoluteUserID) {
 		return responses;
 
 	}
@@ -937,8 +723,7 @@ public class BaseDocument implements Const, Serializable {
 
 	}
 
-	public ArrayList<BaseDocument> getDescendantsArray(int docID, int docType, Set<String> complexUserID, String absoluteUserID)
-	        throws DocumentException {
+	public ArrayList<BaseDocument> getDescendantsArray(int docID, int docType, Set<String> complexUserID, String absoluteUserID) {
 		return responses;
 
 	}
@@ -1011,7 +796,7 @@ public class BaseDocument implements Const, Serializable {
 		return false;
 	}
 
-	public String getURL() throws DocumentException {
+	public String getURL() {
 		return "Provider?type=edit&element=document&id=" + form + "&docid=" + ddbID;
 	}
 
@@ -1028,7 +813,7 @@ public class BaseDocument implements Const, Serializable {
 		return ddbID;
 	}
 
-	public String getFullURL() throws DocumentException {
+	public String getFullURL() {
 		String schema = "http";
 		int port = Environment.httpPort;
 		if (Environment.isSSLEnable) {
@@ -1043,7 +828,7 @@ public class BaseDocument implements Const, Serializable {
 		return fieldsMap;
 	}
 
-	public int save(User user) throws DocumentException {
+	public int save(User user) {
 		return -1;
 	}
 
@@ -1105,7 +890,7 @@ public class BaseDocument implements Const, Serializable {
 					}
 					break;
 				case "datetime":
-					addDateField(k.getNodeName().trim(), _Helper.convertStringToDate(k.getTextContent()));
+
 					break;
 				case "string":
 					addStringField(k.getNodeName().trim(), k.getTextContent());
@@ -1249,7 +1034,7 @@ public class BaseDocument implements Const, Serializable {
 
 	}
 
-	public void fillResponses() throws DocumentException {
+	public void fillResponses() {
 
 	}
 

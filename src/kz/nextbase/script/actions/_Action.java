@@ -1,8 +1,8 @@
 package kz.nextbase.script.actions;
 
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.scripting._Session;
 
-import kz.flabs.localization.Vocabulary;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;
 

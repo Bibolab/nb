@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import kz.flabs.dataengine.Const;
-import kz.flabs.util.ListConvertor;
 import kz.flabs.webrule.constants.FieldType;
 
 public class Field implements Const, Serializable {
@@ -76,7 +75,8 @@ public class Field implements Const, Serializable {
 			valueAsDate = value;
 			valuesAsStringList.add(valueAsText);
 		} catch (Exception e) {
-			// AppEnv.logger.errorLogEntry("dt Unable  get or convert value to Date(value="
+			// AppEnv.logger.errorLogEntry("dt Unable get or convert value to
+			// Date(value="
 			// + value + ") from database (for "+name+")");
 			// this.type = FieldType.UNKNOWN;
 		}
@@ -90,7 +90,8 @@ public class Field implements Const, Serializable {
 			valueAsEnum = value;
 			valuesAsStringList.add(valueAsText);
 		} catch (Exception e) {
-			// AppEnv.logger.errorLogEntry("dt Unable  get or convert value to Date(value="
+			// AppEnv.logger.errorLogEntry("dt Unable get or convert value to
+			// Date(value="
 			// + value + ") from database (for "+name+")");
 			this.type = FieldType.UNKNOWN;
 		}
@@ -101,14 +102,14 @@ public class Field implements Const, Serializable {
 		this.name = name;
 		valuesAsStringList.addAll(list);
 		this.type = FieldType.LIST;
-		valueAsText = ListConvertor.listToString(valuesAsStringList);
+
 	}
 
 	public Field(String name, Collection<Integer> list, boolean fake) {
 		this.name = name;
 		valuesAsGlossaryData.addAll(list);
 		this.type = FieldType.GLOSSARY;
-		valueAsText = ListConvertor.listToString(valuesAsGlossaryData);
+
 	}
 
 	@Deprecated
@@ -119,7 +120,7 @@ public class Field implements Const, Serializable {
 		}
 
 		this.type = FieldType.TEXTLIST;
-		valueAsText = ListConvertor.listToString(valuesAsStringList);
+
 	}
 
 	public Field(String name, String value, FieldType type) {
@@ -171,7 +172,7 @@ public class Field implements Const, Serializable {
 				valuesAsGlossaryData.add(0);
 				valueAsNumber = BigDecimal.valueOf(0);
 			}
-			valueAsText = ListConvertor.listToString(valuesAsGlossaryData);
+
 			break;
 		default:
 
@@ -222,10 +223,9 @@ public class Field implements Const, Serializable {
 
 	public void addValue(String value) {
 		if (value != null && (!value.equalsIgnoreCase(""))) {
-			Collection<String> col = ListConvertor.stringToList(valueAsText);
-			col.add(value);
+
 			type = FieldType.LIST;
-			valueAsText = ListConvertor.listToString(col);
+
 		}
 	}
 

@@ -13,6 +13,11 @@ import org.codehaus.groovy.control.CompilerConfiguration;
 import com.exponentus.caching.PageCacheAdapter;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.localization.Localizator;
+import com.exponentus.localization.Vocabulary;
+import com.exponentus.localization.Vocabulary;
+import com.exponentus.localization.Vocabulary;
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.log.ILogger;
 import com.exponentus.rule.RuleProvider;
 import com.exponentus.server.Server;
@@ -21,8 +26,6 @@ import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.IDatabase;
-import kz.flabs.localization.Localizator;
-import kz.flabs.localization.Vocabulary;
 
 public class AppEnv extends PageCacheAdapter implements Const {
 	public boolean isValid;

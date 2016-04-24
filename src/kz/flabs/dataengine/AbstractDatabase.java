@@ -10,13 +10,11 @@ import java.util.Set;
 
 import com.exponentus.appenv.AppEnv;
 
-import kz.flabs.exception.DocumentException;
 import kz.flabs.runtimeobj.DocumentCollection;
 import kz.flabs.runtimeobj.document.BaseDocument;
 import kz.flabs.runtimeobj.document.DocID;
 import kz.flabs.runtimeobj.document.Document;
 import kz.flabs.users.User;
-import kz.flabs.webrule.constants.TagPublicationFormatType;
 
 public abstract class AbstractDatabase implements IDatabase {
 	protected AppEnv env;
@@ -78,13 +76,12 @@ public abstract class AbstractDatabase implements IDatabase {
 	}
 
 	public ArrayList<BaseDocument> getAllDocuments(int docType, Set<String> complexUserID, String absoluteUserID, String[] fields, int offset,
-	        int pageSize) throws DocumentException {
+	        int pageSize) {
 
 		return null;
 	}
 
-	public ArrayList<BaseDocument> getAllDocuments(int docType, Set<String> complexUserID, String absoluteUserID, int offset, int pageSize)
-	        throws DocumentException {
+	public ArrayList<BaseDocument> getAllDocuments(int docType, Set<String> complexUserID, String absoluteUserID, int offset, int pageSize) {
 
 		return null;
 	}
@@ -94,25 +91,17 @@ public abstract class AbstractDatabase implements IDatabase {
 		return 0;
 	}
 
-	public StringBuffer getDocsByCondition(String sql, Set<String> complexUserID, String absoluteUserID, String fieldCond,
-	        Set<DocID> toExpandResponses, Set<String> toExpandCategory, TagPublicationFormatType publishAs, int page) throws DocumentException {
+	public ArrayList<BaseDocument> getDocumentsByCondition(String form, String query, Set<String> complexUserID, String absoluteUserID) {
 
 		return null;
 	}
 
-	public ArrayList<BaseDocument> getDocumentsByCondition(String form, String query, Set<String> complexUserID, String absoluteUserID)
-	        throws DocumentException {
+	public ArrayList<BaseDocument> getDocumentsByCondition(String query, Set<String> complexUserID, String absoluteUserID, int limit, int offset) {
 
 		return null;
 	}
 
-	public ArrayList<BaseDocument> getDocumentsByCondition(String query, Set<String> complexUserID, String absoluteUserID, int limit, int offset)
-	        throws DocumentException {
-
-		return null;
-	}
-
-	public int getDocumentsCountByCondition(String query, Set<String> complexUserID, String absoluteUserID) throws DocumentException {
+	public int getDocumentsCountByCondition(String query, Set<String> complexUserID, String absoluteUserID) {
 
 		return 0;
 	}
@@ -132,12 +121,12 @@ public abstract class AbstractDatabase implements IDatabase {
 		return null;
 	}
 
-	public BaseDocument getDocumentByComplexID(int docType, int docID) throws DocumentException {
+	public BaseDocument getDocumentByComplexID(int docType, int docID) {
 
 		return null;
 	}
 
-	public BaseDocument getDocumentByDdbID(String ddbID, Set<String> complexUserID, String absoluteUserID) throws DocumentException {
+	public BaseDocument getDocumentByDdbID(String ddbID, Set<String> complexUserID, String absoluteUserID) {
 
 		return null;
 	}
@@ -148,12 +137,12 @@ public abstract class AbstractDatabase implements IDatabase {
 	}
 
 	public void deleteDocument(int docType, int docID, User user, boolean completely)
-	        throws DocumentException, SQLException, DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+	        throws SQLException, DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 	}
 
 	public void deleteDocument(String id, boolean completely, User user)
-	        throws DocumentException, SQLException, DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+	        throws SQLException, DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 	}
 
@@ -162,7 +151,7 @@ public abstract class AbstractDatabase implements IDatabase {
 		return false;
 	}
 
-	public boolean unDeleteDocument(int aid, User user) throws DocumentException {
+	public boolean unDeleteDocument(int aid, User user) {
 
 		return false;
 	}
@@ -172,7 +161,7 @@ public abstract class AbstractDatabase implements IDatabase {
 		return null;
 	}
 
-	public int insertMainDocument(Document doc, User user) throws DocumentException {
+	public int insertMainDocument(Document doc, User user) {
 
 		return 0;
 	}
@@ -218,13 +207,12 @@ public abstract class AbstractDatabase implements IDatabase {
 	}
 
 	public ArrayList<Integer> getAllDocumentsIDS(int docType, Set<String> complexUserID, String absoluteUserID, String[] fields, int offset,
-	        int pageSize) throws DocumentException {
+	        int pageSize) {
 
 		return null;
 	}
 
-	public ArrayList<Integer> getAllDocumentsIDS(int docType, Set<String> complexUserID, String absoluteUserID, int start, int end)
-	        throws DocumentException {
+	public ArrayList<Integer> getAllDocumentsIDS(int docType, Set<String> complexUserID, String absoluteUserID, int start, int end) {
 
 		return null;
 	}
@@ -250,13 +238,13 @@ public abstract class AbstractDatabase implements IDatabase {
 	}
 
 	public ArrayList<BaseDocument> getDescendantsArray(int docID, int docType, DocID[] toExpand, int level, Set<String> complexUserID,
-	        String absoluteUserID) throws DocumentException {
+	        String absoluteUserID) {
 
 		return null;
 	}
 
 	public String getDocumentEntry(Connection conn, Set<String> complexUserID, String absoluteUserID, ResultSet rs, String fieldsCond,
-	        Set<DocID> toExpandResponses, int page) throws SQLException, DocumentException {
+	        Set<DocID> toExpandResponses, int page) throws SQLException {
 
 		return null;
 	}

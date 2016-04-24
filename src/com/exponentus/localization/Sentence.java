@@ -1,13 +1,13 @@
-package kz.flabs.localization;
+package com.exponentus.localization;
 
 import java.util.HashMap;
 
-import kz.flabs.util.XMLUtil;
-import com.exponentus.localization.LanguageCode;
-import com.exponentus.server.Server;
-
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.exponentus.server.Server;
+
+import kz.flabs.util.XMLUtil;
 
 public class Sentence {
 	public boolean isOn = true;
@@ -21,7 +21,7 @@ public class Sentence {
 
 	}
 
-	Sentence(Node node, String primaryLang) {
+	public Sentence(Node node, String primaryLang) {
 		try {
 			if (!XMLUtil.getTextContent(node, "@mode", false).equals("on")) {
 				isOn = false;

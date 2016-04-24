@@ -22,8 +22,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import kz.flabs.exception.ConversionError;
-import kz.flabs.exception.DataConversionException;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.server.Server;
@@ -113,14 +111,6 @@ public class Util {
 			return null;
 		}
 		return null;
-	}
-
-	public static String convertDateTimeToStringSilently(Date date) throws DataConversionException {
-		try {
-			return simpleDateTimeFormat.format(date);
-		} catch (Exception e) {
-			throw new DataConversionException(ConversionError.CONVERSION_DATE_TO_DATABASE_DATE);
-		}
 	}
 
 	public static String convertDateToStringSilently(Date date) {
@@ -388,12 +378,11 @@ public class Util {
 	}
 
 	public static void main(String[] args) {
-		System.out
-		        .println(removeHTMLTags(
-		                "<p1><p></p1>I-4979: Берг П. П. -> (Берг П. П.)<p><p> <p>Допереводить непереведенные слова(в файле dict.xml, слова которые с приставкой kaz, файл во вложении)<br></p>")
+		System.out.println(removeHTMLTags(
+		        "<p1><p></p1>I-4979: Берг П. П. -> (Берг П. П.)<p><p> <p>Допереводить непереведенные слова(в файле dict.xml, слова которые с приставкой kaz, файл во вложении)<br></p>")
 		                .length());
-		System.out
-		        .println(removeHTMLTags("I-4979: Берг П. П. -> (Берг П. П.) <p>Допереводить непереведенные слова(в файле dict.xml, слова которые с приставкой kaz, файл во вложении)<br></p>"));
+		System.out.println(removeHTMLTags(
+		        "I-4979: Берг П. П. -> (Берг П. П.) <p>Допереводить непереведенные слова(в файле dict.xml, слова которые с приставкой kaz, файл во вложении)<br></p>"));
 	}
 
 	public static String removeHTMLTags(String text) {

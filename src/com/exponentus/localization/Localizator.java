@@ -1,4 +1,4 @@
-package kz.flabs.localization;
+package com.exponentus.localization;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,12 +9,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import kz.flabs.dataengine.Const;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.Environment;
 
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
+import kz.flabs.dataengine.Const;
 
 public class Localizator implements Const {
 

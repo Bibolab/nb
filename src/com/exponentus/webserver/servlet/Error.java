@@ -16,7 +16,6 @@ import com.exponentus.env.Environment;
 import com.exponentus.server.Server;
 
 import kz.flabs.exception.TransformatorException;
-import kz.flabs.servlets.SaxonTransformator;
 import net.sf.saxon.s9api.SaxonApiException;
 
 public class Error extends HttpServlet {
@@ -87,7 +86,7 @@ public class Error extends HttpServlet {
 			} else {
 				response.setContentType("text/html");
 
-				new SaxonTransformator().toTrans(response, errorXslt, outputContent);
+				new com.exponentus.webserver.servlet.xslt.SaxonTransformator().toTrans(response, errorXslt, outputContent);
 			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

@@ -7,14 +7,7 @@
 		<param name="encoding" value="UTF-8" />
 
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{kk:mm:ss} %p %c: %m%n" />
-		</layout>
-	</appender>
-
-	<appender name="gui" class="com.exponentus.log.TextAreaAppender">
-
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{kk:mm:ss} %p %c: %m%n" />
+			<param name="ConversionPattern" value="%d{kk:mm:ss} %p  %m%n" />
 		</layout>
 	</appender>
 

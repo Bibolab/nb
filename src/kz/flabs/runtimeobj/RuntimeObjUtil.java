@@ -10,8 +10,6 @@ import java.util.Map;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.IDatabase;
-import kz.flabs.exception.DocumentException;
-import kz.flabs.exception.DocumentExceptionType;
 import kz.flabs.runtimeobj.document.BaseDocument;
 import kz.flabs.runtimeobj.document.BlobFile;
 import kz.flabs.util.Util;
@@ -26,11 +24,11 @@ public class RuntimeObjUtil implements Const {
 	int minComplication;
 	int maxComplication;
 
-	public BaseDocument getGrandParentDocument(IDatabase db, BaseDocument doc) throws DocumentException {
+	public BaseDocument getGrandParentDocument(IDatabase db, BaseDocument doc) {
 		if (!doc.isNewDoc()) {
 
 		} else {
-			throw new DocumentException(DocumentExceptionType.CANNOT_GET_PARENT_DOCUMENT_FROM_NEWDOC);
+
 		}
 		return doc;
 	}

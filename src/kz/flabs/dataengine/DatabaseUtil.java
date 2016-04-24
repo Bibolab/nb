@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 
-import kz.flabs.runtimeobj.document.BaseDocument;
-import kz.flabs.webrule.constants.QueryType;
 import com.exponentus.server.Server;
+
+import kz.flabs.runtimeobj.document.BaseDocument;
 
 public class DatabaseUtil implements Const {
 
@@ -349,14 +349,6 @@ public class DatabaseUtil implements Const {
 			DatabaseUtil.errorPrint(e, sql);
 		}
 		return false;
-	}
-
-	public static String getCustomTableName(QueryType docType) {
-		if (docType == QueryType.GLOSSARY) {
-			return "CUSTOM_FIELDS_GLOSSARY";
-		} else {
-			return "CUSTOM_FIELDS";
-		}
 	}
 
 	@Deprecated

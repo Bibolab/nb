@@ -5,13 +5,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.IDatabaseDeployer;
+import com.exponentus.dataengine.IDatabaseDeployer;
 import com.exponentus.dataengine.jpadatabase.ftengine.FTSearchEngineDeployer;
 
 import kz.flabs.dataengine.DatabasePoolException;
 import kz.flabs.dataengine.DatabaseUtil;
 import kz.flabs.dataengine.IDBConnectionPool;
 import kz.flabs.dataengine.IDatabase;
-import kz.flabs.dataengine.IDatabaseDeployer;
 
 public class DatabaseDeployer implements IDatabaseDeployer {
 	public boolean deployed;

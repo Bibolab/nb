@@ -16,7 +16,6 @@ import kz.flabs.exception.RuleException;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.Rule;
-import kz.flabs.webrule.constants.RuleType;
 import kz.flabs.webrule.constants.RunMode;
 import kz.flabs.webrule.constants.ValueSourceType;;
 

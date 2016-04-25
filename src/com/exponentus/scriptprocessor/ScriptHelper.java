@@ -1,20 +1,16 @@
 package com.exponentus.scriptprocessor;
 
-import java.util.ArrayList;
-
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 
-import kz.flabs.localization.Vocabulary;
 import kz.flabs.scriptprocessor.ScriptProcessor;
-import kz.nextbase.script._IXMLContent;
 
 public class ScriptHelper {
 	protected Vocabulary vocabulary;
 	protected String redirectURL = "";
-	protected ArrayList<_IXMLContent> toPublishElement = new ArrayList<_IXMLContent>();
 	private _Session session;
 
 	public String getTmpDirPath() {

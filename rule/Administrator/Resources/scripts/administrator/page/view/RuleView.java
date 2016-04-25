@@ -1,5 +1,6 @@
 package administrator.page.view;
 
+import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.Environment;
 import com.exponentus.rule.RuleFiles;
@@ -7,8 +8,6 @@ import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoPage;
-
-import kz.flabs.runtimeobj.RuntimeObjUtil;
 
 public class RuleView extends _DoPage {
 

@@ -20,11 +20,11 @@ import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
+import com.exponentus.localization.Localizator;
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.scheduler.SchedulerHelper;
 import com.exponentus.util.StringUtil;
 
-import kz.flabs.localization.Localizator;
-import kz.flabs.localization.Vocabulary;
 import kz.flabs.util.Util;
 
 public class Console implements Runnable {
@@ -56,7 +56,8 @@ public class Console implements Runnable {
 			        "os=" + System.getProperty("os.name") + " " + System.getProperty("os.version") + "(" + System.getProperty("os.arch") + ")");
 			System.out.println("jvm=" + System.getProperty("java.version"));
 			System.out.println("started at=" + Util.convertDataTimeToString(Environment.startTime));
-			System.out.println("application server name=" + EnvConst.APP_NAME);
+			System.out.println("application server name=" + EnvConst.APP_ID);
+			System.out.println("database name=" + EnvConst.DATABASE_NAME);
 			System.out.println("database=" + Environment.adminApplication.getDataBase().getInfo());
 			System.out.println("web server port=" + Environment.httpPort);
 			System.out.println("default language=" + EnvConst.DEFAULT_LANG);

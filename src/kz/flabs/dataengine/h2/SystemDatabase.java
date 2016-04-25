@@ -9,6 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.catalina.realm.RealmBase;
+
+import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.system.IEmployeeDAO;
+import com.exponentus.server.Server;
+
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.DatabasePoolException;
 import kz.flabs.dataengine.DatabaseUtil;
@@ -16,11 +22,6 @@ import kz.flabs.dataengine.IDBConnectionPool;
 import kz.flabs.dataengine.ISystemDatabase;
 import kz.flabs.exception.WebFormValueException;
 import kz.flabs.users.User;
-import com.exponentus.appenv.AppEnv;
-import com.exponentus.dataengine.system.IEmployeeDAO;
-import com.exponentus.server.Server;
-
-import org.apache.catalina.realm.RealmBase;
 
 public class SystemDatabase implements ISystemDatabase, Const {
 	public static boolean isValid;
@@ -334,15 +335,7 @@ public class SystemDatabase implements ISystemDatabase, Const {
 			while (rs.next()) {
 				User user = new User();
 				user.fill(rs);
-				if (user.isValid) {
-					String addSQL = "select * from ENABLEDAPPS where ENABLEDAPPS.DOCID=" + user.docID;
-					Statement statement = conn.createStatement();
-					ResultSet resultSet = statement.executeQuery(addSQL);
 
-					resultSet.close();
-					statement.close();
-				}
-				user.isValid = true;
 				users.add(user);
 			}
 
@@ -400,7 +393,7 @@ public class SystemDatabase implements ISystemDatabase, Const {
 			while (rs.next()) {
 				User user = new User();
 				user.fill(rs);
-				user.isValid = true;
+
 				users.put(user.getUserID(), user);
 			}
 
@@ -433,14 +426,7 @@ public class SystemDatabase implements ISystemDatabase, Const {
 
 			if (rs.next()) {
 				user.fill(rs);
-				if (user.isValid) {
-					String addSQL = "select * from ENABLEDAPPS where ENABLEDAPPS.DOCID=" + user.docID;
-					Statement statement = conn.createStatement();
-					ResultSet resultSet = statement.executeQuery(addSQL);
 
-					resultSet.close();
-					statement.close();
-				}
 			} else {
 				user.setUserID(userID);
 			}
@@ -470,19 +456,7 @@ public class SystemDatabase implements ISystemDatabase, Const {
 			 */
 			String sql = "select * from USERS where USERS.DOCID=" + docID;
 			ResultSet rs = s.executeQuery(sql);
-			if (rs.next()) {
-				user.fill(rs);
-				if (user.isValid) {
-					String addSQL = "select * from ENABLEDAPPS where ENABLEDAPPS.DOCID=" + docID;
-					Statement statement = conn.createStatement();
-					ResultSet resultSet = statement.executeQuery(addSQL);
 
-					resultSet.close();
-					statement.close();
-				}
-			} else {
-				user.setNewDoc(true);
-			}
 			rs.close();
 			s.close();
 			conn.commit();
@@ -611,12 +585,10 @@ public class SystemDatabase implements ISystemDatabase, Const {
 			        + user.getUserID() + "', " + "'" + user.getEmail() + "'," + user.getIsAdmin() + ","
 			        + (user.getUserID() + user.getPassword()).hashCode() + ", '" + user.getPublicKey() + "','" + user.getPasswordHash() + "')";
 
-			PreparedStatement pst = conn.prepareStatement(insertUser/*
-																	 * ,
-																	 * PreparedStatement
-																	 * .
-																	 * RETURN_GENERATED_KEYS
-																	 */);
+			PreparedStatement pst = conn.prepareStatement(
+			        insertUser/*
+			                   * , PreparedStatement . RETURN_GENERATED_KEYS
+			                   */);
 			pst.executeUpdate();
 			// ResultSet rs = pst.getGeneratedKeys();
 			// while(rs.next()){
@@ -655,8 +627,8 @@ public class SystemDatabase implements ISystemDatabase, Const {
 			} else {
 				pwd = user.getPassword();
 			}
-			String userUpdateSQL = "update USERS set USERID='" + user.getUserID() + "'," + " EMAIL='" + user.getEmail() + "'," + "PWD='" + pwd
-			        + "', " + "ISADMIN = " + user.getIsAdmin() + "," + "LOGINHASH = " + (user.getUserID() + user.getPassword()).hashCode() + ", "
+			String userUpdateSQL = "update USERS set USERID='" + user.getUserID() + "'," + " EMAIL='" + user.getEmail() + "'," + "PWD='" + pwd + "', "
+			        + "ISADMIN = " + user.getIsAdmin() + "," + "LOGINHASH = " + (user.getUserID() + user.getPassword()).hashCode() + ", "
 			        + "PUBLICKEY = '" + user.getPublicKey() + "', PWDHASH='" + pwdHsh + "'" + " where DOCID=" + user.docID;
 			PreparedStatement pst = conn.prepareStatement(userUpdateSQL);
 			pst.executeUpdate();

@@ -31,6 +31,7 @@ public class EnvConst {
 	public static final String ADMINISTRATOR_SERVICE_CLASS = "staff.services.UserServices";
 	public static final String OFFICEFRAME = "Officeframe";
 	public static final String[] OFFICEFRAME_APPS = { "Staff", "Reference", "Workspace" };
+	public static final String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
 
 	public static String JPA_LOG_LEVEL = "OFF";
 	public static String DEFAULT_LANG = LanguageCode.ENG.name();
@@ -40,9 +41,10 @@ public class EnvConst {
 	public static String DB_PWD = "smartdoc";
 	public static String APP_DB_USER = DB_USER;
 	public static String APP_DB_PWD = DB_PWD;
+	public static String DATABASE_NAME = APP_ID;
 	public static String DATABASE_HOST = "127.0.0.1";
 	public static String CONN_PORT = "5432";
-	public static String APP_NAME = Paths.get(System.getProperty("user.dir")).getFileName().toString();
+
 	public static String STAFF_APP_NAME = "Staff";
 	public static String STAFF_DAO_CLASS = "staff.dao.EmployeeDAO";
 	public static String RESOURCES_DIR = "resources";

@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 
-import kz.flabs.runtimeobj.document.BaseDocument;
-import kz.flabs.webrule.constants.QueryType;
 import com.exponentus.server.Server;
 
 public class DatabaseUtil implements Const {
@@ -31,16 +29,6 @@ public class DatabaseUtil implements Const {
 			Server.logger.errorLogEntry(e.toString());
 			e.printStackTrace();
 		}
-	}
-
-	public static String getViewTextValues(BaseDocument doc) {
-		String viewTextList = "";
-		int fieldSize = 0;
-
-		if (viewTextList.endsWith(",")) {
-			viewTextList = viewTextList.substring(0, viewTextList.length() - 1);
-		}
-		return viewTextList;
 	}
 
 	public static void errorPrint(String DbID, Throwable e) {
@@ -349,14 +337,6 @@ public class DatabaseUtil implements Const {
 			DatabaseUtil.errorPrint(e, sql);
 		}
 		return false;
-	}
-
-	public static String getCustomTableName(QueryType docType) {
-		if (docType == QueryType.GLOSSARY) {
-			return "CUSTOM_FIELDS_GLOSSARY";
-		} else {
-			return "CUSTOM_FIELDS";
-		}
 	}
 
 	@Deprecated

@@ -3,9 +3,8 @@ package com.exponentus.dataengine.jpa.deploying;
 import java.util.List;
 
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.localization.Vocabulary;
 import com.exponentus.scripting._Session;
-
-import kz.flabs.localization.Vocabulary;
 
 /**
  * Created by Kayra on 30/12/15.

@@ -2,23 +2,19 @@ package kz.flabs.users;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+
+import org.apache.catalina.realm.RealmBase;
+
+import com.exponentus.appenv.AppEnv;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.WebFormValueException;
 import kz.flabs.exception.WebFormValueExceptionType;
-import kz.flabs.runtimeobj.RuntimeObjUtil;
-import kz.flabs.runtimeobj.document.BaseDocument;
-import kz.flabs.runtimeobj.document.BlobFile;
 import kz.flabs.util.Util;
-import com.exponentus.appenv.AppEnv;
-
-import org.apache.catalina.realm.RealmBase;
 
 @Deprecated
-public class User extends BaseDocument implements Const {
+public class User implements Const {
 	public int docID;
 	public boolean authorized;
 	public boolean authorizedByHash;
@@ -42,7 +38,6 @@ public class User extends BaseDocument implements Const {
 	}
 
 	public User(AppEnv env) {
-		this.env = env;
 
 		userID = ANONYMOUS_USER;
 	}
@@ -91,9 +86,9 @@ public class User extends BaseDocument implements Const {
 				isSupervisor = true;
 			}
 			setHash(rs.getInt("LOGINHASH"));
-			isValid = true;
+
 		} catch (Exception e) {
-			isValid = false;
+
 		}
 	}
 
@@ -137,11 +132,6 @@ public class User extends BaseDocument implements Const {
 	 * WebFormValueException(WebFormValueExceptionType.OLD_PWD_INCORRECT, ""); }
 	 * } } }
 	 */
-
-	@Override
-	public String getCurrentUserID() {
-		return userID;
-	}
 
 	public String getEmail() {
 		return email;
@@ -200,27 +190,6 @@ public class User extends BaseDocument implements Const {
 		return hash;
 	}
 
-	public void fillFieldsToSaveLight(HashMap<String, String[]> fields) throws WebFormValueException {
-		setUserID(getWebFormValue("userid", fields, userID)[0]);
-		setEmail(getWebFormValue("email", fields, email)[0]);
-		setPassword(getWebFormValue("pwd", fields, password)[0]);
-		setPasswordHash(getWebFormValue("pwd", fields, password)[0]);
-		String p_eds = getWebFormValue("p_eds", fields, "")[0];
-		for (String key : fields.keySet()) {
-			String formSesID = getWebFormValue("formsesid", fields, "")[0];
-			if (!"".equalsIgnoreCase(formSesID)) {
-				HashMap<String, BlobFile> uploadedFiles = new RuntimeObjUtil().getUploadedFiles(fields);
-				if (uploadedFiles.size() > 0) {
-					for (Map.Entry<String, BlobFile> file_entry : uploadedFiles.entrySet()) {
-
-					}
-				}
-			}
-
-		}
-		// this.appUser.setReplacers(fields);
-	}
-
 	@Override
 	public String toString() {
 		return "userID=" + userID + ", email=" + email;
@@ -244,5 +213,10 @@ public class User extends BaseDocument implements Const {
 
 	public String getLogin() {
 		return userID;
+	}
+
+	public AppEnv getAppEnv() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

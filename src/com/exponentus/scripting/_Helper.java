@@ -13,7 +13,6 @@ import java.net.URI;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Deque;
 import java.util.Enumeration;
@@ -27,7 +26,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import kz.flabs.runtimeobj.RuntimeObjUtil;
 import kz.flabs.util.Util;
 import kz.nextbase.script._Exception;
 import kz.nextbase.script._ExceptionType;
@@ -36,13 +34,6 @@ public class _Helper {
 
 	public static String getNormalizedRichText(String value) {
 		return value.replace("&nbsp;", " ").replace("<br>", "<br/>").replace("&", "&amp;");
-	}
-
-	public static Date getCtrlDate(Date date, int priority, int complication) {
-		Calendar d = Calendar.getInstance();
-		d.setTime(date);
-		Calendar ctrlDate = RuntimeObjUtil.getCtrlDate(d, priority, complication);
-		return ctrlDate.getTime();
 	}
 
 	public static String getDateAsString() throws _Exception {
@@ -119,9 +110,8 @@ public class _Helper {
 	 * 
 	 * 
 	 * } }catch(Exception e){ e.printStackTrace(); throw new
-	 * _Exception(_ExceptionType
-	 * .FORMDATA_INCORRECT,"Parser error :parseCoordinationBlock(" +
-	 * complexString + ")" + e); }
+	 * _Exception(_ExceptionType .FORMDATA_INCORRECT,
+	 * "Parser error :parseCoordinationBlock(" + complexString + ")" + e); }
 	 * 
 	 * return block; }
 	 */

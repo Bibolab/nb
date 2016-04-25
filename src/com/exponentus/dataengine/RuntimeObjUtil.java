@@ -1,17 +1,12 @@
-package kz.flabs.runtimeobj;
+package com.exponentus.dataengine;
 
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import kz.flabs.dataengine.Const;
-import kz.flabs.dataengine.IDatabase;
-import kz.flabs.runtimeobj.document.BaseDocument;
-import kz.flabs.runtimeobj.document.BlobFile;
 import kz.flabs.util.Util;
 import kz.flabs.webrule.constants.FieldType;
 
@@ -23,15 +18,6 @@ public class RuntimeObjUtil implements Const {
 	int maxPriority;
 	int minComplication;
 	int maxComplication;
-
-	public BaseDocument getGrandParentDocument(IDatabase db, BaseDocument doc) {
-		if (!doc.isNewDoc()) {
-
-		} else {
-
-		}
-		return doc;
-	}
 
 	public static Calendar getCtrlDate(Calendar fromTime, int priority, int complication) {
 		Calendar ctrlDate = Calendar.getInstance(), startDate = Calendar.getInstance(), tempDate = Calendar.getInstance();
@@ -236,30 +222,6 @@ public class RuntimeObjUtil implements Const {
 				folder = new File(dirPath + Integer.toString(folderNum));
 			}
 		}
-	}
-
-	public HashMap<String, BlobFile> getUploadedFiles(Map<String, String[]> fields) {
-		HashMap<String, BlobFile> fl = new HashMap<>();
-		if (fields.containsKey("filename") && fields.containsKey("fileid")) {
-			String[] fileNames = fields.get("filename");
-			String[] fileIDS = fields.get("fileid");
-			String[] fileHash = fields.get("filehash");
-			for (int i = 0; i < fileNames.length; i++) {
-				BlobFile bFile = new BlobFile();
-				bFile.originalName = fileNames[i];
-				bFile.path = "";
-				bFile.id = fileIDS[i];
-				bFile.checkHash = fileHash[i];
-				String commentVal[] = fields.get("comment" + bFile.checkHash);
-				if (commentVal != null) {
-					bFile.comment = commentVal[0];
-				} else {
-					bFile.comment = "";
-				}
-				fl.put(bFile.originalName, bFile);
-			}
-		}
-		return fl;
 	}
 
 }

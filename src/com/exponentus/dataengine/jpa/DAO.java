@@ -14,13 +14,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.user.SuperUser;
-
-import kz.flabs.runtimeobj.RuntimeObjUtil;
 
 public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 	public IUser<Long> user;

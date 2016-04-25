@@ -9,8 +9,6 @@ import java.util.Collection;
 
 import com.exponentus.server.Server;
 
-import kz.flabs.runtimeobj.document.BaseDocument;
-
 public class DatabaseUtil implements Const {
 
 	public static void errorPrint(Throwable e) {
@@ -31,16 +29,6 @@ public class DatabaseUtil implements Const {
 			Server.logger.errorLogEntry(e.toString());
 			e.printStackTrace();
 		}
-	}
-
-	public static String getViewTextValues(BaseDocument doc) {
-		String viewTextList = "";
-		int fieldSize = 0;
-
-		if (viewTextList.endsWith(",")) {
-			viewTextList = viewTextList.substring(0, viewTextList.length() - 1);
-		}
-		return viewTextList;
 	}
 
 	public static void errorPrint(String DbID, Throwable e) {

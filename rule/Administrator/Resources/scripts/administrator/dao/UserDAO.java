@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
 
+import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.Environment;
 import com.exponentus.scripting._Session;
@@ -25,7 +26,6 @@ import com.exponentus.util.StringUtil;
 
 import administrator.model.User;
 import kz.flabs.dataengine.IDatabase;
-import kz.flabs.runtimeobj.RuntimeObjUtil;
 
 public class UserDAO {
 	private IUser<Long> user;

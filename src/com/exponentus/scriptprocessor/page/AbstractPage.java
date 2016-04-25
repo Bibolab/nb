@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.DAO;
 import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.exception.SecureException;
@@ -19,7 +20,6 @@ import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.ScriptHelper;
 
-import kz.flabs.runtimeobj.RuntimeObjUtil;
 import kz.flabs.scriptprocessor.ScriptShowField;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.Util;

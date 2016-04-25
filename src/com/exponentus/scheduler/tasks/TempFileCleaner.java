@@ -1,8 +1,16 @@
 package com.exponentus.scheduler.tasks;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -44,7 +52,9 @@ public class TempFileCleaner implements Job {
 				if (file.getParentFile() == null) {
 					file = null;
 				}
-				delete(file);
+				if (delete(file)) {
+					fileToDelete.remove(filePath);
+				}
 			}
 		}
 		if (ac > 0) {
@@ -57,21 +67,36 @@ public class TempFileCleaner implements Job {
 		fileToDelete.add(filePath);
 	}
 
-	public void delete(File file) {
+	public boolean delete(File file) {
 		if (file == null || !file.exists()) {
-			return;
+			return true;
 		}
-		if (file.isDirectory()) {
-			for (File f : file.listFiles()) {
-				delete(f);
+		Path path = Paths.get(file.getAbsolutePath());
+		try {
+			BasicFileAttributes attr = Files.readAttributes(path, BasicFileAttributes.class);
+			DateTime now = DateTime.now();
+			Minutes hours = Minutes.minutesBetween(new DateTime(new Date(attr.creationTime().toMillis())), now);
+
+			if (hours.getMinutes() >= 60) {
+				if (file.isDirectory()) {
+					for (File f : file.listFiles()) {
+						delete(f);
+					}
+					if (file.delete()) {
+						ac++;
+						return true;
+					}
+				} else {
+					if (file.delete()) {
+						ac++;
+						return true;
+					}
+				}
 			}
-			if (file.delete()) {
-				ac++;
-			}
-		} else {
-			if (file.delete()) {
-				ac++;
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		return false;
+
 	}
 }

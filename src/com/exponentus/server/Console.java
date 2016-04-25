@@ -75,6 +75,7 @@ public class Console implements Runnable {
 			} else {
 				System.out.println("developer mode is off");
 			}
+			System.out.println("count of the temporary files wich waiting for deleting=" + Environment.fileToDelete.size());
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
 
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {

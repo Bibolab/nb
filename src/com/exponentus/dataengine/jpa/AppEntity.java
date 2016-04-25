@@ -34,6 +34,7 @@ import kz.flabs.util.XMLUtil;
 @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
 @UuidGenerator(name = "uuid-gen")
 public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObject {
+
 	@Id
 	@GeneratedValue(generator = "uuid-gen")
 	@Convert("uuidConverter")
@@ -71,6 +72,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		return id;
 	}
 
+	@JsonIgnore
 	@Override
 	public String getIdentifier() {
 		if (id != null) {
@@ -101,7 +103,6 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		this.author = author;
 	}
 
-	@JsonIgnore
 	@Override
 	public Date getRegDate() {
 		return regDate;
@@ -217,6 +218,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		this.form = form;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isEditable() {
 		return isEditable;

@@ -161,7 +161,7 @@ public class _WebFormData {
 
 	@Override
 	public String toString() {
-		String result = "-----------begin of list of web form data-----------\n";
+		String result = "-----------begin of list of the web form data-----------\n";
 
 		Iterator<String> en = formData.keySet().iterator();
 
@@ -172,10 +172,10 @@ public class _WebFormData {
 			for (int i = 0; i < val.length; i++) {
 				v += val[i] + "[" + Integer.toString(i) + "],";
 			}
-			result += webFormFieldName + "=" + v + "\n";
+			result += " " + webFormFieldName + " = " + v + "\n";
 		}
 
-		result += "----------------- end of list-----------------------";
+		result += "----------------- end of the list-----------------------";
 		return result;
 
 	}

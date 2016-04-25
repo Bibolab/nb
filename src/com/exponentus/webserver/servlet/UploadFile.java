@@ -75,7 +75,8 @@ public class UploadFile extends HttpServlet {
 			List<FileItem> items = upload.parseRequest(req);
 			for (FileItem item : items) {
 				if (item.isFormField()) {
-					System.out.println(item.getString() + " " + item.getFieldName());
+					// System.out.println(item.getString() + " " +
+					// item.getFieldName());
 					if (item.getFieldName().endsWith(EnvConst.FSID_FIELD_NAME)) {
 						fileItem = item;
 					}

@@ -8,12 +8,16 @@ import javax.persistence.ElementCollection;
 import javax.persistence.MappedSuperclass;
 
 import com.exponentus.user.IUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
 public abstract class SecureAppEntity extends AppEntity<UUID> {
+
+	@JsonIgnore
 	@ElementCollection
 	private Set<Long> editors = new HashSet<Long>();
 
+	@JsonIgnore
 	@ElementCollection
 	private Set<Long> readers = new HashSet<Long>();
 

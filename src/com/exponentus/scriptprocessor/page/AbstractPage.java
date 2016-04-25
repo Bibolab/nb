@@ -3,7 +3,9 @@ package com.exponentus.scriptprocessor.page;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.exponentus.dataengine.RuntimeObjUtil;
@@ -20,6 +22,8 @@ import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.ScriptHelper;
 
+import administrator.dao.LanguageDAO;
+import administrator.model.Language;
 import kz.flabs.scriptprocessor.ScriptShowField;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.Util;
@@ -55,6 +59,20 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		}
 	}
 
+	protected Map<LanguageCode, String> getLocalizedNames(_Session session, _WebFormData formData) {
+		Map<LanguageCode, String> localizedNames = new HashMap<LanguageCode, String>();
+		List<Language> langs = new LanguageDAO(session).findAll();
+		for (Language l : langs) {
+			String ln = formData.getValueSilently(l.getCode().name().toLowerCase() + "localizedname");
+			if (!ln.isEmpty()) {
+				localizedNames.put(l.getCode(), ln);
+			} else {
+				localizedNames.put(l.getCode(), formData.getValueSilently("name"));
+			}
+		}
+		return localizedNames;
+	}
+
 	public void setError(String m) {
 		setBadRequest();
 		result.setType(OutcomeType.SERVER_ERROR);
@@ -73,20 +91,6 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	public void setPublishAsType(PublishAsType respType) {
 		result.setPublishAs(respType);
-	}
-
-	public <T extends Enum<?>> String[] getLocalizedWord(T[] enumObj, String lang) {
-		String[] array = new String[enumObj.length];
-		try {
-			for (int i = 0; i < enumObj.length; i++) {
-				array[i] = vocabulary.getSentenceCaption(enumObj[i].name(), lang).word;
-			}
-
-			return array;
-
-		} catch (Exception e) {
-			return array;
-		}
 	}
 
 	public void showFile(String filePath, String fileName) {
@@ -194,7 +198,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	protected _ActionBar getSimpleActionBar(_Session session, String type, LanguageCode lang) {
 		_ActionBar actionBar = new _ActionBar(session);
 		_Action newDocAction = new _Action(getLocalizedWord("new_", lang), "", "new_" + type);
-		newDocAction.setURL("Provider?id=" + type);
+		newDocAction.setURL("p?id=" + type);
 		actionBar.addAction(newDocAction);
 		actionBar.addAction(new _Action(getLocalizedWord("del_document", lang), "", _ActionType.DELETE_DOCUMENT));
 		return actionBar;

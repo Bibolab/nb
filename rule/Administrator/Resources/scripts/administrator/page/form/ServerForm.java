@@ -16,17 +16,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import com.exponentus.common.page.form.Form;
 import com.exponentus.env.Environment;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.event._DoPage;
 
 import kz.flabs.util.Util;
 import kz.nextbase.script.actions._Action;
 import kz.nextbase.script.actions._ActionBar;
 import kz.nextbase.script.actions._ActionType;
 
-public class ServerForm extends Form {
+public class ServerForm extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {

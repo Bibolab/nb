@@ -5,13 +5,13 @@ import java.util.UUID;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
 
-import com.exponentus.common.page.form.Form;
 import com.exponentus.dataengine.jpa.constants.AppCode;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.event._DoPage;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
@@ -21,7 +21,7 @@ import kz.nextbase.script.actions._Action;
 import kz.nextbase.script.actions._ActionBar;
 import kz.nextbase.script.actions._ActionType;
 
-public class ApplicationForm extends Form {
+public class ApplicationForm extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {

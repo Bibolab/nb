@@ -31,6 +31,7 @@ nb.dialog = {
     },
     confirm: function(options) {
         options.className = 'dialog-warn';
+
         options.width = options.width || 360;
         options.height = options.height || 210;
         options.message = options.message || null;

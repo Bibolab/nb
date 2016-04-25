@@ -30,16 +30,16 @@ nb.dialog = {
         return this.show(opt);
     },
     confirm: function(options) {
-        options.className = 'dialog-warn';
+        options.className = 'dialog-confirm';
 
         options.width = options.width || 360;
         options.height = options.height || 210;
         options.message = options.message || null;
         options.buttons = options.buttons || {
-                'Ok': function() {
-                    $(this).dialog('close');
-                }
-            };
+            'Ok': function() {
+                $(this).dialog('close');
+            }
+        };
 
         return this.show(options);
     },

@@ -27,7 +27,7 @@ public class LogsZip implements Job {
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
 		int cutOffDays = 7;
-		LogFiles logs = new LogFiles();
+		LogFiles logs = new LogFiles("server");
 		String pathfile = logs.logDir.getAbsolutePath();
 
 		GregorianCalendar today = new GregorianCalendar();

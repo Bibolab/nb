@@ -12,10 +12,11 @@ public class LogView extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
+		String dir = formData.getValueSilently("category");
 		int pageNum = formData.getNumberValueSilently("page", 1);
 		int pageSize = session.pageSize;
 
-		LogFiles logs = new LogFiles();
+		LogFiles logs = new LogFiles(dir);
 		long count = logs.getCount();
 		int maxPage = RuntimeObjUtil.countMaxPage(count, pageSize);
 		if (pageNum == 0) {

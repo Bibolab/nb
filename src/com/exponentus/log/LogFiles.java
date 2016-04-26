@@ -18,9 +18,11 @@ public class LogFiles {
 	public File logDir;
 
 	private ArrayList<File> fileList = new ArrayList<File>();
+	private String dir;
 
-	public LogFiles() {
-		logDir = new File("." + File.separator + "logs");
+	public LogFiles(String dir) {
+		this.dir = dir;
+		logDir = new File("." + File.separator + "logs" + File.separator + dir);
 		if (logDir.isDirectory()) {
 			File[] list = logDir.listFiles();
 			Arrays.sort(list, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
@@ -36,7 +38,8 @@ public class LogFiles {
 			objs.add(new POJOObjectAdapter<Object>() {
 				@Override
 				public String getURL() {
-					return "p";
+					return "p?id=log-form&amp;docid=" + element.getName() + "&amp;category=" + dir;
+
 				}
 
 				@Override

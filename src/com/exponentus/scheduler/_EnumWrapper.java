@@ -1,4 +1,4 @@
-package kz.nextbase.script;
+package com.exponentus.scheduler;
 
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;

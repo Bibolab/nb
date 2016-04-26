@@ -8,6 +8,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 import com.exponentus.dataengine.jpa.constants.AppCode;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.scheduler._EnumWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
@@ -19,7 +20,6 @@ import com.exponentus.scripting.event._DoPage;
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
 import kz.flabs.util.Util;
-import kz.nextbase.script._EnumWrapper;
 
 public class ApplicationForm extends _DoPage {
 

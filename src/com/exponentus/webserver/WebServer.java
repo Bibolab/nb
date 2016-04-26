@@ -144,6 +144,7 @@ public class WebServer {
 
 		context.addMimeMapping("css", "text/css");
 		context.addMimeMapping("js", "text/javascript");
+		context.addMimeMapping("html", "text/html");
 
 		initErrorPages(context);
 

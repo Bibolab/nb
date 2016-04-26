@@ -8,7 +8,6 @@ import java.util.List;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.util.Util;
-import kz.flabs.webrule.constants.FieldType;
 
 public class RuntimeObjUtil implements Const {
 	private static final int v = 60 * 60 * 1000;
@@ -132,11 +131,6 @@ public class RuntimeObjUtil implements Const {
 			}
 		}
 		return text.substring(0, indOfSpace) + "...";
-	}
-
-	public static String getTypeAttribute(FieldType type) {
-		String attr = " type=\"" + type.toString() + "\"";
-		return attr;
 	}
 
 	public static String getTypeAttribute(int type) {

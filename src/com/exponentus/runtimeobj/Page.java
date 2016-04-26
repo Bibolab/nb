@@ -1,4 +1,4 @@
-package kz.flabs.runtimeobj.page;
+package com.exponentus.runtimeobj;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,10 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.rule.page.ElementRule;
 import com.exponentus.rule.page.PageRule;
+import com.exponentus.runtimeobj.IncludedPage;
+import com.exponentus.runtimeobj.IncludedPage;
+import com.exponentus.runtimeobj.IncludedPage;
+import com.exponentus.runtimeobj.IncludedPage;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.DoProcessor;

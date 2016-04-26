@@ -3,11 +3,11 @@ package com.exponentus.caching;
 import java.io.IOException;
 import java.util.HashMap;
 
+import com.exponentus.runtimeobj.Page;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.PageOutcome;
 
 import kz.flabs.exception.RuleException;
-import kz.flabs.runtimeobj.page.Page;
 import net.sf.saxon.s9api.SaxonApiException;
 
 public abstract class PageCacheAdapter implements ICache {

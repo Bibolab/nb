@@ -1,10 +1,16 @@
-package kz.nextbase.script.actions;
+package com.exponentus.scripting.actions;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
+import com.exponentus.scripting.actions._Action;
+import com.exponentus.scripting.actions._ActionBar;
+import com.exponentus.scripting.actions._Action;
+import com.exponentus.scripting.actions._ActionBar;
+import com.exponentus.scripting.actions._Action;
+import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
 
 import kz.flabs.webrule.constants.RunMode;

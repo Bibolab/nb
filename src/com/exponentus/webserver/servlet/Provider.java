@@ -22,6 +22,7 @@ import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.ApplicationException;
 import com.exponentus.rule.page.PageRule;
+import com.exponentus.runtimeobj.Page;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Session.PersistValue;
 import com.exponentus.scripting._WebFormData;
@@ -30,7 +31,6 @@ import com.exponentus.server.Server;
 import com.exponentus.webserver.servlet.xslt.SaxonTransformator;
 
 import kz.flabs.exception.RuleException;
-import kz.flabs.runtimeobj.page.Page;
 import kz.flabs.servlets.PublishAsType;
 import kz.flabs.servlets.sitefiles.AttachmentHandler;
 

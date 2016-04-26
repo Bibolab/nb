@@ -1,4 +1,4 @@
-package kz.flabs.runtimeobj.page;
+package com.exponentus.runtimeobj;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.rule.page.PageRule;

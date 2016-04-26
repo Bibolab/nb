@@ -25,7 +25,7 @@ import kz.flabs.servlets.PublishAsType;
 import kz.flabs.util.XMLUtil;
 import kz.flabs.webrule.constants.RunMode;
 
-public abstract class Rule implements IElement, IRule {
+public abstract class Rule implements IElement {
 	public RunMode isOn = RunMode.ON;
 	public boolean isValid = true;
 	public String description;
@@ -113,7 +113,6 @@ public abstract class Rule implements IElement, IRule {
 
 	}
 
-	@Override
 	public void plusHit() {
 		hits++;
 	}
@@ -131,12 +130,10 @@ public abstract class Rule implements IElement, IRule {
 		return "";
 	}
 
-	@Override
 	public boolean isAnonymousAccessAllowed() {
 		return allowAnonymousAccess;
 	}
 
-	@Override
 	public String getRuleID() {
 		return type + "_" + id;
 	}

@@ -12,14 +12,14 @@ import com.exponentus.rule.page.PageRule;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.actions._Action;
+import com.exponentus.scripting.actions._ActionBar;
+import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
 import kz.flabs.exception.RuleException;
-import kz.nextbase.script.actions._Action;
-import kz.nextbase.script.actions._ActionBar;
-import kz.nextbase.script.actions._ActionType;
 
 public class RuleForm extends _DoPage {
 

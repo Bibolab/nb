@@ -19,12 +19,12 @@ import org.xml.sax.SAXException;
 import com.exponentus.env.Environment;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.actions._Action;
+import com.exponentus.scripting.actions._ActionBar;
+import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
 
 import kz.flabs.util.Util;
-import kz.nextbase.script.actions._Action;
-import kz.nextbase.script.actions._ActionBar;
-import kz.nextbase.script.actions._ActionType;
 
 public class ServerForm extends _DoPage {
 

@@ -1,6 +1,6 @@
 package com.exponentus.rule.page;
 
-import kz.flabs.webrule.constants.ValueSourceType;
+import com.exponentus.rule.constans.ValueSourceType;
 
 public class ElementScript {
 	private String className;

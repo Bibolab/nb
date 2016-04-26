@@ -16,14 +16,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.rule.constans.RunMode;
 import com.exponentus.rule.page.ElementRule;
 import com.exponentus.rule.page.IElement;
 import com.exponentus.rule.page.RuleType;
+import com.exponentus.util.XMLUtil;
 
 import kz.flabs.exception.RuleException;
 import kz.flabs.servlets.PublishAsType;
-import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.constants.RunMode;
 
 public abstract class Rule implements IElement {
 	public RunMode isOn = RunMode.ON;

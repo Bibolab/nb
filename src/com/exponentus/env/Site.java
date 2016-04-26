@@ -3,8 +3,7 @@ package com.exponentus.env;
 import java.util.List;
 
 import com.exponentus.rest.RestType;
-
-import kz.flabs.webrule.constants.RunMode;
+import com.exponentus.rule.constans.RunMode;
 
 public class Site {
 	public String siteName;

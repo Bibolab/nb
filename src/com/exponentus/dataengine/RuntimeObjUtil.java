@@ -6,8 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import com.exponentus.util.Util;
+
 import kz.flabs.dataengine.Const;
-import kz.flabs.util.Util;
 
 public class RuntimeObjUtil implements Const {
 	private static final int v = 60 * 60 * 1000;

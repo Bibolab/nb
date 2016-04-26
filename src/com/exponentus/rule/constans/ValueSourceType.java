@@ -1,4 +1,4 @@
-package kz.flabs.webrule.constants;
+package com.exponentus.rule.constans;
 
 public enum ValueSourceType {
 	STATIC, @Deprecated QUERY, @Deprecated SCRIPT, MACRO, DOCFIELD, DOC_FIELD, DOC_ATTACHMENT, KEYWORD, WEBFORMFIELD, UNKNOWN, WEBFORMFILE, MAINDOCFIELD, RESULTSET, VOCABULARY, FILE, GROOVY_FILE, JAVA_CLASS

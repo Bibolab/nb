@@ -1,16 +1,15 @@
-package kz.nextbase.script;
+package com.exponentus.scripting;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.exponentus.appenv.AppEnv;
-import com.exponentus.scripting._Session;
 
 public class _Exception extends Exception {
-	private static final long serialVersionUID = -6047450542781990205L;
-	private String errorText;
+	private static final long serialVersionUID = 1L;
 	private _Session session;
 	private String serviceAddInfo = "";
+	private String errorText;
 
 	_Exception(String text) {
 		super(text);

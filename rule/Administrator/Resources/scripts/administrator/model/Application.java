@@ -16,9 +16,9 @@ import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.constants.AppCode;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
+import com.exponentus.util.Util;
 
 import administrator.dao.LanguageDAO;
-import kz.flabs.util.Util;
 
 @Entity
 @Table(name = "_apps")

@@ -10,10 +10,10 @@ import javax.persistence.MappedSuperclass;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
+import com.exponentus.util.Util;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
-import kz.flabs.util.Util;
 
 @MappedSuperclass
 public class SimpleEntity extends AppEntity<UUID> {

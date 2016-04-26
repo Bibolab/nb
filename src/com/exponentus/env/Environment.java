@@ -41,18 +41,19 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.rest.RestType;
+import com.exponentus.rule.constans.RunMode;
 import com.exponentus.runtimeobj.Page;
 import com.exponentus.scheduler.PeriodicalServices;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.PageOutcome;
 import com.exponentus.server.Server;
+import com.exponentus.util.XMLUtil;
+import com.exponentus.webserver.WebServer;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.dataengine.IDatabase;
 import kz.flabs.exception.RuleException;
-import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.constants.RunMode;
 import net.sf.saxon.s9api.SaxonApiException;
 
 public class Environment implements Const, ICache {
@@ -61,7 +62,6 @@ public class Environment implements Const, ICache {
 	public static String orgName;
 	public static String hostName;
 	public static int httpPort = EnvConst.DEFAULT_HTTP_PORT;
-	public static String httpSchema = "http";
 	public static AppEnv adminApplication;
 	public static String defaultSender = "";
 	public static HashMap<String, String> mimeHash = new HashMap<String, String>();
@@ -70,13 +70,10 @@ public class Environment implements Const, ICache {
 	public static String trash;
 	public static ArrayList<String> fileToDelete = new ArrayList<String>();
 
-	public static Boolean isSSLEnable = false;
+	public static Boolean isTLSEnable = false;
 	public static int secureHttpPort;
-	public static String keyPwd = "";
-	public static String keyStore = "";
-	public static String trustStore;
-	public static String trustStorePwd;
-	public static boolean isClientSSLAuthEnable;
+	public static String certFile = "";
+	public static String certKeyFile = "";
 
 	public static List<LanguageCode> langs = new ArrayList<LanguageCode>();
 
@@ -95,7 +92,6 @@ public class Environment implements Const, ICache {
 	private static ConcurrentHashMap<String, AppEnv> allApplications = new ConcurrentHashMap<String, AppEnv>();
 
 	private static HashMap<String, Object> cache = new HashMap<String, Object>();
-	private static ArrayList<IDatabase> delayedStart = new ArrayList<IDatabase>();
 	private static ArrayList<_Session> sess = new ArrayList<_Session>();
 	private static boolean isDevMode;
 	private static String officeFrameDir = "";
@@ -188,24 +184,25 @@ public class Environment implements Const, ICache {
 			}
 
 			try {
-				isSSLEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/ssl/@mode").equalsIgnoreCase("on");
-				if (isSSLEnable) {
-					secureHttpPort = XMLUtil.getNumberContent(xmlDocument, "/nextbase/ssl/port", 38789);
-					keyPwd = XMLUtil.getTextContent(xmlDocument, "/nextbase/ssl/keypass");
-					keyStore = XMLUtil.getTextContent(xmlDocument, "/nextbase/ssl/keystore");
-					isClientSSLAuthEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/ssl/clientauth/@mode").equalsIgnoreCase("on");
-					if (isClientSSLAuthEnable) {
-						trustStore = XMLUtil.getTextContent(xmlDocument, "/nextbase/ssl/clientauth/truststorefile");
-						trustStorePwd = XMLUtil.getTextContent(xmlDocument, "/nextbase/ssl/clientauth/truststorepass");
+				isTLSEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/tls/@mode").equalsIgnoreCase("on");
+				if (isTLSEnable) {
+					String tlsPort = XMLUtil.getTextContent(xmlDocument, "/nextbase/tls/port");
+					try {
+						secureHttpPort = Integer.parseInt(tlsPort);
+					} catch (NumberFormatException nfe) {
+						secureHttpPort = EnvConst.DEFAULT_HTTP_PORT;
 					}
+					certFile = XMLUtil.getTextContent(xmlDocument, "/nextbase/tls/certfile");
+					certKeyFile = XMLUtil.getTextContent(xmlDocument, "/nextbase/tls/certkeyfile");
+
 					Server.logger.infoLogEntry("TLS is enabled");
-					httpSchema = "https";
+					httpPort = secureHttpPort;
 				}
 			} catch (Exception ex) {
-				Server.logger.infoLogEntry("TLS configiration error");
-				isSSLEnable = false;
-				keyPwd = "";
-				keyStore = "";
+				Server.logger.infoLogEntry("TLS configuration error");
+				isTLSEnable = false;
+				certFile = "";
+				certKeyFile = "";
 			}
 
 			try {
@@ -262,10 +259,6 @@ public class Environment implements Const, ICache {
 		allApplications.put(env.appName.toLowerCase(), env);
 	}
 
-	public static void addDelayedInit(IDatabase db) {
-		delayedStart.add(db);
-	}
-
 	public static AppEnv getAppEnv(String appID) {
 		return allApplications.get(appID);
 	}
@@ -283,7 +276,7 @@ public class Environment implements Const, ICache {
 		if (Environment.httpPort != 80) {
 			port = ":" + Environment.httpPort;
 		}
-		return httpSchema + "://" + Environment.hostName + port;
+		return WebServer.httpSchema + "://" + Environment.hostName + port;
 	}
 
 	public static String getWorkspaceURL() {

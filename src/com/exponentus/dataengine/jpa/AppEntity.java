@@ -25,10 +25,9 @@ import com.exponentus.dataengine.jpa.util.UUIDConverter;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.IUser;
+import com.exponentus.util.Util;
+import com.exponentus.util.XMLUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import kz.flabs.util.Util;
-import kz.flabs.util.XMLUtil;
 
 @MappedSuperclass
 @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)

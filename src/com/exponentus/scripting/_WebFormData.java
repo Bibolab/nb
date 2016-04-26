@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
-import kz.flabs.util.Util;
-import kz.nextbase.script._Exception;
-import kz.nextbase.script._ExceptionType;
+import com.exponentus.util.Util;
 
 public class _WebFormData {
 	private Map<String, String[]> formData;

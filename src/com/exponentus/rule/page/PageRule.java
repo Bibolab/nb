@@ -8,16 +8,16 @@ import org.w3c.dom.NodeList;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.rule.constans.RunMode;
+import com.exponentus.rule.constans.ValueSourceType;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
+import com.exponentus.util.XMLUtil;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.RuleException;
 import kz.flabs.servlets.PublishAsType;
-import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.Rule;
-import kz.flabs.webrule.constants.RunMode;
-import kz.flabs.webrule.constants.ValueSourceType;;
+import kz.flabs.webrule.Rule;;
 
 public class PageRule extends Rule implements IElement, Const, IPOJOObject {
 	public boolean isValid;

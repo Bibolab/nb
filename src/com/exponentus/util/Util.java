@@ -1,4 +1,4 @@
-package kz.flabs.util;
+package com.exponentus.util;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -25,6 +25,9 @@ import java.util.regex.Pattern;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.server.Server;
+import com.exponentus.util.Util;
+import com.exponentus.util.Util;
+import com.exponentus.util.Util;
 
 public class Util {
 	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm:ss");

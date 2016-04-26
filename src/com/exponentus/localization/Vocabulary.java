@@ -5,10 +5,8 @@ import java.util.HashMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.exponentus.localization.LanguageCode;
 import com.exponentus.log.Log4jLogger;
-
-import kz.flabs.util.XMLUtil;
+import com.exponentus.util.XMLUtil;
 
 public class Vocabulary {
 	public HashMap<String, Sentence> words;

@@ -11,8 +11,7 @@ import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
-
-import kz.flabs.util.Util;
+import com.exponentus.util.Util;
 
 public class LogFiles {
 	public File logDir;

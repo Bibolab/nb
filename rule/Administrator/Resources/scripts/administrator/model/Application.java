@@ -129,7 +129,7 @@ public class Application extends AppEntity<UUID> {
 		LanguageDAO lDao = new LanguageDAO(ses);
 		List<Language> list = lDao.findAll();
 		for (Language l : list) {
-			chunk.append("<entry id=\"" + l.getCode() + "\">" + getLocalizedName(ses.getLang()) + "</entry>");
+			chunk.append("<entry id=\"" + l.getCode() + "\">" + getLocalizedName(l.getCode()) + "</entry>");
 		}
 		chunk.append("</localizednames>");
 		return chunk.toString();

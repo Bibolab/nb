@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rule type="page" mode="on">
+<rule  mode="on">
     <description>Outline</description>
     <caching>NO_CACHING</caching>
     <element mode="ON" type="SCRIPT">

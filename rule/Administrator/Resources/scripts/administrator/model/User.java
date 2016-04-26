@@ -23,9 +23,8 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.IUser;
+import com.exponentus.util.Util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import kz.flabs.util.Util;
 
 @Entity
 @Table(name = "_users")

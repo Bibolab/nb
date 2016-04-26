@@ -24,8 +24,7 @@ import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.scheduler.SchedulerHelper;
 import com.exponentus.util.StringUtil;
-
-import kz.flabs.util.Util;
+import com.exponentus.util.Util;
 
 public class Console implements Runnable {
 

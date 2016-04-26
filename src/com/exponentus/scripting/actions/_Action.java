@@ -1,13 +1,9 @@
 package com.exponentus.scripting.actions;
 
 import com.exponentus.localization.Vocabulary;
+import com.exponentus.rule.constans.RunMode;
 import com.exponentus.scripting._Session;
-import com.exponentus.scripting.actions._ActionType;
-import com.exponentus.scripting.actions._ActionType;
-import com.exponentus.scripting.actions._ActionType;
-
-import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.constants.RunMode;
+import com.exponentus.util.XMLUtil;
 
 public class _Action {
 	public RunMode isOn = RunMode.ON;

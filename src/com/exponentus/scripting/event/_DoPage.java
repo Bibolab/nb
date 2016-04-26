@@ -1,10 +1,9 @@
 package com.exponentus.scripting.event;
 
+import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.AbstractPage;
-
-import kz.nextbase.script._Exception;
 
 public abstract class _DoPage extends AbstractPage {
 

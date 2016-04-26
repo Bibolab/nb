@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
@@ -19,7 +20,6 @@ import administrator.dao.ApplicationDAO;
 import administrator.dao.UserDAO;
 import administrator.model.Application;
 import administrator.model.User;
-import kz.nextbase.script._Exception;
 
 /**
  * @author Kayra created 05-03-2016

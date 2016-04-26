@@ -1,4 +1,4 @@
-package kz.flabs.util;
+package com.exponentus.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +25,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.exponentus.server.Server;
+import com.exponentus.util.XMLUtil;
+import com.exponentus.util.XMLUtil;
+import com.exponentus.util.XMLUtil;
 
 public class XMLUtil {
 

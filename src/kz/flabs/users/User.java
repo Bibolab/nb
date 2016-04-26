@@ -7,11 +7,12 @@ import java.util.HashSet;
 import org.apache.catalina.realm.RealmBase;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.util.Util;
+import com.exponentus.util.Util;
 
 import kz.flabs.dataengine.Const;
 import kz.flabs.exception.WebFormValueException;
 import kz.flabs.exception.WebFormValueExceptionType;
-import kz.flabs.util.Util;
 
 @Deprecated
 public class User implements Const {

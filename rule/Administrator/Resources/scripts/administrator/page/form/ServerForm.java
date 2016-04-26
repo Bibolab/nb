@@ -23,8 +23,7 @@ import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
-
-import kz.flabs.util.Util;
+import com.exponentus.util.Util;
 
 public class ServerForm extends _DoPage {
 

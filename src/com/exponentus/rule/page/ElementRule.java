@@ -4,11 +4,11 @@ import org.codehaus.groovy.control.MultipleCompilationErrorsException;
 import org.w3c.dom.Node;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.rule.constans.RunMode;
+import com.exponentus.rule.constans.ValueSourceType;
+import com.exponentus.util.XMLUtil;
 
 import kz.flabs.dataengine.Const;
-import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.constants.RunMode;
-import kz.flabs.webrule.constants.ValueSourceType;
 
 public class ElementRule implements Const {
 	public ElementType type;

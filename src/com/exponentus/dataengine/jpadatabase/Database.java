@@ -37,7 +37,6 @@ import administrator.model.Application;
 import administrator.model.Language;
 import administrator.model.User;
 import kz.flabs.dataengine.Const;
-import kz.flabs.dataengine.DatabaseCore;
 import kz.flabs.dataengine.DatabasePoolException;
 import kz.flabs.dataengine.DatabaseUtil;
 import kz.flabs.dataengine.IDBConnectionPool;
@@ -45,7 +44,7 @@ import kz.flabs.dataengine.IDatabase;
 import kz.flabs.dataengine.IFTIndexEngine;
 import kz.flabs.dataengine.h2.DBConnectionPool;
 
-public class Database extends DatabaseCore implements IDatabase, Const {
+public class Database implements IDatabase, Const {
 	protected static String dbUser = EnvConst.APP_DB_USER;
 	protected static String dbPwd = EnvConst.APP_DB_PWD;
 	protected static String connectionURL = "";

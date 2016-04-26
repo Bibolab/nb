@@ -23,16 +23,17 @@ import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.env.Site;
 import com.exponentus.rest.ResourceLoader;
+import com.exponentus.rule.constans.RunMode;
 import com.exponentus.server.Server;
 import com.exponentus.webserver.valve.Logging;
 import com.exponentus.webserver.valve.Secure;
 import com.exponentus.webserver.valve.Unsecure;
 
-import kz.flabs.webrule.constants.RunMode;
-
 public class WebServer {
 	private static Tomcat tomcat;
 	private static Engine engine;
+	public static final String httpSchema = "http";
+	public static final String httpSecureSchema = "https";
 
 	// private static final String defaultWelcomeList[] = { "index.html",
 	// "index.htm" };
@@ -170,31 +171,26 @@ public class WebServer {
 
 	public String initConnectors() {
 		String portInfo = "";
-		if (Environment.isSSLEnable) {
+		if (Environment.isTLSEnable) {
 			Connector secureConnector = null;
-			Server.logger.infoLogEntry("TLS connector has been enabled");
+			Server.logger.infoLogEntry("TLS has been enabled");
 			secureConnector = tomcat.getConnector();
-			// secureConnector.setDomain("flabs.kz");
 			secureConnector.setPort(Environment.secureHttpPort);
-			secureConnector.setScheme("https");
-			secureConnector.setProtocol("org.apache.coyote.http11.Http11Protocol");
+			secureConnector.setScheme(httpSecureSchema);
+			secureConnector.setProtocol("org.apache.coyote.http11.Http11AprProtocol");
 			secureConnector.setSecure(true);
 			secureConnector.setEnableLookups(false);
 			secureConnector.setSecure(true);
 			secureConnector.setProperty("SSLEnabled", "true");
-			secureConnector.setProperty("sslProtocol", "TLS");
-			secureConnector.setProperty("keystoreFile", Environment.keyStore);
-			secureConnector.setProperty("keystorePass", Environment.keyPwd);
-			if (Environment.isClientSSLAuthEnable) {
-				secureConnector.setProperty("clientAuth", "true");
-				secureConnector.setProperty("truststoreFile", Environment.trustStore);
-				secureConnector.setProperty("truststorePass", Environment.trustStorePwd);
-			}
+			secureConnector.setProperty("SSLCertificateFile", Environment.certFile);
+			secureConnector.setProperty("SSLCertificateKeyFile", Environment.certKeyFile);
 			tomcat.setConnector(secureConnector);
-			portInfo = "secure:" + tomcat.getHost().getName() + ":" + Integer.toString(Environment.secureHttpPort);
+
+			portInfo = httpSecureSchema + "://" + tomcat.getHost().getName() + ":" + Integer.toString(Environment.secureHttpPort);
 		} else {
-			portInfo = tomcat.getHost().getName() + ":" + Integer.toString(Environment.httpPort);
+			portInfo = Environment.getFullHostName();
 		}
+
 		return portInfo;
 
 	}

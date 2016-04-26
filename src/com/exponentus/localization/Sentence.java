@@ -6,8 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.exponentus.server.Server;
-
-import kz.flabs.util.XMLUtil;
+import com.exponentus.util.XMLUtil;
 
 public class Sentence {
 	public boolean isOn = true;

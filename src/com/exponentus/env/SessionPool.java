@@ -6,8 +6,7 @@ import java.util.HashMap;
 import org.apache.commons.codec.binary.Base64;
 
 import com.exponentus.scripting._Session;
-
-import kz.flabs.util.Util;
+import com.exponentus.util.Util;
 
 public class SessionPool {
 	private static HashMap<Integer, _Session> userSessions = new HashMap<Integer, _Session>();

@@ -1,10 +1,10 @@
 package kz.flabs.scriptprocessor;
 
+import com.exponentus.rule.constans.ValueSourceType;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
+import com.exponentus.util.XMLUtil;
 
 import groovy.lang.GroovyObject;
-import kz.flabs.util.XMLUtil;
-import kz.flabs.webrule.constants.ValueSourceType;
 
 public class ScriptShowField implements IOutcomeObject {
 	private String name;

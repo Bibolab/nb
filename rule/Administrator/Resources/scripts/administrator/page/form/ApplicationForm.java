@@ -16,10 +16,10 @@ import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
+import com.exponentus.util.Util;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
-import kz.flabs.util.Util;
 
 public class ApplicationForm extends _DoPage {
 

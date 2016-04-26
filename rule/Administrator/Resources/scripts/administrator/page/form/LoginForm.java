@@ -2,13 +2,13 @@ package administrator.page.form;
 
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._AppEntourage;
+import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoPage;
 
 import administrator.dao.LanguageDAO;
-import kz.nextbase.script._Exception;
 
 public class LoginForm extends _DoPage {
 	@Override

@@ -15,9 +15,7 @@ import org.xml.sax.SAXException;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.Environment;
 
-import kz.flabs.dataengine.Const;
-
-public class Localizator implements Const {
+public class Localizator {
 
 	public Vocabulary populate() {
 		return fill(Environment.vocabuarFilePath, "system", new HashMap<String, Sentence>());

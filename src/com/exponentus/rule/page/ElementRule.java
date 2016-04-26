@@ -8,9 +8,7 @@ import com.exponentus.rule.constans.RunMode;
 import com.exponentus.rule.constans.ValueSourceType;
 import com.exponentus.util.XMLUtil;
 
-import kz.flabs.dataengine.Const;
-
-public class ElementRule implements Const {
+public class ElementRule {
 	public ElementType type;
 	public boolean isValid = true;
 	public String name;

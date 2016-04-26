@@ -7,17 +7,17 @@ import java.sql.Statement;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
-import kz.flabs.dataengine.DatabasePoolException;
-import kz.flabs.dataengine.DatabasePoolExceptionType;
-import kz.flabs.dataengine.DatabaseUtil;
-import kz.flabs.dataengine.IDBConnectionPool;
-import com.exponentus.server.Server;
-
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp.PoolableConnectionFactory;
 import org.apache.commons.dbcp.PoolingDataSource;
 import org.apache.commons.pool.impl.GenericObjectPool;
+
+import com.exponentus.dataengine.DatabaseUtil;
+import com.exponentus.dataengine.IDBConnectionPool;
+import com.exponentus.dataengine.exception.DatabasePoolException;
+import com.exponentus.dataengine.exception.DatabasePoolExceptionType;
+import com.exponentus.server.Server;
 
 public class DBConnectionPool implements IDBConnectionPool {
 	protected GenericObjectPool connectionPool;
@@ -27,8 +27,8 @@ public class DBConnectionPool implements IDBConnectionPool {
 	private String DBMSVersion = "";
 
 	@Override
-	public void initConnectionPool(String driver, String dbURL, String userName, String password) throws DatabasePoolException,
-	        InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public void initConnectionPool(String driver, String dbURL, String userName, String password)
+	        throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Properties props = null;
 		Class.forName(driver).newInstance();
 		connectionPool = new GenericObjectPool(null);
@@ -55,8 +55,8 @@ public class DBConnectionPool implements IDBConnectionPool {
 	}
 
 	@Override
-	public void initConnectionPool(String driver, String dbURL) throws DatabasePoolException, InstantiationException, IllegalAccessException,
-	        ClassNotFoundException {
+	public void initConnectionPool(String driver, String dbURL)
+	        throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Class.forName(driver).newInstance();
 		connectionPool = new GenericObjectPool(null);
 		connectionPool.setTestOnBorrow(true);

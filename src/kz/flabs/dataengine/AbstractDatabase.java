@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.IDBConnectionPool;
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTIndexEngine;
+import com.exponentus.dataengine.exception.DatabasePoolException;
 
 import kz.flabs.users.User;
 

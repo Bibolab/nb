@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTIndexEngine;
 import com.exponentus.dataengine.jpadatabase.Database;
 import com.exponentus.dataengine.jpadatabase.ftengine.FTEntity;
 import com.exponentus.env.EnvConst;
@@ -16,9 +18,6 @@ import com.exponentus.env.Environment;
 import com.exponentus.server.Server;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import kz.flabs.dataengine.IDatabase;
-import kz.flabs.dataengine.IFTIndexEngine;
 
 public class PortalInit extends HttpServlet {
 

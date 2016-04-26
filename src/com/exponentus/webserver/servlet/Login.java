@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.SessionPool;
+import com.exponentus.exception.PortalException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
@@ -22,14 +23,10 @@ import com.exponentus.user.IUser;
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
 import administrator.services.Connect;
-import kz.flabs.dataengine.Const;
-import kz.flabs.exception.PortalException;
-import kz.flabs.servlets.ProviderExceptionType;
-import kz.flabs.servlets.PublishAsType;
 import kz.flabs.users.AuthFailedException;
 import kz.flabs.users.AuthFailedExceptionType;
 
-public class Login extends HttpServlet implements Const {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AppEnv env;
 

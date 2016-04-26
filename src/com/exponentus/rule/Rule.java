@@ -1,4 +1,4 @@
-package kz.flabs.webrule;
+package com.exponentus.rule;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,14 +16,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.exception.RuleException;
 import com.exponentus.rule.constans.RunMode;
 import com.exponentus.rule.page.ElementRule;
 import com.exponentus.rule.page.IElement;
 import com.exponentus.rule.page.RuleType;
 import com.exponentus.util.XMLUtil;
-
-import kz.flabs.exception.RuleException;
-import kz.flabs.servlets.PublishAsType;
+import com.exponentus.webserver.servlet.PublishAsType;
 
 public abstract class Rule implements IElement {
 	public RunMode isOn = RunMode.ON;

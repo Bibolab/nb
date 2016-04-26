@@ -6,6 +6,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.Environment;
+import com.exponentus.exception.RuleException;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.rule.page.PageRule;
@@ -19,7 +20,6 @@ import com.exponentus.scripting.event._DoPage;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
-import kz.flabs.exception.RuleException;
 
 public class RuleForm extends _DoPage {
 

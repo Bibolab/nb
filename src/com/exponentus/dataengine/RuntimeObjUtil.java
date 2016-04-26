@@ -8,9 +8,7 @@ import java.util.List;
 
 import com.exponentus.util.Util;
 
-import kz.flabs.dataengine.Const;
-
-public class RuntimeObjUtil implements Const {
+public class RuntimeObjUtil {
 	private static final int v = 60 * 60 * 1000;
 	private static final float PRIORITY_FACTOR = 2f;
 
@@ -132,38 +130,6 @@ public class RuntimeObjUtil implements Const {
 			}
 		}
 		return text.substring(0, indOfSpace) + "...";
-	}
-
-	public static String getTypeAttribute(int type) {
-		String attr = "";
-		switch (type) {
-		case TEXT:
-			attr = " type=\"string\"";
-			break;
-		case DATETIMES:
-			attr = " type=\"datetime\"";
-			break;
-		case NUMBERS:
-			attr = " type=\"number\"";
-			break;
-		case COMPLEX_OBJECT:
-			attr = " type=\"complex\"";
-			break;
-		case AUTHORS:
-			attr = " type=\"authors\"";
-			break;
-		case TEXTLIST:
-			attr = " type=\"map\"";
-			break;
-		case READERS:
-			attr = " type=\"readers\"";
-			break;
-		case FILES:
-			attr = " type=\"files\"";
-			break;
-
-		}
-		return attr;
 	}
 
 	public static int countMaxPage(long colCount, int pageSize) {

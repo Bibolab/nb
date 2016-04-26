@@ -12,13 +12,10 @@ import javax.servlet.http.HttpSession;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.SessionPool;
+import com.exponentus.exception.PortalException;
 import com.exponentus.scripting._Session;
 
-import kz.flabs.dataengine.Const;
-import kz.flabs.exception.PortalException;
-import kz.flabs.servlets.ProviderExceptionType;
-
-public class Logout extends HttpServlet implements Const {
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AppEnv env;
 

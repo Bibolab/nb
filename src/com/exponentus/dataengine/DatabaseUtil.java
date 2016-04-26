@@ -1,4 +1,4 @@
-package kz.flabs.dataengine;
+package com.exponentus.dataengine;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -9,7 +9,7 @@ import java.util.Collection;
 
 import com.exponentus.server.Server;
 
-public class DatabaseUtil implements Const {
+public class DatabaseUtil {
 
 	public static void errorPrint(Throwable e) {
 		if (e instanceof SQLException) {
@@ -184,31 +184,6 @@ public class DatabaseUtil implements Const {
 		return result.toString();
 	}
 
-	public static String getPrimaryKeyColumnName(int docType) {
-		String columnName;
-		switch (docType) {
-		case DOCTYPE_ORGANIZATION:
-			columnName = "ORGID";
-			break;
-		case DOCTYPE_DEPARTMENT:
-			columnName = "DEPID";
-			break;
-		case DOCTYPE_EMPLOYER:
-			columnName = "EMPID";
-			break;
-		case DOCTYPE_GROUP:
-			columnName = "GROUPID";
-			break;
-		case DOCTYPE_ACTIVITY_ENTRY:
-		case DOCTYPE_RECYCLE_BIN_ENTRY:
-			columnName = "ID";
-			break;
-		default:
-			columnName = "DOCID";
-		}
-		return columnName;
-	}
-
 	public static String getViewTextList(String prefix) {
 		String list = "";
 
@@ -216,85 +191,6 @@ public class DatabaseUtil implements Const {
 			list = list.substring(0, list.length() - 1);
 		}
 		return list;
-	}
-
-	/*
-	 * public static String get() { String viewTextList = ""; for (int i = 1; i
-	 * <= DatabaseConst.VIEWTEXT_COUNT; i++) { viewTextList += "'" +
-	 * doc.getViewTextList().get(i).replaceAll("'", "''") + "',"; } if
-	 * (viewTextList.endsWith(",")) { viewTextList = viewTextList.substring(0,
-	 * viewTextList.length()-1); } return viewTextList; }
-	 */
-
-	public static String getCustomBlobsTableName(int docType) {
-		String tableName;
-		switch (docType) {
-		case DOCTYPE_MAIN:
-		case DOCTYPE_TASK:
-		case DOCTYPE_EXECUTION:
-		case DOCTYPE_PROJECT:
-		case DOCTYPE_EMPLOYER:
-			tableName = "CUSTOM_BLOBS_" + getMainTableName(docType);
-			break;
-		default:
-			throw new IllegalArgumentException("Document type is unknown");
-		}
-
-		return tableName;
-	}
-
-	@Deprecated
-	public static String getReadersTableName(int docType) {
-		return "READERS_" + getMainTableName(docType);
-	}
-
-	@Deprecated
-	public static String getMainTableName(int docType) {
-		String tableName = "";
-		switch (docType) {
-		case DOCTYPE_MAIN:
-			tableName = "MAINDOCS";
-			break;
-		case DOCTYPE_TASK:
-			tableName = "TASKS";
-			break;
-		case DOCTYPE_EXECUTION:
-			tableName = "EXECUTIONS";
-			break;
-		case DOCTYPE_PROJECT:
-			tableName = "PROJECTS";
-			break;
-		case DOCTYPE_GLOSSARY:
-			tableName = "GLOSSARY";
-			break;
-		case DOCTYPE_ORGANIZATION:
-			tableName = "ORGANIZATIONS";
-			break;
-		case DOCTYPE_DEPARTMENT:
-			tableName = "DEPARTMENTS";
-			break;
-		case DOCTYPE_EMPLOYER:
-			tableName = "EMPLOYERS";
-			break;
-		case DOCTYPE_GROUP:
-			tableName = "GROUPS";
-			break;
-		case DOCTYPE_ACTIVITY_ENTRY:
-			tableName = "USERS_ACTIVITY";
-			break;
-		case DOCTYPE_RECYCLE_BIN_ENTRY:
-			tableName = "RECYCLE_BIN";
-			break;
-		case DOCTYPE_TOPIC:
-			tableName = "TOPICS";
-			break;
-		case DOCTYPE_POST:
-			tableName = "POSTS";
-			break;
-		default:
-			throw new IllegalArgumentException("Document type is unknown");
-		}
-		return tableName;
 	}
 
 	public static boolean hasFTIndex(Connection conn, String tableName) {
@@ -339,17 +235,4 @@ public class DatabaseUtil implements Const {
 		return false;
 	}
 
-	@Deprecated
-	public static String resolveElement(int docType) {
-		switch (docType) {
-		case Const.DOCTYPE_TASK:
-			return "task";
-		case Const.DOCTYPE_EXECUTION:
-			return "execution";
-		case Const.DOCTYPE_PROJECT:
-			return "project";
-		default:
-			return "document";
-		}
-	}
 }

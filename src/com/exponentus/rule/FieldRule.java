@@ -1,4 +1,4 @@
-package kz.flabs.webrule;
+package com.exponentus.rule;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.util.XMLUtil;

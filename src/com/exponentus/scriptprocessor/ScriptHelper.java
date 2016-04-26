@@ -6,8 +6,6 @@ import com.exponentus.localization.Vocabulary;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 
-import kz.flabs.scriptprocessor.ScriptProcessor;
-
 public class ScriptHelper {
 	protected Vocabulary vocabulary;
 	protected String redirectURL = "";
@@ -53,7 +51,7 @@ public class ScriptHelper {
 	}
 
 	public static void error(Exception e) {
-		ScriptProcessor.logger.errorLogEntry(e);
+		Server.logger.errorLogEntry(e);
 	}
 
 }

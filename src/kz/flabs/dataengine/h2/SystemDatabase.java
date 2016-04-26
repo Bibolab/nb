@@ -12,18 +12,17 @@ import java.util.HashMap;
 import org.apache.catalina.realm.RealmBase;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.DatabaseUtil;
+import com.exponentus.dataengine.IDBConnectionPool;
+import com.exponentus.dataengine.exception.DatabasePoolException;
 import com.exponentus.dataengine.system.IEmployeeDAO;
 import com.exponentus.server.Server;
 
-import kz.flabs.dataengine.Const;
-import kz.flabs.dataengine.DatabasePoolException;
-import kz.flabs.dataengine.DatabaseUtil;
-import kz.flabs.dataengine.IDBConnectionPool;
 import kz.flabs.dataengine.ISystemDatabase;
 import kz.flabs.exception.WebFormValueException;
 import kz.flabs.users.User;
 
-public class SystemDatabase implements ISystemDatabase, Const {
+public class SystemDatabase implements ISystemDatabase {
 	public static boolean isValid;
 	public static String jdbcDriver = "org.h2.Driver";
 

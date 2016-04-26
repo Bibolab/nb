@@ -14,13 +14,12 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.ApplicationException;
+import com.exponentus.exception.RuleException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
 import com.exponentus.webserver.servlet.SessionCooks;
-
-import kz.flabs.exception.RuleException;
 
 public class Unsecure extends ValveBase {
 	private RequestURL ru;

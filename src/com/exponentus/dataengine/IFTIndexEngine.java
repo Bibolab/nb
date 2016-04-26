@@ -1,4 +1,4 @@
-package kz.flabs.dataengine;
+package com.exponentus.dataengine;
 
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.dataengine.jpadatabase.ftengine.FTEntity;

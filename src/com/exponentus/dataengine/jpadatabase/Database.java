@@ -17,6 +17,11 @@ import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.postgresql.util.PSQLException;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.DatabaseUtil;
+import com.exponentus.dataengine.IDBConnectionPool;
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTIndexEngine;
+import com.exponentus.dataengine.exception.DatabasePoolException;
 import com.exponentus.dataengine.jpadatabase.ftengine.FTSearchEngine;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -36,15 +41,9 @@ import administrator.init.ServerConst;
 import administrator.model.Application;
 import administrator.model.Language;
 import administrator.model.User;
-import kz.flabs.dataengine.Const;
-import kz.flabs.dataengine.DatabasePoolException;
-import kz.flabs.dataengine.DatabaseUtil;
-import kz.flabs.dataengine.IDBConnectionPool;
-import kz.flabs.dataengine.IDatabase;
-import kz.flabs.dataengine.IFTIndexEngine;
 import kz.flabs.dataengine.h2.DBConnectionPool;
 
-public class Database implements IDatabase, Const {
+public class Database implements IDatabase {
 	protected static String dbUser = EnvConst.APP_DB_USER;
 	protected static String dbPwd = EnvConst.APP_DB_PWD;
 	protected static String connectionURL = "";

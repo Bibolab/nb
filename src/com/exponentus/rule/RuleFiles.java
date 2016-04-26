@@ -9,11 +9,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.exception.RuleException;
 import com.exponentus.rule.page.PageRule;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.server.Server;
-
-import kz.flabs.exception.RuleException;
 
 public class RuleFiles {
 	public File rulesDir;

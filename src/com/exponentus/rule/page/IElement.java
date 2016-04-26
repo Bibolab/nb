@@ -3,8 +3,7 @@ package com.exponentus.rule.page;
 import java.util.ArrayList;
 
 import com.exponentus.appenv.AppEnv;
-
-import kz.flabs.webrule.Caption;
+import com.exponentus.rule.Caption;
 
 public interface IElement {
 	String getID();

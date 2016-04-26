@@ -5,12 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.exception.RuleException;
 import com.exponentus.rule.page.PageRule;
 
-import kz.flabs.dataengine.Const;
-import kz.flabs.exception.RuleException;
-
-public class RuleProvider implements Const {
+public class RuleProvider {
 
 	private HashMap<String, PageRule> pageRuleMap = new HashMap<String, PageRule>();
 	private AppEnv env;

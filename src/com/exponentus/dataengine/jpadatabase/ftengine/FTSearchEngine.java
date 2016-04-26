@@ -11,18 +11,16 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.exponentus.dataengine.IDBConnectionPool;
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTIndexEngine;
 import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.dataengine.jpa.IDAO;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 
-import kz.flabs.dataengine.Const;
-import kz.flabs.dataengine.IDBConnectionPool;
-import kz.flabs.dataengine.IDatabase;
-import kz.flabs.dataengine.IFTIndexEngine;
-
-public class FTSearchEngine implements IFTIndexEngine, Const {
+public class FTSearchEngine implements IFTIndexEngine {
 	private IDBConnectionPool dbPool;
 	private List<FTEntity> indexTables = new ArrayList<FTEntity>();
 	private Class[] intArgsClass = new Class[] { _Session.class };

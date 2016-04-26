@@ -1,4 +1,4 @@
-package kz.flabs.webrule;
+package com.exponentus.rule;
 
 import org.w3c.dom.Node;
 

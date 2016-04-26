@@ -2,6 +2,8 @@ package com.exponentus.common.page.view;
 
 import java.util.UUID;
 
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTIndexEngine;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.localization.LanguageCode;
@@ -11,9 +13,6 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.event._DoPage;
-
-import kz.flabs.dataengine.IDatabase;
-import kz.flabs.dataengine.IFTIndexEngine;
 
 /**
  * @author Kayra created 26-03-2016

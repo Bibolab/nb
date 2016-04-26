@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.exponentus.dataengine.DatabaseUtil;
+import com.exponentus.dataengine.IDBConnectionPool;
 import com.exponentus.env.Environment;
-
-import kz.flabs.dataengine.DatabaseUtil;
-import kz.flabs.dataengine.IDBConnectionPool;
 
 public class FTSearchEngineDeployer {
 	private IDBConnectionPool dbPool;

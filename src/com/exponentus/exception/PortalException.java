@@ -1,4 +1,4 @@
-package kz.flabs.exception;
+package com.exponentus.exception;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +18,10 @@ import javax.xml.transform.stream.StreamSource;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.server.Server;
 import com.exponentus.util.XMLUtil;
-import com.exponentus.util.XMLUtil;
-import com.exponentus.util.XMLUtil;
-import com.exponentus.util.XMLUtil;
+import com.exponentus.webserver.servlet.ProviderExceptionType;
+import com.exponentus.webserver.servlet.PublishAsType;
 
-import kz.flabs.dataengine.Const;
-import kz.flabs.servlets.ProviderExceptionType;
-import kz.flabs.servlets.PublishAsType;
-
-public class PortalException extends Exception implements Const {
+public class PortalException extends Exception {
 	private Enum type = ProviderExceptionType.INTERNAL;
 	private AppEnv env;
 	private String currentSkin = "";

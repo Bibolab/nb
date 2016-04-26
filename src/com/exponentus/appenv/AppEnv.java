@@ -11,23 +11,18 @@ import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.control.CompilerConfiguration;
 
 import com.exponentus.caching.PageCacheAdapter;
+import com.exponentus.dataengine.IDatabase;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.Localizator;
-import com.exponentus.localization.Vocabulary;
-import com.exponentus.localization.Vocabulary;
-import com.exponentus.localization.Vocabulary;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.log.ILogger;
 import com.exponentus.rule.RuleProvider;
 import com.exponentus.server.Server;
 
 import groovy.lang.GroovyClassLoader;
-import groovy.lang.GroovyObject;
-import kz.flabs.dataengine.Const;
-import kz.flabs.dataengine.IDatabase;
 
-public class AppEnv extends PageCacheAdapter implements Const {
+public class AppEnv extends PageCacheAdapter {
 	public boolean isValid;
 	public String appName;
 	public RuleProvider ruleProvider;
@@ -109,7 +104,7 @@ public class AppEnv extends PageCacheAdapter implements Const {
 			for (File groovyFile : scipts) {
 				try {
 					Server.logger.debugLogEntry("recompile " + groovyFile.getAbsolutePath() + "...");
-					Class<GroovyObject> clazz = loader.parseClass(groovyFile);
+					loader.parseClass(groovyFile);
 				} catch (CompilationFailedException e) {
 					AppEnv.logger.errorLogEntry(e);
 				} catch (IOException e) {

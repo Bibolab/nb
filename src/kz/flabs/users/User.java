@@ -8,14 +8,12 @@ import org.apache.catalina.realm.RealmBase;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.util.Util;
-import com.exponentus.util.Util;
 
-import kz.flabs.dataengine.Const;
 import kz.flabs.exception.WebFormValueException;
 import kz.flabs.exception.WebFormValueExceptionType;
 
 @Deprecated
-public class User implements Const {
+public class User {
 	public int docID;
 	public boolean authorized;
 	public boolean authorizedByHash;

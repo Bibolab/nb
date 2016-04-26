@@ -12,6 +12,7 @@ import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
+import com.exponentus.webserver.servlet.PublishAsType;
 import com.exponentus.webserver.servlet.xslt.SaxonTransformator;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -19,7 +20,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import kz.flabs.servlets.PublishAsType;
 import net.sf.saxon.s9api.SaxonApiException;
 
 public class PageOutcome {

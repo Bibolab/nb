@@ -10,14 +10,13 @@ import javax.servlet.http.Cookie;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.caching.PageCacheAdapter;
+import com.exponentus.dataengine.IDatabase;
 import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.env.EnvConst;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
-
-import kz.flabs.dataengine.IDatabase;
 
 public class _Session extends PageCacheAdapter {
 	private IDatabase dataBase;

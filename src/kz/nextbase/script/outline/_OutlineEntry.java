@@ -55,4 +55,8 @@ public class _OutlineEntry {
                 + XMLUtil.getAsAttribute("hint", hint) + XMLUtil.getAsAttribute("unread", String.valueOf(unread)) + ">"
                 + XMLUtil.getAsTagValue(value) + a + "</entry>";
     }
+
+    public Object toJSON() {
+        return this;
+    }
 }

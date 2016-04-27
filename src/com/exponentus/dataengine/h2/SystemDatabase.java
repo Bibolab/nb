@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import com.exponentus.dataengine.DatabaseUtil;
 import com.exponentus.dataengine.IDBConnectionPool;
 import com.exponentus.dataengine.exception.DatabasePoolException;
-import com.exponentus.dataengine.system.IEmployeeDAO;
 import com.exponentus.legacy.User;
 import com.exponentus.server.Server;
 
@@ -19,8 +18,6 @@ public class SystemDatabase implements ISystemDatabase {
 
 	private IDBConnectionPool dbPool;
 	private static String connectionURL = "jdbc:h2:system_data" + File.separator + "system_data;MVCC=TRUE;AUTO_SERVER=TRUE";
-
-	private IEmployeeDAO eDao;
 
 	public SystemDatabase() throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		this(connectionURL);

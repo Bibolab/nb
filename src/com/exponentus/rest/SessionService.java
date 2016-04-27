@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -82,6 +83,41 @@ public class SessionService extends RestProvider {
 		}
 
 		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
+	}
+
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response destroySession() throws ClassNotFoundException, InstantiationException, DatabasePoolException, UserException,
+	        IllegalAccessException, SQLException, URISyntaxException {
+		_Session ses = getSession();
+		AppEnv env = getAppEnv();
+		NewCookie cookie = null;
+		try {
+
+			if (env != null && env.isWorkspace) {
+				cookie = new NewCookie(EnvConst.AUTH_COOKIE_NAME, "0", "/", null, null, 0, false);
+			}
+
+			HttpSession jses = request.getSession(false);
+			if (jses != null) {
+				if (ses != null) {
+					ses.getUser().setAuthorized(false);
+					SessionPool.remove(ses);
+				}
+				jses.removeAttribute(EnvConst.SESSION_ATTR);
+				jses.invalidate();
+			}
+		} catch (Exception e) {
+			new PortalException(e, env, response, ProviderExceptionType.LOGOUTERROR);
+		}
+
+		if (cookie != null) {
+			return Response.status(HttpServletResponse.SC_OK).cookie(cookie).build();
+		} else {
+			return Response.status(HttpServletResponse.SC_OK).build();
+		}
+
 	}
 
 }

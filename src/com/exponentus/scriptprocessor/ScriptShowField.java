@@ -1,4 +1,4 @@
-package kz.flabs.scriptprocessor;
+package com.exponentus.scriptprocessor;
 
 import com.exponentus.rule.constans.ValueSourceType;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;

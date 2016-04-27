@@ -1,4 +1,4 @@
-package kz.flabs.dataengine.h2;
+package com.exponentus.dataengine.h2;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

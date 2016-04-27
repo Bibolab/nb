@@ -5,7 +5,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import kz.flabs.exception.TransformatorException;
+import com.exponentus.exception.TransformatorException;
+
 import net.sf.saxon.s9api.SaxonApiException;
 
 public interface IServletTransformator {

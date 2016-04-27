@@ -3,9 +3,8 @@ package com.exponentus.rest;
 import java.io.Serializable;
 
 import com.exponentus.env.Environment;
+import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.localization.LanguageCode;
-
-import kz.flabs.users.AuthFailedExceptionType;
 
 public class Credentials implements Serializable {
 	private static final long serialVersionUID = 1L;

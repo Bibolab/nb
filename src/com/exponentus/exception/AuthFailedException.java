@@ -1,4 +1,4 @@
-package kz.flabs.users;
+package com.exponentus.exception;
 
 import java.io.File;
 import java.io.IOException;

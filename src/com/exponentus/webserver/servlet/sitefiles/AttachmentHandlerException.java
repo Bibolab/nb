@@ -1,4 +1,4 @@
-package kz.flabs.servlets.sitefiles;
+package com.exponentus.webserver.servlet.sitefiles;
 
 public class AttachmentHandlerException extends Exception {
 	private static final long serialVersionUID = -7955384945856281213L;

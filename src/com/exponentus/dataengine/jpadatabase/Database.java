@@ -22,6 +22,7 @@ import com.exponentus.dataengine.IDBConnectionPool;
 import com.exponentus.dataengine.IDatabase;
 import com.exponentus.dataengine.IFTIndexEngine;
 import com.exponentus.dataengine.exception.DatabasePoolException;
+import com.exponentus.dataengine.h2.DBConnectionPool;
 import com.exponentus.dataengine.jpadatabase.ftengine.FTSearchEngine;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -41,7 +42,6 @@ import administrator.init.ServerConst;
 import administrator.model.Application;
 import administrator.model.Language;
 import administrator.model.User;
-import kz.flabs.dataengine.h2.DBConnectionPool;
 
 public class Database implements IDatabase {
 	protected static String dbUser = EnvConst.APP_DB_USER;

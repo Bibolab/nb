@@ -20,8 +20,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import kz.flabs.exception.TransformatorException;
-import kz.flabs.exception.TransformatorExceptionType;
+import com.exponentus.exception.TransformatorException;
+import com.exponentus.exception.TransformatorExceptionType;
+
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.Serializer;

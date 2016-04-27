@@ -20,6 +20,8 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.exception.DatabasePoolException;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.SessionPool;
+import com.exponentus.exception.AuthFailedException;
+import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.exception.PortalException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
@@ -29,8 +31,6 @@ import com.exponentus.webserver.servlet.ProviderExceptionType;
 import com.exponentus.webserver.servlet.PublishAsType;
 
 import administrator.services.Connect;
-import kz.flabs.users.AuthFailedException;
-import kz.flabs.users.AuthFailedExceptionType;
 
 @Path("/session")
 public class SessionService extends RestProvider {

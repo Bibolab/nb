@@ -1,4 +1,4 @@
-package kz.flabs.servlets.sitefiles;
+package com.exponentus.webserver.servlet.sitefiles;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.Environment;

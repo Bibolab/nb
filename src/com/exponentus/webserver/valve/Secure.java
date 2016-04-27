@@ -16,6 +16,8 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.env.SessionPool;
+import com.exponentus.exception.AuthFailedException;
+import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
@@ -23,8 +25,6 @@ import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.SessionCooks;
 
 import administrator.model.Application;
-import kz.flabs.users.AuthFailedException;
-import kz.flabs.users.AuthFailedExceptionType;
 
 public class Secure extends ValveBase {
 	String appType;
@@ -86,7 +86,7 @@ public class Secure extends ValveBase {
 				invoke(request, response);
 			} else {
 				Server.logger.warningLogEntry("there is no associated user session for the token");
-				AuthFailedException e = new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
+				new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				// response.sendRedirect("Logout");
 				request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);

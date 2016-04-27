@@ -1,4 +1,4 @@
-package kz.flabs.users;
+package com.exponentus.legacy;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,10 +7,9 @@ import java.util.HashSet;
 import org.apache.catalina.realm.RealmBase;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.exception.WebFormValueException;
+import com.exponentus.exception.WebFormValueExceptionType;
 import com.exponentus.util.Util;
-
-import kz.flabs.exception.WebFormValueException;
-import kz.flabs.exception.WebFormValueExceptionType;
 
 @Deprecated
 public class User {

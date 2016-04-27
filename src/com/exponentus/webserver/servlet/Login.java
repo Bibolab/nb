@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.SessionPool;
+import com.exponentus.exception.AuthFailedException;
+import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.exception.PortalException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
@@ -23,8 +25,6 @@ import com.exponentus.user.IUser;
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
 import administrator.services.Connect;
-import kz.flabs.users.AuthFailedException;
-import kz.flabs.users.AuthFailedExceptionType;
 
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;

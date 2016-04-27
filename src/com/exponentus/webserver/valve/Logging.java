@@ -50,7 +50,7 @@ public class Logging extends ValveBase {
 			clientIpAddress = request.getRemoteAddr();
 		}
 
-		logger.infoLogEntry(clientIpAddress + " " + request.getServerName() + " " + ru.toString() + "," + request.getHeader("user-agent"));
+		logger.infoLogEntry(clientIpAddress + " " + ru.toString() + "," + request.getHeader("user-agent"));
 		// com.flabser.server.Server.logger.infoLogEntry(clientIpAddress + " " +
 		// ru.toString() + ", apptype="
 		// + ru.getAppType() + ", servername=" + request.getServerName());

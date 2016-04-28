@@ -45,7 +45,7 @@ public class RequestURL {
 
 	public boolean isAuthRequest() {
 		String ulc = url.toLowerCase();
-		return ulc.contains("login") || ulc.contains("logout");
+		return ulc.contains("login") || ulc.contains("logout") || ulc.contains("/session");
 	}
 
 	public boolean isPage() {

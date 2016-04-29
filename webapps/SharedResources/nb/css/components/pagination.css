@@ -1,6 +1,6 @@
 .pagination {
     margin: 0;
-    padding: 2px;
+    padding: 0;
     text-align: center;
 }
 
@@ -10,10 +10,10 @@
     border-radius: 2px;
     color: #444;
     display: inline-block;
-    line-height: 1.3em;
+    /* line-height: 1.3em; */
     margin: 1px;
     outline: 0;
-    padding: 5px 9px;
+    padding: 7px 9px;
     text-align: center;
     text-decoration: none;
 }
@@ -23,6 +23,7 @@
 }
 
 .pagination .page-active {
+    border-color: #444;
     font-weight: bold;
 }
 
@@ -37,7 +38,7 @@
     border-radius: 2px;
     display: inline-block;
     min-height: auto;
-    padding: 4px;
+    padding: 6px 2px;
     vertical-align: baseline;
     width: 50px;
 }

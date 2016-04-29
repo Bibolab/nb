@@ -14,7 +14,7 @@ import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoPage;
 
-public class ScheduledTaskView extends _DoPage {
+public class QueueView extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {

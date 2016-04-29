@@ -25,9 +25,6 @@ import java.util.regex.Pattern;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.server.Server;
-import com.exponentus.util.Util;
-import com.exponentus.util.Util;
-import com.exponentus.util.Util;
 
 public class Util {
 	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm:ss");
@@ -36,7 +33,6 @@ public class Util {
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
 	public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	private static final SimpleDateFormat providerDateTimeFormat = new SimpleDateFormat("dd-MM-yyyy kk:mm:ss");
 	public static final Pattern pEntity = Pattern.compile("\\G&(#\\d+|\\w+);");// Pattern.compile("\\G&(#\\d+|\\w+);");
 	public static final Pattern pTag = Pattern.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
 	public static final Pattern pAtEnd = Pattern.compile("\\G\\z");
@@ -68,16 +64,6 @@ public class Util {
 			return dateTimeFormat.format(date);
 		} catch (Exception e) {
 			return "";
-		}
-	}
-
-	public static String convertDataTimeToProvider(Date date) {
-		try {
-			return providerDateTimeFormat.format(date);
-		} catch (Exception e) {
-			AppEnv.logger.errorLogEntry("Util, Не удалось преобразовать время в текст " + date);
-			// AppEnv.logger.errorLogEntry(e);
-			return "null";
 		}
 	}
 

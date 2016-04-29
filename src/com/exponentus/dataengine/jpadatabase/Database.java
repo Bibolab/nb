@@ -49,11 +49,12 @@ public class Database implements IDatabase {
 	protected static String connectionURL = "";
 	protected IDBConnectionPool dbPool;
 	protected EntityManagerFactory factory;
+
 	private FTSearchEngine ftEngine;
 	private boolean isNascence;
+	private Properties props = new Properties();
 
 	public Database() {
-		Properties props = new Properties();
 		props.setProperty("user", EnvConst.DB_USER);
 		props.setProperty("password", EnvConst.DB_PWD);
 		String sysDbURL = "jdbc:postgresql://" + EnvConst.DATABASE_HOST + ":" + EnvConst.CONN_PORT + "/postgres";
@@ -278,7 +279,23 @@ public class Database implements IDatabase {
 
 	@Override
 	public String getInfo() {
-		return connectionURL;
+		int countOfRecords = 0;
+
+		try {
+			Connection conn = DriverManager.getConnection(connectionURL, props);
+			conn.setAutoCommit(false);
+			Statement s = conn.createStatement();
+			String sql = "SELECT sum(n_live_tup) FROM pg_stat_user_tables";
+			ResultSet rs = s.executeQuery(sql);
+			if (rs.next()) {
+				countOfRecords = rs.getInt(1);
+			}
+			s.close();
+			conn.commit();
+		} catch (Throwable e) {
+			DatabaseUtil.debugErrorPrint(e);
+		}
+		return connectionURL + ", count=" + countOfRecords;
 	}
 
 }

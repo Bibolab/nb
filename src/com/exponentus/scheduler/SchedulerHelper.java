@@ -4,19 +4,31 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
+
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.scripting.IPOJOObject;
+import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
 import com.exponentus.scriptprocessor.scheduled.IScheduledScript;
+import com.exponentus.server.Server;
 import com.exponentus.user.SuperUser;
 import com.exponentus.util.ReflectionUtil;
+import com.exponentus.util.Util;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
@@ -28,6 +40,55 @@ import administrator.model.Application;
  */
 
 public class SchedulerHelper {
+
+	public List<IPOJOObject> getScheduledTasks(boolean showConsoleOutput) throws IOException, SchedulerException {
+		List<IPOJOObject> objs = new ArrayList<IPOJOObject>();
+		Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+
+		for (String groupName : scheduler.getJobGroupNames()) {
+
+			for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName))) {
+
+				String jobName = jobKey.getName();
+				String jobGroup = jobKey.getGroup();
+
+				@SuppressWarnings("unchecked")
+				List<Trigger> triggers = (List<Trigger>) scheduler.getTriggersOfJob(jobKey);
+				Trigger t = triggers.get(0);
+				String prev = Util.convertDataTimeToString(t.getPreviousFireTime());
+				String next = Util.convertDataTimeToString(t.getNextFireTime());
+
+				if (showConsoleOutput) {
+					System.out.println("jobName:" + jobName + " group:" + jobGroup + " - previous:" + prev + ", next:" + next);
+				}
+
+				objs.add(new POJOObjectAdapter<Object>() {
+					@Override
+					public String getURL() {
+						return "p?id=task-form&amp;docid=" + jobName;
+
+					}
+
+					@Override
+					public String getIdentifier() {
+						return jobName;
+					}
+
+					@Override
+					public String getShortXMLChunk(_Session ses) {
+						StringBuffer val = new StringBuffer(500);
+						val.append("<name>" + jobName + "</name>");
+						val.append("<previous>" + prev + "</previous>");
+						val.append("<next>" + next + "</next>");
+						return val.toString();
+					}
+				});
+
+			}
+
+		}
+		return objs;
+	}
 
 	// TODO it need to improve for checking if an application switched off
 	public Map<String, IScheduledScript> getAllScheduledTasks(boolean showConsoleOutput) throws IOException {
@@ -108,8 +169,7 @@ public class SchedulerHelper {
 						}
 					}
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Server.logger.errorLogEntry(e);
 				}
 			}
 		}

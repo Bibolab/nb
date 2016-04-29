@@ -27,7 +27,6 @@ import administrator.model.Application;
 
 public class PeriodicalServices {
 	private Scheduler sched;
-	private static final String[] ext = { "groovy" };
 
 	public PeriodicalServices() {
 

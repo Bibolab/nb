@@ -177,10 +177,15 @@ public class Environment implements ICache {
 				}
 			}
 
-			// TODO Need to add exception handler
 			NodeList l = XMLUtil.getNodeList(xmlDocument, "/nextbase/langs/entry");
 			for (int i = 0; i < l.getLength(); i++) {
-				langs.add(LanguageCode.valueOf(XMLUtil.getTextContent(l.item(i), ".", false)));
+				String val = XMLUtil.getTextContent(l.item(i), ".", false);
+				try {
+					langs.add(LanguageCode.valueOf(val));
+				} catch (IllegalArgumentException e) {
+					Server.logger.errorLogEntry("Language constant \"" + val + "\" is not correct");
+				}
+
 			}
 
 			try {

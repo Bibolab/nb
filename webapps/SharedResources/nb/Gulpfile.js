@@ -31,6 +31,7 @@ for (var i = 0; i < modules.length; i++) {
     // _styles
     _styles[module.name] = ['../css/normalize.css',
         '../vendor/select2/css/select2.min.css',
+        '../themes/**/*.css',
         '../knca/eds.css',
         'css/nb.min.css',
         module.path + '/css/**/*.css',

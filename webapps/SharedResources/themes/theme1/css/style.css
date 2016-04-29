@@ -1,0 +1,46 @@
+body.theme1 {
+    background: #fff url(/SharedResources/themes/theme1/img/theme1-bg.jpg) fixed;
+    background-size: cover;
+}
+
+.theme1 .side-nav {
+    background: none;
+    border-right: none;
+    box-shadow: inset -7px 0 9px -7px rgba(0, 0, 0, .1);
+}
+
+.tablet.theme1 .side-nav,
+.phone.theme1 .side-nav {
+    background: #FFF;
+}
+
+.theme1 .content {
+    background: transparent;
+}
+
+.theme1 .content-body {
+    background: #FFF;
+}
+
+.theme1 .content-header {
+    border-bottom: none;
+}
+
+.theme1 .content-actions {
+    border-top-color: #B1C0BB;
+}
+
+.theme1 .side-nav .nav-link.active {
+    background: rgba(0, 0, 0, .1);
+    border: none;
+    box-shadow: none;
+}
+
+.theme1 .side-nav .nav-link:hover {
+    background: rgba(0, 0, 0, .1);
+}
+
+.theme1 .side-nav .nav-link:active {
+    background: rgba(0, 0, 0, .17) !important;
+    color: #303333;
+}

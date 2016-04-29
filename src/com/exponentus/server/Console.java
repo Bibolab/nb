@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
+import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 import org.quartz.SchedulerException;
 
 import com.exponentus.appenv.AppEnv;
@@ -25,6 +27,7 @@ import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.scheduler.SchedulerHelper;
 import com.exponentus.util.StringUtil;
+import com.exponentus.util.TimeUtil;
 import com.exponentus.util.Util;
 
 public class Console implements Runnable {
@@ -32,6 +35,7 @@ public class Console implements Runnable {
 	@Override
 	public void run() {
 
+		@SuppressWarnings("resource")
 		final Scanner in = new Scanner(System.in);
 		while (in.hasNext()) {
 			try {
@@ -55,10 +59,13 @@ public class Console implements Runnable {
 			System.out.println(
 			        "os=" + System.getProperty("os.name") + " " + System.getProperty("os.version") + "(" + System.getProperty("os.arch") + ")");
 			System.out.println("jvm=" + System.getProperty("java.version"));
-			System.out.println("started at=" + Util.convertDataTimeToString(Environment.startTime));
+			DateTime now = DateTime.now();
+			Minutes mins = Minutes.minutesBetween(new DateTime(Environment.startTime), now);
+			System.out.println(
+			        "started at=" + Util.convertDataTimeToString(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
 			System.out.println("application server name=" + EnvConst.APP_ID);
 			System.out.println("database name=" + EnvConst.DATABASE_NAME);
-			System.out.println("database=" + Environment.adminApplication.getDataBase().getInfo());
+			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
 			System.out.println("web server port=" + Environment.httpPort);
 			System.out.println("default language=" + EnvConst.DEFAULT_LANG);
 			System.out.println("languages=" + Environment.langs);
@@ -123,10 +130,10 @@ public class Console implements Runnable {
 				System.err.println(e);
 			}
 
-		} else if (command.equalsIgnoreCase("show current task") || command.equalsIgnoreCase("sct")) {
+		} else if (command.equalsIgnoreCase("show scheduler queue") || command.equalsIgnoreCase("ssq")) {
 			SchedulerHelper helper = new SchedulerHelper();
 			try {
-				helper.getScheduledTasks(true);
+				helper.getQueue(true);
 			} catch (IOException | SchedulerException e) {
 				System.err.println(e);
 			}

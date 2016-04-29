@@ -1,7 +1,6 @@
 package com.exponentus.webserver.valve;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +23,6 @@ import com.exponentus.user.AnonymousUser;
 import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.SessionCooks;
 
-import administrator.model.Application;
-
 public class Secure extends ValveBase {
 	String appType;
 
@@ -45,7 +42,7 @@ public class Secure extends ValveBase {
 				if (ses != null) {
 					IUser<Long> user = ses.getUser();
 					if (!user.getUserID().equals(AnonymousUser.USER_NAME)) {
-						if (isAllowed(user.getAllowedApps(), appType)) {
+						if (user.getApps().contains(appType)) {
 							getNext().invoke(request, response);
 						} else {
 							Server.logger.warningLogEntry("work with the application was restricted");
@@ -100,17 +97,6 @@ public class Secure extends ValveBase {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
 		}
-	}
-
-	// TODO needed to optimize
-	private boolean isAllowed(List<Application> apps, String currentApp) {
-		for (Application app : apps) {
-			if (app.getName().equals(currentApp)) {
-				return true;
-			}
-		}
-		return false;
-
 	}
 
 }

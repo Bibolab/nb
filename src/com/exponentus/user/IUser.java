@@ -1,6 +1,7 @@
 package com.exponentus.user;
 
 import java.util.List;
+import java.util.Set;
 
 import com.exponentus.dataengine.jpa.ISimpleAppEntity;
 import com.exponentus.localization.LanguageCode;
@@ -27,12 +28,14 @@ public interface IUser<K> extends ISimpleAppEntity<K> {
 
 	boolean isSuperUser();
 
-	List<Application> getAllowedApps();
-
 	void setRoles(List<String> allRoles);
 
 	List<String> getRoles();
 
 	LanguageCode getDefaultLang();
+
+	List<Application> getAllowedApps();
+
+	Set<String> getApps();
 
 }

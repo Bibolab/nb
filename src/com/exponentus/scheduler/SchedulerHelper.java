@@ -41,7 +41,7 @@ import administrator.model.Application;
 
 public class SchedulerHelper {
 
-	public List<IPOJOObject> getScheduledTasks(boolean showConsoleOutput) throws IOException, SchedulerException {
+	public List<IPOJOObject> getQueue(boolean showConsoleOutput) throws IOException, SchedulerException {
 		List<IPOJOObject> objs = new ArrayList<IPOJOObject>();
 		Scheduler scheduler = new StdSchedulerFactory().getScheduler();
 

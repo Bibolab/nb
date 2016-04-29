@@ -295,7 +295,7 @@ public class Database implements IDatabase {
 		} catch (Throwable e) {
 			DatabaseUtil.debugErrorPrint(e);
 		}
-		return connectionURL + ", count=" + countOfRecords;
+		return "url=" + connectionURL + ", count of records=" + countOfRecords;
 	}
 
 }

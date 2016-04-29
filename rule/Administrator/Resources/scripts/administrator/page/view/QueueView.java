@@ -23,7 +23,7 @@ public class QueueView extends _DoPage {
 
 		SchedulerHelper helper = new SchedulerHelper();
 		try {
-			List<IPOJOObject> tasks = helper.getScheduledTasks(false);
+			List<IPOJOObject> tasks = helper.getQueue(false);
 
 			long count = tasks.size();
 			int maxPage = RuntimeObjUtil.countMaxPage(count, pageSize);

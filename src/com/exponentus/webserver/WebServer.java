@@ -139,9 +139,13 @@ public class WebServer {
 
 		Tomcat.addServlet(context, "UploadFile", "com.exponentus.webserver.servlet.UploadFile");
 		context.addServletMapping("/UploadFile", "UploadFile");
+		context.addServletMapping("/UF", "UploadFile");
+		context.addServletMapping("/uf", "UploadFile");
 
 		Tomcat.addServlet(context, "Error", "com.exponentus.webserver.servlet.Error");
 		context.addServletMapping("/Error", "Error");
+		context.addServletMapping("/E", "Error");
+		context.addServletMapping("/e", "Error");
 
 		context.addMimeMapping("css", "text/css");
 		context.addMimeMapping("js", "text/javascript");

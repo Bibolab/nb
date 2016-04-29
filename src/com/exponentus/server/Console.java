@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
+import org.quartz.SchedulerException;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
@@ -113,11 +114,20 @@ public class Console implements Runnable {
 			} catch (IOException e) {
 				System.err.println(e);
 			}
+
 		} else if (command.equalsIgnoreCase("show scheduled tasks") || command.equalsIgnoreCase("sst")) {
 			SchedulerHelper helper = new SchedulerHelper();
 			try {
 				helper.getAllScheduledTasks(true);
 			} catch (IOException e) {
+				System.err.println(e);
+			}
+
+		} else if (command.equalsIgnoreCase("show current task") || command.equalsIgnoreCase("sct")) {
+			SchedulerHelper helper = new SchedulerHelper();
+			try {
+				helper.getScheduledTasks(true);
+			} catch (IOException | SchedulerException e) {
 				System.err.println(e);
 			}
 		} else if (command.contains("start initializer") || command.startsWith("stini")) {

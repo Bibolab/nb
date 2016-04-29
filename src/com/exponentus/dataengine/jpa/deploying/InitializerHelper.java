@@ -107,7 +107,6 @@ public class InitializerHelper {
 
 	public String runInitializer(String name, boolean showConsoleOutput) throws DatabaseException, SecureException {
 		int count = 0;
-		IInitialData<ISimpleAppEntity, IDAO> pcInstance = null;
 		boolean isFound = false;
 		File jarFile = new File(EnvConst.NB_JAR_FILE);
 		if (jarFile.exists()) {

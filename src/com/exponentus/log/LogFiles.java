@@ -19,6 +19,7 @@ public class LogFiles {
 	private ArrayList<File> fileList = new ArrayList<File>();
 	private String dir;
 
+	@SuppressWarnings("unchecked")
 	public LogFiles(String dir) {
 		this.dir = dir;
 		logDir = new File("." + File.separator + "logs" + File.separator + dir);

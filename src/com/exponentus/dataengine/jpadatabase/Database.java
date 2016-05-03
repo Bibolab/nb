@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -290,12 +291,12 @@ public class Database implements IDatabase {
 		} catch (Throwable e) {
 			DatabaseUtil.debugErrorPrint(e);
 		}
-		return "url=" + connectionURL + ", count of records=" + countOfRecords;
+		return "url=" + connectionURL + ", total count of records=" + countOfRecords;
 	}
 
 	@Override
-	public Map<String, Long> getCountsOfRec() {
-		Map<String, Long> map = new HashMap<String, Long>();
+	public List<String[]> getCountsOfRec() {
+		List<String[]> result = new ArrayList<String[]>();
 
 		try {
 			Connection conn = DriverManager.getConnection(connectionURL, props);
@@ -304,14 +305,15 @@ public class Database implements IDatabase {
 			String sql = "SELECT relname,n_live_tup FROM pg_stat_user_tables ORDER BY relname ASC;";
 			ResultSet rs = s.executeQuery(sql);
 			while (rs.next()) {
-				map.put(rs.getString(1), rs.getLong(2));
+				String[] a = { rs.getString(1), Long.toString(rs.getLong(2)) };
+				result.add(a);
 			}
 			s.close();
 			conn.commit();
 		} catch (Throwable e) {
 			DatabaseUtil.debugErrorPrint(e);
 		}
-		return map;
+		return result;
 	}
 
 }

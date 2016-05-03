@@ -10,8 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -88,9 +86,11 @@ public class Console implements Runnable {
 			System.out.println("count of the temporary files wich waiting for deleting=" + Environment.fileToDelete.size());
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {
 			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
-			Map<String, Long> info = Environment.adminApplication.getDataBase().getCountsOfRec();
-			for (Entry<String, Long> entry : info.entrySet()) {
-				System.out.printf(format, entry.getKey(), entry.getValue());
+			List<String[]> info = Environment.adminApplication.getDataBase().getCountsOfRec();
+			System.out.printf(format, "Table", "Count");
+			System.out.printf(format, "--------------", "-----");
+			for (String[] entry : info) {
+				System.out.printf(format, entry[0], entry[1]);
 			}
 
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {

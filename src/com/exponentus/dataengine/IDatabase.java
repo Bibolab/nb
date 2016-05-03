@@ -1,6 +1,6 @@
 package com.exponentus.dataengine;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -14,6 +14,6 @@ public interface IDatabase {
 
 	String getInfo();
 
-	Map<String, Long> getCountsOfRec();
+	List<String[]> getCountsOfRec();
 
 }

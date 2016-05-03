@@ -1,9 +1,7 @@
 package administrator.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -78,10 +76,6 @@ public class User implements IUser<Long>, IPOJOObject {
 	@JsonIgnore
 	@Transient
 	protected boolean isEditable;
-
-	@JsonIgnore
-	@Transient
-	private Set<String> allowed = new HashSet<String>();
 
 	@Override
 	public void setId(Long id) {
@@ -161,15 +155,18 @@ public class User implements IUser<Long>, IPOJOObject {
 		return allowedApps;
 	}
 
+	// TODO it seems too slow
 	@Override
-	public Set<String> getApps() {
-		return allowed;
+	public boolean isAllowed(String appName) {
+		for (Application a : allowedApps) {
+			if (a.getName().equals(appName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setAllowedApps(List<Application> allowedApps) {
-		for (Application a : allowedApps) {
-			allowed.add(a.getName());
-		}
 		this.allowedApps = allowedApps;
 	}
 

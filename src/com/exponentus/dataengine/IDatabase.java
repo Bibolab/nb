@@ -1,8 +1,8 @@
 package com.exponentus.dataengine;
 
-import javax.persistence.EntityManagerFactory;
+import java.util.Map;
 
-import com.exponentus.dataengine.IFTIndexEngine;
+import javax.persistence.EntityManagerFactory;
 
 public interface IDatabase {
 
@@ -10,10 +10,10 @@ public interface IDatabase {
 
 	EntityManagerFactory getEntityManagerFactory();
 
-	IDatabase getBaseObject();
-
 	IFTIndexEngine getFTSearchEngine();
 
 	String getInfo();
+
+	Map<String, Long> getCountsOfRec();
 
 }

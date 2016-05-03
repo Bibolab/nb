@@ -10,6 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -31,6 +33,7 @@ import com.exponentus.util.TimeUtil;
 import com.exponentus.util.Util;
 
 public class Console implements Runnable {
+	private static final String format = "%-30s%s%n";
 
 	@Override
 	public void run() {
@@ -83,6 +86,13 @@ public class Console implements Runnable {
 				System.out.println("developer mode is off");
 			}
 			System.out.println("count of the temporary files wich waiting for deleting=" + Environment.fileToDelete.size());
+		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {
+			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
+			Map<String, Long> info = Environment.adminApplication.getDataBase().getCountsOfRec();
+			for (Entry<String, Long> entry : info.entrySet()) {
+				System.out.printf(format, entry.getKey(), entry.getValue());
+			}
+
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
 
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {

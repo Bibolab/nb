@@ -273,11 +273,6 @@ public class Database implements IDatabase {
 	}
 
 	@Override
-	public IDatabase getBaseObject() {
-		return this;
-	}
-
-	@Override
 	public String getInfo() {
 		int countOfRecords = 0;
 
@@ -296,6 +291,27 @@ public class Database implements IDatabase {
 			DatabaseUtil.debugErrorPrint(e);
 		}
 		return "url=" + connectionURL + ", count of records=" + countOfRecords;
+	}
+
+	@Override
+	public Map<String, Long> getCountsOfRec() {
+		Map<String, Long> map = new HashMap<String, Long>();
+
+		try {
+			Connection conn = DriverManager.getConnection(connectionURL, props);
+			conn.setAutoCommit(false);
+			Statement s = conn.createStatement();
+			String sql = "SELECT relname,n_live_tup FROM pg_stat_user_tables ORDER BY relname ASC;";
+			ResultSet rs = s.executeQuery(sql);
+			while (rs.next()) {
+				map.put(rs.getString(1), rs.getLong(2));
+			}
+			s.close();
+			conn.commit();
+		} catch (Throwable e) {
+			DatabaseUtil.debugErrorPrint(e);
+		}
+		return map;
 	}
 
 }

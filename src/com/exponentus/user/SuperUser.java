@@ -1,8 +1,6 @@
 package com.exponentus.user;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
@@ -44,12 +42,8 @@ public class SuperUser extends SystemUser {
 	}
 
 	@Override
-	public Set<String> getApps() {
-		Set<String> allowed = new HashSet<String>();
-		for (Application a : getAllowedApps()) {
-			allowed.add(a.getName());
-		}
-		return allowed;
+	public boolean isAllowed(String app) {
+		return true;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.exponentus.user;
 
 import java.util.List;
-import java.util.Set;
 
 import com.exponentus.dataengine.jpa.ISimpleAppEntity;
 import com.exponentus.localization.LanguageCode;
@@ -36,6 +35,6 @@ public interface IUser<K> extends ISimpleAppEntity<K> {
 
 	List<Application> getAllowedApps();
 
-	Set<String> getApps();
+	boolean isAllowed(String appName);
 
 }

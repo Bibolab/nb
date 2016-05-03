@@ -1,9 +1,7 @@
 package com.exponentus.user;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.exponentus.localization.LanguageCode;
 
@@ -57,8 +55,8 @@ public abstract class SystemUser implements IUser<Long> {
 	}
 
 	@Override
-	public Set<String> getApps() {
-		return new HashSet<String>();
+	public boolean isAllowed(String app) {
+		return false;
 	}
 
 	@Override

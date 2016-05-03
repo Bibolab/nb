@@ -42,7 +42,7 @@ public class Secure extends ValveBase {
 				if (ses != null) {
 					IUser<Long> user = ses.getUser();
 					if (!user.getUserID().equals(AnonymousUser.USER_NAME)) {
-						if (user.getApps().contains(appType)) {
+						if (user.isAllowed(appType)) {
 							getNext().invoke(request, response);
 						} else {
 							Server.logger.warningLogEntry("work with the application was restricted");

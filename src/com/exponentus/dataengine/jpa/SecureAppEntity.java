@@ -11,7 +11,7 @@ import com.exponentus.user.IUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
-public abstract class SecureAppEntity extends AppEntity<UUID> {
+public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 
 	@JsonIgnore
 	@ElementCollection

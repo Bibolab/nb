@@ -104,7 +104,6 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 		chunk.append("<id>" + id + "</id>");
 		chunk.append("<ison>" + isOn.name() + "</ison>");
 		chunk.append("<xsltfile>" + xsltFile + "</xsltfile>");
-		chunk.append("<issecured>" + isSecured + "</issecured>");
 		chunk.append("<caching>" + caching.name() + "</caching>");
 		chunk.append("<description>" + description + "</description>");
 		chunk.append("<elements>");
@@ -139,7 +138,6 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<id>" + id + "</id>");
 		chunk.append("<ison>" + isOn.name() + "</ison>");
-		chunk.append("<issecured>" + isSecured + "</issecured>");
 		chunk.append("<caching>" + caching.name() + "</caching>");
 		chunk.append("<elements>");
 		for (ElementRule e : elements) {

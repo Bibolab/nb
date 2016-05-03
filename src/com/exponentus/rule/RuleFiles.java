@@ -20,6 +20,7 @@ public class RuleFiles {
 	private ArrayList<File> fileList = new ArrayList<File>();
 	private AppEnv appEnv;
 
+	@SuppressWarnings("unchecked")
 	public RuleFiles(AppEnv appEnv) {
 		this.appEnv = appEnv;
 		rulesDir = new File(appEnv.getRulePath() + File.separator + "Page");

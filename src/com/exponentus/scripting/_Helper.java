@@ -1,42 +1,14 @@
 package com.exponentus.scripting;
 
-import java.io.BufferedReader;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.URI;
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Deque;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipOutputStream;
 
 import com.exponentus.util.Util;
 
 public class _Helper {
-
-	public static String getNormalizedRichText(String value) {
-		return value.replace("&nbsp;", " ").replace("<br>", "<br/>").replace("&", "&amp;");
-	}
-
-	public static String getDateAsString() throws _Exception {
-		return getDateAsString(new Date());
-	}
 
 	public static String getDateAsString(Date date) {
 		try {
@@ -73,46 +45,6 @@ public class _Helper {
 			return "";
 		}
 	}
-
-	/*
-	 * public static kz.nextbase.script.coordination._Block
-	 * parseCoordinationBlock(_Session ses, String complexString) throws
-	 * _Exception{ kz.nextbase.script.coordination._Block block = new
-	 * kz.nextbase.script.coordination._Block(ses); try{ StringTokenizer t = new
-	 * StringTokenizer(complexString,"`"); while(t.hasMoreTokens()){ String
-	 * blockID = t.nextToken(); if (!blockID.equalsIgnoreCase("new")){
-	 * block.setBlockID(Integer.parseInt(blockID)); } String coordType =
-	 * t.nextToken(); if (coordType.equals("par")){
-	 * block.setBlockType(_BlockType.PARALLEL_COORDINATION); }else
-	 * if(coordType.equals("ser")){
-	 * block.setBlockType(_BlockType.SERIAL_COORDINATION); }else
-	 * if(coordType.equals("tosign")){ block.setBlockType(_BlockType.TO_SIGN); }
-	 * 
-	 * String delayTime = t.nextToken();
-	 * block.setDelayTime(Integer.parseInt(delayTime));
-	 * 
-	 * try{ StringTokenizer t1 = new StringTokenizer(t.nextToken(),"^");
-	 * while(t1.hasMoreTokens()){ String coordinator = t1.nextToken();
-	 * kz.nextbase.script.coordination._Coordinator coord =
-	 * ses.createCoordinator();
-	 * 
-	 * if (block.getBlockType() == _BlockType.TO_SIGN){ coord.setAsSigner();
-	 * }else{ coord.setAsReviewer(); } coord.setUserID(coordinator);
-	 * block.addCoordinator(coord); } String coordStatus = t.nextToken(); if
-	 * (coordStatus.length() > 0) { if
-	 * (coordStatus.equalsIgnoreCase("awaiting")){
-	 * block.setBlockStatus(_BlockStatusType.AWAITING); } } }catch
-	 * (java.util.NoSuchElementException nse){
-	 * 
-	 * }
-	 * 
-	 * 
-	 * } }catch(Exception e){ e.printStackTrace(); throw new
-	 * _Exception(_ExceptionType .FORMDATA_INCORRECT,
-	 * "Parser error :parseCoordinationBlock(" + complexString + ")" + e); }
-	 * 
-	 * return block; }
-	 */
 
 	public static Date convertStringToDate(String dateParam) throws _Exception {
 		int numPatterns = 6;
@@ -175,174 +107,6 @@ public class _Helper {
 			maxPage = 1;
 		}
 		return maxPage;
-	}
-
-	public static void unzip(File zipfile, File directory) throws IOException {
-
-		ZipFile zfile = new ZipFile(zipfile);
-		Enumeration<? extends ZipEntry> entries = zfile.entries();
-
-		while (entries.hasMoreElements()) {
-			ZipEntry entry = entries.nextElement();
-			File file = new File(directory, entry.getName());
-			if (entry.isDirectory()) {
-				file.mkdirs();
-			} else {
-				file.getParentFile().mkdirs();
-				InputStream stream = zfile.getInputStream(entry);
-				try {
-					copy(stream, file);
-				} finally {
-					stream.close();
-				}
-			}
-		}
-	}
-
-	public static String getMonth(int month) {
-		Locale locale = new Locale.Builder().setLanguage("ru").setScript("Cyrl").build();
-		DateFormatSymbols symbols = new DateFormatSymbols(locale);
-		String[] monthNames = symbols.getMonths();
-		String month_name = monthNames[month - 1];
-		if (month_name.endsWith("т")) {
-			month_name += "а";
-		} else {
-			month_name = month_name.substring(0, month_name.length() - 1) + "я";
-		}
-		return month_name;
-	}
-
-	public static void changeData(File targetFile, Map<String, String> substitutionData) throws IOException {
-
-		BufferedReader br = null;
-		String docxTemplate = "";
-		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(targetFile), "UTF-8"));
-			String temp;
-			while ((temp = br.readLine()) != null) {
-				docxTemplate = docxTemplate + temp;
-			}
-			br.close();
-			targetFile.delete();
-		} catch (IOException e) {
-			br.close();
-			throw e;
-		}
-
-		Iterator substitutionDataIterator = substitutionData.entrySet().iterator();
-		while (substitutionDataIterator.hasNext()) {
-			Map.Entry<String, String> pair = (Map.Entry<String, String>) substitutionDataIterator.next();
-			if (docxTemplate.contains(pair.getKey())) {
-				if (pair.getValue() != null) {
-					docxTemplate = docxTemplate.replace(pair.getKey(), pair.getValue());
-				} else {
-					docxTemplate = docxTemplate.replace(pair.getKey(), "NEDOSTAJE");
-				}
-			}
-		}
-
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(targetFile);
-			fos.write(docxTemplate.getBytes("UTF-8"));
-			fos.close();
-		} catch (IOException e) {
-			fos.close();
-			throw e;
-		}
-	}
-
-	public static void zip(File directory, File zipfile) throws IOException {
-
-		URI base = directory.toURI();
-		Deque<File> queue = new LinkedList<File>();
-		queue.push(directory);
-		OutputStream out = new FileOutputStream(zipfile);
-		Closeable res = out;
-
-		try {
-			ZipOutputStream zout = new ZipOutputStream(out);
-			res = zout;
-			while (!queue.isEmpty()) {
-				directory = queue.pop();
-				for (File kid : directory.listFiles()) {
-					String name = base.relativize(kid.toURI()).getPath();
-					if (kid.isDirectory()) {
-						queue.push(kid);
-						name = name.endsWith("/") ? name : name + "/";
-						zout.putNextEntry(new ZipEntry(name));
-					} else {
-						if (kid.getName().contains(".docx")) {
-							continue;
-						}
-						zout.putNextEntry(new ZipEntry(name));
-						copy(kid, zout);
-						zout.closeEntry();
-					}
-				}
-			}
-		} finally {
-			res.close();
-		}
-	}
-
-	public static void deleteTempData(File file) throws IOException {
-
-		if (file.isDirectory()) {
-
-			// directory is empty, then delete it
-			if (file.list().length == 0) {
-				file.delete();
-			} else {
-				// list all the directory contents
-				String[] files = file.list();
-
-				for (String temp : files) {
-					// construct the file structure
-					File fileDelete = new File(file, temp);
-					// recursive delete
-					deleteTempData(fileDelete);
-				}
-
-				// check the directory again, if empty then delete it
-				if (file.list().length == 0) {
-					file.delete();
-				}
-			}
-		} else {
-			// if file, then delete it
-			file.delete();
-		}
-	}
-
-	public static void copy(InputStream stream, OutputStream out) throws IOException {
-
-		byte[] buffer = new byte[1024];
-		while (true) {
-			int readCount = stream.read(buffer);
-			if (readCount < 0) {
-				break;
-			}
-			out.write(buffer, 0, readCount);
-		}
-	}
-
-	public static void copy(File file, OutputStream out) throws IOException {
-		InputStream stream = new FileInputStream(file);
-		try {
-			copy(stream, out);
-		} finally {
-			stream.close();
-		}
-	}
-
-	public static void copy(InputStream stream, File file) throws IOException {
-		OutputStream out = new FileOutputStream(file);
-		try {
-			copy(stream, out);
-		} finally {
-			out.close();
-		}
 	}
 
 }

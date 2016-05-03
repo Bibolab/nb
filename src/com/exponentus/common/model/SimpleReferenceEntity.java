@@ -16,7 +16,7 @@ import administrator.dao.LanguageDAO;
 import administrator.model.Language;
 
 @MappedSuperclass
-public class SimpleEntity extends AppEntity<UUID> {
+public class SimpleReferenceEntity extends AppEntity<UUID> {
 	@Column(length = 128)
 	private String name;
 

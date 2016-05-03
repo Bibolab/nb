@@ -1,35 +1,26 @@
 package com.exponentus.dataengine.jpa;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
-import org.eclipse.persistence.annotations.UuidGenerator;
-
-import com.exponentus.dataengine.jpa.util.UUIDConverter;
-
 @MappedSuperclass
-@Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
-@UuidGenerator(name = "uuid-gen")
-public abstract class SimpleAppEntity implements ISimpleAppEntity<UUID> {
+public abstract class SimpleAppEntity implements ISimpleAppEntity<Long> {
+
 	@Id
-	@GeneratedValue(generator = "uuid-gen")
-	@Convert("uuidConverter")
-	@Column(name = "id", nullable = false)
-	protected UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
+	protected Long id;
 
 	@Override
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	@Override
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 

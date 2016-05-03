@@ -15,7 +15,6 @@ public class RuleProvider {
 
 	public RuleProvider(AppEnv env) {
 		try {
-			// System.out.println("type= " + env.appType);
 			this.env = env;
 		} catch (Exception ne) {
 			AppEnv.logger.errorLogEntry(ne);

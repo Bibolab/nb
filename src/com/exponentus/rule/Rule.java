@@ -34,7 +34,6 @@ public abstract class Rule implements IElement {
 	public PublishAsType publishAs = PublishAsType.XML;
 	public int hits;
 	public ArrayList<Caption> captions = new ArrayList<Caption>();
-	public boolean isSecured;
 	public AppEnv env;
 	public ArrayList<ElementRule> elements = new ArrayList<ElementRule>();
 	protected org.w3c.dom.Document doc;
@@ -61,10 +60,6 @@ public abstract class Rule implements IElement {
 
 			if (XMLUtil.getTextContent(doc, "/rule/@anonymous").equalsIgnoreCase("on")) {
 				allowAnonymousAccess = true;
-			}
-
-			if (XMLUtil.getTextContent(doc, "/rule/@security").equalsIgnoreCase("on")) {
-				isSecured = true;
 			}
 
 			description = XMLUtil.getTextContent(doc, "/rule/description");

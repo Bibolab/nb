@@ -45,6 +45,9 @@ public class Application extends AppEntity<UUID> {
 
 	private int position;
 
+	@Column(name = "localized_descr")
+	private Map<LanguageCode, String> localizedDescr;
+
 	@Column(name = "ftsearch_fields")
 	private List<String> ftSearchFields;
 

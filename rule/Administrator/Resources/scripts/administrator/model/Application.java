@@ -19,6 +19,7 @@ import com.exponentus.scripting._Session;
 import com.exponentus.util.Util;
 
 import administrator.dao.LanguageDAO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "_apps")
@@ -31,6 +32,7 @@ public class Application extends AppEntity<UUID> {
 	@Column(length = 128, unique = true)
 	private String name;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "allowedApps")
 	private List<User> users;
 

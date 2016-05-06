@@ -2,6 +2,7 @@ package com.exponentus.common.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,6 +17,9 @@ import com.exponentus.dataengine.jpa.SimpleAppEntity;
 public class ReadingMark extends SimpleAppEntity {
 
 	private Long user;
+
+	@Column(name = "mark_date")
+	private Date markDate;
 
 	public Long getUser() {
 		return user;
@@ -32,7 +36,5 @@ public class ReadingMark extends SimpleAppEntity {
 	public void setMarkDate(Date markDate) {
 		this.markDate = markDate;
 	}
-
-	private Date markDate;
 
 }

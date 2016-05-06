@@ -285,4 +285,9 @@ public class User implements IUser<Long>, IPOJOObject {
 
 	}
 
+	@Override
+	public boolean isWasRead() {
+		return true;
+	}
+
 }

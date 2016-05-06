@@ -32,4 +32,9 @@ public class POJOObjectAdapter<UUID> implements IPOJOObject {
 		return "null";
 	}
 
+	@Override
+	public boolean isWasRead() {
+		return true;
+	}
+
 }

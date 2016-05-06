@@ -84,7 +84,7 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		String result = "<query entity=\"" + entityType + "\"  maxpage=\"" + maxPage + "\" count=\"" + count + "\" currentpage=\"" + currentPage
 		        + "\"" + keyWord + ">";
 		for (T val : list) {
-			result += "<entry isread=\"1\" id=\"" + val.getIdentifier() + "\" " + "url=\"" + val.getURL() + "\"><viewcontent>";
+			result += "<entry isread=\"" + val.isWasRead() + "\" id=\"" + val.getIdentifier() + "\" " + "url=\"" + val.getURL() + "\"><viewcontent>";
 			result += val.getShortXMLChunk(ses) + "</viewcontent></entry>";
 		}
 		return result + "</query>";
@@ -157,6 +157,11 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		@Override
 		public String getIdentifier() {
 			return "null";
+		}
+
+		@Override
+		public boolean isWasRead() {
+			return true;
 		}
 
 	}

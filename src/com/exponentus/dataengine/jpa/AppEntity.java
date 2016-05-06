@@ -56,6 +56,10 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Transient
 	protected boolean isEditable = true;
 
+	@JsonIgnore
+	@Transient
+	protected boolean isWasRead = true;
+
 	@PrePersist
 	private void prePersist() {
 		regDate = new Date();
@@ -226,6 +230,14 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Override
 	public void setEditable(boolean isEditable) {
 		this.isEditable = isEditable;
+	}
+
+	public boolean isWasRead() {
+		return isWasRead;
+	}
+
+	public void setWasRead(boolean isWasRead) {
+		this.isWasRead = isWasRead;
 	}
 
 	@Override

@@ -23,6 +23,8 @@ public interface IAppEntity extends ISimpleAppEntity<UUID> {
 
 	public boolean isEditable();
 
+	public boolean isWasRead();
+
 	public void setEditable(boolean isEditable);
 
 }

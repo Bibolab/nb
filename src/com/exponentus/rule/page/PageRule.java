@@ -175,4 +175,9 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 		return true;
 	}
 
+	@Override
+	public boolean isWasRead() {
+		return true;
+	}
+
 }

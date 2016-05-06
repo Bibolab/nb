@@ -168,7 +168,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 		try {
 			if (user.getId() != SuperUser.ID && SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
-				if (!((SecureAppEntity) entity).getEditors().contains(user.getId())) {
+				if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
 					throw new SecureException(ses.getAppEnv().appName, "deleting_is_restricted", ses.getLang());
 				}
 			}
@@ -275,7 +275,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		}
 	}
 
-	public ViewPage<T> findAllin(String fieldName, List value, int pageNum, int pageSize) {
+	public ViewPage<T> findAllin(String fieldName, List<?> value, int pageNum, int pageSize) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		try {

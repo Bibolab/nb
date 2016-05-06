@@ -1,6 +1,5 @@
 package com.exponentus.scripting;
 
-
 public interface IPOJOObject {
 	String getIdentifier();
 
@@ -9,6 +8,8 @@ public interface IPOJOObject {
 	String getFullXMLChunk(_Session ses);
 
 	String getShortXMLChunk(_Session ses);
+
+	boolean isWasRead();
 
 	Object getJSONObj(_Session ses);
 

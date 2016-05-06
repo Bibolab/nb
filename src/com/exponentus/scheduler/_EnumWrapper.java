@@ -64,4 +64,9 @@ public class _EnumWrapper<T extends Enum<?>> implements IPOJOObject {
 	public String getIdentifier() {
 		return "null";
 	}
+
+	@Override
+	public boolean isWasRead() {
+		return true;
+	}
 }

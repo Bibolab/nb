@@ -3,7 +3,7 @@ label {
 }
 
 label > input + span {
-    margin-left: .3em;
+    margin-left: 0.3em;
     vertical-align: middle;
 }
 
@@ -11,8 +11,8 @@ label:not(.btn) > input + span {
     color: #555;
 }
 
-label:hover > input + span,
-label > input:checked + span {
+label > input:checked + span,
+label:hover > input + span {
     color: #000;
 }
 

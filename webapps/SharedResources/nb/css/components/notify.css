@@ -1,7 +1,7 @@
 .nb-notify {
     border: 1px solid #FFF;
     border-top: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.102);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .102);
     left: 20%;
     max-width: 90%;
     position: fixed;
@@ -32,6 +32,7 @@
     padding: .85em;
     position: relative;
     text-align: center;
+    transform: all .15s;
     width: 100%;
     z-index: 999;
 }

@@ -54,11 +54,10 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 
 			type = RuleType.PAGE;
 
-			// TODO need to improve
 			xsltFile = XMLUtil.getTextContent(doc, "/rule/xsltfile");
 			if (!xsltFile.equals("")) {
 				publishAs = PublishAsType.HTML;
-				if (xsltFile.equalsIgnoreCase("default") || xsltFile.equals("*")) {
+				if (xsltFile.equalsIgnoreCase("default")) {
 					xsltFile = xsltAppsPath + File.separator + type.name().toLowerCase() + File.separator + id + ".xsl";
 				} else if (xsltFile.equalsIgnoreCase("default_staff")) {
 					String xsltStaffAppsPath = "";
@@ -69,9 +68,10 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 						xsltStaffAppsPath = "webapps" + File.separator + EnvConst.STAFF_APP_NAME + File.separator + "xsl";
 					}
 					xsltFile = xsltStaffAppsPath + File.separator + type.name().toLowerCase() + File.separator + id + ".xsl";
-				} else if (xsltFile.equalsIgnoreCase("default_MunicipalProperty")) {
-					String xsltStaffAppsPath = "webapps" + File.separator + "MunicipalProperty" + File.separator + "xsl";
-					xsltFile = xsltStaffAppsPath + File.separator + type.name().toLowerCase() + File.separator + id + ".xsl";
+				} else if (xsltFile.toLowerCase().contains("default")) {
+					String[] val = xsltFile.split("_");
+					String xsltPath = "webapps" + File.separator + val[1] + File.separator + "xsl";
+					xsltFile = xsltPath + File.separator + type.name().toLowerCase() + File.separator + id + ".xsl";
 				} else {
 					xsltFile = xsltAppsPath + File.separator + xsltFile;
 				}

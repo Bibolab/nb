@@ -30,7 +30,6 @@ public abstract class Rule implements IElement {
 	public String description;
 	public String id = "unknown";
 	public String xsltFile;
-	@Deprecated
 	public PublishAsType publishAs = PublishAsType.XML;
 	public int hits;
 	public ArrayList<Caption> captions = new ArrayList<Caption>();

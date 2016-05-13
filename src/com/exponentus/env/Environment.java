@@ -139,9 +139,8 @@ public class Environment implements ICache {
 			String portAsText = XMLUtil.getTextContent(xmlDocument, "/nextbase/port");
 			try {
 				httpPort = Integer.parseInt(portAsText);
-				Server.logger.infoLogEntry("WebServer is going to use port: " + httpPort);
 			} catch (NumberFormatException nfe) {
-				Server.logger.infoLogEntry("WebServer is going to use default port (" + httpPort + ")");
+
 			}
 
 			NodeList nodeList = XMLUtil.getNodeList(xmlDocument, "/nextbase/applications");
@@ -209,6 +208,8 @@ public class Environment implements ICache {
 				certFile = "";
 				certKeyFile = "";
 			}
+
+			Server.logger.infoLogEntry("WebServer is going to use port: " + httpPort);
 
 			try {
 				mailEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/@mode").equalsIgnoreCase("on") ? true : false;

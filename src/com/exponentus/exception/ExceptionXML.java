@@ -35,10 +35,10 @@ public class ExceptionXML {
 			        + "</type><name>" + servletName + "</name><exception><![CDATA[" + exception + "]]></exception><server>" + Server.serverTitle
 			        + "</server></error></request>";
 		} else {
-			return "<?xml version = \"1.0\" encoding=\"" + EnvConst.DEFAULT_XML_ENC + "\"?><error><apptype>" + appType + "</apptype><message>"
-			        + Environment.vocabulary.getWord("internal_server_error", lang) + "</message><code>" + code + "</code><location>" + location
-			        + "</location><type>" + type + "</type><name>" + servletName + "</name><exception></exception><server>" + Server.serverTitle
-			        + "</server></error>";
+			return "<?xml version = \"1.0\" encoding=\"" + EnvConst.DEFAULT_XML_ENC + "\"?><request><error><apptype>" + appType
+			        + "</apptype><message>" + Environment.vocabulary.getWord("internal_server_error", lang) + "</message><code>" + code
+			        + "</code><location>" + location + "</location><type>" + type + "</type><name>" + servletName
+			        + "</name><exception></exception><server>" + Server.serverTitle + "</server></error></request>";
 		}
 	}
 

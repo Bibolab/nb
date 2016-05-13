@@ -1,5 +1,6 @@
 package com.exponentus.common.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ import com.exponentus.dataengine.IDatabase;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.Environment;
+import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 
 public class ReadingMarkDAO {
@@ -31,11 +33,22 @@ public class ReadingMarkDAO {
 		emf = db.getEntityManagerFactory();
 	}
 
+	public boolean isRead(UUID id, IUser<Long> user) {
+		ReadingMark rm = findById(id, user);
+		if (rm == null) {
+			return false;
+		}
+		return true;
+
+	}
+
 	public boolean markAsRead(UUID id, IUser<Long> user) {
 		ReadingMark rm = findById(id, user);
 		if (rm == null) {
 			ReadingMark mark = new ReadingMark();
+			mark.setDocId(id);
 			mark.setUser(user.getId());
+			mark.setMarkDate(new Date());
 			add(mark);
 		}
 		return true;
@@ -44,28 +57,27 @@ public class ReadingMarkDAO {
 
 	public ReadingMark findById(UUID id, IUser<Long> user) {
 		EntityManager em = emf.createEntityManager();
-		CriteriaBuilder cb = em.getCriteriaBuilder();
 		try {
-			CriteriaQuery<ReadingMark> cq = cb.createQuery(ReadingMark.class);
-			Root<ReadingMark> c = cq.from(ReadingMark.class);
-			cq.select(c);
-			Predicate condition = c.get("id").in(id);
-			cq.where(condition);
-			Query query = em.createQuery(cq);
-			ReadingMark entity = (ReadingMark) query.getSingleResult();
-			return entity;
+			String jpql = "SELECT m FROM ReadingMark AS m WHERE m.docId = :id AND m.user = :user";
+			TypedQuery<ReadingMark> q = em.createQuery(jpql, ReadingMark.class);
+			q.setParameter("id", id);
+			q.setParameter("user", user.getId());
+			return q.getSingleResult();
 		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			Server.logger.errorLogEntry(e);
 			return null;
 		} finally {
 			em.close();
 		}
 	}
 
-	public ViewPage<ReadingMark> findWhoRead(UUID id) {
-		return findWhoRead(id, 0, 0);
+	public ViewPage<ReadingMark> findAllWhoRead(UUID id) {
+		return findAllWhoRead(id, 0, 0);
 	}
 
-	public ViewPage<ReadingMark> findWhoRead(UUID id, int pageNum, int pageSize) {
+	public ViewPage<ReadingMark> findAllWhoRead(UUID id, int pageNum, int pageSize) {
 		EntityManager em = emf.createEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		try {

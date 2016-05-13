@@ -46,21 +46,23 @@ public class Connect {
 					Constructor<?> contructor = clazz.getConstructor(args);
 					_Session ses = new _Session(env, new AnonymousUser());
 					eDao = (IEmployeeDAO) contructor.newInstance(new Object[] { ses });
+					if (user.getId() != SuperUser.ID) {
+						IEmployee emp = eDao.getEmployee(user.getId());
+						if (emp != null) {
+							user.setUserName(emp.getName());
+							user.setRoles(emp.getAllRoles());
+						} else {
+							user.setUserName(user.getLogin());
+							user.setRoles(new ArrayList<String>());
+						}
+					}
+				} catch (ClassNotFoundException e) {
+
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				        | ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+				        | NoSuchMethodException | SecurityException e) {
 					Server.logger.errorLogEntry(e);
 				}
 
-				if (user.getId() != SuperUser.ID && eDao != null) {
-					IEmployee emp = eDao.getEmployee(user.getId());
-					if (emp != null) {
-						user.setUserName(emp.getName());
-						user.setRoles(emp.getAllRoles());
-					} else {
-						user.setUserName(user.getLogin());
-						user.setRoles(new ArrayList<String>());
-					}
-				}
 			}
 
 		} else {

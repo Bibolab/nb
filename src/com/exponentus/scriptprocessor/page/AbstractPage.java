@@ -8,9 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.exponentus.common.dao.ReadingMarkDAO;
+import com.exponentus.common.model.ReadingMark;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.DAO;
 import com.exponentus.dataengine.jpa.IAppEntity;
+import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
@@ -26,6 +29,8 @@ import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scriptprocessor.ScriptHelper;
 import com.exponentus.scriptprocessor.ScriptShowField;
+import com.exponentus.server.Server;
+import com.exponentus.user.IUser;
 import com.exponentus.util.Util;
 import com.exponentus.webserver.servlet.PublishAsType;
 
@@ -218,6 +223,41 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		int startRec = RuntimeObjUtil.calcStartEntry(pageNum, pageSize);
 		List<? extends IPOJOObject> list = dao.findAll(startRec, pageSize);
 		return new _POJOListWrapper(list, maxPage, count, pageNum, getSes());
+	}
+
+	public void markAsRead(String id, IUser<Long> user) {
+		ReadingMarkDAO rmDao = new ReadingMarkDAO();
+		try {
+			UUID uuidId = UUID.fromString(id);
+			rmDao.markAsRead(uuidId, user);
+		} catch (IllegalArgumentException e) {
+			Server.logger.errorLogEntry(e);
+		}
+
+	}
+
+	public boolean isRead(String id, IUser<Long> user) {
+		ReadingMarkDAO rmDao = new ReadingMarkDAO();
+		try {
+			UUID uuidId = UUID.fromString(id);
+			return rmDao.isRead(uuidId, user);
+		} catch (IllegalArgumentException e) {
+			Server.logger.errorLogEntry(e);
+		}
+		return false;
+
+	}
+
+	public ViewPage<ReadingMark> whoRead(String id) {
+		ReadingMarkDAO rmDao = new ReadingMarkDAO();
+		try {
+			UUID uuidId = UUID.fromString(id);
+			return rmDao.findAllWhoRead(uuidId);
+		} catch (IllegalArgumentException e) {
+			Server.logger.errorLogEntry(e);
+		}
+		return null;
+
 	}
 
 	@Override

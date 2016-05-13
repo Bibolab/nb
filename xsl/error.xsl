@@ -177,7 +177,7 @@
 						</td>
 					</tr>
 				</table>
-				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://dev.exponentus.com" target="_blank">Exponentus</a>&#xA0; &#8226; &#xA0;</div>
+				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://dev.exponentus.com" target="_blank">Exponentus</a></div>
 			</body>
 		</html>
 	</xsl:template>

@@ -220,7 +220,7 @@ public class WebServer {
 				tomcat.stop();
 			}
 		} catch (LifecycleException exception) {
-			Server.logger.errorLogEntry("Cannot Stop WebServer" + exception.getMessage());
+			Server.logger.errorLogEntry("cannot stop WebServer" + exception.getMessage());
 		}
 
 	}

@@ -15,6 +15,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import org.eclipse.persistence.annotations.UuidGenerator;
@@ -230,6 +231,11 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Override
 	public void setEditable(boolean isEditable) {
 		this.isEditable = isEditable;
+	}
+
+	@JsonProperty("kind")
+	public String getEntityKind() {
+		return this.getClass().getSimpleName().toLowerCase();
 	}
 
 	public boolean isWasRead() {

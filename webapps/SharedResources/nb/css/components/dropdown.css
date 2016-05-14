@@ -29,6 +29,7 @@
     z-index: 1000;
 }
 
+.dropdown.open > .dropdown-menu,
 .open > .dropdown-menu {
     display: block;
 }

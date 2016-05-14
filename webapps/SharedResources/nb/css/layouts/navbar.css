@@ -161,7 +161,6 @@ button.btn-side-nav-toggle {
     border: none;
     border-radius: 0;
     box-shadow: none;
-    display: inline-block;
     font-size: 0;
     float: left;
     line-height: inherit;
@@ -202,6 +201,12 @@ button.btn-side-nav-toggle {
     display: none;
 }
 
+@media ( min-width: 1024px) {
+    .navbar .dropdown .dropdown-menu {
+        display: inline-block;
+    }
+}
+
 @media ( max-width: 1024px) {
     .navbar .dropdown .dropdown-toggle {
         display: block;
@@ -213,7 +218,6 @@ button.btn-side-nav-toggle {
     .navbar .dropdown .dropdown-menu {
         background: #FFF;
         box-shadow: 0 6px 9px #ccc;
-        display: none;
         padding: 6px 0;
         position: absolute;
     }

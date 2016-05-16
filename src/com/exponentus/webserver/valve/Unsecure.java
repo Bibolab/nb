@@ -40,7 +40,9 @@ public class Unsecure extends ValveBase {
 					jses.setAttribute(EnvConst.SESSION_ATTR, new _Session(env, new AnonymousUser()));
 					getNext().getNext().invoke(request, response);
 				} else {
-					if (ru.isPage()) {
+					if (ru.isRest()) {
+						((Secure) getNext()).invoke(request, response, appType);
+					} else if (ru.isPage()) {
 						try {
 							if (env.ruleProvider.getRule(ru.getPageID()).isAnonymousAccessAllowed()) {
 								gettingSession(request, response, env);

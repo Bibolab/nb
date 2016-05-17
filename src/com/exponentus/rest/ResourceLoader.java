@@ -19,6 +19,7 @@ public class ResourceLoader extends Application {
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(SessionService.class);
+		classes.add(ApplicationService.class);
 		for (String clazz : appSite.getRestServices()) {
 			try {
 				classes.add(Class.forName(clazz));

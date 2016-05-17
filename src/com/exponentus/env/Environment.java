@@ -86,7 +86,7 @@ public class Environment implements ICache {
 	public static Vocabulary vocabulary;
 	public static String workspaceName = "Workspace";
 	public static PeriodicalServices periodicalServices;
-	public static final String vocabuarFilePath = "resources" + File.separator + "vocabulary.xml";
+	public static final String vocabuarFilePath = EnvConst.RESOURCES_DIR + File.separator + "vocabulary.xml";
 
 	private static HashMap<String, AppEnv> applications = new HashMap<String, AppEnv>();
 	private static ConcurrentHashMap<String, AppEnv> allApplications = new ConcurrentHashMap<String, AppEnv>();
@@ -157,7 +157,6 @@ public class Environment implements ICache {
 						String restMode = XMLUtil.getTextContent(appNode, "rest/@mode");
 						if (restMode.equalsIgnoreCase("on")) {
 							site.setRestIsOn(RunMode.ON);
-							Server.logger.infoLogEntry("rest service is on");
 							site.setRestUrlMapping(XMLUtil.getTextContent(appNode, "rest/urlmapping"));
 							site.setRestType(RestType.JERSEY);
 							List<String> restServices = new ArrayList<String>();

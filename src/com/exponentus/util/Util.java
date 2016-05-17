@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +22,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.IOUtils;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.AppEntity;
@@ -493,6 +496,31 @@ public class Util {
 			}
 
 			return stringBuilder.toString();
+		} catch (FileNotFoundException e) {
+			Server.logger.errorLogEntry(e);
+		} catch (IOException e) {
+			Server.logger.errorLogEntry(e);
+		} finally {
+			try {
+				if (reader != null) {
+					reader.close();
+				}
+			} catch (IOException e) {
+				Server.logger.errorLogEntry(e);
+			}
+		}
+		return "";
+	}
+
+	public static String readResource(String file) {
+		InputStreamReader reader = null;
+		try {
+
+			InputStream in = Object.class.getClass().getResourceAsStream(file);
+			reader = new InputStreamReader(in, "utf-8");
+			String myInputStream = IOUtils.toString(reader);
+
+			return myInputStream;
 		} catch (FileNotFoundException e) {
 			Server.logger.errorLogEntry(e);
 		} catch (IOException e) {

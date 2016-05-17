@@ -92,7 +92,8 @@ public class Console implements Runnable {
 			for (String[] entry : info) {
 				System.out.printf(format, entry[0], entry[1]);
 			}
-
+			System.out.printf(format, "            ", "-----");
+			System.out.printf(format, "     Total  ", Environment.adminApplication.getDataBase().getCount());
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
 
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {
@@ -229,7 +230,7 @@ public class Console implements Runnable {
 			}
 
 		} else if (command.equals("help") || command.equalsIgnoreCase("h")) {
-			System.out.println(Util.readFile(EnvConst.RESOURCES_DIR + File.separator + "console_commands.txt"));
+			System.out.println(Util.readResource("/com/exponentus/server/console_commands.txt"));
 		} else {
 			if (!command.trim().equalsIgnoreCase("")) {
 				System.err.println("error -command \"" + command + "\" is not recognized");

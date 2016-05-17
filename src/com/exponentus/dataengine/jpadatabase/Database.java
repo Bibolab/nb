@@ -275,23 +275,7 @@ public class Database implements IDatabase {
 
 	@Override
 	public String getInfo() {
-		int countOfRecords = 0;
-
-		try {
-			Connection conn = DriverManager.getConnection(connectionURL, props);
-			conn.setAutoCommit(false);
-			Statement s = conn.createStatement();
-			String sql = "SELECT sum(n_live_tup) FROM pg_stat_user_tables";
-			ResultSet rs = s.executeQuery(sql);
-			if (rs.next()) {
-				countOfRecords = rs.getInt(1);
-			}
-			s.close();
-			conn.commit();
-		} catch (Throwable e) {
-			DatabaseUtil.debugErrorPrint(e);
-		}
-		return "url=" + connectionURL + ", total count of records=" + countOfRecords;
+		return "url=" + connectionURL;
 	}
 
 	@Override
@@ -314,6 +298,27 @@ public class Database implements IDatabase {
 			DatabaseUtil.debugErrorPrint(e);
 		}
 		return result;
+	}
+
+	@Override
+	public long getCount() {
+		int countOfRecords = 0;
+
+		try {
+			Connection conn = DriverManager.getConnection(connectionURL, props);
+			conn.setAutoCommit(false);
+			Statement s = conn.createStatement();
+			String sql = "SELECT sum(n_live_tup) FROM pg_stat_user_tables";
+			ResultSet rs = s.executeQuery(sql);
+			if (rs.next()) {
+				countOfRecords = rs.getInt(1);
+			}
+			s.close();
+			conn.commit();
+		} catch (Throwable e) {
+			DatabaseUtil.debugErrorPrint(e);
+		}
+		return countOfRecords;
 	}
 
 }

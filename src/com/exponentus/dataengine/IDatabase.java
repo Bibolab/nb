@@ -16,4 +16,6 @@ public interface IDatabase {
 
 	List<String[]> getCountsOfRec();
 
+	long getCount();
+
 }

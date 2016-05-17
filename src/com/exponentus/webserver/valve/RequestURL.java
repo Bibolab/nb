@@ -39,13 +39,13 @@ public class RequestURL {
 		return appType;
 	}
 
-	public boolean isDefault() {
-		return url.matches("/" + appType + "(/(Provider)?)?/?") || url.trim().equals("");
-	}
-
 	public boolean isAuthRequest() {
 		String ulc = url.toLowerCase();
 		return ulc.contains("login") || ulc.contains("logout") || ulc.contains("/session");
+	}
+
+	public boolean isRest() {
+		return url.matches(".*/((rest)).*");
 	}
 
 	public boolean isPage() {

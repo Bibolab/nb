@@ -270,6 +270,11 @@ public class User implements IUser<Long>, IPOJOObject {
 	}
 
 	@Override
+	public String getEntityKind() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+
+	@Override
 	public String getIdentifier() {
 		Long id = getId();
 		if (id == null) {

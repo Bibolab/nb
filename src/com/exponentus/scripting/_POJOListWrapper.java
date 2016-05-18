@@ -164,5 +164,10 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 			return true;
 		}
 
+		@Override
+		public String getEntityKind() {
+			return this.getClass().getSimpleName().toLowerCase();
+		}
+
 	}
 }

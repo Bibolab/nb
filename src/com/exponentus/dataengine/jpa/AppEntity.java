@@ -15,7 +15,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import org.eclipse.persistence.annotations.UuidGenerator;
@@ -29,6 +28,7 @@ import com.exponentus.user.IUser;
 import com.exponentus.util.Util;
 import com.exponentus.util.XMLUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @MappedSuperclass
 @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
@@ -234,10 +234,12 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	}
 
 	@JsonProperty("kind")
+	@Override
 	public String getEntityKind() {
 		return this.getClass().getSimpleName().toLowerCase();
 	}
 
+	@Override
 	public boolean isWasRead() {
 		return isWasRead;
 	}

@@ -37,4 +37,9 @@ public class POJOObjectAdapter<UUID> implements IPOJOObject {
 		return true;
 	}
 
+	@Override
+	public String getEntityKind() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+
 }

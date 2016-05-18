@@ -89,6 +89,11 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 	}
 
 	@Override
+	public String getEntityKind() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+
+	@Override
 	public String getIdentifier() {
 		return id;
 	}

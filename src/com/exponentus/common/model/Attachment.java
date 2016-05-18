@@ -51,8 +51,8 @@ public class Attachment extends AppEntity<UUID> {
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(400);
-		chunk.append("<fieldname>" + getFieldName() + "</fieldname>");
-		chunk.append("<filename>" + getRealFileName() + "</filename>");
+		chunk.append("<fieldname>" + fieldName + "</fieldname>");
+		chunk.append("<filename>" + realFileName + "</filename>");
 		return chunk.toString();
 	}
 

@@ -17,4 +17,8 @@ public class StringUtil {
 	public static String encode(String val) {
 		return RealmBase.Digest(val, "MD5", "UTF-8");
 	}
+
+	public static String getRandomText() {
+		return Util.generateRandomAsText("qwertyuiopasdfghjklzxcvbnm", 10);
+	}
 }

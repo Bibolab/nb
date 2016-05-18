@@ -58,6 +58,11 @@ public class ReadingMark extends SimpleAppEntity implements IPOJOObject {
 	}
 
 	@Override
+	public String getEntityKind() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+
+	@Override
 	public String getIdentifier() {
 		return id.toString();
 	}

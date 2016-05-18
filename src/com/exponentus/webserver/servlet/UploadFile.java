@@ -30,6 +30,7 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.ApplicationException;
+import com.exponentus.scripting._FormAttachments;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 
@@ -51,7 +52,7 @@ public class UploadFile extends HttpServlet {
 		HttpSession jses = req.getSession(false);
 		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 		FileItem fileItem = null;
-		String fn = "";
+		String fn = "", fieldName = "";
 
 		String time = req.getParameter(EnvConst.TIME_FIELD_NAME);
 		File userTmpDir = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID());
@@ -75,10 +76,13 @@ public class UploadFile extends HttpServlet {
 			List<FileItem> items = upload.parseRequest(req);
 			for (FileItem item : items) {
 				if (item.isFormField()) {
-					// System.out.println(item.getString() + " " +
-					// item.getFieldName());
-					if (item.getFieldName().endsWith(EnvConst.FSID_FIELD_NAME)) {
+					// System.out.println(">>>>>>>form value = " +
+					// item.getString() + " " + item.getFieldName());
+					String formFieldNameField = item.getFieldName();
+					if (formFieldNameField.endsWith(EnvConst.FSID_FIELD_NAME)) {
 						fileItem = item;
+					} else if (formFieldNameField.equalsIgnoreCase("fieldname")) {
+						fieldName = item.getString();
 					}
 
 				} else {
@@ -102,20 +106,12 @@ public class UploadFile extends HttpServlet {
 		sb.append(fns.stream().collect(Collectors.joining(",")));
 		sb.append("]}");
 
-		// System.out.println(fileItem.getString() + " " +
+		// System.out.println(">>" + fileItem.getString() + " " +
 		// fileItem.getFieldName());
-		List<String> formFiles = null;
+
 		if (fileItem != null) {
-			Object obj = ses.getAttribute(fileItem.getString());
-			if (obj == null) {
-				formFiles = new ArrayList<String>();
-			} else {
-				formFiles = (List<String>) obj;
-			}
-			if (!formFiles.contains(fn)) {
-				formFiles.add(fn);
-				ses.setAttribute(fileItem.getString(), formFiles);
-			}
+			_FormAttachments attachs = ses.getAttachments(fileItem.getString());
+			attachs.addFile(fn, fieldName);
 			resp.setContentType(ContentType.APPLICATION_JSON.toString());
 			PrintWriter out = resp.getWriter();
 			out.println(sb.toString());

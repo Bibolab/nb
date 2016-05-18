@@ -29,7 +29,6 @@ public class _EnumWrapper<T extends Enum<?>> implements IPOJOObject {
 
 	@Override
 	public String getURL() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -43,6 +42,11 @@ public class _EnumWrapper<T extends Enum<?>> implements IPOJOObject {
 		}
 
 		return res.append("</constants>").toString();
+	}
+
+	@Override
+	public String getEntityKind() {
+		return this.getClass().getSimpleName().toLowerCase();
 	}
 
 	@Override

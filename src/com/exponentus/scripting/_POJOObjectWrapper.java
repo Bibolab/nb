@@ -17,8 +17,8 @@ public class _POJOObjectWrapper implements IOutcomeObject {
 		if (object.getClass().getSimpleName().equals("_EnumWrapper")) {
 			result = object.getFullXMLChunk(ses);
 		} else {
-			result = "<document entity=\"" + object.getClass().getSimpleName().toLowerCase() + "\"  docid=\"" + object.getIdentifier()
-			        + "\" editable=\"" + object.isEditable() + "\"><fields>" + object.getFullXMLChunk(ses) + "</fields></document>";
+			result = "<document entity=\"" + object.getEntityKind() + "\"  docid=\"" + object.getIdentifier() + "\" editable=\"" + object.isEditable()
+			        + "\"><fields>" + object.getFullXMLChunk(ses) + "</fields></document>";
 		}
 		return result;
 	}

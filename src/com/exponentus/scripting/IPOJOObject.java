@@ -1,6 +1,8 @@
 package com.exponentus.scripting;
 
 public interface IPOJOObject {
+	String getEntityKind();
+
 	String getIdentifier();
 
 	String getURL();

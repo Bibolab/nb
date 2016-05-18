@@ -105,6 +105,17 @@ public class _Session extends PageCacheAdapter {
 		return newSes;
 	}
 
+	public _FormAttachments getAttachments(String fsid) {
+		Object obj = getAttribute(fsid);
+		if (obj == null) {
+			_FormAttachments fa = new _FormAttachments();
+			setAttribute(fsid, fa);
+			return fa;
+		} else {
+			return (_FormAttachments) obj;
+		}
+	}
+
 	private void setValuesMap(Map<String, Object> vm) {
 		this.valuesMap = vm;
 

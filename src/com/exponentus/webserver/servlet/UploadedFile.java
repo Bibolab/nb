@@ -1,9 +1,11 @@
 package com.exponentus.webserver.servlet;
 
+import java.util.UUID;
+
 import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
 
-public class UploadedFile extends POJOObjectAdapter {
+public class UploadedFile extends POJOObjectAdapter<UUID> {
 
 	private String name;
 

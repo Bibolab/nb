@@ -7,17 +7,17 @@ import java.util.Map;
 import com.exponentus.util.Util;
 
 public class _WebFormData {
-	private Map<String, String[]> formData;
+	private Map<String, String[]> data;
 	private String referrer;
 
 	public _WebFormData(Map<String, String[]> formData, String r) {
-		this.formData = formData;
+		this.data = formData;
 		setReferer(r);
 	}
 
 	public String getValueSilently(String fn) {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			if (value[0].contains("null")) {
 				return "";
 			} else {
@@ -31,7 +31,7 @@ public class _WebFormData {
 
 	public String getValueSilently(String fn, String defaultValue) {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return value[0].trim();
 		} catch (Exception e) {
 			return defaultValue;
@@ -52,7 +52,7 @@ public class _WebFormData {
 		}
 
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return Integer.parseInt(value[0].trim());
 		} catch (Exception e) {
 			return defaultValue;
@@ -61,7 +61,7 @@ public class _WebFormData {
 
 	public float getFloatValueSilently(String fn, int defaultValue) {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return Float.parseFloat(value[0].trim().replace(" ", "").replace(",", "."));
 		} catch (Exception e) {
 			return defaultValue;
@@ -69,7 +69,7 @@ public class _WebFormData {
 	}
 
 	public Integer[] getNumberValuesSilently(String fn, int defaultValue) {
-		String value[] = formData.get(fn);
+		String value[] = data.get(fn);
 		Integer[] nValue = new Integer[value.length];
 		for (int i = 0; i < value.length; i++) {
 			try {
@@ -83,7 +83,7 @@ public class _WebFormData {
 
 	public double getNumberDoubleValueSilently(String fn, double defaultValue) {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return Double.parseDouble(value[0].trim());
 		} catch (Exception e) {
 			return defaultValue;
@@ -91,7 +91,7 @@ public class _WebFormData {
 	}
 
 	public String[] getListOfValuesSilently(String fn) {
-		String value[] = formData.get(fn);
+		String value[] = data.get(fn);
 		if (value != null) {
 			return value;
 		} else {
@@ -102,7 +102,7 @@ public class _WebFormData {
 	}
 
 	public String[] getListOfValuesSilently(String fn, String[] d) {
-		String value[] = formData.get(fn);
+		String value[] = data.get(fn);
 		if (value != null) {
 			return value;
 		} else {
@@ -112,7 +112,7 @@ public class _WebFormData {
 	}
 
 	public String[] getListOfValues(String fn) throws _Exception {
-		String value[] = formData.get(fn);
+		String value[] = data.get(fn);
 		if (value != null) {
 			return value;
 		} else {
@@ -124,7 +124,7 @@ public class _WebFormData {
 	// TODO need to replace _Exception to WebFormValueExceptionType
 	public String getValue(String fn) throws _Exception {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return value[0].trim();
 		} catch (Exception e) {
 			throw new _Exception(_ExceptionType.FORMDATA_INCORRECT, "value of field=" + fn + " has not resolved");
@@ -132,16 +132,16 @@ public class _WebFormData {
 	}
 
 	public Map<String, String[]> getFormData() {
-		return formData;
+		return data;
 	}
 
 	public boolean containsField(String key) {
-		return formData.containsKey(key);
+		return data.containsKey(key);
 	}
 
 	public int getSizeOfField(String fn) {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return value.length;
 		} catch (Exception e) {
 			return 0;
@@ -150,7 +150,7 @@ public class _WebFormData {
 
 	public Date getDateSilently(String fn) {
 		try {
-			String value[] = formData.get(fn);
+			String value[] = data.get(fn);
 			return Util.convertStringToSimpleDate(value[0].trim());
 		} catch (Exception e) {
 			return null;
@@ -161,11 +161,11 @@ public class _WebFormData {
 	public String toString() {
 		String result = "-----------begin of list of the web form data-----------\n";
 
-		Iterator<String> en = formData.keySet().iterator();
+		Iterator<String> en = data.keySet().iterator();
 
 		while (en.hasNext()) {
 			String webFormFieldName = en.next();
-			String[] val = formData.get(webFormFieldName);
+			String[] val = data.get(webFormFieldName);
 			String v = "";
 			for (int i = 0; i < val.length; i++) {
 				v += val[i] + "[" + Integer.toString(i) + "],";
@@ -184,6 +184,18 @@ public class _WebFormData {
 
 	public void setReferer(String referrer) {
 		this.referrer = referrer;
+	}
+
+	public boolean getBoolSilently(String fn) {
+		try {
+			String value[] = data.get(fn);
+			if (value[0].equalsIgnoreCase("true") || value[0].equals("1")) {
+				return true;
+			}
+		} catch (Exception e) {
+
+		}
+		return false;
 	}
 
 }

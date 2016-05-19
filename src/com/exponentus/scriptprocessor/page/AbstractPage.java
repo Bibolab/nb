@@ -1,5 +1,7 @@
 package com.exponentus.scriptprocessor.page;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,12 +10,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
+
 import com.exponentus.common.dao.ReadingMarkDAO;
+import com.exponentus.common.model.Attachment;
 import com.exponentus.common.model.ReadingMark;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.DAO;
 import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.dataengine.jpa.ViewPage;
+import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
@@ -31,6 +37,7 @@ import com.exponentus.scriptprocessor.ScriptHelper;
 import com.exponentus.scriptprocessor.ScriptShowField;
 import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
+import com.exponentus.util.StringUtil;
 import com.exponentus.util.Util;
 import com.exponentus.webserver.servlet.PublishAsType;
 
@@ -101,6 +108,20 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	public void showFile(String filePath, String fileName) {
 		result.setPublishAs(PublishAsType.OUTPUTSTREAM);
 		result.setFile(filePath, fileName);
+	}
+
+	public boolean showAttachment(Attachment att) {
+		try {
+			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + att.getRealFileName();
+			File attFile = new File(filePath);
+			FileUtils.writeByteArrayToFile(attFile, att.getFile());
+			showFile(filePath, att.getRealFileName());
+			Environment.fileToDelete.add(filePath);
+			return true;
+		} catch (IOException ioe) {
+			Server.logger.errorLogEntry(ioe);
+			return false;
+		}
 	}
 
 	@Override

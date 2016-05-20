@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- test
+Build file used by Apache Ant to compile NextBase.
+This is only an example configiration used in a specific implementation of the playform. -->
+
 <nextbase>
     <hostname></hostname>
     <port></port>  

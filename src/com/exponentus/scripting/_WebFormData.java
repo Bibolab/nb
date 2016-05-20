@@ -68,17 +68,38 @@ public class _WebFormData {
 		}
 	}
 
-	public Integer[] getNumberValuesSilently(String fn, int defaultValue) {
-		String value[] = data.get(fn);
-		Integer[] nValue = new Integer[value.length];
-		for (int i = 0; i < value.length; i++) {
-			try {
-				nValue[i] = Integer.parseInt(value[i].trim());
-			} catch (Exception e) {
-				nValue[i] = defaultValue;
+	public Long[] getListOfLongValues(String fn, long defaultValue) {
+		try {
+			String value[] = data.get(fn);
+			Long[] nValue = new Long[value.length];
+			for (int i = 0; i < value.length; i++) {
+				try {
+					nValue[i] = Long.parseLong(value[i].trim());
+				} catch (Exception e) {
+					nValue[i] = defaultValue;
+				}
 			}
+			return nValue;
+		} catch (Exception e) {
+			return new Long['0'];
 		}
-		return nValue;
+	}
+
+	public Integer[] getListOfNumberValues(String fn, int defaultValue) {
+		try {
+			String value[] = data.get(fn);
+			Integer[] nValue = new Integer[value.length];
+			for (int i = 0; i < value.length; i++) {
+				try {
+					nValue[i] = Integer.parseInt(value[i].trim());
+				} catch (Exception e) {
+					nValue[i] = defaultValue;
+				}
+			}
+			return nValue;
+		} catch (Exception e) {
+			return new Integer['0'];
+		}
 	}
 
 	public double getNumberDoubleValueSilently(String fn, double defaultValue) {
@@ -101,12 +122,12 @@ public class _WebFormData {
 
 	}
 
-	public String[] getListOfValuesSilently(String fn, String[] d) {
+	public String[] getListOfStringValues(String fn, String defaultVal) {
 		String value[] = data.get(fn);
 		if (value != null) {
 			return value;
 		} else {
-			return d;
+			return new String[] { defaultVal };
 		}
 
 	}

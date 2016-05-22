@@ -29,7 +29,7 @@ public class EnvConst {
 	public static final String JDBC_DRIVER = "org.postgresql.Driver";
 	public static final int DEFAULT_HTTP_PORT = 38700;
 	public static final String ADMINISTRATOR_SERVICE_CLASS = "staff.services.UserServices";
-	public static final String OFFICEFRAME = "Officeframe";
+	public static final String OFFICEFRAME = "officeframe";
 	public static final String[] OFFICEFRAME_APPS = { "Staff", "Reference", "Workspace" };
 	public static final String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
 

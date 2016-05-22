@@ -56,6 +56,7 @@ main {
     padding: 50px 0 20px;
     position: relative;
     transition: margin-left 0.15s;
+    z-index: 1;
 }
 
 .body:not(.side-nav-toggle) .aside + .content,

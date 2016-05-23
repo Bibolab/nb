@@ -52,7 +52,7 @@ fieldset.fieldset[disabled] {
 
 .tablet .form-group,
 .phone .form-group {
-    border-bottom-color: #F2F2F4;
+    border-bottom-color: #F5F5F5;
 }
 
 .form-group.has-controls-label {}
@@ -160,7 +160,7 @@ fieldset.fieldset[disabled] {
 
 @media ( max-width: 768px) {
     .form-group {
-        border-bottom-color: #F2F2F4;
+        border-bottom-color: #F5F5F5;
     }
     .form-group .control-label {
         text-align: left;

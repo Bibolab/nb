@@ -76,7 +76,7 @@
 }
 
 .select-list .select-option.selected {
-    background-color: #ccc;
+    background-color: #eee;
 }
 
 .select-list .select-option.selected:after {

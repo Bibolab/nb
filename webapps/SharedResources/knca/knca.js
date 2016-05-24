@@ -375,7 +375,7 @@ var knca = (function() {
                         storage.pwd = '';
                         render();
                     }
-                }, 400);
+                }, 260);
             });
             $(edsNode).find('[name=cancel]').on('click', function() {
                 hidePropertyModal();

@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.scripting._Session;
+import com.exponentus.user.AnonymousUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -18,6 +19,8 @@ public class Attachment extends AppEntity<UUID> {
 
 	private String fieldName;
 	private String realFileName;
+	protected String form = "attachment";
+	protected Long author = AnonymousUser.ID;
 
 	@JsonIgnore
 	@Lob
@@ -46,6 +49,11 @@ public class Attachment extends AppEntity<UUID> {
 
 	public void setFile(byte[] file) {
 		this.file = file;
+	}
+
+	@Override
+	public String getDefaultFormName() {
+		return "attachment";
 	}
 
 	@Override

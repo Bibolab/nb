@@ -119,7 +119,11 @@ public class Environment implements ICache {
 			factory.setValidating(true);
 			SAXParser saxParser = factory.newSAXParser();
 			SAXHandler cfgXMLhandler = new SAXHandler();
-			File file = new File("cfg.xml");
+			File file = new File(EnvConst.CFG_FILE);
+			if (!file.exists()) {
+				Server.logger.fatalLogEntry(EnvConst.CFG_FILE + " has not been found (" + file.getAbsolutePath() + ")");
+				Server.shutdown();
+			}
 			saxParser.parse(file, cfgXMLhandler);
 			Document xmlDocument = getDocument();
 

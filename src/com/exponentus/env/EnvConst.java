@@ -15,6 +15,7 @@ public class EnvConst {
 	public static final String FRAMEWORK_NAME = "nb";
 	public static final String SUPPOSED_CODE_PAGE = "utf-8";
 	public static final String DEFAULT_XML_ENC = "utf-8";
+	public static final String CFG_FILE = "cfg.xml";
 	public static final String APP_ATTR = "app";
 	public static final String DEFAULT_PAGE = "index";
 	public final static String SESSION_ATTR = "usersession";

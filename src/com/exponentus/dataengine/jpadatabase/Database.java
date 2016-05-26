@@ -31,10 +31,8 @@ import com.exponentus.env.Site;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
-import com.exponentus.server.Console;
 import com.exponentus.server.Server;
 import com.exponentus.user.SuperUser;
-import com.exponentus.util.StringUtil;
 
 import administrator.dao.ApplicationDAO;
 import administrator.dao.LanguageDAO;
@@ -238,32 +236,32 @@ public class Database implements IDatabase {
 	}
 
 	private int theFirst(_Session ses) {
-		List<String> lwd = Console.getValFromConsole("enter adminstrator user name> ", StringUtil.USERNAME_PATTERN);
-		if (lwd != null) {
-			if (lwd.contains("quit")) {
-				Server.shutdown();
-			} else {
-				String userName = lwd.get(0);
-				String pwd = "";
-				try {
-					pwd = lwd.get(1);
-				} catch (IndexOutOfBoundsException e) {
-					pwd = userName;
-				}
+		/*
+		 * List<String> lwd = Console.getValFromConsole(
+		 * "enter adminstrator user name> ", StringUtil.USERNAME_PATTERN); if
+		 * (lwd != null) { if (lwd.contains("quit")) { Server.shutdown(); } else
+		 * {
+		 */
+		String userName = EnvConst.DUMMY_USER;
+		String pwd = EnvConst.DUMMY_PASSWORD;
+		/*
+		 * try { pwd = lwd.get(1); } catch (IndexOutOfBoundsException e) { pwd =
+		 * userName; }
+		 */
 
-				System.out.println("user \"" + userName + "\" has been registered");
+		System.out.println("user \"" + userName + "\" has been registered");
 
-				User entity = new User();
-				entity.setSuperUser(true);
-				entity.setLogin(userName);
-				entity.setPwd(pwd);
-				ApplicationDAO aDao = new ApplicationDAO(ses);
-				entity.setAllowedApps(aDao.findAll());
-				UserDAO uDao = new UserDAO(this);
-				uDao.add(entity);
+		User entity = new User();
+		entity.setSuperUser(true);
+		entity.setLogin(userName);
+		entity.setPwd(pwd);
+		ApplicationDAO aDao = new ApplicationDAO(ses);
+		entity.setAllowedApps(aDao.findAll());
+		UserDAO uDao = new UserDAO(this);
+		uDao.add(entity);
 
-			}
-		}
+		// }
+		// }
 		return 0;
 
 	}

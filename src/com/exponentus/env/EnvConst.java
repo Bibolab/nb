@@ -34,6 +34,8 @@ public class EnvConst {
 	public static final String[] OFFICEFRAME_APPS = { "Staff", "Reference", "Workspace" };
 	public static final String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
 
+	public static String DUMMY_USER = "admin";
+	public static String DUMMY_PASSWORD = "secret";
 	public static String JPA_LOG_LEVEL = "OFF";
 	public static String DEFAULT_LANG = LanguageCode.ENG.name();
 	public static int DEFAULT_PAGE_SIZE = 20;

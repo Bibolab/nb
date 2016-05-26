@@ -202,6 +202,8 @@ public class WebServer {
 	public void startContainer() {
 		try {
 			tomcat.start();
+		} catch (UnsatisfiedLinkError e) {
+			Server.logger.debugLogEntry("tcnative-1.dll has been not linked");
 		} catch (LifecycleException e) {
 			Server.logger.errorLogEntry(e);
 		}

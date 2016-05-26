@@ -17,9 +17,9 @@ import com.exponentus.dataengine.jpa.constants.AppCode;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.util.Util;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import administrator.dao.LanguageDAO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "_apps")
@@ -125,7 +125,7 @@ public class Application extends AppEntity<UUID> {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.simpleDateTimeFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<name>" + name + "</name>");
 		chunk.append("<appcode>" + code + "</appcode>");
 		chunk.append("<position>" + position + "</position>");

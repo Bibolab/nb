@@ -236,7 +236,7 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.simpleDateTimeFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<email>" + email + "</email>");
 		chunk.append("<issuperuser>" + isSuperUser + "</issuperuser>");
@@ -257,7 +257,7 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.simpleDateTimeFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<email>" + email + "</email>");
 		chunk.append("<issuperuser>" + isSuperUser + "</issuperuser>");

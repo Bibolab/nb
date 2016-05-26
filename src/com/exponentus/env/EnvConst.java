@@ -37,6 +37,9 @@ public class EnvConst {
 	public static String JPA_LOG_LEVEL = "OFF";
 	public static String DEFAULT_LANG = LanguageCode.ENG.name();
 	public static int DEFAULT_PAGE_SIZE = 20;
+	public static String DEFAULT_DATE_FORMAT = "yyyy.MM.dd";
+	public static String DEFAULT_DATETIME_FORMAT = "dd.MM.yyyy kk:mm";
+	public static String DEFAULT_TIME_FORMAT = "kk:mm";
 	public static String DEFAULT_COUNTRY_OF_NUMBER_FORMAT = "ru";
 	public static String DB_USER = "postgres";
 	public static String DB_PWD = "smartdoc";

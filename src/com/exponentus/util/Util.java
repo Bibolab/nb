@@ -27,13 +27,13 @@ import org.apache.commons.io.IOUtils;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.env.EnvConst;
 import com.exponentus.server.Server;
 
 public class Util {
-	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm:ss");
-	public static final SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm");
-	public static final SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
+	public static final SimpleDateFormat timeFormat = new SimpleDateFormat(EnvConst.DEFAULT_TIME_FORMAT);
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATE_FORMAT);
 
 	public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static final Pattern pEntity = Pattern.compile("\\G&(#\\d+|\\w+);");// Pattern.compile("\\G&(#\\d+|\\w+);");
@@ -87,22 +87,6 @@ public class Util {
 			AppEnv.logger.errorLogEntry("Util, Unbale to convert text to date " + date + ", expected format: " + dateTimeFormat.toPattern());
 			return null;
 		}
-	}
-
-	public static Date convertStringToDateTimeSilently(String date) {
-		try {
-			if (date != null) {
-				if (date.length() == 19) {
-					return dateTimeFormat.parse(date);
-				}
-				if (date.length() == 10) {
-					return simpleDateFormat.parse(date);
-				}
-			}
-		} catch (Exception e) {
-			return null;
-		}
-		return null;
 	}
 
 	public static String convertDateToStringSilently(Date date) {

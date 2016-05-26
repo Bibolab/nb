@@ -76,7 +76,7 @@ public class ReadingMark extends SimpleAppEntity implements IPOJOObject {
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<user>" + user + "</user>");
-		chunk.append("<markdate>" + Util.simpleDateTimeFormat.format(markDate) + "</markdate>");
+		chunk.append("<markdate>" + Util.convertDataTimeToStringSilently(markDate) + "</markdate>");
 		return chunk.toString();
 	}
 

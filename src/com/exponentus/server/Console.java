@@ -52,6 +52,7 @@ public class Console implements Runnable {
 	}
 
 	private void cliHandler(String command) {
+		command = command.trim();
 		System.out.println("> " + command);
 		if (command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("q")) {
 			Server.shutdown();
@@ -128,7 +129,7 @@ public class Console implements Runnable {
 		} else if (command.equalsIgnoreCase("show initializers") || command.equalsIgnoreCase("si")) {
 			InitializerHelper helper = new InitializerHelper();
 			try {
-				helper.getAllinitializers(true);
+				helper.getAllInitializers(true);
 			} catch (IOException e) {
 				System.err.println(e);
 			}

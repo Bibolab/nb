@@ -249,7 +249,7 @@ public class Database implements IDatabase {
 		 * userName; }
 		 */
 
-		System.out.println("user \"" + userName + "\" has been registered");
+		// System.out.println("user \"" + userName + "\" has been registered");
 
 		User entity = new User();
 		entity.setSuperUser(true);

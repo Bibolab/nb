@@ -25,9 +25,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.exponentus.server.Server;
-import com.exponentus.util.XMLUtil;
-import com.exponentus.util.XMLUtil;
-import com.exponentus.util.XMLUtil;
 
 public class XMLUtil {
 
@@ -135,6 +132,24 @@ public class XMLUtil {
 		return textResult;
 	}
 
+	public static String getTextContent(Node doc, String xPathExpression, String defaultValue) {
+		String textResult = defaultValue;
+		XPathFactory factory = XPathFactory.newInstance();
+		XPath xpath = factory.newXPath();
+		try {
+			Object result = xpath.compile(xPathExpression).evaluate(doc, XPathConstants.NODESET);
+			NodeList nodes = (NodeList) result;
+			Node node = nodes.item(0);
+			if (node != null) {
+				textResult = node.getTextContent().trim();
+			}
+
+		} catch (Exception e) {
+			return defaultValue;
+		}
+		return textResult;
+	}
+
 	public static boolean getBooleanContent(Document doc, String xPathExpression) {
 		boolean boolResult = Boolean.FALSE;
 		XPathFactory factory = XPathFactory.newInstance();
@@ -209,8 +224,7 @@ public class XMLUtil {
 		return intResult;
 	}
 
-	public static String getTextContent(Node parentNode, String xPathExpression, boolean toUpperCase,
-			String defaultResult, boolean silent) {
+	public static String getTextContent(Node parentNode, String xPathExpression, boolean toUpperCase, String defaultResult, boolean silent) {
 		String textResult = defaultResult;
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();

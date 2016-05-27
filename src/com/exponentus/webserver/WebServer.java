@@ -25,6 +25,7 @@ import com.exponentus.env.Site;
 import com.exponentus.rest.ResourceLoader;
 import com.exponentus.rule.constans.RunMode;
 import com.exponentus.server.Server;
+import com.exponentus.webserver.filter.CORSFilter;
 import com.exponentus.webserver.valve.Logging;
 import com.exponentus.webserver.valve.Secure;
 import com.exponentus.webserver.valve.Unsecure;
@@ -91,6 +92,12 @@ public class WebServer {
 			w1.setLoadOnStartup(1);
 			w1.addInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
 			context.addServletMapping(site.getRestUrlMapping(), "REST");
+
+			// TODO it needed to adding CORS mapping
+			if (!site.getAllowCORS().isEmpty()) {
+				rc.register(CORSFilter.class);
+			}
+
 		}
 		return true;
 
@@ -202,9 +209,12 @@ public class WebServer {
 	public void startContainer() {
 		try {
 			tomcat.start();
+
 		} catch (UnsatisfiedLinkError e) {
 			Server.logger.debugLogEntry("tcnative-1.dll has been not linked");
 		} catch (LifecycleException e) {
+			Server.logger.errorLogEntry(e);
+		} catch (Exception e) {
 			Server.logger.errorLogEntry(e);
 		}
 

@@ -162,6 +162,7 @@ public class Environment implements ICache {
 						if (restMode.equalsIgnoreCase("on")) {
 							site.setRestIsOn(RunMode.ON);
 							site.setRestUrlMapping(XMLUtil.getTextContent(appNode, "rest/urlmapping"));
+							site.setAllowCORS(XMLUtil.getTextContent(appNode, "rest/allowcors"));
 							site.setRestType(RestType.JERSEY);
 							List<String> restServices = new ArrayList<String>();
 							NodeList servicesList = XMLUtil.getNodeList(appNode, "rest/services");

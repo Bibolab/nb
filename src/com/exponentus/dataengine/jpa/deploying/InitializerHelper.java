@@ -4,13 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
+import org.reflections.Reflections;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.IDAO;
@@ -19,8 +22,13 @@ import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
+import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
+import com.exponentus.util.ReflectionUtil;
 import com.eztech.util.JavaClassFinder;
+
+import administrator.dao.ApplicationDAO;
+import administrator.model.Application;
 
 /**
  *
@@ -31,7 +39,7 @@ import com.eztech.util.JavaClassFinder;
 public class InitializerHelper {
 
 	// TODO it need to improve for checking if an application switched off
-	public Map<String, Class<IInitialData>> getAllinitializers(boolean showConsoleOutput) throws IOException {
+	public Map<String, Class<IInitialData>> getAllInitializers(boolean showConsoleOutput) throws IOException {
 		ZipInputStream zip = null;
 		Map<String, Class<IInitialData>> inits = new HashMap<String, Class<IInitialData>>();
 		File jarFile = new File(EnvConst.NB_JAR_FILE);
@@ -64,45 +72,59 @@ public class InitializerHelper {
 			}
 		} else {
 			System.out.println("checking class files...");
-			JavaClassFinder classFinder = new JavaClassFinder();
-			List<Class<? extends IInitialData>> classesList = null;
-			classesList = classFinder.findAllMatchingTypes(IInitialData.class);
-			for (Class<?> populatingClass : classesList) {
-				if (!populatingClass.isInterface() && !populatingClass.getCanonicalName().equals(InitialDataAdapter.class.getCanonicalName())) {
-					IInitialData<ISimpleAppEntity, IDAO> pcInstance = null;
-					try {
-						pcInstance = (IInitialData<ISimpleAppEntity, IDAO>) Class.forName(populatingClass.getCanonicalName()).newInstance();
-						String name = pcInstance.getName();
-						String packageName = populatingClass.getPackage().getName();
-						String p = packageName.substring(0, packageName.indexOf("."));
-						AppEnv env = Environment.getAppEnv(p);
-						if (env != null) {
-							inits.put(name, (Class<IInitialData>) populatingClass);
+			ApplicationDAO aDao = new ApplicationDAO();
+			List<Application> list = aDao.findAll();
+			for (Application app : list) {
+				try {
+					Reflections reflections = new Reflections(app.getName().toLowerCase() + ".init");
+					Set<Class<? extends IInitialData>> classes = reflections.getSubTypesOf(IInitialData.class);
+
+					Class[] classesList = ReflectionUtil.getClasses(app.getName().toLowerCase() + ".init");
+					for (Class initializerClass : classes) {
+						if (!initializerClass.isInterface() && !Modifier.isAbstract(initializerClass.getModifiers())) {
 							if (showConsoleOutput) {
-								System.out.println(env.appName + ":" + populatingClass.getCanonicalName());
-							}
-						} else {
-							if (showConsoleOutput) {
-								System.out.println("null " + populatingClass.getCanonicalName());
+								System.out.println(app.getName() + ":" + initializerClass.getCanonicalName());
 							}
 						}
-					} catch (InstantiationException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (IllegalArgumentException e) {
-						e.printStackTrace();
 					}
-
+				} catch (ClassNotFoundException e) {
+					Server.logger.errorLogEntry(e);
 				}
 			}
+
+			/*
+			 * JavaClassFinder classFinder = new JavaClassFinder(); List<Class<?
+			 * extends IInitialData>> classesList = null; classesList =
+			 * classFinder.findAllMatchingTypes(IInitialData.class); for
+			 * (Class<?> populatingClass : classesList) { if
+			 * (!populatingClass.isInterface() &&
+			 * !populatingClass.getCanonicalName().equals(InitialDataAdapter.
+			 * class.getCanonicalName())) { IInitialData<ISimpleAppEntity, IDAO>
+			 * pcInstance = null; try { pcInstance =
+			 * (IInitialData<ISimpleAppEntity, IDAO>)
+			 * Class.forName(populatingClass.getCanonicalName()).newInstance();
+			 * String name = pcInstance.getName(); String packageName =
+			 * populatingClass.getPackage().getName(); String p =
+			 * packageName.substring(0, packageName.indexOf(".")); AppEnv env =
+			 * Environment.getAppEnv(p); if (env != null) { inits.put(name,
+			 * (Class<IInitialData>) populatingClass); if (showConsoleOutput) {
+			 * System.out.println(env.appName + ":" +
+			 * populatingClass.getCanonicalName()); } } else { if
+			 * (showConsoleOutput) { System.out.println("null " +
+			 * populatingClass.getCanonicalName()); } } } catch
+			 * (InstantiationException e) { e.printStackTrace(); } catch
+			 * (IllegalAccessException e) { e.printStackTrace(); } catch
+			 * (ClassNotFoundException e) { e.printStackTrace(); } catch
+			 * (IllegalArgumentException e) { e.printStackTrace(); }
+			 * 
+			 * } }
+			 */
 		}
 		if (inits.size() == 0 && showConsoleOutput) {
 			System.out.println("there is no any initializer on the Server");
 		}
 		return inits;
+
 	}
 
 	public String runInitializer(String name, boolean showConsoleOutput) throws DatabaseException, SecureException {

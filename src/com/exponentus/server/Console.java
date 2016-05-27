@@ -243,6 +243,7 @@ public class Console implements Runnable {
 		System.out.print(prefix);
 		List<String> result = new ArrayList<String>();
 		String value = "";
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		try {
 			while (in.hasNext()) {

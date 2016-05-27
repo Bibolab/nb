@@ -42,6 +42,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		return emf;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findById(String id) {
 		try {
@@ -68,6 +69,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 				condition = cb.and(c.get("readers").in(user.getId()), condition);
 				isSecureEntity = true;
 			}
+			@SuppressWarnings("unchecked")
 			T entity = (T) query.getSingleResult();
 			if (isSecureEntity) {
 				if (!((SecureAppEntity) entity).getEditors().contains(user.getId())) {

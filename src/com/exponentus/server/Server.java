@@ -34,7 +34,7 @@ public class Server {
 
 		}
 		logger.infoLogEntry("server directory: " + new File("").getAbsolutePath());
-		logger.infoLogEntry(System.getProperty("user.dir"));
+		logger.infoLogEntry("user dir=" + System.getProperty("user.dir"));
 
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
 

@@ -17,7 +17,7 @@ import com.exponentus.webserver.WebServer;
 
 public class Server {
 	public static ILogger logger;
-	public static final String serverVersion = "3.0.8";
+	public static final String serverVersion = "3.0.9";
 	public static String compilationTime = "";
 	public static final String serverTitle = "NextBase " + serverVersion;
 	public static Date startTime = new Date();
@@ -31,8 +31,9 @@ public class Server {
 		if (Environment.isDevMode()) {
 			Environment.verboseLogging = true;
 			logger.warningLogEntry("debug logging is turned on");
-			logger.warningLogEntry("server directory: " + new File("").getAbsolutePath());
+
 		}
+		logger.infoLogEntry("server directory: " + new File("").getAbsolutePath());
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
 
 		Environment.init();

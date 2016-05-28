@@ -17,7 +17,7 @@ import com.exponentus.webserver.WebServer;
 
 public class Server {
 	public static ILogger logger;
-	public static final String serverVersion = "3.0.9";
+	public static final String serverVersion = "3.0.9.1";
 	public static String compilationTime = "";
 	public static final String serverTitle = "NextBase " + serverVersion;
 	public static Date startTime = new Date();
@@ -76,6 +76,9 @@ public class Server {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
+		} catch (Throwable ex) {
+			System.err.println("Uncaught exception - " + ex.getMessage());
+			ex.printStackTrace(System.err);
 		}
 	}
 

@@ -18,6 +18,7 @@ public class Vocabulary {
 		this.words = new HashMap<String, Sentence>();
 	}
 
+	@SuppressWarnings("unchecked")
 	public Vocabulary(Document doc, String appName, HashMap<String, Sentence> w) {
 		this.appName = appName;
 		this.words = (HashMap<String, Sentence>) w.clone();

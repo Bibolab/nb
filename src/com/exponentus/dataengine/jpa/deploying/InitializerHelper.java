@@ -35,7 +35,6 @@ public class InitializerHelper {
 	public Map<String, Class<IInitialData>> getAllInitializers(boolean showConsoleOutput) throws IOException {
 		Map<String, Class<IInitialData>> inits = new HashMap<String, Class<IInitialData>>();
 
-		System.out.println("checking class files...");
 		ApplicationDAO aDao = new ApplicationDAO();
 		List<Application> list = aDao.findAll();
 		for (Application app : list) {

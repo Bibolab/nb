@@ -4,13 +4,11 @@ package com.exponentus.localization;
 public class LocalizatorException extends Exception {
 	public LocalizatorExceptionType id;
 
-	private String fieldName;
 	private static final long serialVersionUID = 4762010135613823296L;
 	private String errorText;
 	private Exception e;
 
 	public LocalizatorException(Exception e, String fieldName) {
-		this.fieldName = fieldName;
 		this.e = e;
 		processError(LocalizatorExceptionType.RUNTIME_ERROR);
 	}

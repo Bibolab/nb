@@ -11,13 +11,11 @@ import com.exponentus.exception.WebFormValueException;
 import com.exponentus.exception.WebFormValueExceptionType;
 import com.exponentus.util.Util;
 
-@Deprecated
 public class User {
 	public int docID;
 	public boolean authorized;
 	public boolean authorizedByHash;
 
-	private static final long serialVersionUID = 1L;
 	public final static String ANONYMOUS_USER = "anonymous";
 
 	private String userID;
@@ -111,25 +109,12 @@ public class User {
 	public void setPasswordHash(String password) throws WebFormValueException {
 		if (!("".equalsIgnoreCase(password))) {
 			if (Util.pwdIsCorrect(password)) {
-				// this.passwordHash = password.hashCode()+"";
-				// this.passwordHash = getMD5Hash(password);
-				RealmBase rb = null;
-				this.passwordHash = rb.Digest(password, "MD5", "UTF-8");
+				this.passwordHash = RealmBase.Digest(password, "MD5", "UTF-8");
 			} else {
 				throw new WebFormValueException(WebFormValueExceptionType.FORMDATA_INCORRECT, "password");
 			}
 		}
 	}
-
-	/*
-	 * public void setPassword(String oldPassword, String newPassword) throws
-	 * WebFormValueException { if (!newPassword.equals("")){ if (isNewDoc()){
-	 * this.password = newPassword; }else{ if ((!isNewDoc()) &&
-	 * oldPassword.equals(oldPassword)){ this.password = newPassword; }else{
-	 * throw new
-	 * WebFormValueException(WebFormValueExceptionType.OLD_PWD_INCORRECT, ""); }
-	 * } } }
-	 */
 
 	public String getEmail() {
 		return email;

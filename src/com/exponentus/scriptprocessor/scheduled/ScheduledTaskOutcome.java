@@ -3,7 +3,6 @@ package com.exponentus.scriptprocessor.scheduled;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
 import com.exponentus.scriptprocessor.page.JSONClass;
@@ -18,15 +17,12 @@ public class ScheduledTaskOutcome {
 	public String name;
 	private List<ScheduledTaskOutcome> includedPage = new ArrayList<ScheduledTaskOutcome>();
 	private ArrayList<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
-	private _Session ses;
-	private LanguageCode lang;
 	private OutcomeType type = OutcomeType.OK;
 	private boolean isScriptResult;
 	private Exception exception;
 
 	public void setSession(_Session ses) {
-		this.ses = ses;
-		lang = ses.getLang();
+
 	}
 
 	public String getName() {

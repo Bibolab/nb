@@ -12,7 +12,7 @@ public interface IDAO<T, K> {
 
 	T findById(String id);
 
-	ViewPage findAllByIds(List<K> ids, int pageNum, int pageSize);
+	ViewPage<? extends IAppEntity> findAllByIds(List<K> ids, int pageNum, int pageSize);
 
 	List<T> findAll();
 

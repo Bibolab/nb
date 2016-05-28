@@ -15,7 +15,6 @@ public class FTSearchEngineDeployer {
 		this.dbPool = dbPool;
 	}
 
-	@SuppressWarnings("SqlNoDataSourceInspection")
 	public void init() {
 		Connection conn = dbPool.getConnection();
 		try (Statement s = conn.createStatement();) {

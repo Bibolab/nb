@@ -1,13 +1,15 @@
 package com.exponentus.dataengine.jpadatabase.ftengine;
 
 import java.util.List;
+import java.util.UUID;
 
+import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.dataengine.jpa.IDAO;
 
 public class FTEntity {
 	private String tableName;
 	private List<String> fieldNames;
-	private Class<? extends IDAO> daoImpl;
+	private Class<? extends IDAO<? extends IAppEntity, UUID>> daoImpl;
 
 	public FTEntity() {
 
@@ -18,14 +20,14 @@ public class FTEntity {
 		this.tableName = tableName;
 		this.fieldNames = fieldNames;
 		try {
-			this.daoImpl = (Class<? extends IDAO>) Class.forName(daoImpl);
+			this.daoImpl = (Class<? extends IDAO<? extends IAppEntity, UUID>>) Class.forName(daoImpl);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public Class<? extends IDAO> getDaoImpl() {
+	public Class<? extends IDAO<? extends IAppEntity, UUID>> getDaoImpl() {
 		return daoImpl;
 	}
 

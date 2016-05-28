@@ -8,7 +8,6 @@ public interface IFTIndexEngine {
 
 	void registerTable(FTEntity table);
 
-	@SuppressWarnings("rawtypes")
 	ViewPage<?> search(String keyWord, _Session ses, int pageNum, int pageSize);
 
 }

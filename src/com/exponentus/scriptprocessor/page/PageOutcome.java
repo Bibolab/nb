@@ -1,8 +1,6 @@
 package com.exponentus.scriptprocessor.page;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -219,7 +217,7 @@ public class PageOutcome {
 
 		ObjectMapper mapper = new ObjectMapper();
 		// ObjectMapper mapper = new ObjectMapperProvider().getContext();
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		// DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		// mapper.setDateFormat(df);
 		// mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);

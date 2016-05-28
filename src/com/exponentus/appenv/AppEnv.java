@@ -98,18 +98,26 @@ public class AppEnv extends PageCacheAdapter {
 
 		File cur = new File(scriptDirPath);
 
-		// System.out.println(cur.getAbsolutePath());
-		if (cur.exists() && cur.isDirectory()) {
-			Collection<File> scipts = FileUtils.listFiles(cur, extensions, true);
-			for (File groovyFile : scipts) {
-				try {
-					Server.logger.debugLogEntry("recompile " + groovyFile.getAbsolutePath() + "...");
-					loader.parseClass(groovyFile);
-				} catch (CompilationFailedException e) {
-					AppEnv.logger.errorLogEntry(e);
-				} catch (IOException e) {
-					AppEnv.logger.errorLogEntry(e);
+		try {
+			if (cur.exists() && cur.isDirectory()) {
+				@SuppressWarnings("unchecked")
+				Collection<File> scipts = FileUtils.listFiles(cur, extensions, true);
+				for (File groovyFile : scipts) {
+					try {
+						Server.logger.debugLogEntry("recompile " + groovyFile.getAbsolutePath() + "...");
+						loader.parseClass(groovyFile);
+					} catch (CompilationFailedException e) {
+						AppEnv.logger.errorLogEntry(e);
+					} catch (IOException e) {
+						AppEnv.logger.errorLogEntry(e);
+					}
 				}
+			}
+		} finally {
+			try {
+				loader.close();
+			} catch (IOException e) {
+				Server.logger.errorLogEntry(e);
 			}
 		}
 	}

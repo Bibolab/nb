@@ -20,10 +20,9 @@ import com.exponentus.dataengine.exception.DatabasePoolExceptionType;
 import com.exponentus.server.Server;
 
 public class DBConnectionPool implements IDBConnectionPool {
-	protected GenericObjectPool connectionPool;
+	protected GenericObjectPool<Connection> connectionPool;
 	protected static int timeBetweenEvictionRunsMillis = 1000 * 60 * 15;
 
-	private boolean isValid;
 	private String DBMSVersion = "";
 
 	@Override
@@ -51,7 +50,7 @@ public class DBConnectionPool implements IDBConnectionPool {
 		connectionPool.setMaxActive(2000);
 
 		checkConnection();
-		isValid = true;
+
 	}
 
 	@Override
@@ -71,14 +70,14 @@ public class DBConnectionPool implements IDBConnectionPool {
 		connectionPool.setMaxActive(2000);
 
 		// checkConnection();
-		isValid = true;
+
 	}
 
 	@Override
 	public Connection getConnection() {
 		Connection con = null;
 		try {
-			con = (Connection) connectionPool.borrowObject();
+			con = connectionPool.borrowObject();
 			con.setAutoCommit(false);
 		} catch (NoSuchElementException nsee) {
 			Server.logger.errorLogEntry(nsee);
@@ -143,7 +142,7 @@ public class DBConnectionPool implements IDBConnectionPool {
 	private void checkConnection() throws DatabasePoolException {
 		Connection con = null;
 		try {
-			con = (Connection) connectionPool.borrowObject();
+			con = connectionPool.borrowObject();
 			con.setAutoCommit(false);
 			Statement st = con.createStatement();
 			String checkVersionQuery = "";

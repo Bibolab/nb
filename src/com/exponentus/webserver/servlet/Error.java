@@ -62,13 +62,14 @@ public class Error extends HttpServlet {
 			} else {
 				msg = (String) request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
 				int statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-				String location = (String) request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
+				// String location = (String)
+				// request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
 				type = (String) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE);
 				Throwable exception = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
 
-				Enumeration attrs = request.getAttributeNames();
+				Enumeration<?> attrs = request.getAttributeNames();
 				while (attrs.hasMoreElements()) {
-					String name = (String) attrs.nextElement();
+					// String name = (String) attrs.nextElement();
 					// System.out.println(name + "=" +
 					// request.getAttribute(name));
 				}

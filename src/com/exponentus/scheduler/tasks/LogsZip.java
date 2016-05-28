@@ -19,13 +19,13 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.exponentus.log.LogFiles;
+import com.exponentus.server.Server;
 
 public class LogsZip implements Job {
 
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
+		Server.logger.infoLogEntry("start scheduled: " + this.getClass().getSimpleName());
 		int cutOffDays = 7;
 		LogFiles logs = new LogFiles("server");
 		String pathfile = logs.logDir.getAbsolutePath();
@@ -69,7 +69,6 @@ public class LogsZip implements Job {
 		}
 	}
 
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	private void addFilesToExistingZip(File zipFile, File file) throws IOException {
 
 		File tempFile = File.createTempFile(zipFile.getName(), null);

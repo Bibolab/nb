@@ -51,6 +51,7 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		entityType = en;
 	}
 
+	@SuppressWarnings("unchecked")
 	public _POJOListWrapper(String msg, String keyWord) {
 		this.count = 0;
 		List<T> l = new ArrayList<T>();
@@ -70,6 +71,7 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 	private void recognizeName() {
 		try {
 			if (list.size() > 0) {
+				@SuppressWarnings("unchecked")
 				final Class<T> listClass = (Class<T>) list.get(0).getClass();
 				entityType = listClass.getSimpleName().toLowerCase();
 			}

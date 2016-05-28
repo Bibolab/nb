@@ -19,8 +19,13 @@ public class ScheduledTask {
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		try {
 			SchedulerHelper sh = new SchedulerHelper();
-			for (IScheduledScript sc : sh.getAllScheduledTasks(false).values()) {
-				processCode(sc);
+			for (Class<IScheduledScript> sc : sh.getAllScheduledTasks(false).values()) {
+				try {
+					processCode(sc.newInstance());
+				} catch (InstantiationException | IllegalAccessException e) {
+					Server.logger.errorLogEntry(e);
+				}
+
 			}
 
 		} catch (ClassNotFoundException | IOException e) {

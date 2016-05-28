@@ -34,6 +34,7 @@ public class _EnumWrapper<T extends Enum<?>> implements IPOJOObject {
 
 	@Override
 	public String getFullXMLChunk(_Session ses) {
+		@SuppressWarnings("unchecked")
 		final Class<T> enumClass = (Class<T>) enumObj[0].getClass();
 		String entityType = enumClass.getSimpleName().toLowerCase();
 		StringBuffer res = new StringBuffer(1000).append("<constants entity=\"" + entityType + "\">");

@@ -22,21 +22,12 @@ import com.exponentus.scriptprocessor.scheduled.Min5ScheduledTask;
 import com.exponentus.scriptprocessor.scheduled.NightScheduledTask;
 import com.exponentus.server.Server;
 
-import administrator.dao.ApplicationDAO;
-import administrator.model.Application;
-
 public class PeriodicalServices {
 	private Scheduler sched;
 
 	public PeriodicalServices() {
+		Server.logger.infoLogEntry("start scheduler");
 
-		ApplicationDAO aDao = new ApplicationDAO();
-		List<Application> list = aDao.findAll();
-		for (Application app : list) {
-			// FileUtils.listFiles(new File(app.getName().toLowerCase()),
-			// FileFilterUtils.nameFileFilter("temp"),
-			// FileFilterUtils.nameFileFilter("temp"));
-		}
 		SchedulerFactory sf = new StdSchedulerFactory();
 		try {
 			sched = sf.getScheduler();

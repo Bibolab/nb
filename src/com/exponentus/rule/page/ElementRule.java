@@ -62,7 +62,6 @@ public class ElementRule {
 		return "name=\"" + name + "\", value=" + value;
 	}
 
-	@SuppressWarnings({ "unchecked", "resource" })
 	private ElementScript getClassName(Node node, String normailzator) {
 		String value = XMLUtil.getTextContent(node, ".", true);
 		ValueSourceType qsSourceType = ValueSourceType.valueOf(XMLUtil.getTextContent(node, "@source", true, "STATIC", true));

@@ -43,8 +43,6 @@ import administrator.model.Language;
 import administrator.model.User;
 
 public class Database implements IDatabase {
-	protected static String dbUser = EnvConst.APP_DB_USER;
-	protected static String dbPwd = EnvConst.APP_DB_PWD;
 	protected static String connectionURL = "";
 	protected IDBConnectionPool dbPool;
 	protected EntityManagerFactory factory;
@@ -61,8 +59,8 @@ public class Database implements IDatabase {
 		try {
 			if (!hasDatabase(EnvConst.DATABASE_NAME, sysDbURL, props)) {
 				Server.logger.infoLogEntry("creating database \"" + EnvConst.DATABASE_NAME + "\"...");
-				registerUser(dbUser, dbPwd, sysDbURL, props);
-				if (createDatabase(EnvConst.DATABASE_NAME, dbUser, sysDbURL, props) == 0) {
+				// registerUser(dbUser, dbPwd, sysDbURL, props);
+				if (createDatabase(EnvConst.DATABASE_NAME, EnvConst.DB_USER, sysDbURL, props) == 0) {
 					Server.logger.infoLogEntry("the database has been created");
 					isNascence = true;
 				}
@@ -75,15 +73,15 @@ public class Database implements IDatabase {
 
 		dbPool = new DBConnectionPool();
 		try {
-			dbPool.initConnectionPool(EnvConst.JDBC_DRIVER, connectionURL, dbUser, dbPwd);
+			dbPool.initConnectionPool(EnvConst.JDBC_DRIVER, connectionURL, EnvConst.DB_USER, EnvConst.DB_PWD);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | DatabasePoolException e) {
 			Server.logger.errorLogEntry(e);
 		}
 
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put(PersistenceUnitProperties.JDBC_DRIVER, EnvConst.JDBC_DRIVER);
-		properties.put(PersistenceUnitProperties.JDBC_USER, dbUser);
-		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, dbPwd);
+		properties.put(PersistenceUnitProperties.JDBC_USER, EnvConst.DB_USER);
+		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, EnvConst.DB_PWD);
 		properties.put(PersistenceUnitProperties.JDBC_URL, connectionURL);
 
 		// INFO,
@@ -135,11 +133,11 @@ public class Database implements IDatabase {
 
 	public Database(String appName) throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		dbPool = new DBConnectionPool();
-		dbPool.initConnectionPool(EnvConst.JDBC_DRIVER, connectionURL, dbUser, dbPwd);
+		dbPool.initConnectionPool(EnvConst.JDBC_DRIVER, connectionURL, EnvConst.DB_USER, EnvConst.DB_PWD);
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put(PersistenceUnitProperties.JDBC_DRIVER, EnvConst.JDBC_DRIVER);
-		properties.put(PersistenceUnitProperties.JDBC_USER, dbUser);
-		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, dbPwd);
+		properties.put(PersistenceUnitProperties.JDBC_USER, EnvConst.DB_USER);
+		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, EnvConst.DB_PWD);
 		properties.put(PersistenceUnitProperties.JDBC_URL, connectionURL);
 
 		// INFO,

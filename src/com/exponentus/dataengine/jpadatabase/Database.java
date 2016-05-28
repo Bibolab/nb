@@ -77,7 +77,7 @@ public class Database implements IDatabase {
 		try {
 			dbPool.initConnectionPool(EnvConst.JDBC_DRIVER, connectionURL, dbUser, dbPwd);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | DatabasePoolException e) {
-			e.printStackTrace();
+			Server.logger.errorLogEntry(e);
 		}
 
 		Map<String, String> properties = new HashMap<String, String>();
@@ -152,6 +152,7 @@ public class Database implements IDatabase {
 		        PersistenceUnitProperties.SCHEMA_GENERATION_DROP_AND_CREATE_ACTION);
 
 		PersistenceProvider pp = new PersistenceProvider();
+		System.out.println(properties);
 		factory = pp.createEntityManagerFactory(appName, properties);
 		if (factory == null) {
 			Server.logger.errorLogEntry("the entity manager of \"" + appName + "\" has not been initialized");

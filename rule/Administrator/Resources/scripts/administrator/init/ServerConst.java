@@ -40,7 +40,6 @@ public class ServerConst {
 	}
 
 	public static Application getApplication(Site site) {
-		// System.out.println(site);
 		Application entity = new Application();
 		try {
 			Class<?> c = Class.forName(site.name.toLowerCase() + ".init.AppConst");

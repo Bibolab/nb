@@ -53,6 +53,9 @@ public class Application extends AppEntity<UUID> {
 	@Column(name = "ftsearch_fields")
 	private List<String> ftSearchFields;
 
+	@Column(name = "is_on")
+	private boolean isOn;
+
 	public String getName() {
 		return name;
 	}
@@ -122,11 +125,20 @@ public class Application extends AppEntity<UUID> {
 		this.ftSearchFields = ftSearchFields;
 	}
 
+	public boolean isOn() {
+		return true;
+	}
+
+	public void setOn(boolean isOn) {
+		this.isOn = isOn;
+	}
+
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<name>" + name + "</name>");
+		chunk.append("<ison>" + isOn + "</ison>");
 		chunk.append("<appcode>" + code + "</appcode>");
 		chunk.append("<position>" + position + "</position>");
 		chunk.append("<defaulturl>" + defaultURL + "</defaulturl>");

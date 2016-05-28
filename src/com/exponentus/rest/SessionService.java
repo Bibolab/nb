@@ -41,7 +41,8 @@ public class SessionService extends RestProvider {
 	public Response getCurrentSession() {
 		HttpSession jses = request.getSession(false);
 		_Session userSession = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
-		return Response.status(HttpServletResponse.SC_OK).entity(userSession.getUser()).build();
+		return Response.status(HttpServletResponse.SC_OK).entity(userSession.getUser())
+		        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").allow("OPTIONS").build();
 	}
 
 	@POST
@@ -77,12 +78,16 @@ public class SessionService extends RestProvider {
 
 		} catch (AuthFailedException e) {
 			authUser.setError(AuthFailedExceptionType.PASSWORD_INCORRECT, lang);
-			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
+			// return
+			// Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
+			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).header("Access-Control-Allow-Origin", "*")
+			        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").allow("OPTIONS").build();
 		} catch (Exception e) {
 			new PortalException(e, response, ProviderExceptionType.INTERNAL, PublishAsType.HTML);
 		}
 
-		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
+		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+		        .allow("OPTIONS").build();
 	}
 
 	@DELETE

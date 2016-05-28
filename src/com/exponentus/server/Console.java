@@ -52,6 +52,7 @@ public class Console implements Runnable {
 	}
 
 	private void cliHandler(String command) {
+		command = command.trim();
 		System.out.println("> " + command);
 		if (command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("q")) {
 			Server.shutdown();
@@ -70,8 +71,6 @@ public class Console implements Runnable {
 			System.out.println("web server port=" + Environment.httpPort);
 			System.out.println("default language=" + EnvConst.DEFAULT_LANG);
 			System.out.println("languages=" + Environment.langs);
-			File jarFile = new File(EnvConst.NB_JAR_FILE);
-			System.out.println("jar=" + EnvConst.NB_JAR_FILE + ", path=" + jarFile.getAbsolutePath() + ", exist=" + jarFile.exists());
 			System.out.println("smtp port=" + Environment.smtpPort);
 			System.out.println("smtp auth=" + Environment.smtpAuth);
 			System.out.println("smtp server=" + Environment.SMTPHost);
@@ -128,7 +127,7 @@ public class Console implements Runnable {
 		} else if (command.equalsIgnoreCase("show initializers") || command.equalsIgnoreCase("si")) {
 			InitializerHelper helper = new InitializerHelper();
 			try {
-				helper.getAllinitializers(true);
+				helper.getAllInitializers(true);
 			} catch (IOException e) {
 				System.err.println(e);
 			}
@@ -242,6 +241,7 @@ public class Console implements Runnable {
 		System.out.print(prefix);
 		List<String> result = new ArrayList<String>();
 		String value = "";
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		try {
 			while (in.hasNext()) {

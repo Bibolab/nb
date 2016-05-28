@@ -11,6 +11,7 @@ public class Site {
 
 	private RunMode restIsOn = RunMode.OFF;
 	private String restUrlMapping = "";
+	private String allowCORS = "";
 	private RestType restType;
 	private List<String> restServices;
 
@@ -28,6 +29,14 @@ public class Site {
 
 	public void setRestUrlMapping(String restUrlMapping) {
 		this.restUrlMapping = restUrlMapping;
+	}
+
+	public String getAllowCORS() {
+		return allowCORS;
+	}
+
+	public void setAllowCORS(String allowCORS) {
+		this.allowCORS = allowCORS;
 	}
 
 	public RestType getRestType() {

@@ -71,8 +71,6 @@ public class Console implements Runnable {
 			System.out.println("web server port=" + Environment.httpPort);
 			System.out.println("default language=" + EnvConst.DEFAULT_LANG);
 			System.out.println("languages=" + Environment.langs);
-			File jarFile = new File(EnvConst.NB_JAR_FILE);
-			System.out.println("jar=" + EnvConst.NB_JAR_FILE + ", path=" + jarFile.getAbsolutePath() + ", exist=" + jarFile.exists());
 			System.out.println("smtp port=" + Environment.smtpPort);
 			System.out.println("smtp auth=" + Environment.smtpAuth);
 			System.out.println("smtp server=" + Environment.SMTPHost);

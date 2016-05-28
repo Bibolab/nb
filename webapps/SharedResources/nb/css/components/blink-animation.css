@@ -3,6 +3,11 @@
     animation: blinkAnim 1.3s;
 }
 
+.blink-anim-error {
+    -webkit-animation: blinkAnimError 1.3s;
+    animation: blinkAnimError 1.3s;
+}
+
 
 /* Chrome, Safari, Opera */
 
@@ -21,6 +26,30 @@
 @keyframes blinkAnim {
     from {
         background: yellow;
+    }
+    to {
+        background: white;
+    }
+}
+
+
+/* error */
+
+@-webkit-keyframes blinkAnimError {
+    from {
+        background: red;
+    }
+    to {
+        background: white;
+    }
+}
+
+
+/* Standard syntax */
+
+@keyframes blinkAnimError {
+    from {
+        background: red;
     }
     to {
         background: white;

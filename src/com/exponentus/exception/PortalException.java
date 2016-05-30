@@ -22,10 +22,8 @@ import com.exponentus.webserver.servlet.ProviderExceptionType;
 import com.exponentus.webserver.servlet.PublishAsType;
 
 public class PortalException extends Exception {
-	private Enum type = ProviderExceptionType.INTERNAL;
+	private Enum<?> type = ProviderExceptionType.INTERNAL;
 	private AppEnv env;
-	private String currentSkin = "";
-
 	private static final long serialVersionUID = 3214292820186296427L;
 	private Source xsltSource;
 
@@ -42,7 +40,6 @@ public class PortalException extends Exception {
 		super(e);
 		this.env = env;
 		if (defaultSkin != null) {
-			currentSkin = defaultSkin;
 		}
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.setContentType("text/xml;charset=utf-8");
@@ -55,7 +52,6 @@ public class PortalException extends Exception {
 		super(e);
 		this.env = env;
 		if (defaultSkin != null) {
-			currentSkin = defaultSkin;
 		}
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.setContentType("text/xml;charset=utf-8");
@@ -64,7 +60,7 @@ public class PortalException extends Exception {
 		message("<errorcontex>" + text + "</errorcontext>" + errorMessage(e), response, publishAs);
 	}
 
-	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum type) {
+	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum<?> type) {
 		super(e);
 		this.env = env;
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -73,11 +69,10 @@ public class PortalException extends Exception {
 		message(errorMessage(e), response, PublishAsType.XML);
 	}
 
-	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum type, PublishAsType publishAs, String defaultSkin) {
+	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum<?> type, PublishAsType publishAs, String defaultSkin) {
 		super(e);
 		this.env = env;
 		if (defaultSkin != null) {
-			currentSkin = defaultSkin;
 		}
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.setContentType("text/xml;charset=utf-8");
@@ -91,7 +86,6 @@ public class PortalException extends Exception {
 		super(text);
 		this.env = env;
 		if (defaultSkin != null) {
-			currentSkin = defaultSkin;
 		}
 		this.type = type;
 		xsltSource = getXSLT();

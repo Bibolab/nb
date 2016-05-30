@@ -7,6 +7,7 @@ import com.exponentus.dataengine.IFTIndexEngine;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
@@ -38,10 +39,11 @@ public class FTSearch extends _DoPage {
 		addContent(new _ActionBar(session)
 		        .addAction(new _Action(getLocalizedWord("back_to_doc_list", lang), getLocalizedWord("back", lang), "reset_search")));
 		if (result != null) {
+			@SuppressWarnings("unchecked")
 			ViewPage<AppEntity<UUID>> res = (ViewPage<AppEntity<UUID>>) result;
 			addContent(new _POJOListWrapper<>(res.getResult(), res.getMaxPage(), res.getCount(), res.getPageNum(), session, keyWord));
 		} else {
-			addContent(new _POJOListWrapper(getLocalizedWord("ft_search_resturn_null", lang) + ": '" + keyWord + "'", keyWord));
+			addContent(new _POJOListWrapper<IPOJOObject>(getLocalizedWord("ft_search_resturn_null", lang) + ": '" + keyWord + "'", keyWord));
 		}
 		addValue("request_param", "keyword=" + keyWord);
 	}

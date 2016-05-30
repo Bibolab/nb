@@ -228,7 +228,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		return actionBar;
 	}
 
-	protected _POJOListWrapper getViewPage(DAO<? extends IPOJOObject, UUID> dao, _WebFormData formData) {
+	protected _POJOListWrapper<? extends IPOJOObject> getViewPage(DAO<? extends IPOJOObject, UUID> dao, _WebFormData formData) {
 		int pageNum = 1;
 		int pageSize = dao.getSession().pageSize;
 		if (formData.containsField("page")) {

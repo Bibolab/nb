@@ -1,6 +1,5 @@
 package com.exponentus.server;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -33,9 +32,6 @@ public class Server {
 			logger.warningLogEntry("debug logging is turned on");
 
 		}
-		logger.infoLogEntry("server directory: " + new File("").getAbsolutePath());
-		logger.infoLogEntry("user dir=" + System.getProperty("user.dir"));
-
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
 
 		Environment.init();

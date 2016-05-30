@@ -150,7 +150,7 @@ public class Database implements IDatabase {
 		        PersistenceUnitProperties.SCHEMA_GENERATION_DROP_AND_CREATE_ACTION);
 
 		PersistenceProvider pp = new PersistenceProvider();
-		System.out.println(properties);
+		// System.out.println(properties);
 		factory = pp.createEntityManagerFactory(appName, properties);
 		if (factory == null) {
 			Server.logger.errorLogEntry("the entity manager of \"" + appName + "\" has not been initialized");

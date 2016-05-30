@@ -30,7 +30,7 @@ public class DBConnectionPool implements IDBConnectionPool {
 	        throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Properties props = null;
 		Class.forName(driver).newInstance();
-		connectionPool = new GenericObjectPool(null);
+		connectionPool = new GenericObjectPool<Connection>(null);
 		connectionPool.setTestOnBorrow(true);
 		connectionPool.setWhenExhaustedAction(GenericObjectPool.WHEN_EXHAUSTED_BLOCK);
 		connectionPool.setMaxWait(15000);
@@ -57,7 +57,7 @@ public class DBConnectionPool implements IDBConnectionPool {
 	public void initConnectionPool(String driver, String dbURL)
 	        throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Class.forName(driver).newInstance();
-		connectionPool = new GenericObjectPool(null);
+		connectionPool = new GenericObjectPool<Connection>(null);
 		connectionPool.setTestOnBorrow(true);
 		connectionPool.setWhenExhaustedAction(GenericObjectPool.WHEN_EXHAUSTED_BLOCK);
 		connectionPool.setMaxWait(15000);

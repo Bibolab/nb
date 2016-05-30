@@ -180,8 +180,9 @@ public class _WebFormData {
 
 	@Override
 	public String toString() {
-		String result = "-----------begin of list of the web form data-----------\n";
+		String result = "-----------properties of the web form data-----------\n";
 
+		result += "REFERRER = " + referrer;
 		Iterator<String> en = data.keySet().iterator();
 
 		while (en.hasNext()) {
@@ -194,7 +195,8 @@ public class _WebFormData {
 			result += " " + webFormFieldName + " = " + v + "\n";
 		}
 
-		result += "----------------- end of the list-----------------------";
+		result += "-----------------------------------------------------";
+
 		return result;
 
 	}

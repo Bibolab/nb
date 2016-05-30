@@ -66,6 +66,7 @@ public class Console implements Runnable {
 			System.out.println(
 			        "started at=" + Util.convertDataTimeToString(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
 			System.out.println("application server name=" + EnvConst.APP_ID);
+			System.out.println("server directory=" + new File("").getAbsolutePath());
 			System.out.println("database name=" + EnvConst.DATABASE_NAME);
 			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
 			System.out.println("web server port=" + Environment.httpPort);

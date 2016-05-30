@@ -22,17 +22,16 @@ public class AuthFailedException extends Exception {
 	public AuthFailedExceptionType type;
 
 	private static final long serialVersionUID = 3214292820186296427L;
-	private String errorText;
 
 	public AuthFailedException(AuthFailedExceptionType type, String user) {
 		super();
 		this.type = type;
 		switch (type) {
 		case NO_USER_SESSION:
-			errorText = "No user session";
 			break;
 		case PASSWORD_INCORRECT:
-			errorText = "Password or login is incorrect login=\"" + user + "\"";
+			break;
+		default:
 			break;
 		}
 	}

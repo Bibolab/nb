@@ -1,135 +1,262 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="nb">
-    <property environment="env"/>
-    <property name="NBSolutionsTesting.location" value="../NBSolutionsTesting"/>
-    <property name="Workflow.location" value="../Workflow"/>
-    <property name="poema.location" value="../poema"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.8"/>
-    <property name="source" value="1.8"/>
-    <path id="nb.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="libs/annotations-api.jar"/>
-        <pathelement location="libs/asm-3.2.jar"/>
-        <pathelement location="libs/commons-beanutils-1.9.0.jar"/>
-        <pathelement location="libs/commons-codec-1.6.jar"/>
-        <pathelement location="libs/commons-collections-3.2.2.jar"/>
-        <pathelement location="libs/commons-dbcp-1.4.jar"/>
-        <pathelement location="libs/commons-digester-1.7.jar"/>
-        <pathelement location="libs/commons-discovery-0.2.jar"/>
-        <pathelement location="libs/commons-fileupload-1.3.1.jar"/>
-        <pathelement location="libs/commons-io-1.4.jar"/>
-        <pathelement location="libs/commons-logging-1.1.1.jar"/>
-        <pathelement location="libs/commons-pool-1.6.jar"/>
-        <pathelement location="libs/cstat.jar"/>
-        <pathelement location="libs/geronimo-validation_1.0_spec-1.0-CR5.jar"/>
-        <pathelement location="libs/groovy-all-2.0.5.jar"/>
-        <pathelement location="libs/h2-1.3.170.jar"/>
-        <pathelement location="libs/httpcore-4.2.jar"/>
-        <pathelement location="libs/jackson/jackson-annotations-2.7.1.jar"/>
-        <pathelement location="libs/jackson/jackson-core-2.7.1.jar"/>
-        <pathelement location="libs/jackson/jackson-databind-2.7.1-1.jar"/>
-        <pathelement location="libs/jasper.jar"/>
-        <pathelement location="libs/jasperreports/iText-2.1.7.jar"/>
-        <pathelement location="libs/jasperreports/itextpdf-5.5.0.jar"/>
-        <pathelement location="libs/jasperreports/jasperreports-6.0.0.jar"/>
-        <pathelement location="libs/jasperreports/jasperreports-fonts-6.0.0.jar"/>
-        <pathelement location="libs/jasperreports/jasperreports-functions-6.0.0.jar"/>
-        <pathelement location="libs/jasperreports/jasperreports-javaflow-6.0.0.jar"/>
-        <pathelement location="libs/jasperreports/jcommon-1.0.17.jar"/>
-        <pathelement location="libs/jasperreports/jfreechart-1.0.14.jar"/>
-        <pathelement location="libs/jasperreports/jsqlparser-0.7.0.jar"/>
-        <pathelement location="libs/jasperreports/jxl-2.6.10.jar"/>
-        <pathelement location="libs/jasperreports/poi-3.12-20150511.jar"/>
-        <pathelement location="libs/javax.servlet-api-3.1.0.jar"/>
-        <pathelement location="libs/jcfinder.jar"/>
-        <pathelement location="libs/jdbc/jtds-1.3.0.jar"/>
-        <pathelement location="libs/jdbc/log4jdbc4-1.2.jar"/>
-        <pathelement location="libs/jdbc/ojdbc7.jar"/>
-        <pathelement location="libs/jdbc/postgresql-9.2-1004.jdbc4.jar"/>
-        <pathelement location="libs/jdbc/slf4j-api-1.7.6.jar"/>
-        <pathelement location="libs/jdbc/sqljdbc4.jar"/>
-        <pathelement location="libs/jdom-1.1.3.jar"/>
-        <pathelement location="libs/jpa/eclipselink.jar"/>
-        <pathelement location="libs/jpa/hibernate-core-5.0.5.Final.jar"/>
-        <pathelement location="libs/jpa/javax.persistence_2.1.0.v201304241213.jar"/>
-        <pathelement location="libs/jsp-api.jar"/>
-        <pathelement location="libs/log4j-1.2.15.jar"/>
-        <pathelement location="libs/lucene-core-3.0.3.jar"/>
-        <pathelement location="libs/mail.jar"/>
-        <pathelement location="libs/pdf/itext-pdfa-5.4.5.jar"/>
-        <pathelement location="libs/pdf/itext-xtra-5.4.5.jar"/>
-        <pathelement location="libs/pdf/itextpdf-5.4.5.jar"/>
-        <pathelement location="libs/quartz/jta-1.1.jar"/>
-        <pathelement location="libs/quartz/quartz-all-2.1.7.jar"/>
-        <pathelement location="libs/quartz/slf4j-api-1.6.1.jar"/>
-        <pathelement location="libs/quartz/slf4j-log4j12-1.6.1.jar"/>
-        <pathelement location="libs/saxon9he.jar"/>
-        <pathelement location="libs/tomcat-juli.jar"/>
-        <pathelement location="libs/tomcat/ecj-4.4.2.jar"/>
-        <pathelement location="libs/tomcat/tomcat-dbcp.jar"/>
-        <pathelement location="libs/tomcat/tomcat-embed-core.jar"/>
-        <pathelement location="libs/tomcat/tomcat-embed-jasper.jar"/>
-        <pathelement location="libs/tomcat/tomcat-embed-logging-juli.jar"/>
-        <pathelement location="libs/tomcat/tomcat-embed-logging-log4j.jar"/>
-        <pathelement location="libs/xercesImpl.jar"/>
-        <pathelement location="webapps/SharedResources/knca/knca_applet.jar"/>
-        <pathelement location="libs/extension/eds/crypto-common.jar"/>
-        <pathelement location="libs/extension/eds/crypto.gammaprov.jar"/>
-        <pathelement location="libs/extension/eds/crypto.tsp.jar"/>
-        <pathelement location="libs/extension/eds/iolajcp2.jar"/>
-        <pathelement location="libs/extension/eds/sign-applet.jar"/>
-        <pathelement location="libs/extension/eds/xmlsec-1.4.4.jar"/>
-        <pathelement location="libs/commons-lang3-3.3.2.jar"/>
-        <pathelement location="libs/rest/jersey/jersey-server.jar"/>
-        <pathelement location="libs/rest/javax.ws.rs-api-2.0.1.jar"/>
-        <pathelement location="libs/rest/jersey/jersey-container-servlet-core.jar"/>
-        <pathelement location="libs/joda-time-2.1.jar"/>
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Poema" default="replace">
+    <description>
+    </description>
+    
+    <!-- Source directory (usually it is IDE workspace path) -->
+    <property name="workspace.dir"         value="."/>
+    <!-- Application path -->
+    <property name="application.dir"       value="run"/>
+    <!-- Temporary folder path -->
+    <property name="tmp.dir"               value="tmp"/>
+    <!-- Directory for backup  -->
+    <property name="backup.dir"            value="backup"/>   
+    
+    
+    <!-- application folders   -->  
+    <property name="application.libs"      value="${application.dir}\libs"/>
+    <property name="application.rule"      value="${application.dir}\rule"/>
+    <property name="application.webapps"   value="${application.dir}\webapps"/>
+    <property name="application.xsl"       value="${application.dir}\xsl"/>
+    <property name="application.resources" value="${application.dir}\resources"/>   
+    
+    
+    <!-- NextBase core source   -->
+    <property name="app_nb_jar.name"            value="nb"/>
+    <property name="nb_prj.dir"                 value="nb"/>
+    <property name="src_nb.dir"                 value="${nb_prj.dir}\src"/>
+    <property name="libs_nb.dir"                value="${nb_prj.dir}\libs"/>
+    <property name="rule_nb.dir"                value="${nb_prj.dir}\rule"/>
+    <property name="webapps_nb.dir"             value="${nb_prj.dir}\webapps"/>
+    <property name="xsl_nb.dir"                 value="${nb_prj.dir}\xsl"/>
+    <property name="administrator_src.dir"      value="${nb_prj.dir}\rule\Administrator\Resources\scripts"/>
+    <property name="jpa_xml_nb.dir"             value="${src_nb.dir}"/>
+
+    <!-- Officeframe module source   -->
+    <property name="app_officeframe_jar.name"    value="officeframe"/>
+    <property name="officeframe_prj.dir"        value="${workspace.dir}\officeframe"/>
+    <property name="resources_officeframe.dir"  value="${officeframe_prj.dir}\resources"/>
+    <property name="rule_officeframe.dir"       value="${officeframe_prj.dir}\rule"/>
+    <property name="webapps_officeframe.dir"    value="${officeframe_prj.dir}\webapps"/>
+    <property name="reference_src.dir"          value="${officeframe_prj.dir}\rule\Reference\Resources\scripts"/>
+    <property name="staff_src.dir"               value="${officeframe_prj.dir}\rule\Staff\Resources\scripts"/>
+    <property name="workspace_src.dir"          value="${officeframe_prj.dir}\rule\Workspace\Resources\scripts"/>
+    <property name="jpa_xml_officeframe.dir"    value="${officeframe_prj.dir}\src"/>
+
+     <!-- Poema module source   -->
+    <property name="app_poema_jar.name"     value="poema"/>
+    <property name="poema_prj.dir"          value="poema"/>
+    <property name="resources_poema.dir"    value="${poema_prj.dir}\resources"/>
+    <property name="rule_poema.dir"         value="${poema_prj.dir}\rule"/>
+    <property name="webapps_poema.dir"      value="${poema_prj.dir}\webapps"/>
+    <property name="poema_src.dir"          value="${poema_prj.dir}\rule\Projects\Resources\scripts"/>
+    <property name="jpa_xml_poema.dir"      value="${poema_prj.dir}\src"/>
+
+    <!-- temporary folders   --> 
+    <property name="tmp_rule.dir"                  value="${tmp.dir}\rule"/>
+    <property name="tmp_webapps.dir"               value="${tmp.dir}\webapps"/>
+    <property name="tmp_classes_nb.dir"            value="${tmp.dir}\nb\classes"/>
+    <property name="tmp_jar_nb.dir"                value="${tmp.dir}\nb\jar"/>
+    <property name="tmp_classes_officeframe.dir"   value="${tmp.dir}\officeframe\classes"/>
+    <property name="tmp_jar_officeframe.dir"       value="${tmp.dir}\officeframe\jar"/>
+    <property name="tmp_classes_poema.dir"    value="${tmp.dir}\poema\classes"/>
+    <property name="tmp_jar_poema.dir"        value="${tmp.dir}\poema\jar"/>
+
+    
+
+    <!-- compiler options -->
+    <property name="includeantruntime"     value="false"/>
+    <property name="compile.debug"         value="true"/>
+    <property name="compile.deprecation"   value="false"/>
+    <property name="compile.optimize"      value="true"/>
+
+    <path id="compile_nb.classpath">
+        <fileset dir="${libs_nb.dir}">
+            <include name="**\*.jar"/>
+        </fileset>
     </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="rule/Administrator/Resources/scripts">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
+    <path id="compile_officeframe.classpath">
+        <fileset dir="${libs_nb.dir}">
+            <include name="**\*.jar"/>
+        </fileset>
+        <fileset dir="${tmp_jar_nb.dir}">
+            <include name="nb.jar"/>
+        </fileset>
+    </path>
+    <path id="compile_poema.classpath">
+        <fileset dir="${libs_nb.dir}">
+            <include name="**\*.jar"/>
+        </fileset>
+        <fileset dir="${tmp_jar_nb.dir}">
+            <include name="nb.jar"/>
+        </fileset>
+        <fileset dir="${tmp_jar_officeframe.dir}">
+              <include name="officeframe.jar"/>
+         </fileset>
+    </path>
+
+     <target name="backup" description="Backup settings of the application">
+        <echo>Making backup original settings files</echo>
+        <copy overwrite="true" failonerror="false" file="${application.dir}\resources\config.properties" tofile="${backup.dir}\config.properties"/>
+        <copy overwrite="true" failonerror="false" file="${application.dir}\cfg.xml" tofile="${backup.dir}\cfg.xml"/>
     </target>
-    <target name="clean">
-        <delete dir="bin"/>
+        
+    <target name="clean" description="Delete generated and temporary directories and files">
+        <echo>Cleaning application and temporary directories</echo>
+        <delete quiet="true" dir="${application.dir}"/>
+        <delete quiet="true" dir="${tmp.dir}"/>
     </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <src path="rule/Administrator/Resources/scripts"/>
-            <classpath refid="nb.classpath"/>
+
+    <target name="prepare" description="Create directories and files before compile">
+        <echo>Prepare the directories</echo>
+        <mkdir dir="${application.dir}"/>
+        <mkdir dir="${tmp.dir}"/>
+        <mkdir dir="${tmp_classes_nb.dir}"/>
+        <mkdir dir="${tmp_jar_nb.dir}"/>
+        <mkdir dir="${tmp_classes_officeframe.dir}"/>
+        <mkdir dir="${tmp_jar_officeframe.dir}"/>
+        <mkdir dir="${tmp_classes_poema.dir}"/>
+        <mkdir dir="${tmp_jar_poema.dir}"/>
+    </target>
+
+    <target name="compile_nb" depends="backup, clean, prepare" description="Compile Java sources">
+        <echo>Compiling NextBase core</echo>
+        <javac  srcdir="${src_nb.dir}:${administrator_src.dir}"
+                destdir="${tmp_classes_nb.dir}"
+                debug="${compile.debug}"
+                deprecation="${compile.deprecation}"
+                optimize="${compile.optimize}"
+                includeantruntime="${includeantruntime}"
+                encoding="utf-8">
+            <classpath refid="compile_nb.classpath"/>
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
         </javac>
+        <tstamp>
+            <format property="TODAY"
+                pattern="HH:mm d-MMMM-yyyy"
+                locale="en,RU"/>
+        </tstamp>
+
+        <pathconvert property="manifest_nb.classpath" pathsep=" " refid="compile_nb.classpath">
+            <map from='${libs_nb.dir}\' to='libs/'/>
+            <filtermapper>
+                <replacestring from="\" to="/"/>
+            </filtermapper>
+        </pathconvert>
+        <copy file="${src_nb.dir}\log4j.xml" tofile="${tmp_classes_nb.dir}\log4j.xml"/>
+        <copy overwrite="true" file="${nb_prj.dir}\src\com\exponentus\server\console_commands.txt" tofile="${tmp_classes_nb.dir}\com\exponentus\server\console_commands.txt" />
+        <jar destfile="${tmp_jar_nb.dir}\${app_nb_jar.name}.jar">
+            <fileset dir="${tmp_classes_nb.dir}" />
+            <fileset dir="${tmp_classes_officeframe.dir}" />
+            <fileset dir="${tmp_classes_poema.dir}" />
+            <manifest>
+                <attribute name="Built-Date" value="${TODAY}"/>
+                <attribute name="Class-Path" value="${manifest_nb.classpath}" />
+                <attribute name="Main-Class" value="com.exponentus.server.Server"/>
+            </manifest>
+        </jar>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
-        <ant antfile="build.xml" dir="${NBSolutionsTesting.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${NBSolutionsTesting.location}" inheritAll="false" target="build"/>
-        <ant antfile="build.xml" dir="${Workflow.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${Workflow.location}" inheritAll="false" target="build"/>
-        <ant antfile="build.xml" dir="${poema.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${poema.location}" inheritAll="false" target="build"/>
+
+    <!--<target name="compile_officeframe" depends="compile_nb" description="Create JAR distribution">
+        <echo>Compiling Officeframe modules</echo>
+        <javac  srcdir="${reference_src.dir}:${staff_src.dir}:${workspace_src.dir}"
+            destdir="${tmp_classes_officeframe.dir}"
+            debug="${compile.debug}"
+            deprecation="${compile.deprecation}"
+            optimize="${compile.optimize}"
+            includeantruntime="${includeantruntime}"
+            encoding="utf-8">
+            <classpath refid="compile_officeframe.classpath"/>
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
+        </javac>
+        <tstamp>
+            <format property="TODAY"
+                pattern="HH:mm d-MMMM-yyyy"
+                locale="en,RU"/>
+        </tstamp>
+        <jar destfile="${tmp_jar_officeframe.dir}\${app_officeframe_jar.name}.jar">
+            <fileset dir="${tmp_classes_officeframe.dir}" />
+            <manifest>
+                <attribute name="Built-Date" value="${TODAY}"/>
+            </manifest>
+        </jar>
     </target>
-    <target name="nb">
-        <java classname="com.exponentus.server.Server" failonerror="true" fork="yes">
-            <classpath refid="nb.classpath"/>
-        </java>
+
+    <target name="compile_poema" depends="compile_officeframe" description="Create JAR distribution">
+        <echo>Compiling poema modules </echo>
+        <javac  srcdir="${poema_src.dir}"
+            destdir="${tmp_classes_poema.dir}"
+            debug="${compile.debug}"
+            deprecation="${compile.deprecation}"
+            optimize="${compile.optimize}"
+            includeantruntime="${includeantruntime}"
+            encoding="utf-8">
+            <classpath refid="compile_poema.classpath"/>
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
+        </javac>
+        <tstamp>
+            <format property="TODAY"
+                pattern="HH:mm d-MMMM-yyyy"
+                locale="en,RU"/>
+        </tstamp>
+        <copy file="${jpa_xml_poema.dir}\META-INF\persistence.xml" tofile="${tmp_classes_poema.dir}\META-INF\persistence.xml"/>
+        <jar destfile="${tmp_jar_poema.dir}\${app_poema_jar.name}.jar">
+            <fileset dir="${tmp_classes_poema.dir}" />
+            <manifest>
+                <attribute name="Built-Date" value="${TODAY}"/>
+            </manifest>
+        </jar>
+    </target>-->
+
+       <target name="make_manifest" depends="compile_nb" description="Update of the work system">
+        </target>
+
+    <target name="replace" depends="make_manifest" description="Update of the work system">
+        <echo>Copying application program files</echo>
+        <copy overwrite="true" todir="${tmp_rule.dir}">
+            <fileset dir="${rule_nb.dir}"/>
+            <fileset dir="${rule_officeframe.dir}"/>
+            <fileset dir="${rule_poema.dir}"/>
+        </copy>
+        <copy overwrite="true" todir="${tmp_webapps.dir}">
+            <fileset dir="${webapps_nb.dir}"/>
+            <fileset dir="${webapps_officeframe.dir}"/>
+            <fileset dir="${webapps_poema.dir}"/>
+        </copy>
+
+        <sync todir="${application.libs}">
+            <fileset dir="${libs_nb.dir}" />
+        </sync>
+        <sync todir="${application.xsl}">
+            <fileset dir="${xsl_nb.dir}" />
+        </sync>
+        <sync todir="${application.rule}">
+            <fileset dir="${tmp_rule.dir}" casesensitive="yes">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </sync>
+        <sync todir="${application.webapps}">
+            <fileset dir="${tmp_webapps.dir}" />
+        </sync>
+        <sync todir="${application.resources}">
+            <fileset dir="${resources_poema.dir}" />
+        </sync>
+
+        <echo>Copying application jar files</echo>      
+        <copy overwrite="true" file="${tmp_jar_nb.dir}\${app_nb_jar.name}.jar" tofile="${application.dir}\libs\${app_nb_jar.name}.jar"/>
+        <!--<copy overwrite="true" file="${tmp_jar_officeframe.dir}\${app_officeframe_jar.name}.jar" tofile="${application.dir}\libs\${app_officeframe_jar.name}.jar"/>
+        <copy overwrite="true" file="${tmp_jar_poema.dir}\${app_poema_jar.name}.jar" tofile="${application.dir}\libs\${app_poema_jar.name}.jar"/>-->
+        <echo>Restore original settings files</echo>
+        <copy overwrite="true"  failonerror="false" file="${backup.dir}\config.properties" tofile="${application.dir}\resources\config.properties"/>
+        <copy overwrite="true"  failonerror="false" file="${backup.dir}\cfg.xml" tofile="${application.dir}\cfg.xml" />
+        <echo>Copy additional files</echo>
+        <copy overwrite="true" file="${nb_prj.dir}\start.bat" tofile="${application.dir}\start.bat" />
+        <copy overwrite="true" file="${nb_prj.dir}\start.sh" tofile="${application.dir}\start.sh" />
+        <copy overwrite="true" file="${nb_prj.dir}\tcnative-1.dll" tofile="${application.dir}\tcnative-1.dll" />
+        
+
     </target>
 </project>

@@ -1,5 +1,7 @@
 package com.exponentus.common.page.form;
 
+import java.util.UUID;
+
 import com.exponentus.common.dao.DAOFactory;
 import com.exponentus.dataengine.jpa.DAO;
 import com.exponentus.dataengine.jpa.IAppEntity;
@@ -16,8 +18,7 @@ public class DefaultForm extends _DoPage {
 		String form = formData.getValueSilently("id");
 		String id = formData.getValueSilently("docid");
 		if (!form.isEmpty() && !id.isEmpty()) {
-			@SuppressWarnings("unchecked")
-			DAO<IAppEntity, ?> dao = DAOFactory.get(form);
+			DAO<IAppEntity, UUID> dao = DAOFactory.get(form);
 			if (dao != null) {
 				entity = dao.findById(id);
 				addContent((IPOJOObject) entity);

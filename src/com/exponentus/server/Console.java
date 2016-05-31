@@ -71,6 +71,7 @@ public class Console implements Runnable {
 			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
 			System.out.println("web server port=" + Environment.httpPort);
 			System.out.println("default language=" + EnvConst.DEFAULT_LANG);
+			System.out.println("session cookie name=" + EnvConst.AUTH_COOKIE_NAME);
 			System.out.println("languages=" + Environment.langs);
 			System.out.println("smtp port=" + Environment.smtpPort);
 			System.out.println("smtp auth=" + Environment.smtpAuth);

@@ -69,6 +69,7 @@ public class SessionService extends RestProvider {
 				jses.setAttribute(EnvConst.SESSION_ATTR, ses);
 				int maxAge = -1;
 				String token = SessionPool.put(ses);
+				authUser.setToken(token);
 				NewCookie cookie = new NewCookie(EnvConst.AUTH_COOKIE_NAME, token, "/", null, null, maxAge, false);
 				return Response.status(HttpServletResponse.SC_OK).entity(authUser).cookie(cookie).build();
 			} else {
@@ -80,14 +81,12 @@ public class SessionService extends RestProvider {
 			authUser.setError(AuthFailedExceptionType.PASSWORD_INCORRECT, lang);
 			// return
 			// Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
-			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).header("Access-Control-Allow-Origin", "*")
-			        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").allow("OPTIONS").build();
+			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
 		} catch (Exception e) {
 			new PortalException(e, response, ProviderExceptionType.INTERNAL, PublishAsType.HTML);
 		}
 
-		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-		        .allow("OPTIONS").build();
+		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
 	}
 
 	@DELETE

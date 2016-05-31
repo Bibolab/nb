@@ -50,6 +50,8 @@ import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.PageOutcome;
 import com.exponentus.server.Server;
+import com.exponentus.util.NumberUtil;
+import com.exponentus.util.Util;
 import com.exponentus.util.XMLUtil;
 import com.exponentus.webserver.WebServer;
 
@@ -384,7 +386,7 @@ public class Environment implements ICache {
 	private static void loadProperties() {
 		Properties prop = new Properties();
 		InputStream input = null;
-
+		EnvConst.AUTH_COOKIE_NAME = Util.generateRandomAsText("%$_!@*&^qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(10, 20));
 		try {
 
 			input = new FileInputStream("resources" + File.separator + "config.properties");
@@ -405,6 +407,7 @@ public class Environment implements ICache {
 			e.printStackTrace();
 
 		}
+
 	}
 
 	@Override

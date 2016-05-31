@@ -11,6 +11,7 @@ public class Credentials implements Serializable {
 	private String login;
 	private String pwd;
 	private String error;
+	private String token;
 
 	public String getLogin() {
 		return login;
@@ -35,6 +36,14 @@ public class Credentials implements Serializable {
 
 	public String getError() {
 		return error;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

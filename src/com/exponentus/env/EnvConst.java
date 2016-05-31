@@ -21,7 +21,6 @@ public class EnvConst {
 	public final static String SESSION_ATTR = "usersession";
 	public static final String LANG_COOKIE_NAME = "lang";
 	public static final String PAGE_SIZE_COOKIE_NAME = "pagesize";
-	public static final String AUTH_COOKIE_NAME = "nb3ses";
 	public static final String ADMINISTRATOR_APP_NAME = "Administrator";
 	public final static String SHARED_RESOURCES_APP_NAME = "SharedResources";
 	public static final String ERROR_XSLT = "error.xsl";
@@ -34,6 +33,7 @@ public class EnvConst {
 	public static final String[] OFFICEFRAME_APPS = { "Staff", "Reference", "Workspace" };
 	public static final String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
 
+	public static String AUTH_COOKIE_NAME = "nb3ses";
 	public static String DUMMY_USER = "admin";
 	public static String DUMMY_PASSWORD = "secret";
 	public static String JPA_LOG_LEVEL = "OFF";

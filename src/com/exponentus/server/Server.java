@@ -16,7 +16,7 @@ import com.exponentus.webserver.WebServer;
 
 public class Server {
 	public static ILogger logger;
-	public static final String serverVersion = "3.0.9.1";
+	public static final String serverVersion = "3.0.9.2";
 	public static String compilationTime = "";
 	public static final String serverTitle = "NextBase " + serverVersion;
 	public static Date startTime = new Date();

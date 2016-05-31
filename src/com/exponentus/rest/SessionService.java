@@ -80,8 +80,6 @@ public class SessionService extends RestProvider {
 
 		} catch (AuthFailedException e) {
 			authUser.setError(AuthFailedExceptionType.PASSWORD_INCORRECT, lang);
-			// return
-			// Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
 			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
 		} catch (Exception e) {
 			new PortalException(e, response, ProviderExceptionType.INTERNAL, PublishAsType.HTML);

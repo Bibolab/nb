@@ -25,7 +25,7 @@ public class _Session extends PageCacheAdapter {
 	private AppEnv env;
 	private LanguageCode lang = LanguageCode.valueOf(EnvConst.DEFAULT_LANG);
 	public int pageSize = EnvConst.DEFAULT_PAGE_SIZE;
-	private AuthModeType authMode;
+	private AuthModeType authMode = AuthModeType.UNDEFINED;
 	private ArrayList<_Session> descendants = new ArrayList<_Session>();
 	private _Session parent;
 	private HashMap<UUID, FormTransaction> formTrans = new HashMap<UUID, FormTransaction>();
@@ -81,7 +81,8 @@ public class _Session extends PageCacheAdapter {
 
 	@Override
 	public String toString() {
-		return "userid=" + user.getUserID() + ", lang=" + lang + ", from=" + Util.convertDataTimeToString(createTime);
+		return "userid=" + user.getUserID() + ", lang=" + lang + ", from=" + Util.convertDataTimeToString(createTime) + ", app=" + env.appName + ", "
+		        + authMode;
 	}
 
 	private void setPageSize(int ps) {
@@ -201,4 +202,9 @@ public class _Session extends PageCacheAdapter {
 		}
 
 	}
+
+	public void setAuthMode(AuthModeType authMode) {
+		this.authMode = authMode;
+	}
+
 }

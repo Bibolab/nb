@@ -20,6 +20,7 @@ import com.exponentus.exception.PortalException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
+import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
 
 import administrator.dao.ApplicationDAO;
@@ -51,6 +52,7 @@ public class Login extends HttpServlet {
 			if (user != null && user.isAuthorized()) {
 				jses = request.getSession(true);
 				ses = new _Session(env, user);
+				ses.setAuthMode(AuthModeType.DIRECT_LOGIN);
 				String token = SessionPool.put(ses);
 				ses.setLang(LanguageCode.valueOf(appCookies.currentLang));
 

@@ -26,6 +26,7 @@ import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.exception.PortalException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
+import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.Cookies;
 import com.exponentus.webserver.servlet.ProviderExceptionType;
@@ -61,7 +62,7 @@ public class SessionService extends RestProvider {
 			if (user != null && user.isAuthorized()) {
 				jses = request.getSession(true);
 				ses = new _Session(getAppEnv(), user);
-
+				ses.setAuthMode(AuthModeType.SESSION_SERVICE_LOGIN);
 				ses.setLang(LanguageCode.valueOf(appCookies.currentLang));
 
 				AppEnv.logger.infoLogEntry(user.getUserID() + " has connected");

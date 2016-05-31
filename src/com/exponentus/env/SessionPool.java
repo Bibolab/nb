@@ -41,4 +41,8 @@ public class SessionPool {
 		userSessions.remove(key);
 	}
 
+	public static HashMap<String, _Session> getUserSessions() {
+		return userSessions;
+	}
+
 }

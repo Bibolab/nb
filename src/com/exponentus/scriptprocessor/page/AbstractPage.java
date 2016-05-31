@@ -194,7 +194,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	}
 
 	// @Deprecated
-	protected void addContent(_POJOListWrapper list) {
+	protected void addContent(_POJOListWrapper<IPOJOObject> list) {
 		result.addContent(list);
 	}
 

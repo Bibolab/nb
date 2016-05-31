@@ -70,9 +70,9 @@ public class Secure extends ValveBase {
 	private void gettingSession(Request request, Response response) throws IOException, ServletException {
 		HttpServletRequest http = request;
 		Token token = getToken(request, response);
-		System.out.println(token);
-		if (token.value != null) {
-			_Session ses = SessionPool.getLoggeedUser(token.value);
+
+		if (token.getValue() != null) {
+			_Session ses = SessionPool.getLoggeedUser(token.getValue());
 			if (ses != null) {
 				HttpSession jses = http.getSession(true);
 				RequestURL ru = new RequestURL(http.getRequestURI());
@@ -88,8 +88,8 @@ public class Secure extends ValveBase {
 				// response.sendRedirect("Logout");
 				request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
 			}
-			if (token.isLimitedToken) {
-				SessionPool.remove(token.value);
+			if (token.isLimitedToken()) {
+				SessionPool.remove(token.getValue());
 			}
 		} else {
 			Server.logger.warningLogEntry("user session was expired");
@@ -108,21 +108,11 @@ public class Secure extends ValveBase {
 		String token = appCookies.auth;
 		if (token == null) {
 			token = request.getParameter("t");
-			t.isLimitedToken = true;
+			t.setLimitedToken(true);
 		}
-		t.value = token;
+		t.setValue(token);
 		return t;
 
-	}
-
-	class Token {
-		String value;
-		boolean isLimitedToken;
-
-		@Override
-		public String toString() {
-			return "value=" + value + ", isLimited=" + isLimitedToken;
-		}
 	}
 
 }

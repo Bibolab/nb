@@ -10,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -22,10 +23,12 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.env.SessionPool;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.scheduler.SchedulerHelper;
+import com.exponentus.scripting._Session;
 import com.exponentus.util.StringUtil;
 import com.exponentus.util.TimeUtil;
 import com.exponentus.util.Util;
@@ -104,6 +107,14 @@ public class Console implements Runnable {
 			}
 			new Environment().flush();
 			Environment.flushSessionsCach();
+		} else if (command.equalsIgnoreCase("show server session pool") || command.equalsIgnoreCase("sssp")) {
+			System.out.printf(format, "Token id", "Session");
+			System.out.printf(format, "--------------", "-----");
+			for (Entry<String, _Session> entry : SessionPool.getUserSessions().entrySet()) {
+				System.out.printf(format, entry.getKey(), entry.getValue());
+			}
+			System.out.printf(format, "            ", "-----");
+			System.out.printf(format, "     Total  ", SessionPool.getUserSessions().size());
 		} else if (command.equalsIgnoreCase("show server cache") || command.equalsIgnoreCase("ssc")) {
 			System.out.println(Environment.getCacheInfo());
 		} else if (command.equalsIgnoreCase("show apps cache") || command.equalsIgnoreCase("sac")) {

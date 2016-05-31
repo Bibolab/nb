@@ -256,27 +256,6 @@ public class Util {
 		return fn;
 	}
 
-	private static byte[] getDigestFromFile(InputStream is) {
-		byte[] result;
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA");
-			byte[] b = new byte[1048576];
-			int len = 0;
-			while ((len = is.read(b)) > 0) {
-				md.update(b, 0, len);
-			}
-			is.close();
-			result = md.digest();
-		} catch (NoSuchAlgorithmException e) {
-			AppEnv.logger.errorLogEntry("Util, не удалось инициализировать алгоритм шифрования");
-			return null;
-		} catch (IOException e) {
-			AppEnv.logger.errorLogEntry("Util, не удалось произвести чтение файла ");
-			return null;
-		}
-		return result;
-	}
-
 	private static byte[] getDigestFromFile(String filePath) {
 		byte[] result;
 		try {
@@ -303,28 +282,8 @@ public class Util {
 		return result;
 	}
 
-	private static String getHexHash(byte[] data) {
-		StringBuffer sb = new StringBuffer();
-		for (byte b : data) {
-			sb.append(String.format("%02X", b & 0xff));
-		}
-		return sb.toString();
-	}
-
-	public static String getHexHash(String filePath) {
-		return getHexHash(getDigestFromFile(filePath));
-	}
-
-	public static String getHexHash(InputStream is) {
-		return getHexHash(getDigestFromFile(is));
-	}
-
 	public static boolean compareFile(String filePath1, String filePath2) {
 		return MessageDigest.isEqual(getDigestFromFile(filePath1), getDigestFromFile(filePath2));
-	}
-
-	public static boolean checkFileHash(String filePath, String hexHash) {
-		return hexHash.equals(getHexHash(filePath));
 	}
 
 	public static File getExistFile(String fn, String tmpFolder) {

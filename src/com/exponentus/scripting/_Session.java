@@ -17,12 +17,13 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
+import com.exponentus.util.Util;
 
 public class _Session extends PageCacheAdapter {
 	private IDatabase dataBase;
 	private IUser<Long> user;
 	private AppEnv env;
-	private LanguageCode lang = LanguageCode.RUS;
+	private LanguageCode lang = LanguageCode.valueOf(EnvConst.DEFAULT_LANG);
 	public int pageSize = EnvConst.DEFAULT_PAGE_SIZE;
 	private AuthModeType authMode;
 	private ArrayList<_Session> descendants = new ArrayList<_Session>();
@@ -30,11 +31,13 @@ public class _Session extends PageCacheAdapter {
 	private HashMap<UUID, FormTransaction> formTrans = new HashMap<UUID, FormTransaction>();
 	private Map<String, Object> valuesMap = new HashMap<String, Object>();
 	private Map<String, PersistValue> persistValuesMap = new HashMap<String, PersistValue>();
+	private Date createTime;
 
 	public _Session(AppEnv env, IUser<Long> user) {
 		this.env = env;
 		this.user = user;
 		dataBase = env.getDataBase();
+		createTime = new Date();
 	}
 
 	public AppEnv getAppEnv() {
@@ -78,7 +81,7 @@ public class _Session extends PageCacheAdapter {
 
 	@Override
 	public String toString() {
-		return "userid=" + user.getUserID() + ", database=" + dataBase.toString() + " app=" + env;
+		return "userid=" + user.getUserID() + ", lang=" + lang + ", from=" + Util.convertDataTimeToString(createTime);
 	}
 
 	private void setPageSize(int ps) {

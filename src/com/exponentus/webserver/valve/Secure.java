@@ -70,7 +70,7 @@ public class Secure extends ValveBase {
 	private void gettingSession(Request request, Response response) throws IOException, ServletException {
 		HttpServletRequest http = request;
 		Token token = getToken(request, response);
-
+		System.out.println(token);
 		if (token.value != null) {
 			_Session ses = SessionPool.getLoggeedUser(token.value);
 			if (ses != null) {
@@ -118,6 +118,11 @@ public class Secure extends ValveBase {
 	class Token {
 		String value;
 		boolean isLimitedToken;
+
+		@Override
+		public String toString() {
+			return "value=" + value + ", isLimited=" + isLimitedToken;
+		}
 	}
 
 }

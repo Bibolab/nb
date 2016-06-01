@@ -73,13 +73,13 @@ public class Secure extends ValveBase {
 
 		if (token.getValue() != null) {
 			_Session ses = SessionPool.getLoggeedUser(token.getValue());
-			String token2 = "";
+			// String token2 = "";
 			if (ses != null) {
 				HttpSession jses = http.getSession(true);
 				RequestURL ru = new RequestURL(http.getRequestURI());
 				AppEnv env = Environment.getAppEnv(ru.getAppType());
 				_Session clonedSes = ses.clone(env);
-				token2 = SessionPool.put(clonedSes);
+				// token2 = SessionPool.put(clonedSes);
 				jses.setAttribute(EnvConst.SESSION_ATTR, clonedSes);
 				Server.logger.debugLogEntry(ses.getUser().getUserID() + "\" got from session pool " + jses.getServletContext().getContextPath());
 				invoke(request, response);
@@ -91,8 +91,8 @@ public class Secure extends ValveBase {
 				request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
 			}
 			if (token.isLimitedToken()) {
-				SessionPool.remove(token.getValue());
-				SessionPool.remove(token2);
+				// SessionPool.remove(token.getValue());
+				// SessionPool.remove(token2);
 			}
 		} else {
 			Server.logger.warningLogEntry("user session was expired");

@@ -60,34 +60,38 @@ public class Console implements Runnable {
 		if (command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("q")) {
 			Server.shutdown();
 		} else if (command.equalsIgnoreCase("info") || command.equalsIgnoreCase("i")) {
-			System.out.println("server version=" + Server.serverVersion);
-			System.out.println(
-			        "os=" + System.getProperty("os.name") + " " + System.getProperty("os.version") + "(" + System.getProperty("os.arch") + ")");
-			System.out.println("jvm=" + System.getProperty("java.version"));
+			System.out.printf(format, "server version", Server.serverVersion);
+			System.out.printf(format, "os", System.getProperty("os.version") + "(" + System.getProperty("os.arch") + ")");
+			System.out.printf(format, "jvm", System.getProperty("java.version"));
 			DateTime now = DateTime.now();
 			Minutes mins = Minutes.minutesBetween(new DateTime(Environment.startTime), now);
-			System.out.println(
-			        "started at=" + Util.convertDataTimeToString(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
-			System.out.println("application server name=" + EnvConst.APP_ID);
-			System.out.println("server directory=" + new File("").getAbsolutePath());
-			System.out.println("database name=" + EnvConst.DATABASE_NAME);
-			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
-			System.out.println("web server port=" + Environment.httpPort);
-			System.out.println("default language=" + EnvConst.DEFAULT_LANG);
-			System.out.println("session cookie name=" + EnvConst.AUTH_COOKIE_NAME);
-			System.out.println("languages=" + Environment.langs);
-			System.out.println("smtp port=" + Environment.smtpPort);
-			System.out.println("smtp auth=" + Environment.smtpAuth);
-			System.out.println("smtp server=" + Environment.SMTPHost);
-			System.out.println("smtp user=" + Environment.smtpUser);
+			System.out.printf(format, "started at",
+			        Util.convertDataTimeToString(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
+			System.out.printf(format, "application server name", EnvConst.APP_ID);
+			System.out.printf(format, "server directory", new File("").getAbsolutePath());
+			System.out.printf(format, "database name", EnvConst.DATABASE_NAME);
+			System.out.printf(format, "database", Environment.adminApplication.getDataBase().getInfo());
+			System.out.printf(format, "web server port", Environment.httpPort);
+			System.out.printf(format, "default language", EnvConst.DEFAULT_LANG);
+			System.out.printf(format, "session cookie name", EnvConst.AUTH_COOKIE_NAME);
+			System.out.printf(format, "languages", Environment.langs);
+			File file = new File(File.separator);
+			long totalSpace = file.getTotalSpace();
+			long freeSpace = file.getFreeSpace();
+			System.out.printf(format, "total disk size", totalSpace / 1024 / 1024 / 1024 + " gb");
+			System.out.printf(format, "space free", freeSpace / 1024 / 1024 / 1024 + " gb");
+			System.out.printf(format, "smtp port", Environment.smtpPort);
+			System.out.printf(format, "smtp auth", Environment.smtpAuth);
+			System.out.printf(format, "smtp server", Environment.SMTPHost);
+			System.out.printf(format, "smtp user", Environment.smtpUser);
 			if (Environment.isDevMode()) {
-				System.out.println("developer mode is on");
-				System.out.println("external server core folder=" + Environment.getKernelDir());
-				System.out.println("external Officeframe folder=" + Environment.getOfficeFrameDir());
+				System.out.printf(format, "developer mode is", "ON");
+				System.out.printf(format, "external server core folder", Environment.getKernelDir());
+				System.out.printf(format, "external Officeframe folder", Environment.getOfficeFrameDir());
 			} else {
-				System.out.println("developer mode is off");
+				System.out.printf(format, "developer mode is", "OFF");
 			}
-			System.out.println("count of the temporary files wich waiting for deleting=" + Environment.fileToDelete.size());
+			System.out.printf(format, "count of the temporary files wich waiting for deleting", Environment.fileToDelete.size());
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {
 			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
 			List<String[]> info = Environment.adminApplication.getDataBase().getCountsOfRec();

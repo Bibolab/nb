@@ -38,6 +38,7 @@ public class UserForm extends _DoPage {
 			entity = new User();
 			entity.setRegDate(new Date());
 			entity.setLogin("");
+			entity.setEditable(true);
 		}
 		addContent(entity);
 		addContent(new _POJOListWrapper(new ApplicationDAO(session).findAll(), session));

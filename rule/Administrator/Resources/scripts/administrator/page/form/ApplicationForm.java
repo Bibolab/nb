@@ -25,7 +25,6 @@ public class ApplicationForm extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
-		LanguageCode lang = session.getLang();
 		String id = formData.getValueSilently("docid");
 		Application entity;
 		if (!id.isEmpty()) {

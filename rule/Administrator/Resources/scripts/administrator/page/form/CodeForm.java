@@ -11,7 +11,7 @@ public class CodeForm extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
-		String clazz = formData.getValueSilently("class");
+		// String clazz = formData.getValueSilently("class");
 
 		_ActionBar actionBar = new _ActionBar(session);
 		actionBar.addAction(new _Action("Compile &amp; Close", "Recompile the class", _ActionType.SAVE_AND_CLOSE));

@@ -169,6 +169,7 @@ public class WebServer {
 		String db = new File("webapps/ROOT").getAbsolutePath();
 		Context context = tomcat.addContext(tomcat.getHost(), "", db);
 		context.setDisplayName("root");
+		context.addWelcomeFile("/Workspace/p?id=workspace");
 
 		engine.getPipeline().addValve(new Logging());
 		engine.getPipeline().addValve(new Unsecure());

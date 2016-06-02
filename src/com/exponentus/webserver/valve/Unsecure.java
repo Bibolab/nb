@@ -69,6 +69,9 @@ public class Unsecure extends ValveBase {
 				if (appType.equals("favicon")) {
 					getNext().getNext().invoke(request, response);
 				} else {
+
+					// request.getRequestDispatcher("/Workspace/p?id=workspace").forward(request,
+					// response);
 					String msg = "unknown application type \"" + appType + "\"";
 					Server.logger.warningLogEntry(msg);
 					ApplicationException ae = new ApplicationException(ru.getAppType(), msg, LanguageCode.valueOf(EnvConst.DEFAULT_LANG));

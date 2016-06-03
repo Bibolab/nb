@@ -32,7 +32,7 @@ for (var i = 0; i < modules.length; i++) {
     _styles[module.name] = ['../css/normalize.css',
         '../vendor/select2/css/select2.min.css',
         '../themes/**/*.css',
-        '../knca/eds.css',
+        // '../knca/eds.css',
         'css/nb.min.css',
         module.path + '/css/**/*.css',
         '!' + module.path + '/css/*.min.css'
@@ -43,7 +43,7 @@ for (var i = 0; i < modules.length; i++) {
     _scripts[module.name] = ['js/nb.build.js',
         '../vendor/select2/js/select2.full.min.js',
         '../vendor/select2/js/i18n/ru.js',
-        '../knca/knca.js',
+        // '../knca/knca.js',
         module.path + '/js/**/*.js',
         '!' + module.path + '/js/app.bundle.js'
     ];

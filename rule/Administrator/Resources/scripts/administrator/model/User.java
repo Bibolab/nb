@@ -52,6 +52,12 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Column(length = 64)
 	private String email = "";
 
+	@Column(length = 64)
+	private String xmpp = "";
+
+	@Column(length = 64)
+	private String slack = "";
+
 	private String pwd;
 
 	private String pwdHash;
@@ -130,6 +136,22 @@ public class User implements IUser<Long>, IPOJOObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getXmpp() {
+		return xmpp;
+	}
+
+	public void setXmpp(String xmpp) {
+		this.xmpp = xmpp;
+	}
+
+	public String getSlack() {
+		return slack;
+	}
+
+	public void setSlack(String slack) {
+		this.slack = slack;
 	}
 
 	@Override
@@ -260,6 +282,8 @@ public class User implements IUser<Long>, IPOJOObject {
 		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<email>" + email + "</email>");
+		chunk.append("<xmpp>" + xmpp + "</xmpp>");
+		chunk.append("<slack>" + slack + "</slack>");
 		chunk.append("<issuperuser>" + isSuperUser + "</issuperuser>");
 		return chunk.toString();
 	}

@@ -154,7 +154,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 						Object val = method.invoke(this, noparams);
 						// System.out.println(val.getClass().getName());
 						if (val instanceof Date) {
-							methodValue = Util.simpleDateFormat.format((Date) val);
+							methodValue = Util.dateFormat.format((Date) val);
 						} else if (val instanceof IndirectList) {
 							List<IPOJOObject> list = (List<IPOJOObject>) val;
 							for (IPOJOObject nestedValue : list) {

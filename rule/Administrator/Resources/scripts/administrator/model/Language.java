@@ -55,7 +55,7 @@ public class Language extends AppEntity {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.simpleDateFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + Util.dateFormat.format(regDate) + "</regdate>");
 		chunk.append("<name>" + name + "</name>");
 		chunk.append("<code>" + code + "</code>");
 		chunk.append("<localizednames>");

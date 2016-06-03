@@ -12,7 +12,7 @@ public class _Helper {
 
 	public static String getDateAsString(Date date) {
 		try {
-			return Util.simpleDateFormat.format(date);
+			return Util.dateFormat.format(date);
 		} catch (Exception e) {
 			return date.toString();
 		}
@@ -32,7 +32,7 @@ public class _Helper {
 
 	public static String getDateAsStringShort(Date date) throws _Exception {
 		try {
-			return Util.simpleDateFormat.format(date);
+			return Util.dateFormat.format(date);
 		} catch (Exception e) {
 			throw new _Exception(_ExceptionType.SCRIPT_ENGINE_ERROR, "Date has not parsed :getDateAsStringShort(" + date + ")");
 		}
@@ -40,7 +40,7 @@ public class _Helper {
 
 	public static String getDateAsStringShortSilently(Date date) throws _Exception {
 		try {
-			return Util.simpleDateFormat.format(date);
+			return Util.dateFormat.format(date);
 		} catch (Exception e) {
 			return "";
 		}

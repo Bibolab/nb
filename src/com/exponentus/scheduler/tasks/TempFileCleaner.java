@@ -29,7 +29,8 @@ public class TempFileCleaner implements Job {
 
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-		Server.logger.infoLogEntry("start scheduled: " + this.getClass().getSimpleName());
+		// Server.logger.infoLogEntry("start scheduled: " +
+		// this.getClass().getSimpleName());
 		ac = 0;
 		if (isFirstStart) {
 			File folder = new File(Environment.tmpDir);

@@ -35,7 +35,6 @@ public class Util {
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat(EnvConst.DEFAULT_TIME_FORMAT);
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATE_FORMAT);
 
-	public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static final Pattern pEntity = Pattern.compile("\\G&(#\\d+|\\w+);");// Pattern.compile("\\G&(#\\d+|\\w+);");
 	public static final Pattern pTag = Pattern.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
 	public static final Pattern pAtEnd = Pattern.compile("\\G\\z");
@@ -91,7 +90,7 @@ public class Util {
 
 	public static String convertDateToStringSilently(Date date) {
 		try {
-			return simpleDateFormat.format(date);
+			return dateFormat.format(date);
 		} catch (Exception e) {
 			return "";
 		}
@@ -99,7 +98,7 @@ public class Util {
 
 	public static String convertDataToString(Calendar date) {
 		try {
-			return simpleDateFormat.format(date.getTime());
+			return dateFormat.format(date.getTime());
 		} catch (Exception e) {
 			AppEnv.logger.errorLogEntry("Util, Не удалось преобразовать дату в текст " + date);
 			// AppEnv.logger.errorLogEntry(e);
@@ -107,6 +106,11 @@ public class Util {
 		}
 	}
 
+	@Deprecated
+	/**
+	 * Recommendation to use is
+	 * com.exponentus.util.TimeUtil.convertStringToDate(String)
+	 **/
 	public static Date convertStringToDate(String date) {
 		try {
 			return dateFormat.parse(date);
@@ -117,12 +121,17 @@ public class Util {
 		}
 	}
 
+	@Deprecated
+	/**
+	 * Recommendation to use is
+	 * com.exponentus.util.TimeUtil.convertStringToDate(String)
+	 **/
 	public static Date convertStringToSimpleDate(String date) {
 		if (date != null && !date.trim().equals("")) {
 			try {
-				return simpleDateFormat.parse(date);
+				return dateFormat.parse(date);
 			} catch (Exception e) {
-				AppEnv.logger.errorLogEntry("Util, Cannot convert the date to String (date=" + date + "), exepted : " + simpleDateFormat.toPattern());
+				AppEnv.logger.errorLogEntry("Util, Cannot convert the date to String (date=" + date + "), exepted : " + dateFormat.toPattern());
 				return null;
 			}
 		} else {
@@ -213,7 +222,7 @@ public class Util {
 						Object val = method.invoke(clazz, noparams);
 						if (val != null) {
 							if (val instanceof Date) {
-								methodValue = Util.simpleDateFormat.format((Date) val);
+								methodValue = Util.dateFormat.format((Date) val);
 							} else if (val.getClass().isInstance(AppEntity.class)) {
 								methodValue = val.getClass().getCanonicalName();
 							} else {

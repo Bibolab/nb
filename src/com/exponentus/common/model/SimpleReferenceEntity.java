@@ -55,7 +55,7 @@ public class SimpleReferenceEntity extends AppEntity<UUID> {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.simpleDateFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + Util.dateFormat.format(regDate) + "</regdate>");
 		chunk.append("<name>" + getName() + "</name>");
 		chunk.append("<localizednames>");
 		LanguageDAO lDao = new LanguageDAO(ses);

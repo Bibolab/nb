@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.http.HttpStatus;
 
+import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
@@ -219,7 +220,7 @@ public class PageOutcome {
 
 		ObjectMapper mapper = new ObjectMapper();
 		// ObjectMapper mapper = new ObjectMapperProvider().getContext();
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat df = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
 		mapper.setDateFormat(df);
 		// mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);

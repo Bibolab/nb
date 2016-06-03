@@ -52,7 +52,7 @@ public class UploadFile extends HttpServlet {
 		HttpSession jses = req.getSession(false);
 		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 		FileItem fileItem = null;
-		String fn = "", fieldName = "";
+		String fn = "", fieldName = "", sign = "";
 
 		String time = req.getParameter(EnvConst.TIME_FIELD_NAME);
 		File userTmpDir = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID());
@@ -83,6 +83,8 @@ public class UploadFile extends HttpServlet {
 						fileItem = item;
 					} else if (formFieldNameField.equalsIgnoreCase("fieldname")) {
 						fieldName = item.getString();
+					} else if (formFieldNameField.equalsIgnoreCase("sign")) {
+						sign = item.getString();
 					}
 
 				} else {
@@ -111,7 +113,11 @@ public class UploadFile extends HttpServlet {
 
 		if (fileItem != null) {
 			_FormAttachments attachs = ses.getAttachments(fileItem.getString());
-			attachs.addFile(fn, fieldName);
+			if (sign != null && !sign.isEmpty()) {
+				attachs.addFileWithSign(fn, fieldName, sign);
+			} else {
+				attachs.addFile(fn, fieldName);
+			}
 			resp.setContentType(ContentType.APPLICATION_JSON.toString());
 			PrintWriter out = resp.getWriter();
 			out.println(sb.toString());

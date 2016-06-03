@@ -17,6 +17,14 @@ public class _FormAttachments {
 		attachments.put(fieldName + "_" + fileName, a);
 	}
 
+	public void addFileWithSign(String fileName, String fieldName, String sign) {
+		Attachment a = new Attachment();
+		a.setRealFileName(fileName);
+		a.setFieldName(fieldName);
+		a.setSign(sign);
+		attachments.put(fieldName + "_" + fileName, a);
+	}
+
 	public List<Attachment> getFiles() {
 		return new ArrayList<Attachment>(attachments.values());
 	}

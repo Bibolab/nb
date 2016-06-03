@@ -76,10 +76,20 @@
 .eds section select,
 .eds section input,
 .eds section label,
-.eds section button {
+.eds section button,
+.eds .eds-file-name {
     margin: .4em 0 0;
+}
+
+.eds section .btn {
+    display: inline-block;
 }
 
 .eds [name=keyType] {
     display: none;
+}
+
+.eds .eds-file-name {
+    display: inline-block;
+    padding: 8px 12px;
 }

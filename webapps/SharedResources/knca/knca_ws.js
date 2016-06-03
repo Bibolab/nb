@@ -22,7 +22,6 @@ var knca = (function() {
     var ws,
         pingInterval = null,
         heartbitMSG = '--heartbeat--',
-        ncaSendPromise,
         callback;
 
     function init() {
@@ -30,6 +29,10 @@ var knca = (function() {
             return initPromise;
         }
 
+        noty = nb.notify({
+            message: nb.getText('ncalayer_init', 'Инициализация программы подписи')
+        }).show();
+        nb.uiBlock();
         initPromise = initPromise || $.Deferred();
         initWSConnection();
         log('init');
@@ -84,11 +87,20 @@ var knca = (function() {
 
         ws.onerror = function() {
             log('ws > onerror');
-            nb.notify({
-                type: 'error',
-                message: nb.getText('ncalayer_unavailable', 'Не возможно работать с NCALayer, перезагрузите программу!')
-            }).show(5000);
+            nb.uiUnblock();
+            noty && noty.remove();
+            noty = null;
             initPromise.reject('ncalayer_unavailable');
+            var dlg = nb.dialog.warn({
+                title: nb.getText('ncalayer_connect_error', 'Ошибка подключения к NCALayer'),
+                message: '<p>Убедитесь что программа запущена.</p><a href="http://pki.gov.kz/index.php/ru/ncalayer" target="blank">Инструкция по установке</a>',
+                height: 200,
+                buttons: {
+                    Ok: function() {
+                        dlg.dialog('close');
+                    }
+                }
+            });
         };
 
         ws.onopen = function() {
@@ -218,7 +230,8 @@ var knca = (function() {
             htm.push('  </select>');
             htm.push('  <input type="radio" value="SIGN" name="keyType" checked="checked"/>');
             htm.push('  <button class="btn" name="chooseStorage" type="button">Выбрать ЭЦП</button>');
-            htm.push('  <input type="password" name="pwd" placeholder="Password" required style="display:none"/>');
+            htm.push('  <div class="eds-file-name"></div>');
+            htm.push('  <input type="password" placeholder="' + nb.getText('password', 'Пароль') + '" style="display:none"/>');
             htm.push('  <select name="keys" class="native" style="display:none"></select>');
             htm.push('</section>');
             htm.push('<footer>');
@@ -229,8 +242,13 @@ var knca = (function() {
             edsNode = wd.createElement('form');
             edsNode.id = 'eds-property';
             edsNode.className = 'eds';
+            edsNode.autocomplete = 'off';
             edsNode.innerHTML = htm.join('');
             wd.body.appendChild(edsNode);
+
+            setTimeout(function() {
+                edsNode.reset();
+            }, 100);
             //
             var overlay = wd.createElement('div');
             overlay.className = 'eds-overlay';
@@ -242,7 +260,7 @@ var knca = (function() {
             $(edsNode).find('[name=chooseStorage]').on('click', function() {
                 browseKeyStore();
             });
-            $(edsNode).find('[name=pwd]').on('keyup blur', function() {
+            $(edsNode).find('[type=password]').val('').on('keyup blur', function() {
                 var el = this;
                 storage.pwd = this.value;
 
@@ -256,6 +274,7 @@ var knca = (function() {
                     } catch (e) {
                         el.classList.add('invalid');
                         storage.pwd = '';
+                        el.value = '';
                     }
                     render();
                 }, 260);
@@ -279,6 +298,12 @@ var knca = (function() {
             });
         }
 
+        // eds-file-name
+        $('.eds-file-name', edsNode).each(function() {
+            var fp = storage.path.replace(/\\/g, '/').split('/');
+            $(this).html(fp[fp.length - 1]);
+        });
+
         // ['RSA'|name|?|alias]
         var keysEl = $(edsNode).find('[name=keys]');
         if (storage.keys && storage.keys.length) {
@@ -301,7 +326,7 @@ var knca = (function() {
         // show/hide
         $(edsNode).find('[name=ok]').attr('disabled', !isValidStorage());
         if (storage.path && !storage.pwd) {
-            $(edsNode).find('[name=pwd]').show();
+            $(edsNode).find('[type=password]').show();
         }
 
         log('render');
@@ -309,9 +334,9 @@ var knca = (function() {
 
     function showPropertyModal(action) {
         if (action === 'sign') {
-            $(wd.getElementById('eds-property')).find('[name=ok]').text(nb.getText('sign', 'Подписать'));
+            $('#eds-property').find('[name=ok]').text(nb.getText('sign', 'Подписать'));
         } else if (action === 'verify') {
-            $(wd.getElementById('eds-property')).find('[name=ok]').text(nb.getText('verify_sign', 'Проверить'));
+            $('#eds-property').find('[name=ok]').text(nb.getText('verify_sign', 'Проверить'));
         }
         wd.getElementById('eds-property').classList.add('open');
     }

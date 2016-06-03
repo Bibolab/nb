@@ -17,7 +17,7 @@ public class Attachment extends AppEntity<UUID> {
     protected String form = "attachment";
     protected Long author = AnonymousUser.ID;
     @Transient
-    private String sign;
+    private String sign = "";
 
     @JsonIgnore
     @Lob

@@ -52,6 +52,11 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 		}
 	}
 
+	public void resetReaderEditor() {
+		editors.clear();
+		readers.clear();
+	}
+
 	@Override
 	public void setAuthor(IUser<Long> user) {
 		author = user.getId();

@@ -345,7 +345,7 @@ var knca = (function() {
             edsNode.id = 'eds-property';
             edsNode.className = 'eds';
             edsNode.innerHTML = htm.join('');
-            wd.getElementsByTagName('body')[0].appendChild(edsNode);
+            wd.body.appendChild(edsNode);
             //
             var overlay = wd.createElement('div');
             overlay.className = 'eds-overlay';

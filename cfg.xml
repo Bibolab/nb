@@ -14,13 +14,13 @@ Example configuration where several runtime aspects of NB are defined.
     </applications>
     <langs>
     	<!-- https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes  -->
+    	<entry>ENG</entry>
+    	<entry>SPA</entry>
 		<entry>RUS</entry>
-		<entry>KAZ</entry>
-		<entry>ENG</entry>
+		<entry>DEU</entry>
 	</langs>
     <mailagent mode="ON">
     	<smtphost>smtp.mail.ru</smtphost>
-		<defaultsender>mynameis.m@mail.ru</defaultsender>
 		<auth>true</auth>
 		<smtpport>465</smtpport>
 		<smtpuser>mynameis.m@mail.ru</smtpuser>

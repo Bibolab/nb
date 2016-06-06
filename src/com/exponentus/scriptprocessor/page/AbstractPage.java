@@ -18,6 +18,7 @@ import com.exponentus.common.model.ReadingMark;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.DAO;
 import com.exponentus.dataengine.jpa.IAppEntity;
+import com.exponentus.dataengine.jpa.SecureAppEntity;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
@@ -208,6 +209,10 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	protected void setBadRequest() {
 		result.setBadRequest();
+	}
+
+	protected IPOJOObject getACL(_Session ses, SecureAppEntity<UUID> entity) {
+		return entity.getACL(ses);
 	}
 
 	protected _ActionBar getSimpleActionBar(_Session session, String type, LanguageCode lang) {

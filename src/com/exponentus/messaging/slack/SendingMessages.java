@@ -1,7 +1,7 @@
-package com.exponentus.im.slack;
+package com.exponentus.messaging.slack;
 
-import com.exponentus.im.slack.SlackPreparedMessage;
-import com.exponentus.im.slack.SlackPreparedMessage;
+import java.io.IOException;
+
 import com.ullink.slack.simpleslackapi.SlackAttachment;
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
@@ -22,7 +22,7 @@ public class SendingMessages {
 	public void sendMessageToAChannel(SlackSession session) {
 
 		// get a channel
-		SlackChannel channel = session.findChannelByName("achannel");
+		SlackChannel channel = session.findChannelByName("poema-bot");
 
 		session.sendMessage(channel, "Hey there");
 	}
@@ -93,5 +93,16 @@ public class SendingMessages {
 
 		// session.sendMessage(channel, preparedMessage);
 		session.sendMessage(channel, "preparedMessage");
+	}
+
+	public static void main(String[] args) {
+		SlackConnection conn = new SlackConnection();
+		SendingMessages msg = new SendingMessages();
+		try {
+			msg.sendMessageToAChannel(conn.getConnection(null));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

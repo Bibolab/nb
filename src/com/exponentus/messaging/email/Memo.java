@@ -1,4 +1,4 @@
-package com.exponentus.scripting.mail;
+package com.exponentus.messaging.email;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -19,6 +19,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.env.Environment;
 import com.exponentus.server.Server;
 
@@ -32,16 +33,18 @@ public class Memo {
 	private boolean smtpAuth = Environment.smtpAuth;
 	private boolean isValid;
 	private boolean hasRecipients;
+	private IAppEntity entity;
 
-	public Memo(String sender, List<String> recipients, String subj, String body) {
-		_Memo(sender, null, recipients, subj, body);
+	public Memo(List<String> recipients, String subj, String body, IAppEntity entity) {
+		Memo(Environment.orgName, recipients, subj, body, entity);
 	}
 
-	public Memo(String sender, String personal, List<String> recipients, String subj, String body) {
-		_Memo(sender, personal, recipients, subj, body);
+	public Memo(String personal, List<String> recipients, String subj, String body, IAppEntity entity) {
+		Memo(personal, recipients, subj, body, entity);
 	}
 
-	private void _Memo(String sender, String personal, List<String> recipients, String subj, String body) {
+	private void Memo(String personal, List<String> recipients, String subj, String body, IAppEntity entity) {
+
 		if (Environment.mailEnable) {
 			Properties props = new Properties();
 			props.put("mail.smtp.host", smtpServer);
@@ -60,12 +63,13 @@ public class Memo {
 
 			msg = new MimeMessage(ses);
 			hasRecipients = false;
+			this.entity = entity;
 
 			try {
 				if (personal == null) {
-					msg.setFrom(new InternetAddress(sender));
+					msg.setFrom(new InternetAddress(smtpUser));
 				} else {
-					msg.setFrom(new InternetAddress(sender, personal));
+					msg.setFrom(new InternetAddress(smtpUser, personal));
 				}
 
 				for (String recipient : recipients) {
@@ -73,7 +77,7 @@ public class Memo {
 						msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 						hasRecipients = true;
 					} catch (AddressException ae) {
-						Server.logger.errorLogEntry("incorrect e-mail \"" + recipient + "\"");
+						Server.logger.warningLogEntry("incorrect e-mail \"" + recipient + "\"");
 						continue;
 					}
 				}

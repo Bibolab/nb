@@ -1,4 +1,4 @@
-package com.exponentus.im.slack.replies;
+package com.exponentus.messaging.slack.replies;
 
 import java.util.Map;
 

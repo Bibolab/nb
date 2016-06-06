@@ -1,11 +1,9 @@
-package com.exponentus.im.slack;
+package com.exponentus.messaging.slack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.exponentus.im.slack.SlackPreparedMessage;
-import com.exponentus.im.slack.SlackPreparedMessage;
 import com.ullink.slack.simpleslackapi.SlackAttachment;
 
 public class SlackPreparedMessage {

@@ -10,7 +10,7 @@ public class SessionPool {
 	private static HashMap<String, _Session> userSessions = new HashMap<String, _Session>();
 
 	public static String put(_Session us) {
-		String token = Util.generateRandomAsText("!$'*-._~qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(15, 20));
+		String token = Util.generateRandomAsText("!'*-._~qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(15, 20));
 		// int key =
 		// Base64.encodeBase64String(us.getUser().getUserID().getBytes(Charset.forName("UTF-8"))).hashCode();
 		userSessions.put(token, us);

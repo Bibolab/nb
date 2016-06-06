@@ -9,6 +9,7 @@ import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._ExceptionType;
 import com.exponentus.scripting._Session;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class _ActionBar implements IOutcomeObject {
 	public RunMode isOn = RunMode.ON;
@@ -16,6 +17,7 @@ public class _ActionBar implements IOutcomeObject {
 	public String hint = "";
 
 	private ArrayList<_Action> actions = new ArrayList<_Action>();
+	@JsonIgnore
 	private _Session session;
 
 	public _ActionBar() throws _Exception {

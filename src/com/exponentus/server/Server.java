@@ -82,9 +82,7 @@ public class Server {
 		logger.infoLogEntry("server is stopping ... ");
 
 		Environment.shutdown();
-		if (webServerInst != null) {
-			webServerInst.stopContainer();
-		}
+
 		logger.infoLogEntry("bye, bye... ");
 		System.exit(0);
 	}

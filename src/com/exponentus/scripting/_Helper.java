@@ -91,10 +91,6 @@ public class _Helper {
 		return Util.generateRandomAsText("QWERTYUIOPASDFGHJKLMNBVCXZ1234567890");
 	}
 
-	public static String removeHTMLTags(String content) {
-		return Util.removeHTMLTags(content);
-	}
-
 	public static int countMaxPage(int colCount, int pageSize) {
 		float mp = (float) colCount / (float) pageSize;
 		float d = Math.round(mp);

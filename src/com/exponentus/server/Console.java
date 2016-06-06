@@ -87,11 +87,11 @@ public class Console implements Runnable {
 			if (Environment.isDevMode()) {
 				System.out.printf(format, "developer mode is", "ON");
 				System.out.printf(format, "external server core folder", Environment.getKernelDir());
-				System.out.printf(format, "external Officeframe folder", Environment.getOfficeFrameDir());
+				System.out.printf(format, "external " + EnvConst.OFFICEFRAME + " folder", Environment.getOfficeFrameDir());
 			} else {
 				System.out.printf(format, "developer mode is", "OFF");
 			}
-			System.out.printf(format, "count of the temporary files wich waiting for deleting", Environment.fileToDelete.size());
+			System.out.printf(format, "temporary files", Environment.fileToDelete.size());
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {
 			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
 			List<String[]> info = Environment.adminApplication.getDataBase().getCountsOfRec();

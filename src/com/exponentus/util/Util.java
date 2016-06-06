@@ -5,15 +5,12 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,13 +31,6 @@ public class Util {
 	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat(EnvConst.DEFAULT_TIME_FORMAT);
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATE_FORMAT);
-
-	public static final Pattern pEntity = Pattern.compile("\\G&(#\\d+|\\w+);");// Pattern.compile("\\G&(#\\d+|\\w+);");
-	public static final Pattern pTag = Pattern.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
-	public static final Pattern pAtEnd = Pattern.compile("\\G\\z");
-	public static final Pattern pWord = Pattern.compile("\\G(\\w|\\pL)+");
-	public static final Pattern pNonHtml = Pattern.compile("\\G([^(\\w|\\p{L})]|\\p{Ps}|\\p{Pe}|\\p{Pi}|\\p{Pf}|\\p{P}|\\p{S})+");
-	public static final int dayInMs = 1000 * 60 * 60 * 24;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static HashMap cloneMap(HashMap sourceMap) {
@@ -265,36 +255,6 @@ public class Util {
 		return fn;
 	}
 
-	private static byte[] getDigestFromFile(String filePath) {
-		byte[] result;
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA");
-			File file = new File(filePath);
-			InputStream is = new FileInputStream(file);
-			byte[] b = new byte[1048576];
-			int len = 0;
-			while ((len = is.read(b)) > 0) {
-				md.update(b, 0, len);
-			}
-			is.close();
-			result = md.digest();
-		} catch (FileNotFoundException e) {
-			AppEnv.logger.errorLogEntry("Util, не удалось получить контрольную сумму файла " + filePath + ": файл не найден");
-			return null;
-		} catch (NoSuchAlgorithmException e) {
-			AppEnv.logger.errorLogEntry("Util, не удалось инициализировать алгоритм шифрования");
-			return null;
-		} catch (IOException e) {
-			AppEnv.logger.errorLogEntry("Util, не удалось произвести чтение файла " + filePath);
-			return null;
-		}
-		return result;
-	}
-
-	public static boolean compareFile(String filePath1, String filePath2) {
-		return MessageDigest.isEqual(getDigestFromFile(filePath1), getDigestFromFile(filePath2));
-	}
-
 	public static File getExistFile(String fn, String tmpFolder) {
 		int folderNum = 1;
 		File file = null;
@@ -319,55 +279,6 @@ public class Util {
 			// AppEnv.logger.errorLogEntry(e);
 			return "";
 		}
-	}
-
-	public static void main(String[] args) {
-		System.out.println(removeHTMLTags(
-		        "<p1><p></p1>I-4979: Берг П. П. -> (Берг П. П.)<p><p> <p>Допереводить непереведенные слова(в файле dict.xml, слова которые с приставкой kaz, файл во вложении)<br></p>")
-		                .length());
-		System.out.println(removeHTMLTags(
-		        "I-4979: Берг П. П. -> (Берг П. П.) <p>Допереводить непереведенные слова(в файле dict.xml, слова которые с приставкой kaz, файл во вложении)<br></p>"));
-	}
-
-	public static String removeHTMLTags(String text) {
-		// Pattern pImgTag = Pattern.compile("\\G(?i)<img\\s+([^>]+)>");
-		// Pattern pLink = Pattern.compile("\\G(?i)<A\\s+([^>]+)>");
-		// Pattern pLinkX = Pattern.compile("\\G(?i)</A>");
-		if (text == null) {
-			return "";
-		}
-		Matcher m = pTag.matcher(text);
-		while (!m.usePattern(pAtEnd).find()) {
-			if (m.usePattern(pWord).find()) {
-			} else if (m.usePattern(pTag).find()) {
-				text = text.replaceAll("<br>", " ").replaceAll("<[^>]+>", "");
-			} else if (m.usePattern(pEntity).find()) {
-				if (m.group().equals("&quot;")) {
-					text = text.replaceAll(m.group(), "\"");
-				} else if (m.group().equals("&amp;")) {
-					text = text.replaceAll(m.group(), "&");
-				} else if (m.group().equals("&nbsp;")) {
-					text = text.replaceAll(m.group(), " ");
-				} else if (m.group().equals("&laquo;")) {
-					text = text.replaceAll(m.group(), "«");
-				} else if (m.group().equals("&raquo;")) {
-					text = text.replaceAll(m.group(), "»");
-				} else if (m.group().equals("&lt;")) {
-					text = text.replaceAll(m.group(), "<");
-				} else if (m.group().equals("&gt;")) {
-					text = text.replaceAll(m.group(), ">");
-				} else {
-					text = text.replaceAll(m.group(), "");
-				}
-			} else if (m.usePattern(pNonHtml).find()) {
-			} else {
-				if (m.usePattern(Pattern.compile("\\G(?s).{1,12}")).find()) {
-					AppEnv.logger.errorLogEntry("Bad char before '" + m.group() + "'");
-				}
-				return text.trim();
-			}
-		}
-		return text.trim();
 	}
 
 	public static double convertBytesToKilobytes(long a) {

@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import com.exponentus.util.Util;
-
 public class RuntimeObjUtil {
 	private static final int v = 60 * 60 * 1000;
 	private static final float PRIORITY_FACTOR = 2f;
@@ -109,13 +107,6 @@ public class RuntimeObjUtil {
 			}
 		}
 		return workDayCount;
-	}
-
-	public static String cutHTMLText(String text, int length) {
-		String result = Util.removeHTMLTags(text);
-		result = cutText(result, length);
-		return result;
-
 	}
 
 	public static String cutText(String text, int length) {

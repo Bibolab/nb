@@ -184,15 +184,6 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		result.addObject(new _POJOObjectWrapper(document, getSes()));
 	}
 
-	/**
-	 * use kz.flabs.scriptprocessor.page.doscript.AbstractPage.addContent(
-	 * IPOJOObject) instead of the method
-	 **/
-	@Deprecated
-	protected void addContent(_POJOObjectWrapper _POJOObjectWrapper) {
-		result.addContent(_POJOObjectWrapper);
-	}
-
 	// @Deprecated
 	protected void addContent(_POJOListWrapper<IPOJOObject> list) {
 		result.addContent(list);

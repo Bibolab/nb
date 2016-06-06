@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -38,6 +40,7 @@ import com.exponentus.dataengine.IDatabase;
 import com.exponentus.dataengine.IDatabaseDeployer;
 import com.exponentus.dataengine.jpadatabase.Database;
 import com.exponentus.dataengine.jpadatabase.DatabaseDeployer;
+import com.exponentus.dataengine.system.IExtUserDAO;
 import com.exponentus.exception.RuleException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Localizator;
@@ -50,6 +53,7 @@ import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.PageOutcome;
 import com.exponentus.server.Server;
+import com.exponentus.user.AnonymousUser;
 import com.exponentus.util.NumberUtil;
 import com.exponentus.util.Util;
 import com.exponentus.util.XMLUtil;
@@ -99,6 +103,8 @@ public class Environment implements ICache {
 	private static String officeFrameDir = "";
 	private static String kernelDir = "";
 
+	private static IExtUserDAO eDao;
+
 	public static void init() {
 		startTime = new Date();
 		loadProperties();
@@ -113,6 +119,8 @@ public class Environment implements ICache {
 			Server.logger.errorLogEntry(e);
 			Server.shutdown();
 		}
+		eDao = initExtUserDAO();
+		Server.logger.debugLogEntry("initialize extended users support (" + eDao.getClass().getSimpleName() + ")");
 	}
 
 	private static void initProcess() {
@@ -383,6 +391,10 @@ public class Environment implements ICache {
 		// if (XMPPServerEnable) Environment.connection.disconnect();
 	}
 
+	public static IExtUserDAO getExtUserDAO() {
+		return eDao;
+	}
+
 	private static void loadProperties() {
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -408,6 +420,23 @@ public class Environment implements ICache {
 
 		}
 
+	}
+
+	private static IExtUserDAO initExtUserDAO() {
+		try {
+			Class<?> clazz = Class.forName(EnvConst.STAFF_DAO_CLASS);
+			@SuppressWarnings("rawtypes")
+			Class[] args = new Class[] { _Session.class };
+			Constructor<?> contructor = clazz.getConstructor(args);
+			_Session ses = new _Session(adminApplication, new AnonymousUser());
+			return (IExtUserDAO) contructor.newInstance(new Object[] { ses });
+		} catch (ClassNotFoundException e) {
+			Server.logger.warningLogEntry("extended user's support DAO has not been initialized (" + EnvConst.STAFF_DAO_CLASS + ")");
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+		        | SecurityException e) {
+			Server.logger.errorLogEntry(e);
+		}
+		return null;
 	}
 
 	@Override

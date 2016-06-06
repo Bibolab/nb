@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.system.IEmployee;
-import com.exponentus.dataengine.system.IEmployeeDAO;
+import com.exponentus.dataengine.system.IExtUserDAO;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.scripting._Session;
@@ -39,13 +39,13 @@ public class Connect {
 			}
 
 			if (user.isAuthorized()) {
-				IEmployeeDAO eDao = null;
+				IExtUserDAO eDao = null;
 				try {
 					Class<?> clazz = Class.forName(EnvConst.STAFF_DAO_CLASS);
 					Class[] args = new Class[] { _Session.class };
 					Constructor<?> contructor = clazz.getConstructor(args);
 					_Session ses = new _Session(env, new AnonymousUser());
-					eDao = (IEmployeeDAO) contructor.newInstance(new Object[] { ses });
+					eDao = (IExtUserDAO) contructor.newInstance(new Object[] { ses });
 					if (user.getId() != SuperUser.ID) {
 						IEmployee emp = eDao.getEmployee(user.getId());
 						if (emp != null) {

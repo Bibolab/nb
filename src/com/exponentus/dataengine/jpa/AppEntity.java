@@ -189,6 +189,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		return getFullXMLChunk(ses);
 	}
 
+	@JsonIgnore
 	@Override
 	public Object getJSONObj(_Session ses) {
 		return this;

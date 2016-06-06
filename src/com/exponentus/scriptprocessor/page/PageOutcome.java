@@ -1,8 +1,6 @@
 package com.exponentus.scriptprocessor.page;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +8,6 @@ import java.util.Map;
 
 import org.apache.http.HttpStatus;
 
-import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
@@ -219,23 +216,17 @@ public class PageOutcome {
 		clazz.setValidation(validation);
 
 		ObjectMapper mapper = new ObjectMapper();
-		// ObjectMapper mapper = new ObjectMapperProvider().getContext();
-		DateFormat df = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
-		mapper.setDateFormat(df);
-		// mapper.enable(SerializationFeature.INDENT_OUTPUT);
+		// SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
+		// mapper.setDateFormat(df);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-		// SimpleModule customSerializerModule = new SimpleModule();
-		// customSerializerModule.addSerializer(_POJOListWrapper.class, new
-		// POJOObjectSerializer());
-		// mapper.registerModule(customSerializerModule);
+
 		String jsonInString = null;
 		try {
 			jsonInString = mapper.writeValueAsString(clazz);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		// System.out.println(jsonInString);
 		return jsonInString;
 	}
 

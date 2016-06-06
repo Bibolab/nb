@@ -1,5 +1,5 @@
 package com.exponentus.dataengine.system;
 
-public interface IEmployeeDAO {
+public interface IExtUserDAO {
 	IEmployee getEmployee(long id);
 }

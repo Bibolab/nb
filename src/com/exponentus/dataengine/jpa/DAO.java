@@ -53,6 +53,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findById(K id) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
@@ -69,10 +70,9 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 				condition = cb.and(c.get("readers").in(user.getId()), condition);
 				isSecureEntity = true;
 			}
-			@SuppressWarnings("unchecked")
 			T entity = (T) query.getSingleResult();
 			if (isSecureEntity) {
-				if (!((SecureAppEntity) entity).getEditors().contains(user.getId())) {
+				if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
 					entity.setEditable(false);
 				}
 			}
@@ -138,13 +138,14 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T update(T entity) throws SecureException {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 
 		try {
 			if (user.getId() != SuperUser.ID && SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
-				if (!((SecureAppEntity) entity).getEditors().contains(user.getId())) {
+				if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
 					throw new SecureException(ses.getAppEnv().appName, "editing_is_restricted", ses.getLang());
 				}
 			}
@@ -165,6 +166,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void delete(T entity) throws SecureException {
 		EntityManager em = getEntityManagerFactory().createEntityManager();

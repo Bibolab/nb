@@ -25,6 +25,84 @@ $(function() {
         nb.submitForm(nb.getForm(this));
     });
 
+    $('[data-action=test_message_xmpp], [data-action=test_message_slack]').click(function(event) {
+        event.preventDefault();
+        var msgtype = $(this).data("msgtype");
+        var addr = $("input[name="+ msgtype +"]").val();
+        $.ajax({
+            url: 'Provider?id=send-test-msg&type='+ msgtype +'&addr='+ addr,
+            type: 'GET',
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function(result) {
+                alert(result.type)
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            complete: function() {
+
+            }
+        });
+    });
+
+
+    function uploadUpdate(fileInput, fsid) {
+        var formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('fsid', fsid);
+        formData.append('fieldname', fileInput.name);
+        var time = new Date().getTime();
+
+        return $.ajax({
+            url: 'UploadFile?time=' + time,
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            dataType: 'json',
+            xhr: function() {
+                var customXhr = $.ajaxSettings.xhr();
+                if (customXhr.upload) {
+                    customXhr.upload.addEventListener('progress', onProgress, false);
+                }
+                return customXhr;
+            },
+            success: function(result) {
+                var fileName = result.files[0];
+                if (fileInput.name == 'uporder') {
+                    $(".update-order").text(fileName);
+                } else {
+                    //renderFilePanel(fileName, fsid);
+                    //clearLocalStorage();
+                    //$("#btn-update-file-excel").addClass("disabled");
+                }
+                return result;
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            complete: function() {
+                $('progress').attr({
+                    value: 0,
+                    max: 100
+                });
+                fileInput.form.reset();
+                insertParam('fsid', fsid);
+                if (fileInput.name != 'uporder') {
+                    insertParam('step', 1);
+                    insertParam('uploadtype', $("input[name=uploadtype]:checked").val());
+                    reloadPage();
+                }
+            }
+        });
+    }
+
+
+
     $('[data-action=delete_document]').click(function(event) {
         event.preventDefault();
 

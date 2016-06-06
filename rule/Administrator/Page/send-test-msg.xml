@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rule  mode="on" >
+    <description/>
+    <caching>NO_CACHING</caching>
+    <xsltfile>DEFAULT</xsltfile>
+    <element mode="ON" type="SCRIPT">
+        <events>
+            <doscript source="JAVA_CLASS">administrator.page.action.SendTestMsg</doscript>
+        </events>
+    </element>
+</rule>

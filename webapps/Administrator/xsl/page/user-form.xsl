@@ -40,6 +40,32 @@
                     </div>
                     <div class="form-group">
                         <div class="control-label">
+                           XMPP
+                        </div>
+                        <div class="controls">
+                            <input type="text" name="xmpp" value="{fields/xmpp}" class="span4"/>
+                            <a class="btn action_test_xmpp" title="send test xmpp message" href="#" data-msgtype="xmpp" data-action="test_message_xmpp">
+                                <span>
+                                    Test
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label">
+                           Slack
+                        </div>
+                        <div class="controls">
+                            <input type="text" name="slack" value="{fields/slack}" class="span4"/>
+                            <a class="btn action_test_slack" title="send test slack message" href="#" data-msgtype="slack" data-action="test_message_slack">
+                                <span>
+                                    Test
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label">
                            Password
                         </div>
                         <div class="controls">

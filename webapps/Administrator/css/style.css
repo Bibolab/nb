@@ -91,3 +91,7 @@ a.btn-sign-up {
     margin-top: 16px;
     text-align: center;
 }
+
+.action_test_slack, .action_test_xmpp{
+    margin: 0 1px 0 1px;
+}

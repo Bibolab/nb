@@ -13,17 +13,14 @@ public class SuperUser extends SystemUser {
 	public static String USER_NAME = "supervisor";
 	public final static long ID = -1;
 
-	public SuperUser(String login) {
-		USER_NAME = login;
-	}
-
-	public SuperUser() {
-
-	}
-
 	@Override
 	public String getUserID() {
 		return USER_NAME;
+	}
+
+	@Override
+	public void setUserName(String name) {
+		USER_NAME = name;
 	}
 
 	@Override

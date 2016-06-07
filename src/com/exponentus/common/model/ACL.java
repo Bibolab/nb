@@ -24,6 +24,9 @@ public class ACL implements IPOJOObject {
 	public Map<Long, Object> editors = new HashMap<>();
 
 	@JsonIgnore
+	private IExtUserDAO eDao = Environment.getExtUserDAO();
+
+	@JsonIgnore
 	private UUID id;
 
 	@JsonIgnore
@@ -34,30 +37,16 @@ public class ACL implements IPOJOObject {
 		this.ses = ses;
 		SecureAppEntity<UUID> entity = (SecureAppEntity<UUID>) e;
 		id = e.getId();
-		IExtUserDAO eDao = Environment.getExtUserDAO();
+
 		Iterator<Long> it = entity.getReaders().iterator();
 		while (it.hasNext()) {
 			long id = it.next();
-			if (id > 0) {
-				IEmployee emp = eDao.getEmployee(id);
-				readers.put(emp.getUserID(), emp.getName());
-			} else if (id == 0) {
-				readers.put(id, AnonymousUser.USER_NAME);
-			} else if (id == -1) {
-				readers.put(id, SuperUser.USER_NAME);
-			}
+			readers.put(id, getUserName(id));
 		}
 		it = entity.getEditors().iterator();
 		while (it.hasNext()) {
 			long id = it.next();
-			if (id > 0) {
-				IEmployee emp = eDao.getEmployee(id);
-				editors.put(emp.getUserID(), emp.getName());
-			} else if (id == 0) {
-				editors.put(id, AnonymousUser.USER_NAME);
-			} else if (id == -1) {
-				editors.put(id, SuperUser.USER_NAME);
-			}
+			editors.put(id, getUserName(id));
 		}
 	}
 
@@ -128,4 +117,15 @@ public class ACL implements IPOJOObject {
 		return false;
 	}
 
+	private String getUserName(long id) {
+		if (id > 0) {
+			IEmployee emp = eDao.getEmployee(id);
+			return emp.getName();
+		} else if (id == 0) {
+			return AnonymousUser.USER_NAME;
+		} else if (id == -1) {
+			return SuperUser.USER_NAME;
+		}
+		return null;
+	}
 }

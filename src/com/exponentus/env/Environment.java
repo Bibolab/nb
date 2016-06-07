@@ -413,7 +413,7 @@ public class Environment implements ICache {
 	private static void loadProperties() {
 		Properties prop = new Properties();
 		InputStream input = null;
-		EnvConst.AUTH_COOKIE_NAME = Util.generateRandomAsText("!$'*-._~qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(10, 20));
+		EnvConst.AUTH_COOKIE_NAME = Util.generateRandomAsText("!'*-._qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(10, 20));
 		try {
 
 			input = new FileInputStream("resources" + File.separator + "config.properties");

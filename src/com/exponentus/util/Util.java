@@ -63,7 +63,7 @@ public class Util {
 		try {
 			return timeFormat.format(date);
 		} catch (Exception e) {
-			AppEnv.logger.errorLogEntry("Util, Не удалось преобразовать время в текст " + date);
+			AppEnv.logger.errorLogEntry("Util, Unable to convert date to text  " + date);
 			// AppEnv.logger.errorLogEntry(e);
 			return "null";
 		}
@@ -73,7 +73,7 @@ public class Util {
 		try {
 			return dateTimeFormat.parse(date);
 		} catch (Exception e) {
-			AppEnv.logger.errorLogEntry("Util, Unbale to convert text to date " + date + ", expected format: " + dateTimeFormat.toPattern());
+			AppEnv.logger.errorLogEntry("Util, Unable to convert text to date " + date + ", expected format: " + dateTimeFormat.toPattern());
 			return null;
 		}
 	}
@@ -90,7 +90,7 @@ public class Util {
 		try {
 			return dateFormat.format(date.getTime());
 		} catch (Exception e) {
-			AppEnv.logger.errorLogEntry("Util, Не удалось преобразовать дату в текст " + date);
+			AppEnv.logger.errorLogEntry("Util, Unable to convert date to text " + date);
 			// AppEnv.logger.errorLogEntry(e);
 			return "err date";
 		}
@@ -105,7 +105,7 @@ public class Util {
 		try {
 			return dateFormat.parse(date);
 		} catch (Exception e) {
-			AppEnv.logger.errorLogEntry("Util, Не удалось преобразовать текст в дату " + date + ", ожидался формат: " + dateFormat.toPattern());
+			AppEnv.logger.errorLogEntry("Util, Unable to convert text to date " + date + ", exepted: " + dateFormat.toPattern());
 			// AppEnv.logger.errorLogEntry(e);
 			return null;
 		}
@@ -274,7 +274,7 @@ public class Util {
 			return dateTimeFormat.format(date.getTime());
 		} catch (Exception e) {
 			if (date != null) {
-				AppEnv.logger.errorLogEntry("Util, Не удалось преобразовать время в текст " + date);
+				AppEnv.logger.errorLogEntry("Util, Cannot convert the time to String " + date);
 			}
 			// AppEnv.logger.errorLogEntry(e);
 			return "";

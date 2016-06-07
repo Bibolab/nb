@@ -10,7 +10,7 @@ import administrator.model.Application;
  */
 
 public class SuperUser extends SystemUser {
-	public String USER_NAME = "supervisor";
+	public static String USER_NAME = "supervisor";
 	public final static long ID = -1;
 
 	public SuperUser(String login) {

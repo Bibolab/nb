@@ -1,5 +1,6 @@
 package com.exponentus.messaging.email;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -7,6 +8,10 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.RunnableFuture;
 
 import com.exponentus.dataengine.jpa.IAppEntity;
+import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
+import com.exponentus.localization.Vocabulary;
+import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.server.Server;
 
 public class MailAgent {
@@ -30,6 +35,17 @@ public class MailAgent {
 			Server.logger.errorLogEntry(e);
 			return false;
 		}
+	}
+
+	public static void main(String[] args) {
+		Server.logger = new JavaConsoleLogger();
+		EnvConst.DATABASE_NAME = "poema";
+		Environment.vocabulary = new Vocabulary("test");
+		Environment.init();
+		MailAgent ma = new MailAgent();
+		List<String> r = new ArrayList<String>();
+		r.add("11111@gmail.com");
+		ma.sendMail(r, "subject", " body");
 	}
 
 }

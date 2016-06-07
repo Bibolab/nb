@@ -83,12 +83,16 @@ public class Environment implements ICache {
 
 	public static List<LanguageCode> langs = new ArrayList<LanguageCode>();
 
+	public static Boolean mailEnable = false;
 	public static String smtpPort;
 	public static boolean smtpAuth;
 	public static String SMTPHost;
 	public static String smtpUser;
 	public static String smtpPassword;
-	public static Boolean mailEnable = false;
+
+	public static Boolean slackEnable = false;
+	public static String slackToken;
+
 	public static Vocabulary vocabulary;
 	public static String workspaceName = "Workspace";
 	public static PeriodicalServices periodicalServices;
@@ -226,14 +230,14 @@ public class Environment implements ICache {
 			Server.logger.infoLogEntry("WebServer is going to use port: " + httpPort);
 
 			try {
-				mailEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/@mode").equalsIgnoreCase("on") ? true : false;
+				mailEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/@mode").equalsIgnoreCase("on") ? true : false;
 				if (mailEnable) {
-					SMTPHost = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/smtphost");
-					defaultSender = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/defaultsender");
-					smtpAuth = Boolean.valueOf(XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/auth"));
-					smtpUser = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/smtpuser");
-					smtpPassword = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/smtppassword");
-					smtpPort = XMLUtil.getTextContent(xmlDocument, "/nextbase/mailagent/smtpport");
+					SMTPHost = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtphost");
+					defaultSender = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/defaultsender");
+					smtpAuth = Boolean.valueOf(XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/auth"));
+					smtpUser = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpuser");
+					smtpPassword = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtppassword");
+					smtpPort = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpport");
 					Server.logger.infoLogEntry("mailAgent is going to redirect some messages to host: " + SMTPHost);
 				} else {
 					Server.logger.infoLogEntry("mailAgent is switch off");
@@ -242,6 +246,17 @@ public class Environment implements ICache {
 				Server.logger.infoLogEntry("MailAgent is not set");
 				SMTPHost = "";
 				defaultSender = "";
+			}
+
+			try {
+				slackEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/slack/@mode").equalsIgnoreCase("on") ? true : false;
+				if (slackEnable) {
+					slackToken = XMLUtil.getTextContent(xmlDocument, "/nextbase/slack/token");
+				} else {
+					// Server.logger.infoLogEntry("mailAgent is switch off");
+				}
+			} catch (NumberFormatException nfe) {
+				Server.logger.infoLogEntry("Slack setting is not correct");
 			}
 
 			File tmp = new File("tmp");

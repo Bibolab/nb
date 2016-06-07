@@ -13,6 +13,8 @@ import com.exponentus.dataengine.system.IExtUserDAO;
 import com.exponentus.env.Environment;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
+import com.exponentus.user.AnonymousUser;
+import com.exponentus.user.SuperUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -35,13 +37,27 @@ public class ACL implements IPOJOObject {
 		IExtUserDAO eDao = Environment.getExtUserDAO();
 		Iterator<Long> it = entity.getReaders().iterator();
 		while (it.hasNext()) {
-			IEmployee emp = eDao.getEmployee(it.next());
-			readers.put(emp.getUserID(), emp.getName());
+			long id = it.next();
+			if (id > 0) {
+				IEmployee emp = eDao.getEmployee(id);
+				readers.put(emp.getUserID(), emp.getName());
+			} else if (id == 0) {
+				readers.put(id, AnonymousUser.USER_NAME);
+			} else if (id == -1) {
+				readers.put(id, SuperUser.USER_NAME);
+			}
 		}
 		it = entity.getEditors().iterator();
 		while (it.hasNext()) {
-			IEmployee emp = eDao.getEmployee(it.next());
-			editors.put(emp.getUserID(), emp.getName());
+			long id = it.next();
+			if (id > 0) {
+				IEmployee emp = eDao.getEmployee(id);
+				editors.put(emp.getUserID(), emp.getName());
+			} else if (id == 0) {
+				editors.put(id, AnonymousUser.USER_NAME);
+			} else if (id == -1) {
+				editors.put(id, SuperUser.USER_NAME);
+			}
 		}
 	}
 
@@ -52,7 +68,11 @@ public class ACL implements IPOJOObject {
 
 	@Override
 	public String getIdentifier() {
-		return id.toString();
+		try {
+			return id.toString();
+		} catch (Exception e) {
+			return "null";
+		}
 	}
 
 	@JsonIgnore

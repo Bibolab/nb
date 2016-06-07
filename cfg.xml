@@ -19,14 +19,16 @@ Example configuration where several runtime aspects of NB are defined.
 		<entry>RUS</entry>
 		<entry>DEU</entry>
 	</langs>
-    <mailagent mode="ON">
+    <mail mode="ON">
     	<smtphost>smtp.mail.ru</smtphost>
 		<auth>true</auth>
 		<smtpport>465</smtpport>
 		<smtpuser>mynameis.m@mail.ru</smtpuser>
 		<smtppassword>mynameis.mmynameis.m</smtppassword>     
-    </mailagent>
-    
+    </mail>
+    <slack mode="ON">
+        <token></token>
+    </slack>
    <tls mode="ON">
         <port>38789</port>
     	<certfile>server.crt</certfile>

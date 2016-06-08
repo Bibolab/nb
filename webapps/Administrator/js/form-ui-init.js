@@ -25,7 +25,7 @@ $(function() {
         nb.submitForm(nb.getForm(this));
     });
 
-    $('[data-action=test_message_xmpp], [data-action=test_message_slack]').click(function(event) {
+    $('[data-action=test_message_xmpp], [data-action=test_message_slack], [data-action=test_message_email]').click(function(event) {
         event.preventDefault();
         var msgtype = $(this).data("msgtype");
         var addr = $("input[name="+ msgtype +"]").val();

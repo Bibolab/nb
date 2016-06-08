@@ -36,6 +36,11 @@
                         </div>
                         <div class="controls">
                             <input type="email" name="email" value="{fields/email}" class="span4"/>
+                            <a class="btn action_test_email" title="send test email message" href="#" data-msgtype="email" data-action="test_message_email">
+                                <span>
+                                    Test
+                                </span>
+                            </a>
                         </div>
                     </div>
                     <div class="form-group">

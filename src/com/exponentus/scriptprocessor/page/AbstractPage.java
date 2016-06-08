@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -177,7 +178,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		result.addContent(obj);
 	}
 
-	protected void addContent(List<IOutcomeObject> list) {
+	protected void addContent(Collection<IOutcomeObject> list) {
 		result.addContent(list);
 	}
 
@@ -185,9 +186,24 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		result.addObject(new _POJOObjectWrapper(document, getSes()));
 	}
 
-	// @Deprecated
-	protected void addContent(_POJOListWrapper<IPOJOObject> list) {
-		result.addContent(list);
+	@Deprecated
+	protected void addContent(_POJOListWrapper<IPOJOObject> wrappedList) {
+		result.addContent(wrappedList);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected void addContent(List<? extends IAppEntity> list) {
+		result.addContent(new _POJOListWrapper(list, getSes()));
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected void addContent(List<? extends IAppEntity> list, int maxPage, long count, int currentPage) {
+		result.addContent(new _POJOListWrapper(list, maxPage, count, currentPage, getSes()));
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected void addContent(List<? extends IAppEntity> list, int maxPage, long count, int currentPage, String keyword) {
+		result.addContent(new _POJOListWrapper(list, maxPage, count, currentPage, getSes(), keyword));
 	}
 
 	protected void startSaveFormTransact(IAppEntity entity) {
@@ -224,6 +240,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		return actionBar;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected _POJOListWrapper<? extends IPOJOObject> getViewPage(DAO<? extends IPOJOObject, UUID> dao, _WebFormData formData) {
 		int pageNum = 1;
 		int pageSize = dao.getSession().pageSize;

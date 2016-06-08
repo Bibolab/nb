@@ -1,7 +1,6 @@
 package administrator.page.navigator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
@@ -19,7 +18,7 @@ public class MainNavigator extends _DoPage {
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
 		LanguageCode lang = session.getLang();
-		List<IOutcomeObject> list = new ArrayList<IOutcomeObject>();
+		LinkedList<IOutcomeObject> list = new LinkedList<IOutcomeObject>();
 
 		_Outline common_outline = new _Outline(getLocalizedWord("Server settings", lang), "server");
 		common_outline.addEntry(new _OutlineEntry("Server parameters", "General server parameters", "server", "p?id=server-form"));

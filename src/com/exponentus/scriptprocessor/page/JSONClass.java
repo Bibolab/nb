@@ -1,7 +1,7 @@
 package com.exponentus.scriptprocessor.page;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import com.exponentus.scripting._Validation;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("outcome")
 public class JSONClass {
-	private ArrayList<Object> objects = new ArrayList<Object>();
+	private Collection<Object> objects = new ArrayList<Object>();
 	private Map<String, String> captions;
 	private OutcomeType type;
 	private String redirectURL;
@@ -48,11 +48,11 @@ public class JSONClass {
 		this.flash = flash;
 	}
 
-	public ArrayList<Object> getObjects() {
+	public Collection<Object> getObjects() {
 		return objects;
 	}
 
-	public void setObjects(List<IOutcomeObject> objects) {
+	public void setObjects(Collection<IOutcomeObject> objects) {
 		for (IOutcomeObject obj : objects) {
 			this.objects.add(obj.toJSON());
 		}

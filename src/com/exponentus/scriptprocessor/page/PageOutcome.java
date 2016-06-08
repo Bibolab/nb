@@ -2,6 +2,7 @@ package com.exponentus.scriptprocessor.page;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class PageOutcome {
 	private int httpStatus = HttpStatus.SC_OK;
 	private static final String xmlTextUTF8Header = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 	private List<PageOutcome> includedPage = new ArrayList<PageOutcome>();
-	private ArrayList<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
+	private Collection<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
 	private _Session ses;
 	private LanguageCode lang;
 	private OutcomeType type = OutcomeType.OK;
@@ -240,7 +241,7 @@ public class PageOutcome {
 
 	}
 
-	public void addContent(List<IOutcomeObject> elements) {
+	public void addContent(Collection<IOutcomeObject> elements) {
 		objects.addAll(elements);
 
 	}

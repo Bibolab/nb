@@ -2,6 +2,7 @@ package administrator.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import administrator.dao.LanguageDAO;
 @Entity
 @Table(name = "_langs")
 @NamedQuery(name = "Language.findAll", query = "SELECT m FROM Language AS m ORDER BY m.regDate")
-public class Language extends AppEntity {
+public class Language extends AppEntity<UUID> {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = true, length = 7, unique = true)
 	private LanguageCode code = LanguageCode.UNKNOWN;

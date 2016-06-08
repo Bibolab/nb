@@ -73,10 +73,10 @@
         <appender-ref ref="console" />
     </category>
     
-    <category name="com.ullink.slack.simpleslackapi.impl.SlackWebSocketSessionImpl">
+  <!--   <category name="com.ullink.slack.simpleslackapi.impl.SlackWebSocketSessionImpl">
         <priority value="DEBUG" />
         <appender-ref ref="console" />
-    </category>
+    </category> -->
     
 	<logger name="Server">
 		<level value="DEBUG" />

@@ -37,5 +37,4 @@ public class SendTestMsg extends _DoPage {
 		}
 
 	}
-
 }

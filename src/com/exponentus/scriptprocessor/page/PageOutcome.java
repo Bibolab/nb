@@ -33,7 +33,7 @@ public class PageOutcome {
 	private Collection<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
 	private _Session ses;
 	private LanguageCode lang;
-	private OutcomeType type = OutcomeType.OK;
+	private InfoMessageType type = InfoMessageType.OK;
 	private Map<String, String> captions = new HashMap<String, String>();
 	private boolean isScriptResult;
 	private String pageId;
@@ -93,22 +93,22 @@ public class PageOutcome {
 		httpStatus = HttpStatus.SC_INTERNAL_SERVER_ERROR;
 	}
 
-	public void setType(OutcomeType type) {
+	public void setInfoMessageType(InfoMessageType type) {
 		this.type = type;
 		String keyWord = "";
-		if (type == OutcomeType.OK) {
+		if (type == InfoMessageType.OK) {
 			keyWord = "action_completed_successfully";
-		} else if (type == OutcomeType.DOCUMENT_SAVED) {
+		} else if (type == InfoMessageType.DOCUMENT_SAVED) {
 			keyWord = "document_was_saved_succesfully";
-		} else if (type == OutcomeType.SERVER_ERROR) {
+		} else if (type == InfoMessageType.SERVER_ERROR) {
 			keyWord = "internal_server_error";
-		} else if (type == OutcomeType.VALIDATION_ERROR) {
+		} else if (type == InfoMessageType.VALIDATION_ERROR) {
 			keyWord = "validation_error";
 		}
 		captions.put("type", Environment.vocabulary.getWord(keyWord, lang));
 	}
 
-	public OutcomeType getType() {
+	public InfoMessageType getType() {
 		return type;
 	}
 

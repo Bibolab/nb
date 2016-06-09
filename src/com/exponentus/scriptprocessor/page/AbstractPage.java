@@ -124,7 +124,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	}
 
 	protected void setValidation(_Validation obj) {
-		result.setType(OutcomeType.VALIDATION_ERROR);
+		result.setInfoMessageType(InfoMessageType.VALIDATION_ERROR);
 		result.setValidation(obj);
 	}
 
@@ -169,7 +169,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	protected void addError(IOutcomeObject obj) {
 		setBadRequest();
-		result.setType(OutcomeType.WARNING);
+		result.setInfoMessageType(InfoMessageType.SERVER_ERROR);
 		result.addContent(obj);
 	}
 
@@ -212,9 +212,9 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	protected void finishSaveFormTransact(IAppEntity entity) {
 		result.setRedirectURL(getSes().getTransactRedirect(entity));
-		if (result.getType() != OutcomeType.VALIDATION_ERROR && result.getType() != OutcomeType.SERVER_ERROR) {
+		if (result.getType() != InfoMessageType.VALIDATION_ERROR && result.getType() != InfoMessageType.SERVER_ERROR) {
 			result.setFlash(entity.getId().toString());
-			result.setType(OutcomeType.DOCUMENT_SAVED);
+			result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
 		}
 	}
 
@@ -302,7 +302,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 			}
 		} catch (Exception e) {
 			result.setException(e);
-			result.setType(OutcomeType.SERVER_ERROR);
+			result.setInfoMessageType(InfoMessageType.SERVER_ERROR);
 			result.setVeryBadRequest();
 			error(e);
 		}

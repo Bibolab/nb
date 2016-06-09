@@ -6,7 +6,7 @@ import java.util.List;
 import com.exponentus.scripting._Session;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
 import com.exponentus.scriptprocessor.page.JSONClass;
-import com.exponentus.scriptprocessor.page.OutcomeType;
+import com.exponentus.scriptprocessor.page.InfoMessageType;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,7 +17,7 @@ public class ScheduledTaskOutcome {
 	public String name;
 	private List<ScheduledTaskOutcome> includedPage = new ArrayList<ScheduledTaskOutcome>();
 	private ArrayList<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
-	private OutcomeType type = OutcomeType.OK;
+	private InfoMessageType type = InfoMessageType.OK;
 	private boolean isScriptResult;
 	private Exception exception;
 
@@ -46,7 +46,7 @@ public class ScheduledTaskOutcome {
 		objects.add(obj);
 	}
 
-	public OutcomeType getType() {
+	public InfoMessageType getType() {
 		return type;
 	}
 

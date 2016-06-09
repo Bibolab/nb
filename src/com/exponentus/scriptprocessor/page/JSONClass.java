@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class JSONClass {
 	private Collection<Object> objects = new ArrayList<Object>();
 	private Map<String, String> captions;
-	private OutcomeType type;
+	private InfoMessageType type;
 	private String redirectURL;
 	private String flash;
 	private _Validation validation;
@@ -24,11 +24,11 @@ public class JSONClass {
 		this.captions = captions;
 	}
 
-	public OutcomeType getType() {
+	public InfoMessageType getType() {
 		return type;
 	}
 
-	public void setType(OutcomeType type) {
+	public void setType(InfoMessageType type) {
 		this.type = type;
 	}
 

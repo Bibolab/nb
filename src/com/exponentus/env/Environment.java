@@ -69,7 +69,6 @@ public class Environment implements ICache {
 	public static String hostName;
 	public static int httpPort = EnvConst.DEFAULT_HTTP_PORT;
 	public static AppEnv adminApplication;
-	public static String defaultSender = "";
 	public static HashMap<String, String> mimeHash = new HashMap<String, String>();
 	public static HashMap<String, Site> webAppToStart = new HashMap<String, Site>();
 	public static String tmpDir;
@@ -231,14 +230,11 @@ public class Environment implements ICache {
 				certKeyFile = "";
 			}
 
-			Server.logger.infoLogEntry("WebServer is going to use port: " + httpPort);
-
 			try {
 				mailEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/@mode").equalsIgnoreCase("on") ? true : false;
 				if (mailEnable) {
 					SMTPHost = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtphost");
-					defaultSender = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/defaultsender");
-					smtpAuth = Boolean.valueOf(XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/auth"));
+					smtpAuth = Boolean.valueOf(XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpauth"));
 					smtpUser = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpuser");
 					smtpPassword = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtppassword");
 					smtpPort = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpport");
@@ -248,8 +244,6 @@ public class Environment implements ICache {
 				}
 			} catch (NumberFormatException nfe) {
 				Server.logger.infoLogEntry("MailAgent is not set");
-				SMTPHost = "";
-				defaultSender = "";
 			}
 
 			try {

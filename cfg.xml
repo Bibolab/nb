@@ -21,7 +21,7 @@ Example configuration where several runtime aspects of NB are defined.
 	</langs>
     <mail mode="ON">
     	<smtphost>smtp.mail.ru</smtphost>
-		<auth>true</auth>
+		<smtpauth>true</smtpauth>
 		<smtpport>465</smtpport>
 		<smtpuser>mynameis.m@mail.ru</smtpuser>
 		<smtppassword>mynameis.mmynameis.m</smtppassword>     

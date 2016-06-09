@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Properties;
 
+import javax.mail.AuthenticationFailedException;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -21,6 +22,8 @@ import javax.mail.internet.MimeMultipart;
 
 import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.env.Environment;
+import com.exponentus.exception.MsgException;
+import com.exponentus.localization.LanguageCode;
 import com.exponentus.server.Server;
 
 public class Memo {
@@ -36,14 +39,14 @@ public class Memo {
 	private IAppEntity entity;
 
 	public Memo(List<String> recipients, String subj, String body, IAppEntity entity) {
-		Memo(Environment.orgName, recipients, subj, body, entity);
+		mailMemo(Environment.orgName, recipients, subj, body, entity);
 	}
 
 	public Memo(String personal, List<String> recipients, String subj, String body, IAppEntity entity) {
-		Memo(personal, recipients, subj, body, entity);
+		mailMemo(personal, recipients, subj, body, entity);
 	}
 
-	private void Memo(String personal, List<String> recipients, String subj, String body, IAppEntity entity) {
+	private void mailMemo(String personal, List<String> recipients, String subj, String body, IAppEntity entity) {
 
 		if (Environment.mailEnable) {
 			Properties props = new Properties();
@@ -103,19 +106,40 @@ public class Memo {
 
 	public boolean send() {
 		try {
+			sendWithPassions();
+			return true;
+		} catch (MsgException e) {
+			Server.logger.errorLogEntry(e);
+		}
+		return false;
+	}
+
+	public boolean sendWithPassions() throws MsgException {
+		try {
 			if (Environment.mailEnable && isValid) {
 				Transport.send(msg);
 				return true;
+			} else {
+				Server.logger.warningLogEntry("Mail agent disabled");
 			}
 		} catch (SendFailedException se) {
 			if (se.getMessage().contains("relay rejected for policy reasons")) {
-				Server.logger.warningLogEntry("relay rejected for policy reasons by SMTP server. Message has not sent");
+				String error = "relay rejected for policy reasons by SMTP server. Message has not sent";
+				Server.logger.warningLogEntry(error);
+				throw new MsgException(error, LanguageCode.ENG);
 			} else {
-				Server.logger.errorLogEntry("unable to send a message, probably SMTP host did not set");
-				Server.logger.errorLogEntry(se);
+				String error = "unable to send a message, probably SMTP host did not set";
+				Server.logger.errorLogEntry(error);
+				throw new MsgException(error, LanguageCode.ENG);
 			}
-		} catch (MessagingException e) {
+		} catch (AuthenticationFailedException e) {
+			String error = "SMTP authentication exception, user=" + Environment.smtpUser;
 			Server.logger.errorLogEntry(e);
+			throw new MsgException(error, LanguageCode.ENG);
+		} catch (MessagingException e) {
+			String error = e.toString();
+			Server.logger.errorLogEntry(e);
+			throw new MsgException(error, LanguageCode.ENG);
 		}
 		return false;
 	}

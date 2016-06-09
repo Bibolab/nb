@@ -26,7 +26,6 @@ import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting.POJOObjectAdapter;
-import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._POJOObjectWrapper;
 import com.exponentus.scripting._Session;
@@ -85,12 +84,6 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 			}
 		}
 		return localizedNames;
-	}
-
-	public void setError(String m) {
-		setBadRequest();
-		result.setType(OutcomeType.SERVER_ERROR);
-		addContent("msg", m);
 	}
 
 	protected void setError(Exception e) {
@@ -172,6 +165,12 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 				return map;
 			}
 		}, getSes()));
+	}
+
+	protected void addError(IOutcomeObject obj) {
+		setBadRequest();
+		result.setType(OutcomeType.WARNING);
+		result.addContent(obj);
 	}
 
 	protected void addContent(IOutcomeObject obj) {
@@ -310,11 +309,11 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		return result;
 	}
 
-	public abstract void doGET(_Session session, _WebFormData formData) throws _Exception;
+	public abstract void doGET(_Session session, _WebFormData formData) throws Exception;
 
-	public abstract void doPUT(_Session session, _WebFormData formData) throws _Exception;
+	public abstract void doPUT(_Session session, _WebFormData formData) throws Exception;
 
-	public abstract void doPOST(_Session session, _WebFormData formData) throws _Exception;
+	public abstract void doPOST(_Session session, _WebFormData formData) throws Exception;
 
-	public abstract void doDELETE(_Session session, _WebFormData formData) throws _Exception;
+	public abstract void doDELETE(_Session session, _WebFormData formData) throws Exception;
 }

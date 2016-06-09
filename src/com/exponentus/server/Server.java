@@ -45,7 +45,7 @@ public class Server {
 			}
 
 			String info = webServerInst.initConnectors();
-			Server.logger.debugLogEntry("web server started (" + info + ")");
+			Server.logger.infoLogEntry("web server started (" + info + ")");
 			webServerInst.startContainer();
 
 			Environment.periodicalServices = new PeriodicalServices();

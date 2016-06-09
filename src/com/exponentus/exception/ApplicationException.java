@@ -24,14 +24,18 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import net.sf.saxon.s9api.SaxonApiException;
 
 public class ApplicationException extends Exception implements IOutcomeObject {
-	private static final long serialVersionUID = 1L;
+	protected static String type = EnvConst.APP_ID;
+	protected LanguageCode lang;
+	protected String errorMsg;
+	protected int code = HttpStatus.SC_INTERNAL_SERVER_ERROR;
+
+	private static final long serialVersionUID = 8544634275928476077L;
 	private String location;
-	private String type = EnvConst.APP_ID;
+
+	@JsonIgnore
 	private String servletName = "Provider";
-	private String exception;
+
 	private String appType;
-	private LanguageCode lang;
-	private int code = HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
 	public ApplicationException(String appType, String error, LanguageCode lang) {
 		super(error);
@@ -44,7 +48,7 @@ public class ApplicationException extends Exception implements IOutcomeObject {
 		this.appType = appType;
 		StringWriter errors = new StringWriter();
 		outcome.getException().printStackTrace(new PrintWriter(errors));
-		exception = errors.toString();
+		errorMsg = errors.toString();
 		this.lang = lang;
 		code = outcome.getHttpStatus();
 	}
@@ -56,7 +60,7 @@ public class ApplicationException extends Exception implements IOutcomeObject {
 
 	@JsonIgnore
 	public String getHTMLMessage(int code) {
-		ExceptionXML document = new ExceptionXML(getMessage(), code, location, type, servletName, exception);
+		ExceptionXML document = new ExceptionXML(getMessage(), code, location, type, servletName, errorMsg);
 		document.setAppType(appType);
 		String xslt = Environment.getKernelDir() + "xsl" + File.separator + EnvConst.ERROR_XSLT;
 		File errorXslt = new File(xslt);
@@ -71,13 +75,9 @@ public class ApplicationException extends Exception implements IOutcomeObject {
 		return toXML();
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	@Override
 	public String toXML() {
-		ExceptionXML document = new ExceptionXML(getMessage(), code, location, type, servletName, exception);
+		ExceptionXML document = new ExceptionXML(getMessage(), code, location, type, servletName, errorMsg);
 		document.setAppType(appType);
 		return document.toXML(lang);
 	}
@@ -92,7 +92,7 @@ public class ApplicationException extends Exception implements IOutcomeObject {
 		try {
 			jsonInString = mapper.writeValueAsString(this);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			Server.logger.errorLogEntry(e);
 		}
 		return jsonInString;
 	}

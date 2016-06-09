@@ -80,10 +80,14 @@ public class Console implements Runnable {
 			long freeSpace = file.getFreeSpace();
 			System.out.printf(format, "total disk size", totalSpace / 1024 / 1024 / 1024 + " gb");
 			System.out.printf(format, "space free", freeSpace / 1024 / 1024 / 1024 + " gb");
-			System.out.printf(format, "smtp port", Environment.smtpPort);
-			System.out.printf(format, "smtp auth", Environment.smtpAuth);
-			System.out.printf(format, "smtp server", Environment.SMTPHost);
-			System.out.printf(format, "smtp user", Environment.smtpUser);
+			if (Environment.mailEnable) {
+				System.out.printf(format, "smtp port", Environment.smtpPort);
+				System.out.printf(format, "smtp auth", Environment.smtpAuth);
+				System.out.printf(format, "smtp server", Environment.SMTPHost);
+				System.out.printf(format, "smtp user", Environment.smtpUser);
+			} else {
+				System.out.printf(format, "mail agent is", "OFF");
+			}
 			if (Environment.isDevMode()) {
 				System.out.printf(format, "developer mode is", "ON");
 				System.out.printf(format, "external server core folder", Environment.getKernelDir());

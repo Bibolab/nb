@@ -10,6 +10,7 @@ import java.util.concurrent.RunnableFuture;
 import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.exception.MsgException;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.server.Server;
@@ -22,6 +23,11 @@ public class MailAgent {
 
 	public boolean sendMail(List<String> recipients, String subj, String body, boolean async) {
 		return sendMail(recipients, subj, body, null, async);
+	}
+
+	public boolean sendDebugMail(List<String> recipients, String subj, String body) throws MsgException {
+		Memo memo = new Memo(recipients, subj, body, null);
+		return memo.sendWithPassions();
 	}
 
 	public boolean sendMail(List<String> recipients, String subj, String body, IAppEntity entity, boolean async) {

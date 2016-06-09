@@ -3002,16 +3002,12 @@ $(function() {
         event.preventDefault();
         var msgtype = $(this).data("msgtype");
         var addr = $("input[name="+ msgtype +"]").val();
-        var formData = new FormData();
-        formData.append('type', msgtype);
-        formData.append('addr', addr);
+
         $.ajax({
             url: 'Provider?id=sendtestmsg-action',
             type: 'POST',
             cache: false,
-            contentType: false,
-            processData: false,
-            data:formData,
+            data: "type="+msgtype+"&addr="+addr ,
             dataType: 'json',
             success: function(result) {
                 alert(result.type)
@@ -3023,8 +3019,8 @@ $(function() {
 
             }
         });
-    });
 
+    });
 
     function uploadUpdate(fileInput, fsid) {
         var formData = new FormData();

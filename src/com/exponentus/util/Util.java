@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -31,17 +30,6 @@ public class Util {
 	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat(EnvConst.DEFAULT_TIME_FORMAT);
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATE_FORMAT);
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static HashMap cloneMap(HashMap sourceMap) {
-		HashMap map = new HashMap();
-		for (Object key : sourceMap.keySet()) {
-			String k = (String) key;
-			map.put(k, sourceMap.get(k));
-		}
-		return map;
-
-	}
 
 	public static String convertDataTimeToString(Date date) {
 		try {

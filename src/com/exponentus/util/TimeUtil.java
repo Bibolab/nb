@@ -15,7 +15,7 @@ public class TimeUtil {
 
 	public static Date convertStringToDate(String val) {
 		try {
-			return DateUtils.parseDate(val, "yyyy", "dd.MM.yy", "dd.MM.yyyy", "dd-MM-yyyy", "dd.MM.yy hh:mm:ss", "dd.MM.yyyy hh:mm:ss", "yyyy.MM.dd",
+			return DateUtils.parseDate(val, "yyyy", "dd.MM.yy", "dd.MM.yyyy", "dd-MM-yyyy", "dd.MM.yyyy hh:mm", "dd.MM.yyyy hh:mm:ss", "yyyy.MM.dd",
 			        "yyyy.MM.dd hh:mm:ss");
 
 		} catch (ParseException e) {

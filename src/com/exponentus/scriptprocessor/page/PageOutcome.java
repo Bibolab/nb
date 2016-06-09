@@ -1,6 +1,7 @@
 package com.exponentus.scriptprocessor.page;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import org.apache.http.HttpStatus;
 
+import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
@@ -217,8 +219,7 @@ public class PageOutcome {
 		clazz.setValidation(validation);
 
 		ObjectMapper mapper = new ObjectMapper();
-		// SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
-		// mapper.setDateFormat(df);
+		mapper.setDateFormat(new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT));
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 

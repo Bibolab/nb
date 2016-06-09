@@ -149,7 +149,7 @@ public class Environment implements ICache {
 
 			orgName = XMLUtil.getTextContent(xmlDocument, "/nextbase/orgname");
 			if (orgName.isEmpty()) {
-				hostName = EnvConst.APP_ID;
+				orgName = EnvConst.APP_ID;
 			}
 
 			hostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/hostname");
@@ -351,7 +351,7 @@ public class Environment implements ICache {
 		try {
 			addr = InetAddress.getLocalHost();
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			Server.logger.errorLogEntry(e);
 		}
 		return addr.getHostName();
 	}

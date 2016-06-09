@@ -12,7 +12,7 @@
 /rule/*/global.xml
 /rule/*/global.dat
 /webapps/*/reports/templates/*.jasper
-
+*.sql
 # Idea resources #
 ##################
 .idea

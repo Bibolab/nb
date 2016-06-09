@@ -33,7 +33,6 @@ public class EnvConst {
 	public static final String WORKSPACE_NAME = "Workspace";
 	public static final String STAFF_NAME = "Staff";
 	public static final String[] OFFICEFRAME_APPS = { STAFF_NAME, "Reference", WORKSPACE_NAME };
-	public static final String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
 
 	public static String AUTH_COOKIE_NAME = "nb3ses";
 	public static String DUMMY_USER = "admin";
@@ -47,6 +46,7 @@ public class EnvConst {
 	public static String DEFAULT_COUNTRY_OF_NUMBER_FORMAT = "ru";
 	public static String DB_USER = "postgres";
 	public static String DB_PWD = "smartdoc";
+	public static String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
 	public static String DATABASE_NAME = APP_ID;
 	public static String DATABASE_HOST = "127.0.0.1";
 	public static String CONN_PORT = "5432";

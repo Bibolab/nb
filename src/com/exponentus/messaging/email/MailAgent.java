@@ -20,6 +20,19 @@ public class MailAgent {
 		return sendMail(recipients, subj, body, null);
 	}
 
+	public boolean sendMail(List<String> recipients, String subj, String body, boolean async) {
+		return sendMail(recipients, subj, body, null, async);
+	}
+
+	public boolean sendMail(List<String> recipients, String subj, String body, IAppEntity entity, boolean async) {
+		Memo memo = new Memo(recipients, subj, body, entity);
+		if (async) {
+			return sendMail(recipients, subj, body, entity);
+		} else {
+			return memo.send();
+		}
+	}
+
 	public boolean sendMail(List<String> recipients, String subj, String body, IAppEntity entity) {
 		Memo memo = new Memo(recipients, subj, body, entity);
 		RunnableFuture<Boolean> f = new FutureTask<>(new Callable<Boolean>() {

@@ -29,12 +29,16 @@ $(function() {
         event.preventDefault();
         var msgtype = $(this).data("msgtype");
         var addr = $("input[name="+ msgtype +"]").val();
+        var formData = new FormData();
+        formData.append('type', msgtype);
+        formData.append('fsid', addr);
         $.ajax({
-            url: 'Provider?id=send-test-msg&type='+ msgtype +'&addr='+ addr,
-            type: 'GET',
+            url: 'Provider?id=sendtestmsg-action',
+            type: 'POST',
             cache: false,
             contentType: false,
             processData: false,
+            data:formData,
             dataType: 'json',
             success: function(result) {
                 alert(result.type)

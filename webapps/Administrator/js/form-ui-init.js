@@ -31,7 +31,7 @@ $(function() {
         var addr = $("input[name="+ msgtype +"]").val();
         var formData = new FormData();
         formData.append('type', msgtype);
-        formData.append('fsid', addr);
+        formData.append('addr', addr);
         $.ajax({
             url: 'Provider?id=sendtestmsg-action',
             type: 'POST',

@@ -33,7 +33,7 @@ public class PageOutcome {
 	private Collection<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
 	private _Session ses;
 	private LanguageCode lang;
-	private InfoMessageType type = InfoMessageType.OK;
+	private InfoMessageType infoMessage = InfoMessageType.OK;
 	private Map<String, String> captions = new HashMap<String, String>();
 	private boolean isScriptResult;
 	private String pageId;
@@ -94,7 +94,7 @@ public class PageOutcome {
 	}
 
 	public void setInfoMessageType(InfoMessageType type) {
-		this.type = type;
+		this.infoMessage = type;
 		String keyWord = "";
 		if (type == InfoMessageType.OK) {
 			keyWord = "action_completed_successfully";
@@ -108,8 +108,8 @@ public class PageOutcome {
 		captions.put("type", Environment.vocabulary.getWord(keyWord, lang));
 	}
 
-	public InfoMessageType getType() {
-		return type;
+	public InfoMessageType getInfoMessageType() {
+		return infoMessage;
 	}
 
 	public void setScriptResult(boolean isScriptResult) {
@@ -211,7 +211,7 @@ public class PageOutcome {
 
 		clazz.setObjects(objects);
 		clazz.setCaptions(captions);
-		clazz.setType(type);
+		clazz.setType(infoMessage);
 		clazz.setRedirectURL(redirectURL);
 		clazz.setFlash(flash);
 		clazz.setValidation(validation);

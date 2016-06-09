@@ -35,7 +35,7 @@ import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scriptprocessor.ScriptHelper;
-import com.exponentus.scriptprocessor.ScriptShowField;
+import com.exponentus.scriptprocessor.SimpleValue;
 import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.util.StringUtil;
@@ -46,7 +46,7 @@ import administrator.dao.LanguageDAO;
 import administrator.model.Language;
 
 public abstract class AbstractPage extends ScriptHelper implements IPageScript {
-	private static final String messageTag = "msg";
+	private static final String DEFAULT_MESSAGE_TAG = "msg";
 	private _WebFormData formData;
 	private PageOutcome result;
 
@@ -63,13 +63,13 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	public void addValue(String entryName, Object value) {
 		if (value == null) {
-			result.addContent(new ScriptShowField(entryName, ""));
+			result.addContent(new SimpleValue(entryName, ""));
 		} else if (value instanceof String) {
-			result.addContent(new ScriptShowField(entryName, (String) value));
+			result.addContent(new SimpleValue(entryName, (String) value));
 		} else if (value instanceof Date) {
-			result.addContent(new ScriptShowField(entryName, Util.convertDataTimeToString(((Date) value))));
+			result.addContent(new SimpleValue(entryName, Util.convertDataTimeToString(((Date) value))));
 		} else if (value instanceof BigDecimal) {
-			result.addContent(new ScriptShowField(entryName, value.toString()));
+			result.addContent(new SimpleValue(entryName, value.toString()));
 		}
 	}
 
@@ -176,11 +176,11 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	protected void addWarning(String value) {
 		result.setInfoMessageType(InfoMessageType.WARNING);
-		addValue(messageTag, value);
+		addValue(DEFAULT_MESSAGE_TAG, value);
 	}
 
 	protected void addValue(String value) {
-		addValue(messageTag, value);
+		addValue(DEFAULT_MESSAGE_TAG, value);
 	}
 
 	protected void addContent(IOutcomeObject obj) {
@@ -222,7 +222,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	protected void finishSaveFormTransact(IAppEntity entity) {
 		result.setRedirectURL(getSes().getTransactRedirect(entity));
-		if (result.getType() != InfoMessageType.VALIDATION_ERROR && result.getType() != InfoMessageType.SERVER_ERROR) {
+		if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
 			result.setFlash(entity.getId().toString());
 			result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
 		}

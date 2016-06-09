@@ -4,14 +4,14 @@ import com.exponentus.scriptprocessor.page.IOutcomeObject;
 import com.exponentus.util.XMLUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ScriptShowField implements IOutcomeObject {
+public class SimpleValue implements IOutcomeObject {
 	private String name;
 	private String value = "";
 
 	@JsonIgnore
 	private String XMLPiece;
 
-	public ScriptShowField(String name, String value) {
+	public SimpleValue(String name, String value) {
 		this.name = name;
 		this.value = value;
 		XMLPiece = "<" + name + ">" + XMLUtil.getAsTagValue(value) + "</" + name + ">";
@@ -31,11 +31,13 @@ public class ScriptShowField implements IOutcomeObject {
 		return "name=" + name + ", value=" + value;
 	}
 
+	@JsonIgnore
 	@Override
 	public String toXML() {
 		return XMLPiece;
 	}
 
+	@JsonIgnore
 	@Override
 	public Object toJSON() {
 		return this;

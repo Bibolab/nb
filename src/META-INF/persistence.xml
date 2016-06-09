@@ -12,3 +12,4 @@
         <class>com.exponentus.common.model.ReadingMark</class>
     </persistence-unit>
 </persistence>
+

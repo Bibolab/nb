@@ -26,6 +26,9 @@ public class SendTestMsg extends _DoPage {
 			try {
 				if (!ma.sendDebugMail(recipients, "this is test message from " + EnvConst.APP_ID,
 				        "this is test message " + Util.convertDataTimeToString(new Date()))) {
+					addValue("The message has been sent succesfully");
+				} else {
+					addWarning("The message has not been sent");
 				}
 			} catch (MsgException e) {
 				addError(e);

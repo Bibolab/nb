@@ -46,6 +46,7 @@ import administrator.dao.LanguageDAO;
 import administrator.model.Language;
 
 public abstract class AbstractPage extends ScriptHelper implements IPageScript {
+	private static final String messageTag = "msg";
 	private _WebFormData formData;
 	private PageOutcome result;
 
@@ -171,6 +172,15 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		setBadRequest();
 		result.setInfoMessageType(InfoMessageType.SERVER_ERROR);
 		result.addContent(obj);
+	}
+
+	protected void addWarning(String value) {
+		result.setInfoMessageType(InfoMessageType.WARNING);
+		addValue(messageTag, value);
+	}
+
+	protected void addValue(String value) {
+		addValue(messageTag, value);
 	}
 
 	protected void addContent(IOutcomeObject obj) {

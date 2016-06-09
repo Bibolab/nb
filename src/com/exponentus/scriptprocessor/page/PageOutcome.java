@@ -265,4 +265,5 @@ public class PageOutcome {
 	public void setRedirectURL(String redirectURL) {
 		this.redirectURL = redirectURL;
 	}
+
 }

@@ -47,7 +47,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Transient
 	private String authorName;
 
-	@Column(name = "reg_date", nullable = false, updatable = false)
+	@Column(name = "reg_date", nullable = false, updatable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
 	protected Date regDate;
 
 	@Column(name = "form", nullable = false, updatable = false, length = 64)

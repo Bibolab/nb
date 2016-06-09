@@ -78,21 +78,7 @@ public class Database implements IDatabase {
 			Server.logger.errorLogEntry(e);
 		}
 
-		Map<String, String> properties = new HashMap<String, String>();
-		properties.put(PersistenceUnitProperties.JDBC_DRIVER, EnvConst.JDBC_DRIVER);
-		properties.put(PersistenceUnitProperties.JDBC_USER, EnvConst.DB_USER);
-		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, EnvConst.DB_PWD);
-		properties.put(PersistenceUnitProperties.JDBC_URL, connectionURL);
-
-		// INFO,
-		// OFF,
-		// ALL,
-		// CONFIG (developing)
-		properties.put(PersistenceUnitProperties.LOGGING_LEVEL, EnvConst.JPA_LOG_LEVEL);
-		properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
-		properties.put(PersistenceUnitProperties.SCHEMA_GENERATION_SCRIPTS_ACTION,
-		        PersistenceUnitProperties.SCHEMA_GENERATION_DROP_AND_CREATE_ACTION);
-
+		Map<String, String> properties = getProp();
 		PersistenceProvider pp = new PersistenceProvider();
 		factory = pp.createEntityManagerFactory(EnvConst.ADMINISTRATOR_APP_NAME, properties);
 		if (factory == null) {
@@ -134,21 +120,7 @@ public class Database implements IDatabase {
 	public Database(String appName) throws DatabasePoolException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		dbPool = new DBConnectionPool();
 		dbPool.initConnectionPool(EnvConst.JDBC_DRIVER, connectionURL, EnvConst.DB_USER, EnvConst.DB_PWD);
-		Map<String, String> properties = new HashMap<String, String>();
-		properties.put(PersistenceUnitProperties.JDBC_DRIVER, EnvConst.JDBC_DRIVER);
-		properties.put(PersistenceUnitProperties.JDBC_USER, EnvConst.DB_USER);
-		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, EnvConst.DB_PWD);
-		properties.put(PersistenceUnitProperties.JDBC_URL, connectionURL);
-
-		// INFO,
-		// OFF,
-		// ALL,
-		// CONFIG (developing)
-		properties.put(PersistenceUnitProperties.LOGGING_LEVEL, EnvConst.JPA_LOG_LEVEL);
-		properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
-		properties.put(PersistenceUnitProperties.SCHEMA_GENERATION_SCRIPTS_ACTION,
-		        PersistenceUnitProperties.SCHEMA_GENERATION_DROP_AND_CREATE_ACTION);
-
+		Map<String, String> properties = getProp();
 		PersistenceProvider pp = new PersistenceProvider();
 		// System.out.println(properties);
 		factory = pp.createEntityManagerFactory(appName, properties);
@@ -318,4 +290,23 @@ public class Database implements IDatabase {
 		return countOfRecords;
 	}
 
+	private Map<String, String> getProp() {
+		Map<String, String> properties = new HashMap<String, String>();
+		properties.put(PersistenceUnitProperties.JDBC_DRIVER, EnvConst.JDBC_DRIVER);
+		properties.put(PersistenceUnitProperties.JDBC_USER, EnvConst.DB_USER);
+		properties.put(PersistenceUnitProperties.JDBC_PASSWORD, EnvConst.DB_PWD);
+		properties.put(PersistenceUnitProperties.JDBC_URL, connectionURL);
+
+		// INFO,
+		// OFF,
+		// ALL,
+		// CONFIG (developing)
+		properties.put(PersistenceUnitProperties.LOGGING_LEVEL, EnvConst.JPA_LOG_LEVEL);
+		properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
+		properties.put(PersistenceUnitProperties.SCHEMA_GENERATION_SCRIPTS_ACTION,
+		        PersistenceUnitProperties.SCHEMA_GENERATION_DROP_AND_CREATE_ACTION);
+		properties.put(PersistenceUnitProperties.DDL_GENERATION_MODE, PersistenceUnitProperties.DDL_BOTH_GENERATION);
+		properties.put(PersistenceUnitProperties.CREATE_JDBC_DDL_FILE, "create.sql");
+		return properties;
+	}
 }

@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.apache.http.HttpStatus;
 
 import com.exponentus.env.EnvConst;
-import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
 import com.exponentus.server.Server;
@@ -48,7 +47,7 @@ public class SecureException extends Exception implements IOutcomeObject {
 		String xslt = "webapps" + File.separator + appType + File.separator + EnvConst.ERROR_XSLT;
 		File errorXslt = new File(xslt);
 		if (!errorXslt.exists()) {
-			errorXslt = new File("webapps" + File.separator + Environment.workspaceName + File.separator + EnvConst.ERROR_XSLT);
+			errorXslt = new File("webapps" + File.separator + EnvConst.WORKSPACE_NAME + File.separator + EnvConst.ERROR_XSLT);
 		}
 
 		try {
@@ -73,7 +72,7 @@ public class SecureException extends Exception implements IOutcomeObject {
 		String xslt = "webapps" + File.separator + appType + File.separator + EnvConst.ERROR_XSLT;
 		File errorXslt = new File(xslt);
 		if (!errorXslt.exists()) {
-			errorXslt = new File("webapps" + File.separator + Environment.workspaceName + File.separator + EnvConst.ERROR_XSLT);
+			errorXslt = new File("webapps" + File.separator + EnvConst.WORKSPACE_NAME + File.separator + EnvConst.ERROR_XSLT);
 		}
 
 		try {

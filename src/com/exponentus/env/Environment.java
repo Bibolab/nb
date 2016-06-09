@@ -94,7 +94,7 @@ public class Environment implements ICache {
 	public static String slackToken;
 
 	public static Vocabulary vocabulary;
-	public static String workspaceName = "Workspace";
+	public static AuthMethodType authMethod = AuthMethodType.WORKSPACE_LOGIN_PAGE;
 	public static PeriodicalServices periodicalServices;
 	public static final String vocabuarFilePath = EnvConst.RESOURCES_DIR + File.separator + "vocabulary.xml";
 
@@ -124,7 +124,11 @@ public class Environment implements ICache {
 			Server.shutdown();
 		}
 		eDao = initExtUserDAO();
-		Server.logger.debugLogEntry("initialize extended users support (" + eDao.getClass().getSimpleName() + ")");
+		if (eDao != null) {
+			Server.logger.debugLogEntry("initialized extended users support (" + eDao.getClass().getSimpleName() + ")");
+		} else {
+			authMethod = AuthMethodType.LOGIN_PAGE;
+		}
 	}
 
 	private static void initProcess() {

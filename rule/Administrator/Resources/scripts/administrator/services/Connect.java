@@ -25,10 +25,14 @@ public class Connect {
 			if (user.getPwdHash() != null && user.getPwdHash().equals(pwdHash)) {
 				user.setAuthorized(true);
 				if (user.isSuperUser()) {
-					IEmployee emp = eDao.getEmployee(user.getId());
-					user = new SuperUser();
-					if (emp != null) {
-						user.setUserName(emp.getName());
+					if (eDao != null) {
+						IEmployee emp = eDao.getEmployee(user.getId());
+						user = new SuperUser();
+						if (emp != null) {
+							user.setUserName(emp.getName());
+						} else {
+							user.setUserName(login);
+						}
 					} else {
 						user.setUserName(login);
 					}
@@ -38,7 +42,7 @@ public class Connect {
 				user.setAuthorized(false);
 			}
 
-			if (user.isAuthorized()) {
+			if (eDao != null && user.isAuthorized()) {
 				if (user.getId() != SuperUser.ID) {
 					IEmployee emp = eDao.getEmployee(user.getId());
 					if (emp != null) {

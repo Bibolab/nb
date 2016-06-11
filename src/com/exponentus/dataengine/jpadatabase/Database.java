@@ -305,7 +305,8 @@ public class Database implements IDatabase {
 		properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
 		properties.put(PersistenceUnitProperties.SCHEMA_GENERATION_SCRIPTS_ACTION,
 		        PersistenceUnitProperties.SCHEMA_GENERATION_DROP_AND_CREATE_ACTION);
-		properties.put(PersistenceUnitProperties.DDL_GENERATION_MODE, PersistenceUnitProperties.DDL_BOTH_GENERATION);
+		// properties.put(PersistenceUnitProperties.DDL_GENERATION_MODE,
+		// PersistenceUnitProperties.DDL_BOTH_GENERATION);
 		// properties.put(PersistenceUnitProperties.CREATE_JDBC_DDL_FILE,
 		// "create.sql");
 		return properties;

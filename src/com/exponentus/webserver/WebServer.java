@@ -26,6 +26,7 @@ import com.exponentus.rest.ResourceLoader;
 import com.exponentus.rule.constans.RunMode;
 import com.exponentus.server.Server;
 import com.exponentus.webserver.filter.CORSFilter;
+import com.exponentus.webserver.servlet.Default;
 import com.exponentus.webserver.valve.Logging;
 import com.exponentus.webserver.valve.Secure;
 import com.exponentus.webserver.valve.Unsecure;
@@ -73,11 +74,12 @@ public class WebServer {
 			Context sharedResContext = tomcat.addContext(URLPath, db);
 			sharedResContext.setDisplayName(EnvConst.SHARED_RESOURCES_APP_NAME);
 
-			Tomcat.addServlet(sharedResContext, "default", "org.apache.catalina.servlets.DefaultServlet");
+			Tomcat.addServlet(sharedResContext, "default", Default.class.getCanonicalName());
 			sharedResContext.addServletMapping("/", "default");
 
 			sharedResContext.addMimeMapping("css", "text/css");
 			sharedResContext.addMimeMapping("js", "text/javascript");
+
 			return true;
 		} else {
 			return false;
@@ -125,7 +127,7 @@ public class WebServer {
 		context.setDisplayName(URLPath.substring(1));
 		context.addWelcomeFile("Provider");
 
-		Tomcat.addServlet(context, "default", "org.apache.catalina.servlets.DefaultServlet");
+		Tomcat.addServlet(context, "default", Default.class.getCanonicalName());
 		context.addServletMapping("/", "default");
 
 		Tomcat.addServlet(context, "Provider", "com.exponentus.webserver.servlet.Provider");
@@ -158,7 +160,7 @@ public class WebServer {
 		context.addMimeMapping("js", "text/javascript");
 		context.addMimeMapping("html", "text/html");
 
-		initErrorPages(context);
+		// initErrorPages(context);
 
 		initRestService(site, context);
 

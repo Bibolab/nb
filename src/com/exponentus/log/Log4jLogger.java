@@ -53,16 +53,6 @@ public class Log4jLogger implements ILogger {
 
 	}
 
-	public static String getErrorStackString(StackTraceElement stack[]) {
-		StringBuffer addErrorMessage = new StringBuffer(1000);
-		for (int i = 0; i < stack.length; i++) {
-			addErrorMessage.append(
-			        "\n" + stack[i].getClassName() + " > " + stack[i].getMethodName() + " " + Integer.toString(stack[i].getLineNumber()) + "\n");
-		}
-
-		return addErrorMessage.toString();
-	}
-
 	public String getBuildDateTime() {
 		String value = "";
 		JarFile jarFile = null;

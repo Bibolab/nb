@@ -17,6 +17,7 @@ import com.exponentus.env.SessionPool;
 import com.exponentus.exception.AuthFailedException;
 import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.exception.PortalException;
+import com.exponentus.extconnect.Connect;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
@@ -25,7 +26,6 @@ import com.exponentus.user.IUser;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
-import administrator.services.Connect;
 
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;

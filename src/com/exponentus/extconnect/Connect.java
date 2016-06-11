@@ -1,4 +1,4 @@
-package administrator.services;
+package com.exponentus.extconnect;
 
 import java.util.ArrayList;
 

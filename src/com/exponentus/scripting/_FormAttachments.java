@@ -29,7 +29,11 @@ public class _FormAttachments {
 		return new ArrayList<Attachment>(attachments.values());
 	}
 
-	public Attachment getFile() {
-		return attachments.get(attachments);
+	public Attachment getFile(String fieldName, String fileName) {
+		return attachments.get(fieldName + "_" + fileName);
+	}
+
+	public Attachment getFile(String fileName) {
+		return attachments.get(fileName);
 	}
 }

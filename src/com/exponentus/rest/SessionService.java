@@ -24,6 +24,7 @@ import com.exponentus.env.SessionPool;
 import com.exponentus.exception.AuthFailedException;
 import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.exception.PortalException;
+import com.exponentus.extconnect.Connect;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AuthModeType;
@@ -31,8 +32,6 @@ import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.Cookies;
 import com.exponentus.webserver.servlet.ProviderExceptionType;
 import com.exponentus.webserver.servlet.PublishAsType;
-
-import administrator.services.Connect;
 
 @Path("/session")
 public class SessionService extends RestProvider {

@@ -28,7 +28,7 @@ public class PortalInit extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		ServletContext context = config.getServletContext();
 		String contextName = context.getServletContextName();
-		Server.logger.infoLogEntry("# start application \"" + contextName + "\"");
+		Server.logger.infoLogEntry("# Start application \"" + contextName + "\"");
 		try {
 			IDatabase db = new Database(contextName);
 			AppEnv env = new AppEnv(contextName, db);

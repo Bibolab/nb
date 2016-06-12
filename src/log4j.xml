@@ -57,6 +57,23 @@
 		</layout>
 	</appender>
 
+
+    <category name="org.apache.catalina.core">
+        <priority value="INFO" />
+        <appender-ref ref="console" />
+    </category>  
+    
+    
+    <category name="org.apache.coyote.http11.Http11NioProtocol">
+        <priority value="INFO" />
+        <appender-ref ref="console" />
+    </category>  
+    
+      <category name="org.apache.tomcat.util.net">
+        <priority value="INFO" />
+        <appender-ref ref="console" />
+    </category>  
+        
 	<category name="net.sf.jasperreports">
 		<priority value="debug" />
 		<appender-ref ref="roller" />
@@ -77,7 +94,9 @@
         <priority value="DEBUG" />
         <appender-ref ref="console" />
     </category> -->
+      
     
+   
 	<logger name="Server">
 		<level value="DEBUG" />
 		<appender-ref ref="server_main" />

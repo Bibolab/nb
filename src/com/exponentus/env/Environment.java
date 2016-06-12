@@ -124,7 +124,7 @@ public class Environment implements ICache {
 		}
 		eDao = initExtUserDAO();
 		if (eDao != null) {
-			Server.logger.debugLogEntry("initialized extended users support (" + eDao.getClass().getSimpleName() + ")");
+			Server.logger.debugLogEntry("Initialized extended users support (" + eDao.getClass().getSimpleName() + ")");
 		} else {
 			authMethod = AuthMethodType.LOGIN_PAGE;
 		}
@@ -144,7 +144,7 @@ public class Environment implements ICache {
 			saxParser.parse(file, cfgXMLhandler);
 			Document xmlDocument = getDocument();
 
-			Server.logger.infoLogEntry("initialize runtime environment");
+			Server.logger.infoLogEntry("Initialize runtime environment");
 			initMimeTypes();
 
 			orgName = XMLUtil.getTextContent(xmlDocument, "/nextbase/orgname");
@@ -238,9 +238,9 @@ public class Environment implements ICache {
 					smtpUser = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpuser");
 					smtpPassword = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtppassword");
 					smtpPort = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpport");
-					Server.logger.infoLogEntry("mailAgent is going to redirect some messages to host: " + SMTPHost);
+					Server.logger.infoLogEntry("MailAgent is going to redirect some messages to host: " + SMTPHost);
 				} else {
-					Server.logger.infoLogEntry("mailAgent is switch off");
+					Server.logger.infoLogEntry("MailAgent is switch off");
 				}
 			} catch (NumberFormatException nfe) {
 				Server.logger.infoLogEntry("MailAgent is not set");
@@ -444,7 +444,7 @@ public class Environment implements ICache {
 			_Session ses = new _Session(adminApplication, new AnonymousUser());
 			return (IExtUserDAO) contructor.newInstance(new Object[] { ses });
 		} catch (ClassNotFoundException e) {
-			Server.logger.warningLogEntry("extended user's support DAO has not been initialized (" + EnvConst.STAFF_DAO_CLASS + ")");
+			Server.logger.warningLogEntry("Extended user's support DAO has not been initialized (" + EnvConst.STAFF_DAO_CLASS + ")");
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 		        | SecurityException e) {
 			Server.logger.errorLogEntry(e);

@@ -26,10 +26,10 @@ public class Server {
 	public static void start() throws MalformedURLException, LifecycleException, URISyntaxException {
 		logger = new Log4jLogger("Server");
 		logger.infoLogEntry(":-)");
-		logger.infoLogEntry(serverTitle + " start");
+		logger.infoLogEntry(serverTitle + " starting");
 		if (Environment.isDevMode()) {
 			Environment.verboseLogging = true;
-			logger.warningLogEntry("debug logging is turned on");
+			logger.warningLogEntry("Debug logging is turned on");
 
 		}
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
@@ -45,7 +45,7 @@ public class Server {
 			}
 
 			String info = webServerInst.initConnectors();
-			Server.logger.infoLogEntry("web server started (" + info + ")");
+			Server.logger.infoLogEntry("Web server using: " + info);
 			webServerInst.startContainer();
 
 			Environment.periodicalServices = new PeriodicalServices();

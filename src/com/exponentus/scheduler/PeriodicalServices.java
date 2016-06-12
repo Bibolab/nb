@@ -26,7 +26,7 @@ public class PeriodicalServices {
 	private Scheduler sched;
 
 	public PeriodicalServices() {
-		Server.logger.infoLogEntry("start scheduler");
+		Server.logger.infoLogEntry("Starting scheduler");
 
 		SchedulerFactory sf = new StdSchedulerFactory();
 		try {

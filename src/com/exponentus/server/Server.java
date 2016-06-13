@@ -7,6 +7,7 @@ import java.util.Date;
 import org.apache.catalina.LifecycleException;
 
 import com.exponentus.dataengine.IDatabase;
+import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.env.Site;
 import com.exponentus.log.ILogger;
@@ -50,9 +51,14 @@ public class Server {
 
 			Environment.periodicalServices = new PeriodicalServices();
 
-			Thread thread = new Thread(new Console());
-			thread.setPriority(Thread.MIN_PRIORITY);
-			thread.start();
+			if (EnvConst.CLI.equalsIgnoreCase("on")) {
+				Thread thread = new Thread(new Console());
+				thread.setPriority(Thread.MIN_PRIORITY);
+				thread.start();
+			} else {
+				Server.logger.warningLogEntry("CLI is disabled");
+			}
+
 		} else {
 			shutdown();
 		}
@@ -79,7 +85,7 @@ public class Server {
 	}
 
 	public static void shutdown() {
-		logger.infoLogEntry("server is stopping ... ");
+		logger.infoLogEntry("Server is stopping ... ");
 
 		Environment.shutdown();
 

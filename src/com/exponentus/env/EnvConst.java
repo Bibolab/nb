@@ -34,6 +34,7 @@ public class EnvConst {
 	public static final String STAFF_NAME = "Staff";
 	public static final String[] OFFICEFRAME_APPS = { STAFF_NAME, "Reference", WORKSPACE_NAME };
 
+	public static String CLI = "ON";
 	public static String AUTH_COOKIE_NAME = "nb3ses";
 	public static String DUMMY_USER = "admin";
 	public static String DUMMY_PASSWORD = "secret";

@@ -43,8 +43,7 @@ public class AppEnv extends PageCacheAdapter {
 				rulePath = Environment.getKernelDir() + "rule";
 			} else if (ArrayUtils.contains(EnvConst.OFFICEFRAME_APPS, appName)) {
 				rulePath = Environment.getOfficeFrameDir() + "rule";
-				Server.logger
-				        .debugLogEntry("server going to use \"" + appName + "\" as external module (path=" + Environment.getOfficeFrameDir() + ")");
+				Server.logger.debugLogEntry("Server using  \"" + appName + "\" as external module (path=" + Environment.getOfficeFrameDir() + ")");
 			}
 		}
 
@@ -104,7 +103,7 @@ public class AppEnv extends PageCacheAdapter {
 				Collection<File> scipts = FileUtils.listFiles(cur, extensions, true);
 				for (File groovyFile : scipts) {
 					try {
-						Server.logger.debugLogEntry("recompile " + groovyFile.getAbsolutePath() + "...");
+						Server.logger.debugLogEntry("Recompile " + groovyFile.getAbsolutePath() + "...");
 						loader.parseClass(groovyFile);
 					} catch (CompilationFailedException e) {
 						AppEnv.logger.errorLogEntry(e);

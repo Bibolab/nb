@@ -86,14 +86,14 @@ public class Console implements Runnable {
 				System.out.printf(format, "smtp server", Environment.SMTPHost);
 				System.out.printf(format, "smtp user", Environment.smtpUser);
 			} else {
-				System.out.printf(format, "mail agent is", "OFF");
+				System.out.printf(format, "mail agent: ", "OFF");
 			}
 			if (Environment.isDevMode()) {
-				System.out.printf(format, "developer mode is", "ON");
+				System.out.printf(format, "developer mode: ", "ON");
 				System.out.printf(format, "external server core folder", Environment.getKernelDir());
 				System.out.printf(format, "external " + EnvConst.OFFICEFRAME + " folder", Environment.getOfficeFrameDir());
 			} else {
-				System.out.printf(format, "developer mode is", "OFF");
+				System.out.printf(format, "developer mode: ", "OFF");
 			}
 			System.out.printf(format, "temporary files", Environment.fileToDelete.size());
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {

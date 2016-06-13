@@ -261,6 +261,8 @@ public class User implements IUser<Long>, IPOJOObject {
 		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<email>" + email + "</email>");
+		chunk.append("<xmpp>" + xmpp + "</xmpp>");
+		chunk.append("<slack>" + slack + "</slack>");
 		chunk.append("<issuperuser>" + isSuperUser + "</issuperuser>");
 		chunk.append("<apps>");
 		try {

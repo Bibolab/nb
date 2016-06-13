@@ -7,12 +7,14 @@ import java.util.List;
 import com.exponentus.env.EnvConst;
 import com.exponentus.exception.MsgException;
 import com.exponentus.messaging.email.MailAgent;
+import com.exponentus.messaging.slack.SlackAgent;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoPage;
 import com.exponentus.util.Util;
 
 public class SendTestMsg extends _DoPage {
+	private static String testMsg = "this is test message from " + EnvConst.APP_ID;
 
 	@Override
 	public void doPOST(_Session session, _WebFormData formData) {
@@ -24,8 +26,7 @@ public class SendTestMsg extends _DoPage {
 			recipients.add(address);
 			MailAgent ma = new MailAgent();
 			try {
-				if (!ma.sendDebugMail(recipients, "this is test message from " + EnvConst.APP_ID,
-				        "this is test message " + Util.convertDataTimeToString(new Date()))) {
+				if (!ma.sendDebugMail(recipients, testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()))) {
 					addValue("The message has been sent succesfully");
 				} else {
 					addWarning("The message has not been sent");
@@ -36,6 +37,8 @@ public class SendTestMsg extends _DoPage {
 		} else if (type.equalsIgnoreCase("xmpp")) {
 
 		} else if (type.equalsIgnoreCase("slack")) {
+			SlackAgent sa = new SlackAgent();
+			sa.sendDirectMessageToAUser(address, testMsg);
 
 		}
 

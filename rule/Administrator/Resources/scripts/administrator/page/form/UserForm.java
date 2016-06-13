@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Exception;
-import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._Validator;
@@ -41,7 +40,7 @@ public class UserForm extends _DoPage {
 			entity.setEditable(true);
 		}
 		addContent(entity);
-		addContent(new _POJOListWrapper(new ApplicationDAO(session).findAll(), session));
+		addContent(new ApplicationDAO(session).findAll());
 		_ActionBar actionBar = new _ActionBar(session);
 		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
 		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
@@ -71,6 +70,8 @@ public class UserForm extends _DoPage {
 
 			entity.setLogin(formData.getValue("login"));
 			entity.setEmail(formData.getValue("email"));
+			entity.setXmpp(formData.getValue("xmpp"));
+			entity.setSlack(formData.getValue("slack"));
 			entity.setPwd(formData.getValue("pwd"));
 			List<Application> apps = new ArrayList<Application>();
 			ApplicationDAO aDao = new ApplicationDAO(session);

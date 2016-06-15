@@ -112,7 +112,7 @@ public class _Session extends PageCacheAdapter {
 	public _FormAttachments getAttachments(String fsid) {
 		Object obj = getAttribute(fsid);
 		if (obj == null) {
-			_FormAttachments fa = new _FormAttachments();
+			_FormAttachments fa = new _FormAttachments(this);
 			setAttribute(fsid, fa);
 			return fa;
 		} else {

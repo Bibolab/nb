@@ -94,6 +94,21 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		result.setFile(filePath, fileName);
 	}
 
+	public boolean showAttachment(byte[] att) {
+		try {
+			String tempFileName = StringUtil.getRandomText();
+			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + tempFileName;
+			File attFile = new File(filePath);
+			FileUtils.writeByteArrayToFile(attFile, att);
+			showFile(filePath, tempFileName);
+			Environment.fileToDelete.add(filePath);
+			return true;
+		} catch (IOException ioe) {
+			Server.logger.errorLogEntry(ioe);
+			return false;
+		}
+	}
+
 	public boolean showAttachment(Attachment att) {
 		try {
 			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + att.getRealFileName();

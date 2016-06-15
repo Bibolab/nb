@@ -17,7 +17,8 @@ import com.exponentus.env.Environment;
 import com.exponentus.server.Server;
 
 public class _FormAttachments {
-	private Map<String, EntityFile> attachments = new HashMap<String, EntityFile>();
+	private Map<String, EntityFile> addedAttachments = new HashMap<String, EntityFile>();
+	private Map<String, EntityFile> deletedAttachments = new HashMap<String, EntityFile>();
 	private _Session ses;
 
 	_FormAttachments(_Session ses) {
@@ -28,7 +29,7 @@ public class _FormAttachments {
 		Attachment a = new Attachment();
 		a.setRealFileName(fileName);
 		a.setFieldName(fieldName);
-		attachments.put(fieldName + "_" + fileName, a);
+		addedAttachments.put(fieldName + "_" + fileName, a);
 	}
 
 	public void addFileWithSign(String fileName, String fieldName, String sign) {
@@ -36,19 +37,19 @@ public class _FormAttachments {
 		a.setRealFileName(fileName);
 		a.setFieldName(fieldName);
 		a.setSign(sign);
-		attachments.put(fieldName + "_" + fileName, a);
+		addedAttachments.put(fieldName + "_" + fileName, a);
 	}
 
 	public List<EntityFile> getFiles() {
-		return new ArrayList<EntityFile>(attachments.values());
+		return new ArrayList<EntityFile>(addedAttachments.values());
 	}
 
 	public EntityFile getFile(String fieldName, String fileName) {
-		return attachments.get(fieldName + "_" + fileName);
+		return addedAttachments.get(fieldName + "_" + fileName);
 	}
 
 	public EntityFile getFile(String fn) {
-		EntityFile att = attachments.get("_" + fn);
+		EntityFile att = addedAttachments.get("_" + fn);
 		att.setRealFileName(fn);
 		File file = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID() + File.separator + fn);
 		InputStream is = null;
@@ -61,5 +62,17 @@ public class _FormAttachments {
 		}
 
 		return att;
+	}
+
+	public void removeFile(String fieldName, String fileName) {
+		Attachment a = new Attachment();
+		a.setRealFileName(fileName);
+		a.setFieldName(fieldName);
+		deletedAttachments.put(fieldName + "_" + fileName, a);
+
+	}
+
+	public List<EntityFile> getDeletedFiles() {
+		return new ArrayList<EntityFile>(deletedAttachments.values());
 	}
 }

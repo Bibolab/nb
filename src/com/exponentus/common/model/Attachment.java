@@ -86,7 +86,34 @@ public class Attachment extends EntityFile {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+
+		if (obj == null) {
+			return false;
+		}
+
+		if (!(getClass() == obj.getClass())) {
+			return false;
+		} else {
+			Attachment tmp = (Attachment) obj;
+
+			if (tmp.id == null) {
+				return false;
+			}
+
+			if (tmp.fieldName.equals(this.fieldName) && tmp.realFileName.equals(this.realFileName)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	@Override
 	public String toString() {
-		return fieldName + "/" + realFileName;
+		return "fieldName=" + fieldName + ", realFileName=" + realFileName;
 	}
 }

@@ -37,8 +37,8 @@ import com.exponentus.webserver.servlet.PublishAsType;
 
 public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	private static final String DEFAULT_MESSAGE_TAG = "msg";
-	private _WebFormData formData;
-	private PageOutcome result;
+	protected _WebFormData formData;
+	protected PageOutcome result;
 
 	@Override
 	public void setOutcome(PageOutcome o) {

@@ -109,7 +109,7 @@ public class _Session extends PageCacheAdapter {
 		return newSes;
 	}
 
-	public _FormAttachments getAttachments(String fsid) {
+	public _FormAttachments getFormAttachments(String fsid) {
 		Object obj = getAttribute(fsid);
 		if (obj == null) {
 			_FormAttachments fa = new _FormAttachments(this);
@@ -156,7 +156,7 @@ public class _Session extends PageCacheAdapter {
 			formTrans.remove(entity.getId());
 			return refURL;
 		} else {
-			return "Provider?id=" + entity.getDefaultViewName() + "&page=0";
+			return "p?id=" + entity.getDefaultViewName() + "&page=0";
 		}
 
 	}

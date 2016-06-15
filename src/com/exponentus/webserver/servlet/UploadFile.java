@@ -112,7 +112,7 @@ public class UploadFile extends HttpServlet {
 		// fileItem.getFieldName());
 
 		if (fileItem != null) {
-			_FormAttachments attachs = ses.getAttachments(fileItem.getString());
+			_FormAttachments attachs = ses.getFormAttachments(fileItem.getString());
 			if (sign != null && !sign.isEmpty()) {
 				attachs.addFileWithSign(fn, fieldName, sign);
 			} else {

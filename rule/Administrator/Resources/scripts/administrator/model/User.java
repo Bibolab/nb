@@ -321,4 +321,9 @@ public class User implements IUser<Long>, IPOJOObject {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "id=" + id + ", login=" + login;
+	}
+
 }

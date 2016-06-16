@@ -14,16 +14,29 @@ public abstract class AbstractForm extends AbstractPage {
 
 	@Override
 	public PageOutcome processCode(String method) {
+		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 		try {
 			if (method.equalsIgnoreCase("POST")) {
 				doPOST(getSes(), formData);
+				if (!fsId.isEmpty()) {
+					result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
+					if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR
+					        && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
+						// result.setFlash(entity.getId().toString());
+						result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
+					}
+					getSes().removeAttribute(fsId);
+				}
 			} else if (method.equalsIgnoreCase("PUT")) {
 				doPUT(getSes(), formData);
+				if (!fsId.isEmpty()) {
+					result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
+					getSes().removeAttribute(fsId);
+				}
 			} else if (method.equalsIgnoreCase("DELETE")) {
 				doDELETE(getSes(), formData);
 			} else {
 				doGET(getSes(), formData);
-				String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 				if (fsId.isEmpty()) {
 					fsId = Util.generateRandomAsText();
 				}
@@ -56,6 +69,7 @@ public abstract class AbstractForm extends AbstractPage {
 				atts.remove(fn);
 			}
 		}
+
 		return atts;
 	}
 

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 public class _WebFormData {
 	private Map<String, String[]> data;
@@ -172,7 +172,7 @@ public class _WebFormData {
 	public Date getDateSilently(String fn) {
 		try {
 			String value[] = data.get(fn);
-			return Util.convertStringToSimpleDate(value[0].trim());
+			return TimeUtil.convertStringToDate(value[0].trim());
 		} catch (Exception e) {
 			return null;
 		}

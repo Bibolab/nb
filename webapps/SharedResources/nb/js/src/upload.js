@@ -56,7 +56,8 @@ nb.uploadProgress = function(e, $progress) {
 };
 
 $(document).ready(function() {
-    var fsId = new Date().getTime();
+   // var fsId = new Date().getTime();
+    var fsId = $("#fsid").val();
 
     $('[data-upload]').each(function() {
         var uploadBtn = this;

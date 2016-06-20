@@ -1,6 +1,7 @@
 package com.exponentus.common.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -98,6 +99,16 @@ public class ReadingMark extends SimpleAppEntity implements IPOJOObject {
 	@Override
 	public boolean isEditable() {
 		return false;
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return null;
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 
 }

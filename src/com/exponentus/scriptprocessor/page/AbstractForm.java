@@ -3,14 +3,26 @@ package com.exponentus.scriptprocessor.page;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
-import com.exponentus.common.model.EntityFile;
 import com.exponentus.env.EnvConst;
+import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._FormAttachments;
+import com.exponentus.scripting._POJOObjectWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.util.Util;
 
 public abstract class AbstractForm extends AbstractPage {
+
+	@Override
+	protected void addContent(IPOJOObject document) {
+		_Session ses = getSes();
+		List<Attachment> atts = document.getAttachments();
+		for (Attachment file : ses.getFormAttachments(formData.getValueSilently(EnvConst.FSID_FIELD_NAME)).getFiles()) {
+			atts.add(file);
+		}
+		_POJOObjectWrapper wrapped = new _POJOObjectWrapper(document, getSes());
+		result.addObject(wrapped);
+	}
 
 	@Override
 	public PageOutcome processCode(String method) {
@@ -58,14 +70,14 @@ public abstract class AbstractForm extends AbstractPage {
 		String[] fileNames = formData.getListOfValuesSilently(fieldName);
 		if (fileNames.length > 0) {
 			for (String fn : fileNames) {
-				EntityFile ef = formFiles.getFile(fn);
-				atts.add((Attachment) ef);
+				Attachment ef = formFiles.getFile(fn);
+				atts.add(ef);
 			}
 		}
 
-		List<EntityFile> toDelete = formFiles.getDeletedFiles();
+		List<Attachment> toDelete = formFiles.getDeletedFiles();
 		if (toDelete.size() > 0) {
-			for (EntityFile fn : toDelete) {
+			for (Attachment fn : toDelete) {
 				atts.remove(fn);
 			}
 		}

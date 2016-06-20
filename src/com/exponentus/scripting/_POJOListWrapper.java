@@ -2,6 +2,7 @@ package com.exponentus.scripting;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.exponentus.scriptprocessor.page.IOutcomeObject;
 
@@ -123,7 +124,7 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		public List<Object> list = new ArrayList<>();
 	}
 
-	class SimplePOJO implements IPOJOObject {
+	class SimplePOJO extends POJOObjectAdapter<UUID> {
 		private String msg;
 
 		SimplePOJO(String msg) {
@@ -137,11 +138,6 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		}
 
 		@Override
-		public boolean isEditable() {
-			return false;
-		}
-
-		@Override
 		public String getFullXMLChunk(_Session ses) {
 			return "<message>" + msg + "</message>";
 		}
@@ -149,26 +145,6 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		@Override
 		public String getShortXMLChunk(_Session ses) {
 			return getFullXMLChunk(ses);
-		}
-
-		@Override
-		public Object getJSONObj(_Session ses) {
-			return this;
-		}
-
-		@Override
-		public String getIdentifier() {
-			return "null";
-		}
-
-		@Override
-		public boolean isWasRead() {
-			return true;
-		}
-
-		@Override
-		public String getEntityKind() {
-			return this.getClass().getSimpleName().toLowerCase();
 		}
 
 	}

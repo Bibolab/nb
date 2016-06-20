@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +22,7 @@ import org.eclipse.persistence.annotations.UuidGenerator;
 import org.eclipse.persistence.internal.indirection.jdk8.IndirectList;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.jpa.util.UUIDConverter;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
@@ -249,6 +251,16 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 
 	public void setWasRead(boolean isWasRead) {
 		this.isWasRead = isWasRead;
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return new ArrayList<Attachment>();
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 
 	@Override

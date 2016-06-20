@@ -1,6 +1,8 @@
 package com.exponentus.scheduler;
 
-import com.exponentus.scripting.IPOJOObject;
+import java.util.UUID;
+
+import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
 
 /**
@@ -9,7 +11,7 @@ import com.exponentus.scripting._Session;
  * @author Kayra created 03-01-2016
  */
 
-public class _EnumWrapper<T extends Enum<?>> implements IPOJOObject {
+public class _EnumWrapper<T extends Enum<?>> extends POJOObjectAdapter<UUID> {
 	private T[] enumObj;
 	private String[] translatedWords;
 
@@ -46,32 +48,8 @@ public class _EnumWrapper<T extends Enum<?>> implements IPOJOObject {
 	}
 
 	@Override
-	public String getEntityKind() {
-		return this.getClass().getSimpleName().toLowerCase();
-	}
-
-	@Override
 	public String getShortXMLChunk(_Session ses) {
 		return null;
 	}
 
-	@Override
-	public boolean isEditable() {
-		return false;
-	}
-
-	@Override
-	public Object getJSONObj(_Session ses) {
-		return this;
-	}
-
-	@Override
-	public String getIdentifier() {
-		return "null";
-	}
-
-	@Override
-	public boolean isWasRead() {
-		return true;
-	}
 }

@@ -94,6 +94,23 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		result.setFile(filePath, fileName);
 	}
 
+	public boolean showAttachment(String attachmentId, IPOJOObject entity) {
+		if (attachmentId.equals("00000000-0000-0000-0000-000000000000")) {
+			String fn = formData.getValueSilently("fileid");
+			File file = new File(Environment.tmpDir + File.separator + getSes().getUser().getUserID() + File.separator + fn);
+			showFile(file.getAbsolutePath(), fn);
+			return true;
+		} else {
+			if (entity.getAttachments() != null) {
+				Attachment att = entity.getAttachments().stream().filter(it -> it.getIdentifier().equals(attachmentId)).findFirst().get();
+				if (showAttachment(att)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public boolean showAttachment(byte[] att) {
 		try {
 			String tempFileName = StringUtil.getRandomText();
@@ -181,7 +198,8 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	}
 
 	protected void addContent(IPOJOObject document) {
-		result.addObject(new _POJOObjectWrapper(document, getSes()));
+		_POJOObjectWrapper wrapped = new _POJOObjectWrapper(document, getSes());
+		result.addObject(wrapped);
 	}
 
 	protected void addContent(_POJOListWrapper<IPOJOObject> wrappedList) {

@@ -1,5 +1,6 @@
 package administrator.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import javax.persistence.Transient;
 import org.eclipse.persistence.annotations.Cache;
 import org.eclipse.persistence.config.CacheIsolationType;
 
+import com.exponentus.common.model.Attachment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
@@ -324,6 +326,16 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public String toString() {
 		return "id=" + id + ", login=" + login;
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return new ArrayList<Attachment>();
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 
 }

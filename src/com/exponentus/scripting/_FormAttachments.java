@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 
 import com.exponentus.common.model.Attachment;
-import com.exponentus.common.model.EntityFile;
 import com.exponentus.env.Environment;
 import com.exponentus.server.Server;
 
 public class _FormAttachments {
-	private Map<String, EntityFile> addedAttachments = new HashMap<String, EntityFile>();
-	private Map<String, EntityFile> deletedAttachments = new HashMap<String, EntityFile>();
+	private Map<String, Attachment> addedAttachments = new HashMap<String, Attachment>();
+	private Map<String, Attachment> deletedAttachments = new HashMap<String, Attachment>();
 	private _Session ses;
 
 	_FormAttachments(_Session ses) {
@@ -29,6 +29,7 @@ public class _FormAttachments {
 		Attachment a = new Attachment();
 		a.setRealFileName(fileName);
 		a.setFieldName(fieldName);
+		a.setId(new UUID(0L, 0L));
 		addedAttachments.put(fieldName + "_" + fileName, a);
 	}
 
@@ -36,20 +37,21 @@ public class _FormAttachments {
 		Attachment a = new Attachment();
 		a.setRealFileName(fileName);
 		a.setFieldName(fieldName);
+		a.setId(new UUID(0L, 0L));
 		a.setSign(sign);
 		addedAttachments.put(fieldName + "_" + fileName, a);
 	}
 
-	public List<EntityFile> getFiles() {
-		return new ArrayList<EntityFile>(addedAttachments.values());
+	public List<Attachment> getFiles() {
+		return new ArrayList<Attachment>(addedAttachments.values());
 	}
 
-	public EntityFile getFile(String fieldName, String fileName) {
+	public Attachment getFile(String fieldName, String fileName) {
 		return addedAttachments.get(fieldName + "_" + fileName);
 	}
 
-	public EntityFile getFile(String fn) {
-		EntityFile att = addedAttachments.get("_" + fn);
+	public Attachment getFile(String fn) {
+		Attachment att = addedAttachments.get("_" + fn);
 		att.setRealFileName(fn);
 		File file = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID() + File.separator + fn);
 		InputStream is = null;
@@ -72,7 +74,7 @@ public class _FormAttachments {
 
 	}
 
-	public List<EntityFile> getDeletedFiles() {
-		return new ArrayList<EntityFile>(deletedAttachments.values());
+	public List<Attachment> getDeletedFiles() {
+		return new ArrayList<Attachment>(deletedAttachments.values());
 	}
 }

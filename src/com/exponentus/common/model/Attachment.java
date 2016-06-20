@@ -1,5 +1,7 @@
 package com.exponentus.common.model;
 
+import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,13 +9,14 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "attachments")
-public class Attachment extends EntityFile {
+public class Attachment extends AppEntity<UUID> {
 
 	private String fieldName;
 	private String realFileName;
@@ -27,42 +30,34 @@ public class Attachment extends EntityFile {
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] file;
 
-	@Override
 	public String getFieldName() {
 		return fieldName;
 	}
 
-	@Override
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
 
-	@Override
 	public String getRealFileName() {
 		return realFileName;
 	}
 
-	@Override
 	public void setRealFileName(String realFileName) {
 		this.realFileName = realFileName;
 	}
 
-	@Override
 	public byte[] getFile() {
 		return file;
 	}
 
-	@Override
 	public void setFile(byte[] file) {
 		this.file = file;
 	}
 
-	@Override
 	public String getSign() {
 		return sign;
 	}
 
-	@Override
 	public void setSign(String sign) {
 		this.sign = sign;
 	}

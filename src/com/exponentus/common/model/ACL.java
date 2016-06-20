@@ -11,7 +11,7 @@ import com.exponentus.dataengine.jpa.SecureAppEntity;
 import com.exponentus.dataengine.system.IEmployee;
 import com.exponentus.dataengine.system.IExtUserDAO;
 import com.exponentus.env.Environment;
-import com.exponentus.scripting.IPOJOObject;
+import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.exponentus.user.SuperUser;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({ "entityKind", "identifier", "readers", "editors" })
-public class ACL implements IPOJOObject {
+public class ACL extends POJOObjectAdapter<UUID> {
 	public Map<Long, Object> readers = new HashMap<>();
 	public Map<Long, Object> editors = new HashMap<>();
 

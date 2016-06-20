@@ -1,5 +1,6 @@
 package administrator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.constants.AppCode;
 import com.exponentus.localization.LanguageCode;
@@ -164,5 +166,15 @@ public class Application extends AppEntity<UUID> {
 		} catch (Exception e) {
 			return name;
 		}
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return new ArrayList<Attachment>();
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 }

@@ -1,11 +1,13 @@
 package com.exponentus.rule.page;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.w3c.dom.NodeList;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.common.model.Attachment;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.RuleException;
@@ -183,6 +185,16 @@ public class PageRule extends Rule implements IElement, IPOJOObject {
 	@Override
 	public boolean isWasRead() {
 		return true;
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return null;
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 
 }

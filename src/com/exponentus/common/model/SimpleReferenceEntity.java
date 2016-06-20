@@ -1,5 +1,6 @@
 package com.exponentus.common.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -70,6 +71,16 @@ public class SimpleReferenceEntity extends AppEntity<UUID> {
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		return "<name>" + getLocalizedName(ses.getLang()) + "</name>";
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return new ArrayList<Attachment>();
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 
 }

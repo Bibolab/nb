@@ -1,5 +1,10 @@
 package com.exponentus.scripting;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.exponentus.common.model.Attachment;
+
 public class POJOObjectAdapter<UUID> implements IPOJOObject {
 
 	@Override
@@ -40,6 +45,16 @@ public class POJOObjectAdapter<UUID> implements IPOJOObject {
 	@Override
 	public String getEntityKind() {
 		return this.getClass().getSimpleName().toLowerCase();
+	}
+
+	@Override
+	public List<Attachment> getAttachments() {
+		return new ArrayList<Attachment>();
+	}
+
+	@Override
+	public void setAttachments(List<Attachment> attachments) {
+
 	}
 
 }

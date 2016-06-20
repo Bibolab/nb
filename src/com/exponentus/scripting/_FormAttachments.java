@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 
@@ -29,7 +28,6 @@ public class _FormAttachments {
 		Attachment a = new Attachment();
 		a.setRealFileName(fileName);
 		a.setFieldName(fieldName);
-		a.setId(new UUID(0L, 0L));
 		addedAttachments.put(fieldName + "_" + fileName, a);
 	}
 
@@ -37,7 +35,6 @@ public class _FormAttachments {
 		Attachment a = new Attachment();
 		a.setRealFileName(fileName);
 		a.setFieldName(fieldName);
-		a.setId(new UUID(0L, 0L));
 		a.setSign(sign);
 		addedAttachments.put(fieldName + "_" + fileName, a);
 	}

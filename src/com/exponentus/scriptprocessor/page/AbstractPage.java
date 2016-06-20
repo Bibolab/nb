@@ -95,19 +95,21 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	}
 
 	public boolean showAttachment(String attachmentId, IPOJOObject entity) {
-		if (attachmentId.equals("00000000-0000-0000-0000-000000000000")) {
-			String fn = formData.getValueSilently("fileid");
-			File file = new File(Environment.tmpDir + File.separator + getSes().getUser().getUserID() + File.separator + fn);
-			showFile(file.getAbsolutePath(), fn);
-			return true;
-		} else {
-			if (entity.getAttachments() != null) {
-				Attachment att = entity.getAttachments().stream().filter(it -> it.getIdentifier().equals(attachmentId)).findFirst().get();
+
+		if (entity.getAttachments() != null) {
+			Attachment att = entity.getAttachments().stream().filter(it -> it.getIdentifier().equals(attachmentId)).findFirst().get();
+			if (att != null) {
 				if (showAttachment(att)) {
 					return true;
 				}
+			} else {
+				String fn = formData.getValueSilently("fileid");
+				File file = new File(Environment.tmpDir + File.separator + getSes().getUser().getUserID() + File.separator + fn);
+				showFile(file.getAbsolutePath(), fn);
+				return true;
 			}
 		}
+
 		return false;
 	}
 

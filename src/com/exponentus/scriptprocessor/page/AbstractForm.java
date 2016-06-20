@@ -8,6 +8,7 @@ import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._FormAttachments;
 import com.exponentus.scripting._POJOObjectWrapper;
 import com.exponentus.scripting._Session;
+import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.util.Util;
 
@@ -28,32 +29,38 @@ public abstract class AbstractForm extends AbstractPage {
 	public PageOutcome processCode(String method) {
 		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 		try {
-			if (method.equalsIgnoreCase("POST")) {
-				doPOST(getSes(), formData);
-				if (!fsId.isEmpty()) {
-					result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
-					if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR
-					        && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
-						// result.setFlash(entity.getId().toString());
-						result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
-					}
-					getSes().removeAttribute(fsId);
-				}
-			} else if (method.equalsIgnoreCase("PUT")) {
-				doPUT(getSes(), formData);
-				if (!fsId.isEmpty()) {
-					result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
-					getSes().removeAttribute(fsId);
-				}
-			} else if (method.equalsIgnoreCase("DELETE")) {
-				doDELETE(getSes(), formData);
-			} else {
+			if (method.equalsIgnoreCase("GET")) {
 				doGET(getSes(), formData);
 				if (fsId.isEmpty()) {
 					fsId = Util.generateRandomAsText();
 				}
-				addValue("formsesid", fsId);
+				addValue(EnvConst.FSID_FIELD_NAME, fsId);
 				getSes().setAttribute(fsId + "_referrer", formData.getReferrer());
+			} else {
+				_Validation ve = validate(fsId);
+				if (ve.hasError()) {
+					setBadRequest();
+					setValidation(ve);
+				} else {
+					if (method.equalsIgnoreCase("POST")) {
+						doPOST(getSes(), formData);
+						result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
+						if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR
+						        && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
+							// result.setFlash(entity.getId().toString());
+							result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
+						}
+						getSes().removeAttribute(fsId);
+					} else if (method.equalsIgnoreCase("PUT")) {
+						doPUT(getSes(), formData);
+						if (!fsId.isEmpty()) {
+							result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
+							getSes().removeAttribute(fsId);
+						}
+					} else if (method.equalsIgnoreCase("DELETE")) {
+						doDELETE(getSes(), formData);
+					}
+				}
 			}
 		} catch (Exception e) {
 			result.setException(e);
@@ -62,6 +69,7 @@ public abstract class AbstractForm extends AbstractPage {
 			error(e);
 		}
 		return result;
+
 	}
 
 	protected List<Attachment> getActualAttachments(String fieldName, List<Attachment> atts) {
@@ -96,4 +104,14 @@ public abstract class AbstractForm extends AbstractPage {
 
 	@Override
 	public abstract void doDELETE(_Session session, _WebFormData formData) throws Exception;
+
+	private _Validation validate(String fsId) {
+		_Validation ve = new _Validation();
+		if (fsId.isEmpty()) {
+			ve.addError("fsid", "required", "There is no \"" + EnvConst.FSID_FIELD_NAME + "\" field");
+			setBadRequest();
+			setValidation(ve);
+		}
+		return ve;
+	}
 }

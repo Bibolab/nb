@@ -99,7 +99,16 @@ public class Attachment extends AppEntity<UUID> {
 				return false;
 			}
 
-			if (tmp.fieldName.equals(this.fieldName) && tmp.realFileName.equals(this.realFileName)) {
+			if (tmp.fieldName != null && this.fieldName == null) {
+				return false;
+			}
+
+			if (tmp.realFileName != null && this.realFileName == null) {
+				return false;
+			}
+
+			if ((tmp.fieldName == null && this.fieldName == null || tmp.fieldName.equals(this.fieldName))
+					&& (tmp.realFileName == null && this.realFileName == null || tmp.realFileName.equals(this.realFileName))) {
 				return true;
 			} else {
 				return false;

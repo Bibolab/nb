@@ -29,6 +29,19 @@ public class _WebFormData {
 		}
 	}
 
+	public String getAnyValueSilently(String fn) {
+		String items[] = data.get(fn);
+		if (items != null) {
+			for (String s : items) {
+				if (s != null) {
+					return s;
+				}
+			}
+		}
+		return "";
+
+	}
+
 	public String getValueSilently(String fn, String defaultValue) {
 		try {
 			String value[] = data.get(fn);

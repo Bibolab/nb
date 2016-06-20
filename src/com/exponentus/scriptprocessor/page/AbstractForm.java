@@ -27,7 +27,7 @@ public abstract class AbstractForm extends AbstractPage {
 
 	@Override
 	public PageOutcome processCode(String method) {
-		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
+		String fsId = formData.getAnyValueSilently(EnvConst.FSID_FIELD_NAME);
 		try {
 			if (method.equalsIgnoreCase("GET")) {
 				doGET(getSes(), formData);
@@ -49,8 +49,9 @@ public abstract class AbstractForm extends AbstractPage {
 						        && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
 							// result.setFlash(entity.getId().toString());
 							result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
+							getSes().removeAttribute(fsId);
 						}
-						getSes().removeAttribute(fsId);
+
 					} else if (method.equalsIgnoreCase("PUT")) {
 						doPUT(getSes(), formData);
 						if (!fsId.isEmpty()) {
@@ -70,6 +71,24 @@ public abstract class AbstractForm extends AbstractPage {
 		}
 		return result;
 
+	}
+
+	protected List<Attachment> getActualAttachments(List<Attachment> atts) {
+		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
+		_FormAttachments formFiles = getSes().getFormAttachments(fsId);
+
+		for (Attachment newFile : formFiles.getFiles()) {
+			atts.add(newFile);
+		}
+
+		List<Attachment> toDelete = formFiles.getDeletedFiles();
+		if (toDelete.size() > 0) {
+			for (Attachment fn : toDelete) {
+				atts.remove(fn);
+			}
+		}
+
+		return atts;
 	}
 
 	protected List<Attachment> getActualAttachments(String fieldName, List<Attachment> atts) {

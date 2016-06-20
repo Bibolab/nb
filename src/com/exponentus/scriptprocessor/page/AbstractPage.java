@@ -96,27 +96,30 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	public boolean showAttachment(String attachmentId, IPOJOObject entity) {
 
-		if (entity.getAttachments() != null) {
+		if (!attachmentId.isEmpty() && entity.getAttachments() != null) {
 			Attachment att = entity.getAttachments().stream().filter(it -> it.getIdentifier().equals(attachmentId)).findFirst().get();
 			if (att != null) {
 				if (showAttachment(att)) {
 					return true;
+				} else {
+					return false;
 				}
-			} else {
-				String fn = formData.getValueSilently("fileid");
-				File file = new File(Environment.tmpDir + File.separator + getSes().getUser().getUserID() + File.separator + fn);
-				showFile(file.getAbsolutePath(), fn);
-				return true;
 			}
+		} else {
+			String fn = formData.getValueSilently("fileid");
+			File file = new File(Environment.tmpDir + File.separator + getSes().getUser().getUserID() + File.separator + fn);
+			showFile(file.getAbsolutePath(), fn);
+			return true;
 		}
 
 		return false;
+
 	}
 
 	public boolean showAttachment(byte[] att) {
 		try {
 			String tempFileName = StringUtil.getRandomText();
-			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + tempFileName;
+			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + File.separator + tempFileName;
 			File attFile = new File(filePath);
 			FileUtils.writeByteArrayToFile(attFile, att);
 			showFile(filePath, tempFileName);
@@ -130,7 +133,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	public boolean showAttachment(Attachment att) {
 		try {
-			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + att.getRealFileName();
+			String filePath = getTmpDirPath() + File.separator + StringUtil.getRandomText() + File.separator + att.getRealFileName();
 			File attFile = new File(filePath);
 			FileUtils.writeByteArrayToFile(attFile, att.getFile());
 			showFile(filePath, att.getRealFileName());

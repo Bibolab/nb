@@ -40,7 +40,11 @@ public class _FormAttachments {
 	}
 
 	public List<Attachment> getFiles() {
-		return new ArrayList<Attachment>(addedAttachments.values());
+		ArrayList<Attachment> atts = new ArrayList<Attachment>();
+		for (Attachment att : addedAttachments.values()) {
+			atts.add(getFile(att.getRealFileName()));
+		}
+		return atts;
 	}
 
 	public Attachment getFile(String fieldName, String fileName) {

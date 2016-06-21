@@ -17,7 +17,6 @@ import javax.persistence.criteria.Root;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
-import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.user.SuperUser;
 
@@ -48,7 +47,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		try {
 			return findById((K) UUID.fromString(id));
 		} catch (IllegalArgumentException e) {
-			Server.logger.errorLogEntry(e.toString());
+			// Server.logger.errorLogEntry(e.toString());
 			return null;
 		}
 	}

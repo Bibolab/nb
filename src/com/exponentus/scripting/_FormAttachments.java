@@ -75,6 +75,14 @@ public class _FormAttachments {
 
 	}
 
+	public void removeFile(String fileName) {
+		Attachment a = new Attachment();
+		a.setRealFileName(fileName);
+		a.setFieldName("");
+		deletedAttachments.put("_" + fileName, a);
+
+	}
+
 	public List<Attachment> getDeletedFiles() {
 		return new ArrayList<Attachment>(deletedAttachments.values());
 	}

@@ -93,6 +93,7 @@ nb.uploadAvatar = function(fileInput) {
         complete: function() {
             fileInput.form.reset();
             $('#progress_' + inputName).val(0);
+            window.location.reload();
         }
     });
 };

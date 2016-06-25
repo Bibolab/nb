@@ -24,6 +24,8 @@ public class Server {
 	public static IDatabase dataBase;
 	public static WebServer webServerInst;
 
+	private static boolean keepCLI;
+
 	public static void start() throws MalformedURLException, LifecycleException, URISyntaxException {
 		logger = new Log4jLogger("Server");
 		logger.infoLogEntry(":-)");
@@ -51,7 +53,7 @@ public class Server {
 
 			Environment.periodicalServices = new PeriodicalServices();
 
-			if (EnvConst.CLI.equalsIgnoreCase("on")) {
+			if (EnvConst.CLI.equalsIgnoreCase("on") || keepCLI) {
 				Thread thread = new Thread(new Console());
 				thread.setPriority(Thread.MIN_PRIORITY);
 				thread.start();
@@ -69,6 +71,8 @@ public class Server {
 			for (int i = 0; i < arg.length; i++) {
 				if (arg[i].equals("developing")) {
 					Environment.setDevMode(true);
+				} else if (arg[i].equals("keepcli")) {
+					keepCLI = true;
 				}
 			}
 			Server.start();

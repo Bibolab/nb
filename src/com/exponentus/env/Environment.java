@@ -103,6 +103,7 @@ public class Environment implements ICache {
 	private static HashMap<String, Object> cache = new HashMap<String, Object>();
 	private static ArrayList<_Session> sess = new ArrayList<_Session>();
 	private static boolean isDevMode;
+
 	private static String officeFrameDir = "";
 	private static String kernelDir = "";
 

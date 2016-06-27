@@ -6,11 +6,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.server.Server;
 
-public class Connect {
+public class SlackConnect {
 	private static final String SLACK_HTTPS_AUTH_URL = "https://slack.com/api/rtm.start?token=";
 	private static String authToken = Environment.slackToken;
 
@@ -39,8 +40,25 @@ public class Connect {
 		System.out.println(bean + "=" + rr.getClass().getCanonicalName());
 	}
 
+	public void sendMessage(String userName, String text) {
+		SlackMessage msg = new SlackMessage();
+		msg.setToken(authToken);
+		msg.setSender(EnvConst.APP_ID);
+		msg.setChannel(userName);
+		msg.setText(text);
+
+		Client client = ClientBuilder.newClient();
+
+		WebTarget target = client.target("https://slack.com/api/chat.postMessage").queryParam("token", msg.getToken())
+		        .queryParam("username", msg.getSender()).queryParam("channel", msg.getChannel()).queryParam("text", msg.getText());
+
+		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
+		Object rr = bean.getEntity();
+		System.out.println(bean + "=" + rr.getClass().getCanonicalName());
+	}
+
 	public static void main(String[] args) {
-		Connect conn = new Connect();
-		conn.get();
+		SlackConnect conn = new SlackConnect();
+		conn.sendMessage("@kayra", "SLACK_HTTPS_AUTH_URL");
 	}
 }

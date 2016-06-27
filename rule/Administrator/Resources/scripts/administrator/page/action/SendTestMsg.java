@@ -7,7 +7,7 @@ import java.util.List;
 import com.exponentus.env.EnvConst;
 import com.exponentus.exception.MsgException;
 import com.exponentus.messaging.email.MailAgent;
-import com.exponentus.messaging.slack.SlackAgent;
+import com.exponentus.messaging.slack.SlackConnect;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoPage;
@@ -37,8 +37,8 @@ public class SendTestMsg extends _DoPage {
 		} else if (type.equalsIgnoreCase("xmpp")) {
 
 		} else if (type.equalsIgnoreCase("slack")) {
-			SlackAgent sa = new SlackAgent();
-			sa.sendDirectMessageToAUser(address, testMsg);
+			SlackConnect sa = new SlackConnect();
+			sa.sendMessage(address, testMsg);
 
 		}
 

@@ -1,6 +1,5 @@
 package com.exponentus.scriptprocessor.page;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
@@ -19,9 +18,6 @@ public abstract class AbstractForm extends AbstractPage {
 	protected void addContent(IPOJOObject document) {
 		_Session ses = getSes();
 		List<Attachment> atts = document.getAttachments();
-		if (atts == null) {
-			atts = new ArrayList<Attachment>();
-		}
 		for (Attachment file : ses.getFormAttachments(formData.getValueSilently(EnvConst.FSID_FIELD_NAME)).getFiles()) {
 			atts.add(file);
 		}

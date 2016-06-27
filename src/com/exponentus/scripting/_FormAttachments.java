@@ -57,17 +57,18 @@ public class _FormAttachments {
 
 	public Attachment getFile(String fieldName, String fileName) {
 		Attachment att = addedAttachments.get(fieldName + "_" + fileName);
-		att.setRealFileName(fileName);
-		File file = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID() + File.separator + fileName);
-		InputStream is = null;
+		if (att != null) {
+			att.setRealFileName(fileName);
+			File file = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID() + File.separator + fileName);
+			InputStream is = null;
 
-		try {
-			is = new FileInputStream(file);
-			att.setFile(IOUtils.toByteArray(is));
-		} catch (IOException e) {
-			Server.logger.errorLogEntry(e);
+			try {
+				is = new FileInputStream(file);
+				att.setFile(IOUtils.toByteArray(is));
+			} catch (IOException e) {
+				Server.logger.errorLogEntry(e);
+			}
 		}
-
 		return att;
 	}
 

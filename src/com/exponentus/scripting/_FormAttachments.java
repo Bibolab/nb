@@ -39,6 +39,14 @@ public class _FormAttachments {
 		addedAttachments.put(fieldName + "_" + fileName, a);
 	}
 
+	public List<Attachment> getFiles(String fieldName) {
+		ArrayList<Attachment> atts = new ArrayList<Attachment>();
+		for (Attachment att : addedAttachments.values()) {
+			atts.add(getFile(fieldName, att.getRealFileName()));
+		}
+		return atts;
+	}
+
 	public List<Attachment> getFiles() {
 		ArrayList<Attachment> atts = new ArrayList<Attachment>();
 		for (Attachment att : addedAttachments.values()) {
@@ -48,13 +56,9 @@ public class _FormAttachments {
 	}
 
 	public Attachment getFile(String fieldName, String fileName) {
-		return addedAttachments.get(fieldName + "_" + fileName);
-	}
-
-	public Attachment getFile(String fn) {
-		Attachment att = addedAttachments.get("_" + fn);
-		att.setRealFileName(fn);
-		File file = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID() + File.separator + fn);
+		Attachment att = addedAttachments.get(fieldName + "_" + fileName);
+		att.setRealFileName(fileName);
+		File file = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID() + File.separator + fileName);
 		InputStream is = null;
 
 		try {
@@ -65,6 +69,10 @@ public class _FormAttachments {
 		}
 
 		return att;
+	}
+
+	public Attachment getFile(String fn) {
+		return getFile("", fn);
 	}
 
 	public void removeFile(String fieldName, String fileName) {

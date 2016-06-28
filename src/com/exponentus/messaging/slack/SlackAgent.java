@@ -11,7 +11,7 @@ import com.exponentus.env.Environment;
 import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.server.Server;
 
-public class SlackConnect {
+public class SlackAgent {
 	private static final String SLACK_HTTPS_AUTH_URL = "https://slack.com/api/rtm.start?token=";
 	private static String authToken = Environment.slackToken;
 
@@ -55,10 +55,5 @@ public class SlackConnect {
 		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
 		Object rr = bean.getEntity();
 		System.out.println(bean + "=" + rr.getClass().getCanonicalName());
-	}
-
-	public static void main(String[] args) {
-		SlackConnect conn = new SlackConnect();
-		conn.sendMessage("@kayra", "SLACK_HTTPS_AUTH_URL");
 	}
 }

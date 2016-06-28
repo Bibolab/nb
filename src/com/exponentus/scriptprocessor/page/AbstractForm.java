@@ -25,6 +25,7 @@ public abstract class AbstractForm extends AbstractPage {
 		result.addObject(wrapped);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public PageOutcome processCode(String method) {
 		String fsId = formData.getAnyValueSilently(EnvConst.FSID_FIELD_NAME);
@@ -37,10 +38,10 @@ public abstract class AbstractForm extends AbstractPage {
 				addValue(EnvConst.FSID_FIELD_NAME, fsId);
 				getSes().setAttribute(fsId + "_referrer", formData.getReferrer());
 			} else {
-				_Validation ve = validate(fsId);
-				if (ve.hasError()) {
+				// _Validation ve = validate(fsId);
+				if (false) {
 					setBadRequest();
-					setValidation(ve);
+					// setValidation(ve);
 				} else {
 					if (method.equalsIgnoreCase("POST")) {
 						doPOST(getSes(), formData);

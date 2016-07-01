@@ -111,7 +111,7 @@ public class _WebFormData {
 			}
 			return nValue;
 		} catch (Exception e) {
-			return new Integer['0'];
+			return new Integer[] { defaultValue };
 		}
 	}
 

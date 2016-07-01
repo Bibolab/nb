@@ -116,11 +116,6 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		return regDate;
 	}
 
-	@Override
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-
 	@JsonIgnore
 	@Override
 	public String toString() {

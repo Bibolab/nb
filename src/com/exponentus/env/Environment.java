@@ -29,6 +29,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.jdom.input.SAXHandler;
+import org.jivesoftware.smack.ChatManager;
+import org.jivesoftware.smack.proxy.ProxyInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -91,6 +93,13 @@ public class Environment implements ICache {
 
 	public static Boolean slackEnable = false;
 	public static String slackToken;
+
+	public static boolean XMPPServerEnable;
+	public static String XMPPServer;
+	public static ProxyInfo XMPPServerPort;
+	public static String XMPPLogin;
+	public static String XMPPPwd;
+	public static ChatManager chatmanager;
 
 	public static Vocabulary vocabulary;
 	public static AuthMethodType authMethod = AuthMethodType.WORKSPACE_LOGIN_PAGE;

@@ -1,6 +1,5 @@
 package administrator.page.form;
 
-import java.util.Date;
 import java.util.UUID;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
@@ -32,7 +31,6 @@ public class ApplicationForm extends _DoPage {
 			entity = dao.findById(UUID.fromString(id));
 		} else {
 			entity = new Application();
-			entity.setRegDate(new Date());
 			entity.setName("");
 		}
 		addContent(entity);

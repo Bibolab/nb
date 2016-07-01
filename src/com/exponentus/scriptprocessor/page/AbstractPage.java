@@ -245,6 +245,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	protected void setBadRequest() {
 		result.setBadRequest();
+		result.setInfoMessageType(InfoMessageType.SERVER_ERROR);
 	}
 
 	public void markAsRead(String id, IUser<Long> user) {

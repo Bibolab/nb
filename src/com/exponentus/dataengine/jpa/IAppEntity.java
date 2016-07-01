@@ -11,8 +11,6 @@ public interface IAppEntity extends ISimpleAppEntity<UUID> {
 
 	Date getRegDate();
 
-	void setRegDate(Date regDate);
-
 	public String getForm();
 
 	public void setForm(String form);

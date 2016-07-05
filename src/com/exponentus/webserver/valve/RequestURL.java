@@ -49,7 +49,7 @@ public class RequestURL {
 	}
 
 	public boolean isPage() {
-		return url.trim().length() == 0 || url.matches(".*/((Provider)|(P)|(p)).*") || url.matches("/" + appType + "/*");
+		return url.trim().length() == 0 || url.matches(".*/((Provider)|(P)|(p))\\?.*") || url.matches("/" + appType + "/*");
 	}
 
 	public String getPageID() {

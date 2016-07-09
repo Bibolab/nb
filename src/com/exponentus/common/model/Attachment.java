@@ -10,13 +10,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "attachments")
-public class Attachment extends AppEntity<UUID> {
+public class Attachment extends AppEntity<UUID>implements IAppFile {
 
 	private String fieldName;
 	private String realFileName;
@@ -30,6 +31,7 @@ public class Attachment extends AppEntity<UUID> {
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] file;
 
+	@Override
 	public String getFieldName() {
 		return fieldName;
 	}
@@ -38,22 +40,27 @@ public class Attachment extends AppEntity<UUID> {
 		this.fieldName = fieldName;
 	}
 
+	@Override
 	public String getRealFileName() {
 		return realFileName;
 	}
 
+	@Override
 	public void setRealFileName(String realFileName) {
 		this.realFileName = realFileName;
 	}
 
+	@Override
 	public byte[] getFile() {
 		return file;
 	}
 
+	@Override
 	public void setFile(byte[] file) {
 		this.file = file;
 	}
 
+	@Override
 	public String getSign() {
 		return sign;
 	}
@@ -108,7 +115,7 @@ public class Attachment extends AppEntity<UUID> {
 			}
 
 			if ((tmp.fieldName == null && this.fieldName == null || tmp.fieldName.equals(this.fieldName))
-					&& (tmp.realFileName == null && this.realFileName == null || tmp.realFileName.equals(this.realFileName))) {
+			        && (tmp.realFileName == null && this.realFileName == null || tmp.realFileName.equals(this.realFileName))) {
 				return true;
 			} else {
 				return false;

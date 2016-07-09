@@ -3,6 +3,8 @@ package com.exponentus.scriptprocessor.page;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.dataengine.jpa.IAppFile;
+import com.exponentus.dataengine.jpa.TempFile;
 import com.exponentus.env.EnvConst;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._FormAttachments;
@@ -18,11 +20,15 @@ public abstract class AbstractForm extends AbstractPage {
 	protected void addContent(IPOJOObject document) {
 		_Session ses = getSes();
 		List<Attachment> atts = document.getAttachments();
-		for (Attachment file : ses.getFormAttachments(formData.getValueSilently(EnvConst.FSID_FIELD_NAME)).getFiles()) {
-			atts.add(file);
+		for (TempFile file : ses.getFormAttachments(formData.getValueSilently(EnvConst.FSID_FIELD_NAME)).getFiles()) {
+			atts.add((Attachment) file.getFileObject(new Attachment()));
 		}
 		_POJOObjectWrapper wrapped = new _POJOObjectWrapper(document, getSes());
 		result.addObject(wrapped);
+	}
+
+	public static void content() {
+
 	}
 
 	@SuppressWarnings("unused")
@@ -52,7 +58,7 @@ public abstract class AbstractForm extends AbstractPage {
 							result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
 							getSes().removeAttribute(fsId);
 						}
-
+						getSes().removeAttribute(fsId + "_referrer");
 					} else if (method.equalsIgnoreCase("PUT")) {
 						doPUT(getSes(), formData);
 						if (!fsId.isEmpty()) {
@@ -78,13 +84,13 @@ public abstract class AbstractForm extends AbstractPage {
 		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 		_FormAttachments formFiles = getSes().getFormAttachments(fsId);
 
-		for (Attachment newFile : formFiles.getFiles()) {
-			atts.add(newFile);
+		for (TempFile newFile : formFiles.getFiles()) {
+			atts.add((Attachment) newFile.getFileObject(new Attachment()));
 		}
 
-		List<Attachment> toDelete = formFiles.getDeletedFiles();
+		List<TempFile> toDelete = formFiles.getDeletedFiles();
 		if (toDelete.size() > 0) {
-			for (Attachment fn : toDelete) {
+			for (IAppFile fn : toDelete) {
 				atts.remove(fn);
 			}
 		}
@@ -92,20 +98,20 @@ public abstract class AbstractForm extends AbstractPage {
 		return atts;
 	}
 
-	protected List<Attachment> getActualAttachments(String fieldName, List<Attachment> atts) {
+	protected List<IAppFile> getActualAttachments(String fieldName, List<IAppFile> atts) {
 		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 		_FormAttachments formFiles = getSes().getFormAttachments(fsId);
 		String[] fileNames = formData.getListOfValuesSilently(fieldName);
 		if (fileNames.length > 0) {
 			for (String fn : fileNames) {
-				Attachment ef = formFiles.getFile(fieldName, fn);
+				IAppFile ef = formFiles.getFile(fieldName, fn);
 				atts.add(ef);
 			}
 		}
 
-		List<Attachment> toDelete = formFiles.getDeletedFiles();
+		List<TempFile> toDelete = formFiles.getDeletedFiles();
 		if (toDelete.size() > 0) {
-			for (Attachment fn : toDelete) {
+			for (IAppFile fn : toDelete) {
 				atts.remove(fn);
 			}
 		}

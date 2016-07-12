@@ -57,6 +57,11 @@ public class Provider extends HttpServlet {
 	}
 
 	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		doPost(request, response);
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession jses = request.getSession(false);
 		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);

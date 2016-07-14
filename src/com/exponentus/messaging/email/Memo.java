@@ -19,7 +19,7 @@ public class Memo {
 	public Memo(String subj, String message, Map<String, String> v) {
 		subject = subj;
 		try {
-			ST rawBody = new ST(message);
+			ST rawBody = new ST(message, '$', '$');
 			for (Map.Entry<String, String> entry : v.entrySet()) {
 				rawBody.add(entry.getKey(), entry.getValue());
 			}

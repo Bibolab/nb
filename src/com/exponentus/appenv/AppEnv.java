@@ -15,6 +15,7 @@ import com.exponentus.dataengine.IDatabase;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.Localizator;
+import com.exponentus.localization.TemplatesSet;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.log.ILogger;
 import com.exponentus.rule.RuleProvider;
@@ -29,6 +30,7 @@ public class AppEnv extends PageCacheAdapter {
 	public HashMap<String, File> xsltFileMap = new HashMap<String, File>();
 	public boolean isWorkspace;
 	public Vocabulary vocabulary;
+	public TemplatesSet templates;
 	public static ILogger logger = Server.logger;
 	private IDatabase dataBase;
 	private String rulePath = "rule";
@@ -57,6 +59,7 @@ public class AppEnv extends PageCacheAdapter {
 		}
 
 		loadVocabulary();
+		loadTemplateSet();
 		compileScenarios();
 	}
 
@@ -82,6 +85,11 @@ public class AppEnv extends PageCacheAdapter {
 		Localizator l = new Localizator();
 		String vocabuarFilePath = getRulePath() + File.separator + "Resources" + File.separator + "vocabulary.xml";
 		vocabulary = l.populate(appName, vocabuarFilePath);
+	}
+
+	private void loadTemplateSet() {
+		String templatesFilePath = getRulePath() + File.separator + "Resources" + File.separator + "template";
+		templates = new TemplatesSet(appName, templatesFilePath);
 	}
 
 	private void compileScenarios() {

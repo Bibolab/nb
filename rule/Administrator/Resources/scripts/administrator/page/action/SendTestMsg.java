@@ -33,7 +33,7 @@ public class SendTestMsg extends _DoPage {
 			Memo memo = new Memo(testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()), vars);
 
 			try {
-				if (!ma.sendMеssageSync(memo, recipients)) {
+				if (ma.sendMеssageSync(memo, recipients)) {
 					addValue("The message has been sent succesfully");
 				} else {
 					addWarning("The message has not been sent");

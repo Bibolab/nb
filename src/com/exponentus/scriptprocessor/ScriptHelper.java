@@ -11,6 +11,7 @@ import com.exponentus.dataengine.jpa.SecureAppEntity;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Vocabulary;
+import com.exponentus.messaging.MessageType;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
@@ -63,12 +64,16 @@ public class ScriptHelper {
 		}
 	}
 
+	public String getLocalizedEmailTemplate(String templateName, LanguageCode lang) {
+		return session.getAppEnv().templates.getTemplate(MessageType.EMAIL, templateName, lang);
+	}
+
 	public String getLocalizedWord(String word, LanguageCode lang) {
 		return getWord(word, vocabulary, lang.name());
 	}
 
-	protected IPOJOObject getACL(_Session ses, SecureAppEntity<UUID> entity) {
-		return entity.getACL(ses);
+	protected IPOJOObject getACL(SecureAppEntity<UUID> entity) {
+		return entity.getACL(session);
 	}
 
 	protected _ActionBar getSimpleActionBar(_Session session, String type, LanguageCode lang) {

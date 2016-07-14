@@ -368,7 +368,7 @@ public class Util {
 		try {
 
 			InputStream in = Object.class.getClass().getResourceAsStream(file);
-			reader = new InputStreamReader(in, "utf-8");
+			reader = new InputStreamReader(in);
 			String myInputStream = IOUtils.toString(reader);
 
 			return myInputStream;

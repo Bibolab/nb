@@ -142,7 +142,9 @@ public class Console implements Runnable {
 			for (AppEnv env : Environment.getApplications()) {
 				env.reloadVocabulary();
 				env.flush();
+				env.templates.reset();
 			}
+
 			new Environment().flush();
 			Environment.flushSessionsCach();
 		} else if (command.equalsIgnoreCase("show initializers") || command.equalsIgnoreCase("si")) {

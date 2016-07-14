@@ -2209,7 +2209,8 @@ nb.setFormValues = function(currentNode) {
                         $('[data-input=' + field.replace('id', '') + ']', form).append('<li>' + text + '</li>');
                     }
                 } else {
-                    $('[data-input=' + field.replace('id', '') + ']', form).html(text);
+                    $('[data-input=' + field.replace('id', '') + ']', form).html('<li>' + text + '</li>');
+                    
                 }
             }
         });

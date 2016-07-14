@@ -93,7 +93,7 @@ public class UserForm extends _DoPage {
 
 			setRedirect("Provider?id=user-view");
 		} catch (_Exception e) {
-			error(e);
+			logError(e);
 		}
 	}
 

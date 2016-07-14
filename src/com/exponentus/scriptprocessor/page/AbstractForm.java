@@ -74,7 +74,7 @@ public abstract class AbstractForm extends AbstractPage {
 			result.setException(e);
 			result.setInfoMessageType(InfoMessageType.SERVER_ERROR);
 			result.setVeryBadRequest();
-			error(e);
+			logError(e);
 		}
 		return result;
 

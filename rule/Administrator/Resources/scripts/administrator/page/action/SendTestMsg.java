@@ -2,11 +2,14 @@ package administrator.page.action;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.exponentus.env.EnvConst;
 import com.exponentus.exception.MsgException;
 import com.exponentus.messaging.email.MailAgent;
+import com.exponentus.messaging.email.Memo;
 import com.exponentus.messaging.slack.SlackAgent;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
@@ -25,15 +28,21 @@ public class SendTestMsg extends _DoPage {
 			List<String> recipients = new ArrayList<String>();
 			recipients.add(address);
 			MailAgent ma = new MailAgent();
+
+			Map<String, String> vars = new HashMap<String, String>();
+			Memo memo = new Memo(testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()), vars);
+
 			try {
-				if (!ma.sendDebugMail(recipients, testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()))) {
+				if (!ma.sendMеssageSync(memo, recipients)) {
 					addValue("The message has been sent succesfully");
 				} else {
 					addWarning("The message has not been sent");
 				}
 			} catch (MsgException e) {
-				addError(e);
+				logError(e);
+				setBadRequest();
 			}
+
 		} else if (type.equalsIgnoreCase("xmpp")) {
 
 		} else if (type.equalsIgnoreCase("slack")) {

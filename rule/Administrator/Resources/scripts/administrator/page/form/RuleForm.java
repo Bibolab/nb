@@ -37,7 +37,7 @@ public class RuleForm extends _DoPage {
 			actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 			addContent(actionBar);
 		} catch (RuleException e) {
-			error(e);
+			logError(e);
 			setBadRequest();
 		}
 	}

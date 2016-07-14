@@ -33,7 +33,7 @@ public class QueueView extends _DoPage {
 			ViewPage vp = new ViewPage(tasks, count, maxPage, pageNum);
 			addContent(new _POJOListWrapper(vp.getResult(), vp.getMaxPage(), vp.getCount(), vp.getPageNum(), session));
 		} catch (IOException | SchedulerException e) {
-			error(e);
+			logError(e);
 			setBadRequest();
 		}
 	}

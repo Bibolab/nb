@@ -111,7 +111,7 @@ public class ScriptHelper {
 		Server.logger.infoLogEntry(text);
 	}
 
-	public static void error(Exception e) {
+	public static void logError(Exception e) {
 		Server.logger.errorLogEntry(e);
 	}
 

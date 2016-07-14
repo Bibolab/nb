@@ -296,7 +296,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 			result.setException(e);
 			result.setInfoMessageType(InfoMessageType.SERVER_ERROR);
 			result.setVeryBadRequest();
-			error(e);
+			logError(e);
 		}
 		return result;
 	}

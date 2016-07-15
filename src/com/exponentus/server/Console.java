@@ -143,6 +143,7 @@ public class Console implements Runnable {
 				env.reloadVocabulary();
 				env.flush();
 				env.templates.reset();
+				System.out.println("Templates and the dictionary were reloaded (" + env.appName + ")");
 			}
 
 			new Environment().flush();

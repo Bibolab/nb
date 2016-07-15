@@ -73,7 +73,6 @@ public class AppEnv extends PageCacheAdapter {
 	}
 
 	public void reloadVocabulary() {
-		Server.logger.infoLogEntry("Dictionary is reloading (" + appName + ")...");
 		loadVocabulary();
 	}
 

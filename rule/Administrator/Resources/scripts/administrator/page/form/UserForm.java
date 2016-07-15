@@ -14,6 +14,7 @@ import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
+import com.exponentus.user.IUser;
 
 import administrator.dao.ApplicationDAO;
 import administrator.dao.UserDAO;
@@ -29,7 +30,7 @@ public class UserForm extends _DoPage {
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
 		String id = formData.getValueSilently("docid");
-		User entity;
+		IUser<Long> entity;
 		if (!id.isEmpty()) {
 			UserDAO dao = new UserDAO(session);
 			entity = dao.findById(Long.parseLong(id));
@@ -39,7 +40,7 @@ public class UserForm extends _DoPage {
 			entity.setLogin("");
 			entity.setEditable(true);
 		}
-		addContent(entity);
+		addContent((User) entity);
 		addContent(new ApplicationDAO(session).findAll());
 		_ActionBar actionBar = new _ActionBar(session);
 		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
@@ -65,7 +66,7 @@ public class UserForm extends _DoPage {
 			if (isNew) {
 				entity = new User();
 			} else {
-				entity = dao.findById(id);
+				entity = (User) dao.findById(id);
 			}
 
 			entity.setLogin(formData.getValue("login"));

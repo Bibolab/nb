@@ -1,6 +1,7 @@
 package com.exponentus.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.exponentus.localization.LanguageCode;
@@ -85,4 +86,38 @@ public abstract class SystemUser implements IUser<Long> {
 	@Override
 	public abstract String getLogin();
 
+	@Override
+	public void setEditable(boolean b) {
+
+	}
+
+	@Override
+	public String getEmail() {
+		return null;
+	}
+
+	@Override
+	public void setRegDate(Date date) {
+
+	}
+
+	@Override
+	public void setLogin(String string) {
+
+	}
+
+	@Override
+	public void setEmail(String value) {
+
+	}
+
+	@Override
+	public void setPwd(String value) {
+
+	}
+
+	@Override
+	public void setPwdHash(String pwdHash) {
+
+	}
 }

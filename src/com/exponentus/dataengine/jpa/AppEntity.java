@@ -32,6 +32,8 @@ import com.exponentus.util.XMLUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import administrator.dao.UserDAO;
+
 @MappedSuperclass
 @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
 @UuidGenerator(name = "uuid-gen")
@@ -93,12 +95,18 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 
 	@JsonIgnore
 	@Override
-	public long getAuthor() {
+	public long getAuthorId() {
 		return author;
 	}
 
+	@JsonIgnore
 	@Override
-	public void setAuthor(long author) {
+	public IUser<Long> getAuthor() {
+		return new UserDAO().findById(author);
+	}
+
+	@Override
+	public void setAuthorId(long author) {
 		this.author = author;
 	}
 

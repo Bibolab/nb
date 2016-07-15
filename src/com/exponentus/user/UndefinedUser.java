@@ -23,4 +23,5 @@ public class UndefinedUser extends SystemUser {
 	public String getLogin() {
 		return USER_NAME;
 	}
+
 }

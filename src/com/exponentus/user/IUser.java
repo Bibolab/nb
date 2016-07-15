@@ -1,5 +1,6 @@
 package com.exponentus.user;
 
+import java.util.Date;
 import java.util.List;
 
 import com.exponentus.dataengine.jpa.ISimpleAppEntity;
@@ -36,5 +37,19 @@ public interface IUser<K> extends ISimpleAppEntity<K> {
 	List<Application> getAllowedApps();
 
 	boolean isAllowed(String appName);
+
+	void setEditable(boolean b);
+
+	String getEmail();
+
+	void setRegDate(Date date);
+
+	void setLogin(String string);
+
+	void setEmail(String value);
+
+	void setPwd(String value);
+
+	void setPwdHash(String pwdHash);
 
 }

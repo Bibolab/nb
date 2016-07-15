@@ -3,11 +3,15 @@ package com.exponentus.dataengine.jpa;
 import java.util.Date;
 import java.util.UUID;
 
+import com.exponentus.user.IUser;
+
 public interface IAppEntity extends ISimpleAppEntity<UUID> {
 
-	long getAuthor();
+	long getAuthorId();
 
-	void setAuthor(long author);
+	IUser<Long> getAuthor();
+
+	void setAuthorId(long author);
 
 	Date getRegDate();
 

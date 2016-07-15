@@ -39,7 +39,7 @@ public class UserView extends _DoPage {
 	public void doDELETE(_Session session, _WebFormData formData) {
 		UserDAO dao = new UserDAO();
 		for (String id : formData.getListOfValuesSilently("docid")) {
-			User m = dao.findById(Long.parseLong(id));
+			User m = (User) dao.findById(Long.parseLong(id));
 			dao.delete(m);
 		}
 	}

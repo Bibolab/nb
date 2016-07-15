@@ -2,9 +2,7 @@ package administrator.page.action;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.exponentus.env.EnvConst;
 import com.exponentus.exception.MsgException;
@@ -28,9 +26,7 @@ public class SendTestMsg extends _DoPage {
 			List<String> recipients = new ArrayList<String>();
 			recipients.add(address);
 			MailAgent ma = new MailAgent();
-
-			Map<String, String> vars = new HashMap<String, String>();
-			Memo memo = new Memo(testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()), vars);
+			Memo memo = new Memo(testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()));
 
 			try {
 				if (ma.sendMеssageSync(memo, recipients)) {

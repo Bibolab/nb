@@ -23,6 +23,7 @@ import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.exponentus.user.IUser;
 import com.exponentus.user.SuperUser;
+import com.exponentus.user.UndefinedUser;
 import com.exponentus.util.StringUtil;
 
 import administrator.model.User;
@@ -145,26 +146,38 @@ public class UserDAO {
 		}
 	}
 
-	public User findById(long id) {
-		EntityManager em = emf.createEntityManager();
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		try {
-			CriteriaQuery<User> cq = cb.createQuery(User.class);
-			Root<User> c = cq.from(User.class);
-			cq.select(c);
-			Predicate condition = c.get("id").in(id);
-			cq.where(condition);
-			Query query = em.createQuery(cq);
-			User entity = (User) query.getSingleResult();
-			if (user.getId() == SuperUser.ID) {
-				entity.setEditable(true);
+	public IUser<Long> findById(long id) {
+		if (id > 0) {
+			EntityManager em = emf.createEntityManager();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			try {
+				CriteriaQuery<User> cq = cb.createQuery(User.class);
+				Root<User> c = cq.from(User.class);
+				cq.select(c);
+				Predicate condition = c.get("id").in(id);
+				cq.where(condition);
+				Query query = em.createQuery(cq);
+				@SuppressWarnings("unchecked")
+				IUser<Long> entity = (IUser<Long>) query.getSingleResult();
+				if (user.getId() == SuperUser.ID) {
+					entity.setEditable(true);
+				}
+				return entity;
+			} catch (NoResultException e) {
+				return null;
+			} finally {
+				em.close();
 			}
-			return entity;
-		} catch (NoResultException e) {
-			return null;
-		} finally {
-			em.close();
+		} else {
+			if (id == 0) {
+				return new AnonymousUser();
+			} else if (id == -1) {
+				return new SuperUser();
+			} else {
+				return new UndefinedUser();
+			}
 		}
+
 	}
 
 	public IUser<Long> findByLogin(String login) {
@@ -247,11 +260,32 @@ public class UserDAO {
 		}
 	}
 
-	public static void normalizePwd(User user) {
+	public static void normalizePwd(IUser<Long> user) {
 		if (user != null && user.getPwd() != null && !user.getPwd().isEmpty()) {
 			String pwdHash = StringUtil.encode(user.getPwd());
 			user.setPwdHash(pwdHash);
 			user.setPwd("");
 		}
+	}
+
+	public IUser<Long> update(IUser<Long> entity) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			EntityTransaction t = em.getTransaction();
+			try {
+				t.begin();
+				normalizePwd(entity);
+				em.merge(entity);
+				t.commit();
+				return entity;
+			} finally {
+				if (t.isActive()) {
+					t.rollback();
+				}
+			}
+		} finally {
+			em.close();
+		}
+
 	}
 }

@@ -28,6 +28,7 @@ import com.exponentus.util.StringUtil;
 
 import administrator.model.User;
 
+//TODO it need to refactor to use  IUser
 public class UserDAO {
 	private IUser<Long> user;
 	private EntityManagerFactory emf;

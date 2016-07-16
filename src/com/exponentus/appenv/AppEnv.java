@@ -80,6 +80,10 @@ public class AppEnv extends PageCacheAdapter {
 		return rulePath;
 	}
 
+	public String getURL() {
+		return Environment.getFullHostName() + "//" + appName;
+	}
+
 	private void loadVocabulary() {
 		Localizator l = new Localizator();
 		String vocabuarFilePath = getRulePath() + File.separator + "Resources" + File.separator + "vocabulary.xml";
@@ -88,7 +92,7 @@ public class AppEnv extends PageCacheAdapter {
 
 	private void loadTemplateSet() {
 		String templatesFilePath = getRulePath() + File.separator + "Resources" + File.separator + "template";
-		templates = new TemplatesSet(appName, templatesFilePath);
+		templates = new TemplatesSet(templatesFilePath);
 	}
 
 	private void compileScenarios() {

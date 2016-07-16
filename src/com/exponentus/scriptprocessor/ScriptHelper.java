@@ -102,17 +102,17 @@ public class ScriptHelper {
 		return new _POJOListWrapper(list, maxPage, count, pageNum, getSes());
 	}
 
-	public void devPrint(Object text) {
+	public static void devPrint(Object text) {
 		if (Environment.isDevMode()) {
 			System.out.println(text.toString());
 		}
 	}
 
-	public void println(Object text) {
+	public static void println(Object text) {
 		System.out.println(text.toString());
 	}
 
-	public void log(String text) {
+	public static void log(String text) {
 		Server.logger.infoLogEntry(text);
 	}
 

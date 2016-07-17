@@ -27,10 +27,6 @@ public abstract class AbstractForm extends AbstractPage {
 		result.addObject(wrapped);
 	}
 
-	public static void content() {
-
-	}
-
 	@SuppressWarnings("unused")
 	@Override
 	public PageOutcome processCode(String method) {

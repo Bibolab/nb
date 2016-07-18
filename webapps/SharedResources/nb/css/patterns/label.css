@@ -3,7 +3,7 @@ label {
 }
 
 label > input + span {
-    margin-left: 0.3em;
+    margin-left: .3em;
     vertical-align: middle;
 }
 

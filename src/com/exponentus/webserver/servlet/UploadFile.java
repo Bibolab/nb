@@ -59,7 +59,7 @@ public class UploadFile extends HttpServlet {
 		if (!userTmpDir.exists()) {
 			userTmpDir.mkdir();
 		}
-
+		File uploadedFile = null;
 		File repository = new File(Environment.trash);
 
 		DiskFileItemFactory factory = newDiskFileItemFactory(context, repository);
@@ -92,9 +92,9 @@ public class UploadFile extends HttpServlet {
 					if (fn != null) {
 						fn = FilenameUtils.getName(fn);
 					}
-					File f = new File(userTmpDir.getAbsolutePath() + File.separator + fn);
+					uploadedFile = new File(userTmpDir.getAbsolutePath() + File.separator + fn);
 					jses.setAttribute("filename", fn);
-					item.write(f);
+					item.write(uploadedFile);
 					fns.add("\"" + fn + "\"");
 				}
 			}
@@ -114,9 +114,9 @@ public class UploadFile extends HttpServlet {
 		if (fileItem != null) {
 			_FormAttachments attachs = ses.getFormAttachments(fileItem.getString());
 			if (sign != null && !sign.isEmpty()) {
-				attachs.addFileWithSign(fn, fieldName, sign);
+				attachs.addFileWithSign(uploadedFile, fn, fieldName, sign);
 			} else {
-				attachs.addFile(fn, fieldName);
+				attachs.addFile(uploadedFile, fn, fieldName);
 			}
 			resp.setContentType(ContentType.APPLICATION_JSON.toString());
 			PrintWriter out = resp.getWriter();

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "attachments")
 public class Attachment extends AppEntity<UUID>implements IAppFile {
 
-	private String fieldName;
+	private String fieldName = "attachment";
 	private String realFileName;
 	protected String form = "attachment";
 	protected Long author = AnonymousUser.ID;
@@ -36,6 +36,7 @@ public class Attachment extends AppEntity<UUID>implements IAppFile {
 		return fieldName;
 	}
 
+	@Override
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
@@ -65,6 +66,7 @@ public class Attachment extends AppEntity<UUID>implements IAppFile {
 		return sign;
 	}
 
+	@Override
 	public void setSign(String sign) {
 		this.sign = sign;
 	}

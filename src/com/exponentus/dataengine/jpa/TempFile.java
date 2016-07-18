@@ -1,9 +1,16 @@
 package com.exponentus.dataengine.jpa;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import com.exponentus.server.Server;
+
 public class TempFile implements IAppFile {
 
 	private String fieldName;
 	private String realFileName;
+	private String path;
 	private String sign = "";
 
 	@Override
@@ -26,6 +33,14 @@ public class TempFile implements IAppFile {
 		this.realFileName = realFileName;
 	}
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	@Override
 	public String getSign() {
 		return sign;
@@ -38,7 +53,12 @@ public class TempFile implements IAppFile {
 
 	@Override
 	public byte[] getFile() {
-		return null;
+		try {
+			return Files.readAllBytes(Paths.get(path));
+		} catch (IOException e) {
+			Server.logger.errorLogEntry(e);
+			return null;
+		}
 	}
 
 	@Override
@@ -46,10 +66,11 @@ public class TempFile implements IAppFile {
 
 	}
 
-	public IAppFile getFileObject(IAppFile file) {
+	public IAppFile convertTo(IAppFile file) {
 		file.setRealFileName(realFileName);
 		file.setFieldName(fieldName);
 		file.setSign(sign);
+		file.setFile(getFile());
 		return file;
 	}
 

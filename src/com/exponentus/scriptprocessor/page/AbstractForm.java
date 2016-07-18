@@ -21,7 +21,7 @@ public abstract class AbstractForm extends AbstractPage {
 		_Session ses = getSes();
 		List<Attachment> atts = document.getAttachments();
 		for (TempFile file : ses.getFormAttachments(formData.getValueSilently(EnvConst.FSID_FIELD_NAME)).getFiles()) {
-			atts.add((Attachment) file.getFileObject(new Attachment()));
+			atts.add((Attachment) file.convertTo(new Attachment()));
 		}
 		_POJOObjectWrapper wrapped = new _POJOObjectWrapper(document, getSes());
 		result.addObject(wrapped);
@@ -80,8 +80,10 @@ public abstract class AbstractForm extends AbstractPage {
 		String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 		_FormAttachments formFiles = getSes().getFormAttachments(fsId);
 
-		for (TempFile newFile : formFiles.getFiles()) {
-			atts.add((Attachment) newFile.getFileObject(new Attachment()));
+		for (TempFile tmpFile : formFiles.getFiles()) {
+			Attachment a = (Attachment) tmpFile.convertTo(new Attachment());
+			a.setFieldName(a.getDefaultFormName());
+			atts.add(a);
 		}
 
 		List<TempFile> toDelete = formFiles.getDeletedFiles();

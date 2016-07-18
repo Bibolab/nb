@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -13,7 +14,9 @@ import javax.mail.internet.MimeMultipart;
 
 import org.stringtemplate.v4.ST;
 
-import com.exponentus.dataengine.jpa.IAppEntity;
+import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
+import com.exponentus.scriptprocessor.ScriptHelper;
 import com.exponentus.server.Server;
 
 public class Memo {
@@ -24,35 +27,9 @@ public class Memo {
 	public Memo(String subj, String message) {
 		subject = subj;
 		rawBody = new ST(message, '$', '$');
-	}
+		addVar("orgname", Environment.orgName);
+		addVar("appname", EnvConst.APP_ID);
 
-	public Memo(String subj, String message, IAppEntity entity) {
-		subject = subj;
-		try {
-			rawBody = new ST(message, '$', '$');
-			Class<? extends IAppEntity> clazz = entity.getClass();
-			Field[] allFields = clazz.getDeclaredFields();
-
-			for (Field each : allFields) {
-				Field field;
-				try {
-					field = clazz.getDeclaredField(each.getName());
-					field.setAccessible(true);
-					Object value = field.get(entity);
-					rawBody.add(field.getName(), value);
-					System.out.println(field.getName() + "=" + value);
-				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-
-			}
-
-			BodyPart htmlPart = new MimeBodyPart();
-			htmlPart.setContent(rawBody.render(), "text/html; charset=utf-8");
-			body.addBodyPart(htmlPart);
-		} catch (MessagingException e) {
-			Server.logger.errorLogEntry(e);
-		}
 	}
 
 	public void addVar(String varName, String value) {
@@ -62,6 +39,9 @@ public class Memo {
 	public Multipart getBody() {
 		try {
 			BodyPart htmlPart = new MimeBodyPart();
+			if (Environment.isDevMode()) {
+				ScriptHelper.println(toString());
+			}
 			htmlPart.setContent(rawBody.render(), "text/html; charset=utf-8");
 			body.addBodyPart(htmlPart);
 			return body;
@@ -81,6 +61,18 @@ public class Memo {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	@Override
+	public String toString() {
+		String result = "-----------properties of the email form-----------\n";
+
+		for (Entry<String, Object> entry : rawBody.getAttributes().entrySet()) {
+			result += entry.getKey() + " = " + entry.getValue() + "\n";
+		}
+		result += "-----------------------------------------------------";
+		return result;
+
 	}
 
 	@SuppressWarnings("unused")

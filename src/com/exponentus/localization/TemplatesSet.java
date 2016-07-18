@@ -9,20 +9,15 @@ import com.exponentus.messaging.MessageType;
 
 public class TemplatesSet {
 	private HashMap<String, String> templs;
-	private String appName;
 	private File templateDir;
 
-	public TemplatesSet(String appName, String templatesFilePath) {
-		this.appName = appName;
+	public TemplatesSet(String templatesFilePath) {
 		templateDir = new File(templatesFilePath);
 		templs = new HashMap<String, String>();
-		templs.put("appname", appName);
-		templs.put("lang", LanguageCode.ENG.name());
 	}
 
 	public String getTemplate(MessageType type, String templateName, LanguageCode lang) {
 		String tmpl = null;
-		templs.put("lang", lang.name());
 		String msgType = type.name().toLowerCase();
 		String key = msgType + "_" + templateName + "_" + lang.toString().toLowerCase();
 		try {
@@ -46,8 +41,6 @@ public class TemplatesSet {
 
 	public void reset() {
 		templs.clear();
-		templs.put("appname", appName);
-		templs.put("lang", LanguageCode.ENG.name());
 	}
 
 	public StringBuffer toXML(String lang) {

@@ -92,7 +92,7 @@ public class UserForm extends _DoPage {
 				dao.update(entity);
 			}
 
-			setRedirect("Provider?id=user-view");
+			setRedirect("p?id=user-view");
 		} catch (_Exception e) {
 			logError(e);
 		}

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
@@ -74,6 +76,17 @@ public class _FormAttachments {
 
 	public TempFile getFile(String fn) {
 		return getFile("", fn);
+	}
+
+	public TempFile getFile() {
+		Set<?> set = addedAttachments.entrySet();
+		if (set.size() > 0) {
+			Entry<String, TempFile> entry = (Entry<String, TempFile>) set.iterator().next();
+			TempFile att = addedAttachments.entrySet().iterator().next().getValue();
+			return getFile(att.getFieldName(), att.getRealFileName());
+		} else {
+			return null;
+		}
 	}
 
 	public void removeFile(String fieldName, String fileName) {

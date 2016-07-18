@@ -26,9 +26,10 @@ import com.exponentus.exception.MsgException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.log.JavaConsoleLogger;
+import com.exponentus.messaging.MessageAgent;
 import com.exponentus.server.Server;
 
-public class MailAgent {
+public class MailAgent extends MessageAgent {
 	private String smtpServer = Environment.SMTPHost;
 	private String smtpPort = Environment.smtpPort;
 	private String smtpUser = Environment.smtpUser;
@@ -65,7 +66,7 @@ public class MailAgent {
 			msg.setSubject(mailMessage.getSubject(), "utf-8");
 		} catch (MessagingException e) {
 			String error = e.toString();
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 			throw new MsgException(error, LanguageCode.ENG);
 		}
 
@@ -88,7 +89,7 @@ public class MailAgent {
 			msg.setSubject(mailMessage.getSubject(), "utf-8");
 		} catch (MessagingException e) {
 			String error = e.toString();
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 			throw new MsgException(error, LanguageCode.ENG);
 		}
 
@@ -103,40 +104,41 @@ public class MailAgent {
 				try {
 					msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 				} catch (AddressException ae) {
-					Server.logger.warningLogEntry("incorrect e-mail \"" + recipient + "\"");
+					logger.warningLogEntry("incorrect e-mail \"" + recipient + "\"");
 					continue;
 				}
 			}
 		} catch (MessagingException e) {
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 		} catch (UnsupportedEncodingException e) {
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 		}
 
 		try {
 			if (Environment.mailEnable) {
 				Transport.send(msg);
+				logger.infoLogEntry("Message has been sent to " + recipients);
 				return true;
 			} else {
-				Server.logger.warningLogEntry("Mail agent disabled");
+				logger.warningLogEntry("Mail agent disabled");
 			}
 		} catch (SendFailedException se) {
 			if (se.getMessage().contains("relay rejected for policy reasons")) {
 				String error = "relay rejected for policy reasons by SMTP server. Message has not sent";
-				Server.logger.warningLogEntry(error);
+				logger.warningLogEntry(error);
 				throw new MsgException(error, LanguageCode.ENG);
 			} else {
 				String error = "unable to send a message, probably SMTP host did not set";
-				Server.logger.errorLogEntry(error);
+				logger.errorLogEntry(error);
 				throw new MsgException(error, LanguageCode.ENG);
 			}
 		} catch (AuthenticationFailedException e) {
 			String error = "SMTP authentication exception, smtp user=" + Environment.smtpUser;
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 			throw new MsgException(error, LanguageCode.ENG);
 		} catch (MessagingException e) {
 			String error = e.toString();
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 			throw new MsgException(error, LanguageCode.ENG);
 		}
 		return false;

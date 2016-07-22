@@ -60,10 +60,13 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Column(length = 64)
 	private String slack = "";
 
+	@JsonIgnore
 	private String pwd;
 
+	@JsonIgnore
 	private String pwdHash;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "_allowed_apps", joinColumns = @JoinColumn(name = "app_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") )
 	private List<Application> allowedApps;

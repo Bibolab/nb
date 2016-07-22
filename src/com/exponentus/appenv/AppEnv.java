@@ -81,7 +81,7 @@ public class AppEnv extends PageCacheAdapter {
 	}
 
 	public String getURL() {
-		return Environment.getFullHostName() + "//" + appName;
+		return Environment.getFullHostName() + "/" + appName;
 	}
 
 	private void loadVocabulary() {

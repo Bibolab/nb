@@ -1,5 +1,6 @@
 .menu {
     display: inline-block;
+    list-style: none;
     margin: 0;
     padding: 0;
     vertical-align: top;
@@ -7,19 +8,21 @@
 }
 
 .menu .menu-item {
+    cursor: pointer;
+    color: #555;
     display: block;
     font-size: 13px;
-    padding: 15px;
-    line-height: 20px;
+    line-height: 16px;
+    padding: 8px;
+    text-decoration: none;
+}
+
+.menu .menu-item:hover {
+    background: #EEEEEE;
 }
 
 .menu.inline > .menu-item {
     display: inline-block;
-}
-
-.menu.menu-compact > .menu-item {
-    line-height: 16px;
-    padding: 8px;
 }
 
 .menu-divider {

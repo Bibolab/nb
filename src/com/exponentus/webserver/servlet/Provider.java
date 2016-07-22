@@ -68,6 +68,9 @@ public class Provider extends HttpServlet {
 		AppEnv env = ses.getAppEnv();
 		PageOutcome result = new PageOutcome();
 		String id = request.getParameter("id");
+		if(id == null){
+			id = "index";
+		}
 		String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
 		if (acceptHeader != null && acceptHeader.indexOf("application/json") != -1) {
 			result.setPublishAs(PublishAsType.JSON);

@@ -93,10 +93,9 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 
 	}
 
-	@JsonIgnore
 	@Override
 	public long getAuthorId() {
-		return author;
+		return author == null ? 0 : author;
 	}
 
 	@JsonIgnore
@@ -230,7 +229,6 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		this.form = form;
 	}
 
-	@JsonIgnore
 	@Override
 	public boolean isEditable() {
 		return isEditable;

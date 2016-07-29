@@ -47,6 +47,7 @@
     padding-left: 40px;
 }
 
+.entry-captions > div,
 .entry-captions > span {
     display: inline-block;
     overflow: hidden;
@@ -66,7 +67,7 @@
 }
 
 .entry-wrap {
-    background: #F5F5F5;
+    /*background: #F5F5F5;*/
     border-bottom: 1px solid #F5F5F5;
     display: block;
     margin: 0;
@@ -79,7 +80,7 @@
 
 .entry-wrap.entry-action-open,
 .entry-wrap:hover {
-    background: #F7F7F7;
+    /*background: #F7F7F7;*/
 }
 
 /* entry */
@@ -97,8 +98,8 @@
     z-index: 3;
 }
 
-.entry-wrap:hover .entry,
-.entry:hover {
+/*.entry-wrap:hover .entry,*/
+.entry-wrap .entry:hover {
     background: #F7F7F7;
 }
 
@@ -151,54 +152,6 @@
     padding: 20px 0;
 }
 
-/* entry-expander */
-
-.entry-expander {
-    display: inline-block;
-    height: 100%;
-    left: 0;
-    padding: 13px 0 0 4px;
-    position: absolute;
-    top: 0;
-    text-align: left;
-    vertical-align: middle;
-    width: 45px;
-}
-
-.phone .entry-expander,
-.tablet .entry-expander {
-    padding-top: 20px;
-}
-
-.entry-expander.is-collapsed:hover,
-.entry-expander.is-expanded:hover {
-    background: rgba(0, 0, 0, 0.02);
-}
-
-.entry-expander.is-collapsed,
-.entry-expander.is-expanded {
-    color: #000;
-    cursor: pointer;
-}
-
-.entry-expander i.entry-expander_icon {
-    color: inherit;
-    font-size: 16px;
-    opacity: .5;
-}
-
-.entry-expander:hover i.entry-expander_icon {
-    opacity: 1;
-}
-
-.entry-expander.is-expanded > i.entry-expander_icon:before {
-    content: "\f0da";
-}
-
-.entry-expander.is-collapsed > i.entry-expander_icon:before {
-    content: "\f0d7";
-}
-
 /* entry-link */
 
 .entry-link {
@@ -222,6 +175,7 @@
     position: relative;
 }
 
+.entry-fields > div,
 .entry-fields > span {
     display: inline-block;
     overflow: hidden;
@@ -231,7 +185,9 @@
     word-break: break-all;
 }
 
+.phone .entry-fields > div,
 .phone .entry-fields > span,
+.tablet .entry-fields > div,
 .tablet .entry-fields > span {
     padding-bottom: 20px;
     padding-top: 20px;
@@ -287,6 +243,52 @@
 
 .action-delete:hover .fa {
     color: white;
+}
+
+/* entry-expander */
+
+.entry-expander {
+    display: inline-block;
+    height: 100%;
+    left: 0;
+    padding: 13px 0 0 4px;
+    position: absolute;
+    top: 0;
+    text-align: left;
+    vertical-align: middle;
+    width: 45px;
+}
+
+.phone .entry-expander,
+.tablet .entry-expander {
+    padding-top: 20px;
+}
+
+.has-expandable .entry-expander:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.has-expandable .entry-expander {
+    color: #000;
+    cursor: pointer;
+}
+
+.entry-expander i.entry-expander_icon {
+    color: inherit;
+    font-size: 16px;
+    opacity: .5;
+}
+
+.entry-expander:hover i.entry-expander_icon {
+    opacity: 1;
+}
+
+.has-expandable > .entry-expander.is-expanded > i.entry-expander_icon:before {
+    content: "\f0d7";
+}
+
+.has-expandable > .entry-expander > i.entry-expander_icon:before {
+    content: "\f0da";
 }
 
 /* child */

@@ -248,15 +248,31 @@
 /* entry-expander */
 
 .entry-expander {
-    display: inline-block;
+    /*border: 1px solid red;*/
+    display: none;
     height: 100%;
     left: 0;
-    padding: 13px 0 0 4px;
+    padding: 13px 6px 0;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    vertical-align: middle;
+    width: 35px;
+}
+
+[class*=' level-'] .entry-expander,
+[class^='level-'] .entry-expander {
+    text-align: right;
+}
+
+.entry-expander:after {
+    background: #aaa;
+    content: '';
+    display: none;
+    height: 100%;
     position: absolute;
     top: 0;
-    text-align: left;
-    vertical-align: middle;
-    width: 45px;
+    width: 1px;
 }
 
 .phone .entry-expander,
@@ -264,8 +280,12 @@
     padding-top: 20px;
 }
 
+.has-expandable .entry-expander {
+    display: inline-block;
+}
+
 .has-expandable .entry-expander:hover {
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .has-expandable .entry-expander {
@@ -289,6 +309,50 @@
 
 .has-expandable > .entry-expander > i.entry-expander_icon:before {
     content: "\f0da";
+}
+
+.level-0 .expandable-level {
+    text-align: left;
+}
+
+.level-1 .expandable-level {
+    padding-left: 36px;
+}
+
+.level-1 .entry-expander {
+    width: 36px;
+}
+
+.level-2 .expandable-level {
+    padding-left: 48px;
+}
+
+.level-2 .entry-expander {
+    width: 48px;
+}
+
+.level-3 .expandable-level {
+    padding-left: 60px;
+}
+
+.level-3 .entry-expander {
+    width: 60px;
+}
+
+.level-4 .expandable-level {
+    padding-left: 72px;
+}
+
+.level-4 .entry-expander {
+    width: 72px;
+}
+
+.level-5 .expandable-level {
+    padding-left: 84px;
+}
+
+.level-5 .entry-expander {
+    width: 84px;
 }
 
 /* child */

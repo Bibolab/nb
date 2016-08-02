@@ -3,10 +3,10 @@
     "path": "../../Administrator"
 }, {
     "name": "Reference",
-    "path": "../../../../Officeframe/webapps/Reference"
+    "path": "../../../../officeframe/webapps/Reference"
 }, {
     "name": "Staff",
-    "path": "../../../../Officeframe/webapps/Staff"
+    "path": "../../../../officeframe/webapps/Staff"
 }, {
     "name": "Accountant",
     "path": "../../../../ComProperty/webapps/Accountant"

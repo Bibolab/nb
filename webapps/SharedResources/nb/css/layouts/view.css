@@ -1,6 +1,7 @@
 .view {
     position: relative;
     width: 100%;
+    z-index: 0;
 }
 
 .view-empty {
@@ -64,6 +65,7 @@
     margin: 0;
     padding: 0;
     position: relative;
+    z-index: 0;
 }
 
 .entry-wrap {

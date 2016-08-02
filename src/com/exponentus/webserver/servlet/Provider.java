@@ -69,7 +69,7 @@ public class Provider extends HttpServlet {
 		PageOutcome result = new PageOutcome();
 		String id = request.getParameter("id");
 		if(id == null){
-			id = "index";
+			id = EnvConst.DEFAULT_PAGE;
 		}
 		String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
 		if (acceptHeader != null && acceptHeader.indexOf("application/json") != -1) {

@@ -1,5 +1,5 @@
-html,
-body {
+body,
+html {
     height: 100%;
     font-size: 10px;
     margin: 0;
@@ -12,8 +12,8 @@ body {
 }
 
 *,
-::before,
-::after {
+::after,
+::before {
     box-sizing: border-box;
 }
 
@@ -46,7 +46,6 @@ table {
     transition: none !important;
 }
 
-
 /* .hidden-md */
 
 .hidden-md {}
@@ -54,13 +53,11 @@ table {
 html body.phone .hidden-md {
     display: none !important;
 }
-
 @media ( max-width: 768px) {
     html body .hidden-md {
         display: none !important;
     }
 }
-
 
 /* .fa */
 
@@ -68,7 +65,6 @@ html body.phone .hidden-md {
     color: #666;
     font-size: 14px;
 }
-
 
 /* floating */
 
@@ -80,9 +76,7 @@ html body.phone .hidden-md {
     float: right;
 }
 
-
 /* .clearfix */
-
 .clearfix:after {
     content: ' ';
     clear: both;
@@ -153,4 +147,19 @@ html body.phone .hidden-md {
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+}
+
+.noselect {
+    /* iOS Safari */
+    -webkit-touch-callout: none;
+    /* Chrome/Safari/Opera */
+    -webkit-user-select: none;
+    /* Konqueror */
+    -khtml-user-select: none;
+    /* Firefox */
+    -moz-user-select: none;
+    /* Internet Explorer/Edge */
+    -ms-user-select: none;
+    /* Non-prefixed version, currently */
+    user-select: none;
 }

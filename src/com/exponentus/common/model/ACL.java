@@ -15,6 +15,7 @@ import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.exponentus.user.SuperUser;
+import com.exponentus.user.UndefinedUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -120,12 +121,17 @@ public class ACL extends POJOObjectAdapter<UUID> {
 	private String getUserName(long id) {
 		if (id > 0) {
 			IEmployee emp = eDao.getEmployee(id);
-			return emp.getName();
+			if (emp != null) {
+				return emp.getName();
+			} else {
+				return UndefinedUser.USER_NAME;
+			}
 		} else if (id == 0) {
 			return AnonymousUser.USER_NAME;
 		} else if (id == -1) {
 			return SuperUser.USER_NAME;
+		} else {
+			return UndefinedUser.USER_NAME;
 		}
-		return null;
 	}
 }

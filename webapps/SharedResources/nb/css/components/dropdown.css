@@ -8,6 +8,10 @@
     padding: 0 8px;
 }
 
+.dropdown:focus .dropdown-toggle {
+    border-color: #4D90FE;
+}
+
 .dropdown-menu {
     background-color: #fff;
     background-clip: padding-box;

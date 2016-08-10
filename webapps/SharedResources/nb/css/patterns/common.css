@@ -17,6 +17,10 @@ body {
     box-sizing: border-box;
 }
 
+[tabindex] {
+    outline: 0;
+}
+
 a {
     color: #2222CC;
     margin: auto;

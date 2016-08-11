@@ -1,11 +1,13 @@
 package com.exponentus.scriptprocessor.page;
 
+import java.io.File;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.dataengine.jpa.TempFile;
 import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._FormAttachments;
 import com.exponentus.scripting._POJOObjectWrapper;
@@ -58,6 +60,17 @@ public abstract class AbstractForm extends AbstractPage {
 							result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
 						}
 						ses.removeAttribute(fsId + REFERRER_ATTR_NAME);
+						File userTmpDir = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID());
+						File dirToUploadedFile = new File(userTmpDir.getAbsolutePath() + File.separator + fsId);
+						if (dirToUploadedFile.exists()) {
+							File[] directoryListing = dirToUploadedFile.listFiles();
+							if (directoryListing != null) {
+								for (File child : directoryListing) {
+									Environment.fileToDelete.add(child.getAbsolutePath());
+								}
+							}
+						}
+
 					} else if (method.equalsIgnoreCase("PUT")) {
 						doPUT(ses, formData);
 						result.setRedirectURL((String) ses.getAttribute(fsId + REFERRER_ATTR_NAME));

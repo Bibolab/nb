@@ -45,6 +45,7 @@ public class EnvConst {
 	public static String DEFAULT_DATETIME_FORMAT = "dd.MM.yyyy kk:mm";
 	public static String DEFAULT_TIME_FORMAT = "kk:mm";
 	public static String DEFAULT_COUNTRY_OF_NUMBER_FORMAT = "ru";
+	public static String DB_TYPE = "postgresql";
 	public static String DB_USER = "postgres";
 	public static String DB_PWD = "smartdoc";
 	public static String APP_ID = Paths.get(System.getProperty("user.dir")).getFileName().toString();
@@ -55,7 +56,6 @@ public class EnvConst {
 	public static String STAFF_APP_NAME = STAFF_NAME;
 	public static String STAFF_DAO_CLASS = "staff.dao.EmployeeDAO";
 	public static String RESOURCES_DIR = "resources";
-	public static String NB_JAR_FILE = "nb.jar";
 	public static String OLD_STRUCTDB_USER = DB_USER;
 	public static String OLD_STRUCTDB_PWD = "";
 	public static String OLD_STRUCTDB_URL = "";

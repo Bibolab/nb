@@ -2833,6 +2833,7 @@ nb.uploadAvatar = function(fileInput) {
             sessionStorage.setItem('organization', org_html);
             var dept_html = $("select[name=department]").html();
             sessionStorage.setItem('department', dept_html);
+            
             window.location.reload();
         }
     });

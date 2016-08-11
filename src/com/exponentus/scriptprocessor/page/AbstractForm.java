@@ -15,6 +15,7 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.util.Util;
 
 public abstract class AbstractForm extends AbstractPage {
+	private final static String REFERRER_ATTR_NAME = "_referrer";
 
 	@Override
 	protected void addContent(IPOJOObject document) {
@@ -31,38 +32,38 @@ public abstract class AbstractForm extends AbstractPage {
 	@Override
 	public PageOutcome processCode(String method) {
 		String fsId = formData.getAnyValueSilently(EnvConst.FSID_FIELD_NAME);
+		_Session ses = getSes();
 		try {
 			if (method.equalsIgnoreCase("GET")) {
-				doGET(getSes(), formData);
+				doGET(ses, formData);
 				if (fsId.isEmpty()) {
 					fsId = Util.generateRandomAsText();
 				}
 				addValue(EnvConst.FSID_FIELD_NAME, fsId);
-				getSes().setAttribute(fsId + "_referrer", formData.getReferrer());
+				ses.setAttribute(fsId + REFERRER_ATTR_NAME, formData.getReferrer());
 			} else {
-				// _Validation ve = validate(fsId);
+				_Validation ve = validate(fsId);
 				if (false) {
 					setBadRequest();
-					// setValidation(ve);
+					setValidation(ve);
 				} else {
 					if (method.equalsIgnoreCase("POST")) {
-						doPOST(getSes(), formData);
-						result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
+						doPOST(ses, formData);
+						// System.out.println(ses.getAttributes());
+						String redirectURL = (String) ses.getAttribute(fsId + REFERRER_ATTR_NAME);
+						result.setRedirectURL(redirectURL);
 						if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR
 						        && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
 							// result.setFlash(entity.getId().toString());
 							result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
-							getSes().removeAttribute(fsId);
 						}
-						getSes().removeAttribute(fsId + "_referrer");
+						ses.removeAttribute(fsId + REFERRER_ATTR_NAME);
 					} else if (method.equalsIgnoreCase("PUT")) {
-						doPUT(getSes(), formData);
-						if (!fsId.isEmpty()) {
-							result.setRedirectURL((String) getSes().getAttribute(fsId + "_referrer"));
-							getSes().removeAttribute(fsId);
-						}
+						doPUT(ses, formData);
+						result.setRedirectURL((String) ses.getAttribute(fsId + REFERRER_ATTR_NAME));
+						ses.removeAttribute(fsId + REFERRER_ATTR_NAME);
 					} else if (method.equalsIgnoreCase("DELETE")) {
-						doDELETE(getSes(), formData);
+						doDELETE(ses, formData);
 					}
 				}
 			}

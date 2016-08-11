@@ -126,7 +126,9 @@ public class _Session extends PageCacheAdapter {
 	}
 
 	public void setAttribute(String varName, Object fn) {
-		valuesMap.put(varName, fn);
+		if (!valuesMap.containsKey(varName)) {
+			valuesMap.put(varName, fn);
+		}
 	}
 
 	public Object getAttribute(String varName) {
@@ -136,6 +138,10 @@ public class _Session extends PageCacheAdapter {
 
 	public void removeAttribute(String varName) {
 		valuesMap.remove(varName);
+	}
+
+	public Map<String, Object> getAttributes() {
+		return valuesMap;
 	}
 
 	public void addFormTransaction(IAppEntity entity, String referrer) {

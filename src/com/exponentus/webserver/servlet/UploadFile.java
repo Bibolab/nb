@@ -51,7 +51,7 @@ public class UploadFile extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession jses = req.getSession(false);
 		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
-		FileItem fileItem = null;
+		FileItem fsidItem = null;
 		String fn = "", fieldName = "", sign = "";
 
 		String time = req.getParameter(EnvConst.TIME_FIELD_NAME);
@@ -59,6 +59,7 @@ public class UploadFile extends HttpServlet {
 		if (!userTmpDir.exists()) {
 			userTmpDir.mkdir();
 		}
+		FileItem file = null;
 		File uploadedFile = null;
 		File repository = new File(Environment.trash);
 
@@ -76,11 +77,10 @@ public class UploadFile extends HttpServlet {
 			List<FileItem> items = upload.parseRequest(req);
 			for (FileItem item : items) {
 				if (item.isFormField()) {
-					// System.out.println(">>>>>>>form value = " +
-					// item.getString() + " " + item.getFieldName());
+					System.out.println(">>>>>>>form value = " + item.getString() + " " + item.getFieldName());
 					String formFieldNameField = item.getFieldName();
 					if (formFieldNameField.endsWith(EnvConst.FSID_FIELD_NAME)) {
-						fileItem = item;
+						fsidItem = item;
 					} else if (formFieldNameField.equalsIgnoreCase("fieldname")) {
 						fieldName = item.getString();
 					} else if (formFieldNameField.equalsIgnoreCase("sign")) {
@@ -88,16 +88,24 @@ public class UploadFile extends HttpServlet {
 					}
 
 				} else {
-					fn = item.getName();
-					if (fn != null) {
-						fn = FilenameUtils.getName(fn);
-					}
-					uploadedFile = new File(userTmpDir.getAbsolutePath() + File.separator + fn);
-					jses.setAttribute("filename", fn);
-					item.write(uploadedFile);
-					fns.add("\"" + fn + "\"");
+					file = item;
+
 				}
 			}
+
+			fn = file.getName();
+			if (fn != null) {
+				fn = FilenameUtils.getName(fn);
+			}
+			File dirToUploadedFile = new File(userTmpDir.getAbsolutePath() + File.separator + fsidItem.getString());
+			if (!dirToUploadedFile.exists()) {
+				dirToUploadedFile.mkdir();
+			}
+			uploadedFile = new File(dirToUploadedFile + File.separator + fn);
+			jses.setAttribute("filename", fn);
+			file.write(uploadedFile);
+			fns.add("\"" + fn + "\"");
+
 		} catch (FileUploadException e) {
 			req.getSession().removeAttribute(time);
 			e.printStackTrace();
@@ -111,8 +119,8 @@ public class UploadFile extends HttpServlet {
 		// System.out.println(">>" + fileItem.getString() + " " +
 		// fileItem.getFieldName());
 
-		if (fileItem != null) {
-			_FormAttachments attachs = ses.getFormAttachments(fileItem.getString());
+		if (fsidItem != null) {
+			_FormAttachments attachs = ses.getFormAttachments(fsidItem.getString());
 			if (sign != null && !sign.isEmpty()) {
 				attachs.addFileWithSign(uploadedFile, fn, fieldName, sign);
 			} else {

@@ -2829,6 +2829,11 @@ nb.uploadAvatar = function(fileInput) {
         complete: function() {
             fileInput.form.reset();
             $('#progress_' + inputName).val(0);
+            var org_html = $("select[name=organization]").html();
+            sessionStorage.setItem('organization', org_html);
+            var dept_html = $("select[name=department]").html();
+            sessionStorage.setItem('department', dept_html);
+            
             window.location.reload();
         }
     });

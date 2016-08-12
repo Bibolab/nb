@@ -1,5 +1,6 @@
-[class^="span"],
-[class*=" span"] {
+[class*=" span"],
+[class^="span"] {
+    display: inline-block;
     max-width: 100%;
 }
 

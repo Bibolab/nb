@@ -6,7 +6,7 @@
     <!-- Source directory (usually it is IDE workspace path) -->
     <property name="workspace.dir"         value="."/>
     <!-- Application path -->
-    <property name="application.dir"       value="run"/>
+    <property name="application.dir"       value="poema"/>
     <!-- Temporary folder path -->
     <property name="tmp.dir"               value="tmp"/>
     <!-- Directory for backup  -->

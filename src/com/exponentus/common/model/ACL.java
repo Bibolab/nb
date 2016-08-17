@@ -30,12 +30,8 @@ public class ACL extends POJOObjectAdapter<UUID> {
 	@JsonIgnore
 	private UUID id;
 
-	@JsonIgnore
-	private _Session ses;
-
 	@SuppressWarnings("unchecked")
-	public ACL(_Session ses, IAppEntity e) {
-		this.ses = ses;
+	public ACL(IAppEntity e) {
 		SecureAppEntity<UUID> entity = (SecureAppEntity<UUID>) e;
 		id = e.getId();
 

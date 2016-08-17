@@ -38,9 +38,11 @@ public class Connect {
 					}
 				}
 			} else {
-				Server.logger.errorLogEntry("password has not been encoded");
-				Server.logger.errorLogEntry(pwdHash + " " + user.getPwdHash());
+				// Server.logger.errorLogEntry("password has not been encoded");
+				// Server.logger.errorLogEntry(pwdHash + " " +
+				// user.getPwdHash());
 				user.setAuthorized(false);
+				return user;
 			}
 
 			if (eDao != null && user.isAuthorized()) {

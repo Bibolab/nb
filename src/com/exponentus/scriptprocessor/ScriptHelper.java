@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.DAO;
-import com.exponentus.dataengine.jpa.SecureAppEntity;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Vocabulary;
@@ -70,10 +69,6 @@ public class ScriptHelper {
 
 	public String getLocalizedWord(String word, LanguageCode lang) {
 		return getWord(word, vocabulary, lang.name());
-	}
-
-	protected IPOJOObject getACL(SecureAppEntity<UUID> entity) {
-		return entity.getACL(session);
 	}
 
 	protected _ActionBar getSimpleActionBar(_Session session, String type, LanguageCode lang) {

@@ -1,15 +1,13 @@
 package com.exponentus.dataengine.jpa;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.MappedSuperclass;
 
-import com.exponentus.common.model.ACL;
-import com.exponentus.scripting.IPOJOObject;
-import com.exponentus.scripting._Session;
 import com.exponentus.user.IUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -55,6 +53,10 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 		}
 	}
 
+	public void addReaders(List<Long> readers) {
+		readers.addAll(readers);
+	}
+
 	public void resetReaderEditor() {
 		editors.clear();
 		readers.clear();
@@ -72,11 +74,6 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 	@Override
 	public boolean isEditable() {
 		return isEditable;
-	}
-
-	@JsonIgnore
-	public IPOJOObject getACL(_Session ses) {
-		return new ACL(ses, this);
 	}
 
 }

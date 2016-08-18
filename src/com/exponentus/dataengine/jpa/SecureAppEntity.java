@@ -53,8 +53,8 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 		}
 	}
 
-	public void addReaders(List<Long> readers) {
-		readers.addAll(readers);
+	public void addReaders(List<Long> r) {
+		readers.addAll(r);
 	}
 
 	public void resetReaderEditor() {

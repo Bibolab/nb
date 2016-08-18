@@ -2,6 +2,7 @@ package com.exponentus.scriptprocessor.scheduled;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.scriptprocessor.ScriptHelper;
+import com.exponentus.scriptprocessor.page.InfoMessageType;
 
 public abstract class AbstractScheduledTask extends ScriptHelper implements IScheduledScript {
 	private _Session ses;
@@ -17,6 +18,11 @@ public abstract class AbstractScheduledTask extends ScriptHelper implements ISch
 	public void setOutcome(ScheduledTaskOutcome outcome) {
 		this.outcome = outcome;
 
+	}
+
+	protected void setError(Exception e) {
+		outcome.setType(InfoMessageType.SCHEDULED_TASK_ERROR);
+		outcome.setException(e);
 	}
 
 	@Override

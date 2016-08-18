@@ -3,6 +3,7 @@ package com.exponentus.scheduler.tasks;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -94,6 +95,8 @@ public class TempFileCleaner implements Job {
 					}
 				}
 			}
+		} catch (NoSuchFileException e) {
+			// no need to inform
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

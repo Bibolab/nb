@@ -1,5 +1,5 @@
 package com.exponentus.scriptprocessor.page;
 
 public enum InfoMessageType {
-	OK, DOCUMENT_SAVED, VALIDATION_ERROR, SERVER_ERROR, WARNING
+	OK, DOCUMENT_SAVED, VALIDATION_ERROR, SERVER_ERROR, WARNING, SCHEDULED_TASK_ERROR
 }

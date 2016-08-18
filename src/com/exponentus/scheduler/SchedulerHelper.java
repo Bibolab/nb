@@ -18,6 +18,7 @@ import org.reflections.Reflections;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
+import com.exponentus.scripting.event._DoScheduledTask;
 import com.exponentus.scriptprocessor.scheduled.IScheduledScript;
 import com.exponentus.util.Util;
 
@@ -82,20 +83,24 @@ public class SchedulerHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<String, Class<IScheduledScript>> getAllScheduledTasks(boolean showConsoleOutput) throws IOException {
-		Map<String, Class<IScheduledScript>> tasks = new HashMap<String, Class<IScheduledScript>>();
+	public Map<String, ScheduledClass> getAllScheduledTasks(boolean showConsoleOutput) throws IOException {
+		Map<String, ScheduledClass> tasks = new HashMap<String, ScheduledClass>();
 
 		ApplicationDAO aDao = new ApplicationDAO();
 		List<Application> list = aDao.findAll();
 		for (Application app : list) {
 			if (app.isOn()) {
-				String packageName = app.getName().toLowerCase() + ".scheduled";
+				String appName = app.getName();
+				String packageName = appName.toLowerCase() + ".scheduled";
 				Reflections reflections = new Reflections(packageName);
-				Set<Class<? extends IScheduledScript>> classes = reflections.getSubTypesOf(IScheduledScript.class);
+				Set<Class<? extends _DoScheduledTask>> classes = reflections.getSubTypesOf(_DoScheduledTask.class);
 				for (Class<? extends IScheduledScript> initializerClass : classes) {
-					tasks.put(initializerClass.getName(), (Class<IScheduledScript>) initializerClass);
+					ScheduledClass sc = new ScheduledClass();
+					sc.appName = appName;
+					sc.initializerClass = (Class<IScheduledScript>) initializerClass;
+					tasks.put(initializerClass.getName(), sc);
 					if (showConsoleOutput) {
-						System.out.println(initializerClass.getName());
+						System.out.println(sc.appName + " " + sc.initializerClass.getName());
 					}
 				}
 			}

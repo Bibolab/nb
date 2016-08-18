@@ -162,6 +162,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 						if (val instanceof Date) {
 							methodValue = Util.dateFormat.format((Date) val);
 						} else if (val instanceof IndirectList) {
+							@SuppressWarnings("unchecked")
 							List<IPOJOObject> list = (List<IPOJOObject>) val;
 							for (IPOJOObject nestedValue : list) {
 								// methodValue += nestedValue.toXML();
@@ -277,6 +278,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		if (!(getClass() == obj.getClass())) {
 			return false;
 		} else {
+			@SuppressWarnings("unchecked")
 			AppEntity<UUID> tmp = (AppEntity<UUID>) obj;
 
 			if (tmp.id == null) {

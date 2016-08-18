@@ -48,7 +48,7 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 
 	public void addReader(IUser<Long> user) {
 		long id = user.getId();
-		if (id != 0) {
+		if (id > 0) {
 			this.readers.add(id);
 		}
 	}
@@ -65,7 +65,7 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 	@Override
 	public void setAuthor(IUser<Long> user) {
 		author = user.getId();
-		if (author != 0) {
+		if (author > 0) {
 			addReader(user);
 			addReaderEditor(user);
 		}

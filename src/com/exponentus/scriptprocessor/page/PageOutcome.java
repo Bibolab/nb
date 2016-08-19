@@ -15,6 +15,7 @@ import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
+import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.PublishAsType;
 import com.exponentus.webserver.servlet.xslt.SaxonTransformator;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -191,12 +192,9 @@ public class PageOutcome {
 	}
 
 	public String toCompleteXML() {
-		String localUserName = ses.getUser().getUserName();
-		String userId = ses.getUser().getUserID();
-		String lang = ses.getLang().name();
-
-		return xmlTextUTF8Header + "<request  lang=\"" + lang + "\" id=\"" + pageId + "\" userid=\"" + userId + "\" username=\"" + localUserName
-		        + "\">" + toXML() + "</request>";
+		IUser<Long> user = ses.getUser();
+		return xmlTextUTF8Header + "<request  lang=\"" + ses.getLang().name() + "\" id=\"" + pageId + "\" userid=\"" + user.getUserID()
+		        + "\" username=\"" + user.getUserName() + "\">" + toXML() + "</request>";
 
 	}
 

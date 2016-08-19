@@ -21,6 +21,9 @@ import org.eclipse.persistence.annotations.Cache;
 import org.eclipse.persistence.config.CacheIsolationType;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.dataengine.system.IEmployee;
+import com.exponentus.dataengine.system.IExtUserDAO;
+import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
@@ -107,12 +110,24 @@ public class User implements IUser<Long>, IPOJOObject {
 		return regDate;
 	}
 
+	@Override
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 
 	@Override
 	public String getUserName() {
+		if (userName == null) {
+			IExtUserDAO eDao = Environment.getExtUserDAO();
+			IEmployee emp = eDao.getEmployee(id);
+			if (emp != null) {
+				userName = emp.getName();
+				if (roles == null) {
+					roles = new ArrayList<String>();
+				}
+				roles.addAll(emp.getAllRoles());
+			}
+		}
 		return userName;
 	}
 
@@ -131,14 +146,17 @@ public class User implements IUser<Long>, IPOJOObject {
 		return login;
 	}
 
+	@Override
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+	@Override
 	public String getEmail() {
 		return email;
 	}
 
+	@Override
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -164,6 +182,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		return pwd;
 	}
 
+	@Override
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
@@ -173,6 +192,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		return pwdHash;
 	}
 
+	@Override
 	public void setPwdHash(String pwdHash) {
 		this.pwdHash = pwdHash;
 	}
@@ -246,6 +266,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		return isEditable;
 	}
 
+	@Override
 	public void setEditable(boolean isEditable) {
 		this.isEditable = isEditable;
 	}

@@ -30,7 +30,6 @@ public abstract class AbstractForm extends AbstractPage {
 		result.addObject(wrapped);
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public PageOutcome processCode(String method) {
 		String fsId = formData.getAnyValueSilently(EnvConst.FSID_FIELD_NAME);
@@ -45,7 +44,7 @@ public abstract class AbstractForm extends AbstractPage {
 				ses.setAttribute(fsId + REFERRER_ATTR_NAME, formData.getReferrer());
 			} else {
 				_Validation ve = validate(fsId);
-				if (false) {
+				if (ve.hasError()) {
 					setBadRequest();
 					setValidation(ve);
 				} else {

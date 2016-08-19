@@ -69,6 +69,7 @@ public class Console implements Runnable {
 			        Util.convertDataTimeToString(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
 			System.out.printf(format, "application server name", EnvConst.APP_ID);
 			System.out.printf(format, "server directory", new File("").getAbsolutePath());
+			System.out.printf(format, "officeframe directory", Environment.getOfficeFrameDir());
 			System.out.printf(format, "database name", EnvConst.DATABASE_NAME);
 			System.out.printf(format, "database", Environment.adminApplication.getDataBase().getInfo());
 			System.out.printf(format, "web server port", Environment.httpPort);
@@ -96,6 +97,11 @@ public class Console implements Runnable {
 				System.out.printf(format, "developer mode: ", "OFF");
 			}
 			System.out.printf(format, "temporary files", Environment.fileToDelete.size());
+		} else if (command.equalsIgnoreCase("modules info") || command.equalsIgnoreCase("mi")) {
+			for (AppEnv app : Environment.getApplications()) {
+				System.out.printf(format, app.appName + ": ", app.getModuleVer());
+			}
+
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {
 			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
 			List<String[]> info = Environment.adminApplication.getDataBase().getCountsOfRec();

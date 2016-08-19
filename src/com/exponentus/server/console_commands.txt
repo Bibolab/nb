@@ -9,6 +9,7 @@ show scheduled tasks (sst) - show scheduled tasks
 show scheduler queue (ssq) - show scheduler queue 
 import from h2 (ifh2) - import users list from H2 database;
 info (i) - show some information of the environment;
+modules info (mi) - show some information of the loaded modules;
 database info (dbi) - show some information of the database;
 help (h) - show this help;
 

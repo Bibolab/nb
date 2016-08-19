@@ -46,6 +46,11 @@ public class PortalInit extends HttpServlet {
 						ftEngine.registerTable(fEnt);
 					}
 				}
+
+				String mv = (String) c.getDeclaredField("MODULE_VERSION").get(null);
+				if (!mv.isEmpty()) {
+					env.setModuleVer(mv);
+				}
 			} catch (ClassNotFoundException e) {
 
 			}

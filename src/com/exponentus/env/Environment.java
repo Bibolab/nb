@@ -88,6 +88,7 @@ public class Environment implements ICache {
 	public static String SMTPHost;
 	public static String smtpUser;
 	public static String smtpPassword;
+	public static String smtpUserName;
 
 	public static Boolean slackEnable = false;
 	public static String slackToken;
@@ -245,6 +246,7 @@ public class Environment implements ICache {
 					smtpAuth = Boolean.valueOf(XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpauth"));
 					smtpUser = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpuser");
 					smtpPassword = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtppassword");
+					smtpUserName = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpusername", EnvConst.APP_ID + ", bot");
 					smtpPort = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpport");
 					Server.logger.infoLogEntry("MailAgent is going to redirect some messages to host: " + SMTPHost);
 				} else {

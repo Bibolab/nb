@@ -1,7 +1,6 @@
 package com.exponentus.messaging.email;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Callable;
@@ -20,32 +19,22 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.MsgException;
 import com.exponentus.localization.LanguageCode;
-import com.exponentus.localization.Vocabulary;
-import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.messaging.MessageAgent;
-import com.exponentus.server.Server;
 
 public class MailAgent extends MessageAgent {
-	private String smtpServer = Environment.SMTPHost;
-	private String smtpPort = Environment.smtpPort;
-	private String smtpUser = Environment.smtpUser;
-	private String smtpUserName = EnvConst.APP_ID + ", bot";
-	private String smtpPassword = Environment.smtpPassword;
-	private boolean smtpAuth = Environment.smtpAuth;
 	private Session mailerSes;
 
 	public MailAgent() {
 		if (Environment.mailEnable) {
 			Properties props = new Properties();
-			props.put("mail.smtp.host", smtpServer);
-			if (smtpAuth) {
-				props.put("mail.smtp.auth", smtpAuth);
-				props.put("mail.smtp.port", smtpPort);
-				if ("465".equals(smtpPort)) {
+			props.put("mail.smtp.host", Environment.SMTPHost);
+			if (Environment.smtpAuth) {
+				props.put("mail.smtp.auth", Environment.smtpAuth);
+				props.put("mail.smtp.port", Environment.smtpPort);
+				if ("465".equals(Environment.smtpPort)) {
 					props.put("mail.smtp.ssl.enable", "true");
 				}
 				Authenticator auth = new SMTPAuthenticator();
@@ -99,7 +88,7 @@ public class MailAgent extends MessageAgent {
 
 	private boolean send(MimeMessage msg, List<String> recipients) throws MsgException {
 		try {
-			msg.setFrom(new InternetAddress(smtpUser, smtpUserName));
+			msg.setFrom(new InternetAddress(Environment.smtpUser, Environment.smtpUserName));
 			for (String recipient : recipients) {
 				try {
 					msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
@@ -149,19 +138,8 @@ public class MailAgent extends MessageAgent {
 
 		@Override
 		public PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication(smtpUser, smtpPassword);
+			return new PasswordAuthentication(Environment.smtpUser, Environment.smtpPassword);
 		}
-	}
-
-	public static void main(String[] args) {
-		Server.logger = new JavaConsoleLogger();
-		EnvConst.DATABASE_NAME = "poema";
-		Environment.vocabulary = new Vocabulary("test");
-		Environment.init();
-		MailAgent ma = new MailAgent();
-		List<String> r = new ArrayList<String>();
-		r.add("11111@gmail.com");
-		// ma.sendMail(r, "subject", " body");
 	}
 
 }

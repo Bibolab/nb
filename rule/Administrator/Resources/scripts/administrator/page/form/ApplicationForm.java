@@ -39,7 +39,6 @@ public class ApplicationForm extends _DoPage {
 		actionBar.addAction(new _Action("Save &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
 		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
-		startSaveFormTransact(entity);
 	}
 
 	@Override
@@ -66,7 +65,7 @@ public class ApplicationForm extends _DoPage {
 
 		entity.setName(formData.getValueSilently("name"));
 		entity.setPosition(Util.convertStringToInt(formData.getValueSilently("position"), 99));
-		entity.setDefaultPage(formData.getValueSilently("defaulturl").replace("&", "&amp;"));
+		entity.setDefaultPage(formData.getValueSilently("defaulturl"));
 		entity.setLocalizedName(getLocalizedNames(session, formData));
 
 		try {

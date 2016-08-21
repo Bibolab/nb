@@ -88,7 +88,7 @@ public class Login extends HttpServlet {
 			Server.logger.errorLogEntry(e.type + " " + e.toString());
 			try {
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				RequestDispatcher d = request.getRequestDispatcher("Error?type=ws_auth_error");
+				RequestDispatcher d = request.getRequestDispatcher("e?type=ws_auth_error");
 				d.forward(request, response);
 			} catch (IOException e1) {
 				Server.logger.errorLogEntry(e1);

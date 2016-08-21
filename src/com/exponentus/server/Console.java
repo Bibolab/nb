@@ -86,6 +86,7 @@ public class Console implements Runnable {
 				System.out.printf(format, "smtp auth", Environment.smtpAuth);
 				System.out.printf(format, "smtp server", Environment.SMTPHost);
 				System.out.printf(format, "smtp user", Environment.smtpUser);
+				System.out.printf(format, "smtp user name", Environment.smtpUserName);
 			} else {
 				System.out.printf(format, "mail agent: ", "OFF");
 			}
@@ -97,6 +98,8 @@ public class Console implements Runnable {
 				System.out.printf(format, "developer mode: ", "OFF");
 			}
 			System.out.printf(format, "temporary files", Environment.fileToDelete.size());
+		} else if (command.equalsIgnoreCase("server info") || command.equalsIgnoreCase("si")) {
+			System.out.printf(format, "server version", Server.serverVersion);
 		} else if (command.equalsIgnoreCase("modules info") || command.equalsIgnoreCase("mi")) {
 			for (AppEnv app : Environment.getApplications()) {
 				System.out.printf(format, app.appName + ": ", app.getModuleVer());

@@ -66,7 +66,7 @@ public class ApplicationForm extends _DoPage {
 
 		entity.setName(formData.getValueSilently("name"));
 		entity.setPosition(Util.convertStringToInt(formData.getValueSilently("position"), 99));
-		entity.setDefaultURL(formData.getValueSilently("defaulturl").replace("&", "&amp;"));
+		entity.setDefaultPage(formData.getValueSilently("defaulturl").replace("&", "&amp;"));
 		entity.setLocalizedName(getLocalizedNames(session, formData));
 
 		try {

@@ -44,7 +44,11 @@ public class Unsecure extends ValveBase {
 						((Secure) getNext()).invoke(request, response, appType);
 					} else if (ru.isPage()) {
 						try {
-							if (env.ruleProvider.getRule(ru.getPageID()).isAnonymousAccessAllowed()) {
+							String pageId = ru.getPageID();
+							if (pageId.isEmpty()) {
+								pageId = env.getDefaultPage();
+							}
+							if (env.ruleProvider.getRule(pageId).isAnonymousAccessAllowed()) {
 								gettingSession(request, response, env);
 								getNext().getNext().invoke(request, response);
 							} else {
@@ -69,14 +73,15 @@ public class Unsecure extends ValveBase {
 				if (appType.equals("favicon")) {
 					getNext().getNext().invoke(request, response);
 				} else {
-
-					// request.getRequestDispatcher("/Workspace/p?id=workspace").forward(request,
-					// response);
-					String msg = "unknown application type \"" + appType + "\"";
-					Server.logger.warningLogEntry(msg);
-					ApplicationException ae = new ApplicationException(ru.getAppType(), msg, LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
-					response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-					response.getWriter().println(ae.getHTMLMessage());
+					if (appType.trim().equals("")) {
+						getNext().getNext().invoke(request, response);
+					} else {
+						String msg = "unknown application type \"" + appType + "\"";
+						Server.logger.warningLogEntry(msg);
+						ApplicationException ae = new ApplicationException(ru.getAppType(), msg, LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
+						response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+						response.getWriter().println(ae.getHTMLMessage());
+					}
 				}
 			}
 		} else {

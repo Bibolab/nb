@@ -102,6 +102,12 @@
         <appender-ref ref="console" />
     </category>
     
+    <category name=" org.apache.catalina.util.SessionIdGeneratorBase">
+        <priority value="OFF" />
+        <appender-ref ref="console" />
+    </category>
+    
+   
   <!--   <category name="com.ullink.slack.simpleslackapi.impl.SlackWebSocketSessionImpl">
         <priority value="DEBUG" />
         <appender-ref ref="console" />

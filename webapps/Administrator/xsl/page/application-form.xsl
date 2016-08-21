@@ -49,10 +49,10 @@
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                           Default URL
+                           Default Page
                         </div>
                         <div class="controls">
-                            <input type="text" name="defaulturl" value="{fields/defaulturl}" class="span7"/>
+                            <input type="text" name="defaulturl" value="{fields/defaultpage}" class="span7"/>
                         </div>
                     </div>
                 </fieldset>

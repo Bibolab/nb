@@ -120,10 +120,10 @@ public class ServerConst {
 			}
 
 			try {
-				Field f = c.getDeclaredField("DEFAULT_URL");
-				entity.setDefaultURL((String) f.get(null));
+				Field f = c.getDeclaredField("DEFAULT_PAGE");
+				entity.setDefaultPage((String) f.get(null));
 			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-				entity.setDefaultURL("p");
+				entity.setDefaultPage("index");
 			}
 
 			Map<LanguageCode, String> localizedName = new HashMap<LanguageCode, String>();
@@ -145,7 +145,7 @@ public class ServerConst {
 			entity.setName(site.name);
 			if (site.name.equalsIgnoreCase(EnvConst.ADMINISTRATOR_APP_NAME)) {
 				entity.setCode(AppCode.ADMINISTRATOR);
-				entity.setDefaultURL("p?id=user-view");
+				entity.setDefaultPage("user-view");
 			} else {
 				Server.logger.errorLogEntry(e.toString());
 				entity.setCode(AppCode.CUSTOM);

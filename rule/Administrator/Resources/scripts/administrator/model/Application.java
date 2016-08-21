@@ -45,7 +45,7 @@ public class Application extends AppEntity<UUID> {
 
 	private String authURL;
 
-	private String defaultURL;
+	private String defaultPage;
 
 	private int position;
 
@@ -95,12 +95,12 @@ public class Application extends AppEntity<UUID> {
 		this.authURL = authURL;
 	}
 
-	public String getDefaultURL() {
-		return defaultURL;
+	public String getDefaultPage() {
+		return defaultPage;
 	}
 
-	public void setDefaultURL(String defaultURL) {
-		this.defaultURL = defaultURL;
+	public void setDefaultPage(String defaultPage) {
+		this.defaultPage = defaultPage;
 	}
 
 	public AppCode getCode() {
@@ -143,7 +143,7 @@ public class Application extends AppEntity<UUID> {
 		chunk.append("<ison>" + isOn + "</ison>");
 		chunk.append("<appcode>" + code + "</appcode>");
 		chunk.append("<position>" + position + "</position>");
-		chunk.append("<defaulturl>" + defaultURL + "</defaulturl>");
+		chunk.append("<defaultpage>" + defaultPage + "</defaultpage>");
 		chunk.append("<localizednames>");
 		LanguageDAO lDao = new LanguageDAO(ses);
 		List<Language> list = lDao.findAll();
@@ -157,7 +157,7 @@ public class Application extends AppEntity<UUID> {
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		return "<app id=\"" + name + "\">" + getLocalizedName(ses.getLang()) + "</app>" + "<pos>" + position + "</pos><url>"
-		        + Util.getAsTagValue(defaultURL) + "</url>";
+		        + Util.getAsTagValue(getDefaultURL()) + "</url>";
 	}
 
 	public String getLocalizedName(LanguageCode lang) {
@@ -176,5 +176,9 @@ public class Application extends AppEntity<UUID> {
 	@Override
 	public void setAttachments(List<Attachment> attachments) {
 
+	}
+
+	public String getDefaultURL() {
+		return "p?id=" + defaultPage;
 	}
 }

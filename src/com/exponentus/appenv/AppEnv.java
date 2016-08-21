@@ -35,6 +35,7 @@ public class AppEnv extends PageCacheAdapter {
 	private IDatabase dataBase;
 	private String rulePath = "rule";
 	private static final String[] extensions = { "groovy" };
+	private String defaultPage;
 	private String moduleVer;
 
 	public AppEnv(String n, IDatabase db) {
@@ -131,6 +132,14 @@ public class AppEnv extends PageCacheAdapter {
 				Server.logger.errorLogEntry(e);
 			}
 		}
+	}
+
+	public String getDefaultPage() {
+		return defaultPage;
+	}
+
+	public void setDefaultPage(String defaultPage) {
+		this.defaultPage = defaultPage;
 	}
 
 	public String getModuleVer() {

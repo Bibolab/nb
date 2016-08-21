@@ -504,4 +504,8 @@ public class Environment implements ICache {
 		return kernelDir;
 	}
 
+	public static String getDefaultRedirectURL() {
+		return "/Workspace/p?id=workspace";
+	}
+
 }

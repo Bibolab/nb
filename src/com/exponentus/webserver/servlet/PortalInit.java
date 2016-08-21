@@ -47,6 +47,11 @@ public class PortalInit extends HttpServlet {
 					}
 				}
 
+				String dp = (String) c.getDeclaredField("DEFAULT_PAGE").get(null);
+				if (!dp.isEmpty()) {
+					env.setDefaultPage(dp);
+				}
+
 				String mv = (String) c.getDeclaredField("MODULE_VERSION").get(null);
 				if (!mv.isEmpty()) {
 					env.setModuleVer(mv);

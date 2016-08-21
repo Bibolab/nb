@@ -125,7 +125,7 @@ public class WebServer {
 
 		context = tomcat.addContext(URLPath, db);
 		context.setDisplayName(URLPath.substring(1));
-		context.addWelcomeFile("Provider");
+		context.addWelcomeFile("p");
 
 		Tomcat.addServlet(context, "default", Default.class.getCanonicalName());
 		context.addServletMapping("/", "default");
@@ -171,11 +171,16 @@ public class WebServer {
 		String db = new File("webapps/ROOT").getAbsolutePath();
 		Context context = tomcat.addContext(tomcat.getHost(), "", db);
 		context.setDisplayName("root");
-		context.addWelcomeFile("/Workspace/p?id=workspace");
+		context.addWelcomeFile("r");
 
 		engine.getPipeline().addValve(new Logging());
 		engine.getPipeline().addValve(new Unsecure());
 		engine.getPipeline().addValve(new Secure());
+
+		Tomcat.addServlet(context, "Redirector", "com.exponentus.webserver.servlet.Redirector");
+		context.addServletMapping("/Redirector", "Redirector");
+		context.addServletMapping("/r", "Redirector");
+		context.addServletMapping("/R", "Redirector");
 
 		initErrorPages(context);
 

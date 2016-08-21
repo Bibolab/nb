@@ -45,6 +45,7 @@ public class Application extends AppEntity<UUID> {
 
 	private String authURL;
 
+	@Column(length = 64)
 	private String defaultPage;
 
 	private int position;

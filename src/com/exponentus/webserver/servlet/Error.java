@@ -25,7 +25,7 @@ public class Error extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String type = request.getParameter("type");
 		String msg = request.getParameter("msg");
-		String xslt = "xsl" + File.separator + "error.xsl";
+		String xslt = "." + File.separator + "xsl" + File.separator + "error.xsl";
 		File errorXslt = new File(xslt);
 		if (!errorXslt.exists()) {
 			xslt = Environment.getKernelDir() + "xsl" + File.separator + "error.xsl";
@@ -37,7 +37,7 @@ public class Error extends HttpServlet {
 			if (type != null) {
 				if (type.equals("ws_auth_error")) {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					xslt = "xsl" + File.separator + "authfailed.xsl";
+					xslt = "." + File.separator + "xsl" + File.separator + "authfailed.xsl";
 					errorXslt = new File(xslt);
 					if (!errorXslt.exists()) {
 						xslt = Environment.getKernelDir() + "xsl" + File.separator + "authfailed.xsl";

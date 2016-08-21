@@ -2,6 +2,7 @@ package com.exponentus.webserver.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -83,10 +84,12 @@ public class Login extends HttpServlet {
 				throw new AuthFailedException(AuthFailedExceptionType.PASSWORD_INCORRECT, login);
 			}
 		} catch (AuthFailedException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			Server.logger.errorLogEntry(e.type + " " + e.toString());
 			try {
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				request.getRequestDispatcher("Error?type=ws_auth_error").forward(request, response);
+				RequestDispatcher d = request.getRequestDispatcher("Error?type=ws_auth_error");
+				d.forward(request, response);
 			} catch (IOException e1) {
 				Server.logger.errorLogEntry(e1);
 			} catch (ServletException e2) {

@@ -16,6 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.Environment;
 import com.exponentus.server.Server;
 
 public class AuthFailedException extends Exception {
@@ -61,14 +62,14 @@ public class AuthFailedException extends Exception {
 				response.setContentType("text/html;charset=utf-8");
 				out = response.getWriter();
 				Source xmlSource = new StreamSource(new StringReader(xmlText));
-				Source xsltSource = new StreamSource(new File("xsl" + File.separator + "authfailed.xsl"));
+				Source xsltSource = new StreamSource(new File(Environment.getXSLDir() + "authfailed.xsl"));
 				Result result = new StreamResult(out);
 
 				TransformerFactory transFact = TransformerFactory.newInstance();
 				Transformer trans = transFact.newTransformer(xsltSource);
 				trans.transform(xmlSource, result);
 			} else {
-				response.setContentType("text/xml;charset=Windows-1251");
+				response.setContentType("text/xml;charset=utf-8");
 				// response.sendError(550);
 				out = response.getWriter();
 				out.println(xmlText);

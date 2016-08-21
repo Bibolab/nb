@@ -504,6 +504,11 @@ public class Environment implements ICache {
 		return kernelDir;
 	}
 
+	public static String getXSLDir() {
+		Path parent = Paths.get(System.getProperty("user.dir")).getParent();
+		return parent + "xsl" + File.separator;
+	}
+
 	public static String getDefaultRedirectURL() {
 		return "/Workspace/p?id=workspace";
 	}

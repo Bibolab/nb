@@ -74,9 +74,9 @@
         <priority value="INFO" />
         <appender-ref ref="console" />
     </category>  
+
     
-    
-    <category name="org.apache.coyote.http11.Http11NioProtocol">
+    <category name="org.apache.coyote.http11">
         <priority value="INFO" />
         <appender-ref ref="console" />
     </category>  

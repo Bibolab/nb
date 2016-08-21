@@ -80,12 +80,11 @@ public class Login extends HttpServlet {
 				response.sendRedirect(redirect);
 
 			} else {
-				AppEnv.logger.infoLogEntry("Authorization failed, login or password is incorrect -");
 				throw new AuthFailedException(AuthFailedExceptionType.PASSWORD_INCORRECT, login);
 			}
 		} catch (AuthFailedException e) {
 			// e.printStackTrace();
-			Server.logger.errorLogEntry(e.type + " " + e.toString());
+			Server.logger.warningLogEntry(e.toString());
 			try {
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				RequestDispatcher d = request.getRequestDispatcher("e?type=ws_auth_error");

@@ -22,11 +22,13 @@ import com.exponentus.server.Server;
 public class AuthFailedException extends Exception {
 	public AuthFailedExceptionType type;
 
+	private String user;
 	private static final long serialVersionUID = 3214292820186296427L;
 
 	public AuthFailedException(AuthFailedExceptionType type, String user) {
 		super();
 		this.type = type;
+		this.user = user;
 		switch (type) {
 		case NO_USER_SESSION:
 			break;
@@ -86,6 +88,11 @@ public class AuthFailedException extends Exception {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return type + " " + user;
+	}
+
 	public int getCode() {
 		return 0;
 	}
@@ -95,4 +102,5 @@ public class AuthFailedException extends Exception {
 
 		return xmlText;
 	}
+
 }

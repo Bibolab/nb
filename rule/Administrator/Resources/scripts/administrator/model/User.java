@@ -286,6 +286,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
+		chunk.append("<defaultlang>" + defaultLang + "</defaultlang>");
 		chunk.append("<email>" + email + "</email>");
 		chunk.append("<xmpp>" + xmpp + "</xmpp>");
 		chunk.append("<slack>" + slack + "</slack>");
@@ -309,9 +310,8 @@ public class User implements IUser<Long>, IPOJOObject {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
+		chunk.append("<defaultlang>" + defaultLang + "</defaultlang>");
 		chunk.append("<email>" + email + "</email>");
-		chunk.append("<xmpp>" + xmpp + "</xmpp>");
-		chunk.append("<slack>" + slack + "</slack>");
 		chunk.append("<issuperuser>" + isSuperUser + "</issuperuser>");
 		return chunk.toString();
 	}

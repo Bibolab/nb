@@ -56,7 +56,7 @@ public class PortalInit extends HttpServlet {
 
 				String mv = (String) c.getDeclaredField("MODULE_VERSION").get(null);
 				if (!mv.isEmpty()) {
-					env.setModuleVer(mv);
+					// env.setModuleVer(mv);
 				}
 			} catch (ClassNotFoundException e) {
 

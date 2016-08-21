@@ -32,6 +32,8 @@ public interface IUser<K> extends ISimpleAppEntity<K> {
 
 	List<String> getRoles();
 
+	void setDefaultLang(LanguageCode defaultLang);
+
 	LanguageCode getDefaultLang();
 
 	List<Application> getAllowedApps();

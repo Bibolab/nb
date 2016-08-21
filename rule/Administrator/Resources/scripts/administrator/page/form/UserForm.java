@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.exponentus.env.EnvConst;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.scheduler._EnumWrapper;
 import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
@@ -38,18 +40,21 @@ public class UserForm extends _DoPage {
 			entity = new User();
 			entity.setRegDate(new Date());
 			entity.setLogin("");
+			entity.setDefaultLang(LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
 			entity.setEditable(true);
 		}
 		addContent((User) entity);
+		addContent(new _EnumWrapper<>(LanguageCode.class.getEnumConstants()));
 		addContent(new ApplicationDAO(session).findAll());
 		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
+		actionBar.addAction(new _Action("Save &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
 		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
 	}
 
 	@Override
 	public void doPOST(_Session session, _WebFormData formData) {
+		devPrint(formData);
 		try {
 			_Validation ve = validate(formData, session.getLang());
 			if (ve.hasError()) {
@@ -71,6 +76,7 @@ public class UserForm extends _DoPage {
 
 			entity.setLogin(formData.getValue("login"));
 			entity.setEmail(formData.getValue("email"));
+			entity.setDefaultLang(LanguageCode.valueOf(formData.getValue("defaultlang")));
 			entity.setXmpp(formData.getValue("xmpp"));
 			entity.setSlack(formData.getValue("slack"));
 			entity.setPwd(formData.getValue("pwd"));

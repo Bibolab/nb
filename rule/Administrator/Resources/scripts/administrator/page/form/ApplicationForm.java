@@ -36,7 +36,7 @@ public class ApplicationForm extends _DoPage {
 		addContent(entity);
 		addContent(new _EnumWrapper<>(AppCode.class.getEnumConstants()));
 		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
+		actionBar.addAction(new _Action("Save &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
 		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
 		startSaveFormTransact(entity);

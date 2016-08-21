@@ -76,6 +76,11 @@ public abstract class SystemUser implements IUser<Long> {
 	}
 
 	@Override
+	public void setDefaultLang(LanguageCode defaultLang) {
+
+	}
+
+	@Override
 	public LanguageCode getDefaultLang() {
 		return LanguageCode.ENG;
 	}

@@ -102,7 +102,7 @@ public class Console implements Runnable {
 			System.out.printf(format, "server version", Server.serverVersion);
 		} else if (command.equalsIgnoreCase("modules info") || command.equalsIgnoreCase("mi")) {
 			for (AppEnv app : Environment.getApplications()) {
-				System.out.printf(format, app.appName + ": ", app.getModuleVer());
+				System.out.printf(format, app.appName + ": ", app.getDefaultPage());
 			}
 
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {

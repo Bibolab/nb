@@ -505,8 +505,7 @@ public class Environment implements ICache {
 	}
 
 	public static String getXSLDir() {
-		Path parent = Paths.get(System.getProperty("user.dir")).getParent();
-		return parent + "xsl" + File.separator;
+		return "xsl" + File.separator;
 	}
 
 	public static String getDefaultRedirectURL() {

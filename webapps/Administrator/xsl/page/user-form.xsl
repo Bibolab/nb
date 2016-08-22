@@ -100,6 +100,7 @@
                                         <xsl:value-of select="."/>
                                     </option>
                                 </xsl:for-each>
+
                             </select>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
+import com.exponentus.user.SuperUser;
 import com.exponentus.util.StringUtil;
 
 import administrator.dao.UserDAO;
@@ -19,9 +20,15 @@ public class Connect {
 			String pwdHash = StringUtil.encode(pwd);
 			if (user.getPwdHash() != null && user.getPwdHash().equals(pwdHash)) {
 				user.setAuthorized(true);
+				if (user.isSuperUser()) {
+					user = new SuperUser();
+				}
+
 				if (user.getUserName() == null) {
 					user.setUserName(user.getLogin());
 					user.setRoles(new ArrayList<String>());
+				} else {
+					user.setUserName(login);
 				}
 			} else {
 				user.setAuthorized(false);

@@ -87,6 +87,24 @@
                     </div>
                     <div class="form-group">
                         <div class="control-label">
+                           Default language
+                        </div>
+                        <div class="controls">
+                            <xsl:variable name="currentlang" select="/fields/defaultlang"/>
+                            <select name="defaultlang" class="native span2">
+                                <xsl:for-each select="//constants[@entity = 'languagecode']/entry">
+                                    <option value="{@attrval}">
+                                        <xsl:if test="@attrval = $currentlang">
+                                            <xsl:attribute name="selected" select="'selected'"/>
+                                        </xsl:if>
+                                        <xsl:value-of select="."/>
+                                    </option>
+                                </xsl:for-each>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label">
                             Allowed applications
                         </div>
                         <div class="controls">

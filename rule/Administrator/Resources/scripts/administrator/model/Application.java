@@ -180,6 +180,9 @@ public class Application extends AppEntity<UUID> {
 	}
 
 	public String getDefaultURL() {
+		if (defaultPage == null) {
+			return "";
+		}
 		return "p?id=" + defaultPage;
 	}
 }

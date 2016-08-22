@@ -16,6 +16,7 @@ import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoForm;
 import com.exponentus.user.IUser;
+import com.exponentus.user.UserStatusCode;
 
 import administrator.dao.ApplicationDAO;
 import administrator.dao.UserDAO;
@@ -89,9 +90,11 @@ public class UserForm extends _DoForm {
 				}
 			}
 		}
+
 		entity.setAllowedApps(apps);
 
 		if (isNew) {
+			entity.setStatus(UserStatusCode.REGISTERED);
 			dao.add(entity);
 		} else {
 			dao.update(entity);

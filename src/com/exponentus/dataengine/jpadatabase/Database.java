@@ -2,6 +2,7 @@ package com.exponentus.dataengine.jpadatabase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -206,22 +207,79 @@ public class Database implements IDatabase {
 		}
 	}
 
+	@Override
+	public int getRegNum(String key) {
+		int lastNum = 1;
+		Connection conn = dbPool.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			String sql = "select * from COUNTERS where KEYS='" + key + "'";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			String keyValue = "";
+			if (rs.next()) {
+				keyValue = rs.getString("KEYS");
+				lastNum = rs.getInt("LASTNUM");
+			}
+			if (keyValue != "") {
+				lastNum++;
+			}
+			rs.close();
+			pst.close();
+			conn.commit();
+		} catch (SQLException e) {
+			DatabaseUtil.errorPrint(e);
+		} finally {
+			dbPool.returnConnection(conn);
+		}
+		return lastNum;
+	}
+
+	@SuppressWarnings("resource")
+	@Override
+	public int postRegNum(int num, String key) {
+		int lastNum = 0;
+		Connection conn = dbPool.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			String sql = "select *from COUNTERS where KEYS='" + key + "'";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			String keyValue = "";
+			if (rs.next()) {
+				keyValue = rs.getString("KEYS");
+				lastNum = rs.getInt("LASTNUM");
+			}
+			rs.close();
+			String getNum = null;
+			conn.setAutoCommit(false);
+			if (keyValue.equals("")) {
+				getNum = "insert into COUNTERS(KEYS, LASTNUM)values(?,?)";
+				pst = conn.prepareStatement(getNum);
+				pst.setString(1, key);
+				pst.setInt(2, num);
+			} else {
+				getNum = "update COUNTERS set LASTNUM = ? where KEYS = ? ";
+				pst = conn.prepareStatement(getNum);
+				lastNum++;
+				pst.setInt(1, num);
+				pst.setString(2, key);
+			}
+			pst.executeUpdate();
+			conn.commit();
+			pst.close();
+		} catch (SQLException e) {
+			DatabaseUtil.errorPrint(e);
+			lastNum = -1;
+		} finally {
+			dbPool.returnConnection(conn);
+		}
+		return lastNum;
+	}
+
 	private int theFirst(_Session ses) {
-		/*
-		 * List<String> lwd = Console.getValFromConsole(
-		 * "enter adminstrator user name> ", StringUtil.USERNAME_PATTERN); if
-		 * (lwd != null) { if (lwd.contains("quit")) { Server.shutdown(); } else
-		 * {
-		 */
 		String userName = EnvConst.DUMMY_USER;
 		String pwd = EnvConst.DUMMY_PASSWORD;
-		/*
-		 * try { pwd = lwd.get(1); } catch (IndexOutOfBoundsException e) { pwd =
-		 * userName; }
-		 */
-
-		// System.out.println("user \"" + userName + "\" has been registered");
-
 		User entity = new User();
 		entity.setSuperUser(true);
 		entity.setLogin(userName);
@@ -230,11 +288,7 @@ public class Database implements IDatabase {
 		entity.setAllowedApps(aDao.findAll());
 		UserDAO uDao = new UserDAO(this);
 		uDao.add(entity);
-
-		// }
-		// }
 		return 0;
-
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.dataengine.IDatabase;
 import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.dataengine.jpa.TempFile;
 import com.exponentus.env.EnvConst;
@@ -128,6 +129,25 @@ public abstract class AbstractForm extends AbstractPage {
 		}
 
 		return atts;
+	}
+
+	public class RegNum {
+
+		String key;
+		int num;
+		IDatabase db = getSes().getAppEnv().getDataBase();
+
+		public int getRegNumber(String key) {
+			this.key = key;
+			num = db.getRegNum(key);
+			return num;
+		}
+
+		public void post() {
+			db.postRegNum(num, key);
+
+		}
+
 	}
 
 	@Override

@@ -18,4 +18,8 @@ public interface IDatabase {
 
 	long getCount();
 
+	int getRegNum(String key);
+
+	int postRegNum(int num, String key);
+
 }

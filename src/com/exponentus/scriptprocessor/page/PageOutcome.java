@@ -15,6 +15,7 @@ import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
+import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.PublishAsType;
 import com.exponentus.webserver.servlet.xslt.SaxonTransformator;
@@ -225,7 +226,7 @@ public class PageOutcome {
 		try {
 			jsonInString = mapper.writeValueAsString(clazz);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			Server.logger.errorLogEntry(e);
 		}
 		return jsonInString;
 	}

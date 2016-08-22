@@ -4,9 +4,9 @@ import java.io.File;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
-import com.exponentus.scripting.event._DoPage;
+import com.exponentus.scripting.event._DoForm;
 
-public class LogForm extends _DoPage {
+public class LogForm extends _DoForm {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {

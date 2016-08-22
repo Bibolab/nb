@@ -2,12 +2,9 @@ package administrator.page.form;
 
 import java.util.UUID;
 
-import org.eclipse.persistence.exceptions.DatabaseException;
-
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.RuleException;
-import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.rule.page.PageRule;
 import com.exponentus.scripting._Session;
@@ -16,16 +13,15 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
-import com.exponentus.scripting.event._DoPage;
+import com.exponentus.scripting.event._DoForm;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
 
-public class RuleForm extends _DoPage {
+public class RuleForm extends _DoForm {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
-		LanguageCode lang = session.getLang();
 		String id = formData.getValueSilently("docid");
 		String application = formData.getValueSilently("application");
 		AppEnv appEnv = Environment.getApplication(application);
@@ -51,26 +47,27 @@ public class RuleForm extends _DoPage {
 			return;
 		}
 
-		boolean isNew = false;
-		String id = formData.getValueSilently("docid");
-		LanguageDAO dao = new LanguageDAO(session);
-		Language entity;
-
-		if (id.isEmpty()) {
-			isNew = true;
-			entity = new Language();
-		} else {
-			entity = dao.findById(UUID.fromString(id));
-		}
-
 		try {
+			boolean isNew = false;
+			String id = formData.getValueSilently("docid");
+			LanguageDAO dao = new LanguageDAO(session);
+			Language entity;
+
+			if (id.isEmpty()) {
+				isNew = true;
+				entity = new Language();
+			} else {
+				entity = dao.findById(UUID.fromString(id));
+			}
+
 			if (isNew) {
 				dao.add(entity);
 			} else {
 				dao.update(entity);
 			}
-		} catch (DatabaseException | SecureException e) {
-			setError(e);
+		} catch (Exception e) {
+			setBadRequest();
+			logError(e);
 		}
 	}
 

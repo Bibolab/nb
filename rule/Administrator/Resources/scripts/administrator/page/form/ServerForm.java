@@ -1,20 +1,16 @@
 package administrator.page.form;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 
 import com.exponentus.env.Environment;
 import com.exponentus.scripting._Session;
@@ -22,10 +18,10 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
-import com.exponentus.scripting.event._DoPage;
+import com.exponentus.scripting.event._DoForm;
 import com.exponentus.util.Util;
 
-public class ServerForm extends _DoPage {
+public class ServerForm extends _DoForm {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
@@ -65,14 +61,9 @@ public class ServerForm extends _DoPage {
 			StreamResult result = new StreamResult(new File("cfg.xml"));
 			transformer.transform(source, result);
 
-		} catch (ParserConfigurationException pce) {
-			pce.printStackTrace();
-		} catch (TransformerException tfe) {
-			tfe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		} catch (SAXException sae) {
-			sae.printStackTrace();
+		} catch (Exception e) {
+			setBadRequest();
+			logError(e);
 		}
 	}
 

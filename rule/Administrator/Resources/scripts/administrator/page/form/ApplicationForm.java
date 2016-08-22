@@ -14,13 +14,13 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
-import com.exponentus.scripting.event._DoPage;
+import com.exponentus.scripting.event._DoForm;
 import com.exponentus.util.Util;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
 
-public class ApplicationForm extends _DoPage {
+public class ApplicationForm extends _DoForm {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {

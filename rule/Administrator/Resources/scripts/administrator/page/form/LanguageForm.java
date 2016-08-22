@@ -12,12 +12,12 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
-import com.exponentus.scripting.event._DoPage;
+import com.exponentus.scripting.event._DoForm;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
 
-public class LanguageForm extends _DoPage {
+public class LanguageForm extends _DoForm {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
@@ -65,6 +65,7 @@ public class LanguageForm extends _DoPage {
 				dao.update(entity);
 			}
 		} catch (DatabaseException | SecureException e) {
+
 			setError(e);
 		}
 	}

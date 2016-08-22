@@ -90,7 +90,7 @@
                            Default language
                         </div>
                         <div class="controls">
-                            <xsl:variable name="currentlang" select="/fields/defaultlang"/>
+                            <xsl:variable name="currentlang" select="fields/defaultlang"/>
                             <select name="defaultlang" class="native span2">
                                 <xsl:for-each select="//constants[@entity = 'languagecode']/entry">
                                     <option value="{@attrval}">

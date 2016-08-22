@@ -71,6 +71,7 @@ public class Login extends HttpServlet {
 				redirect = cpc.page;
 				if (redirect.equals("")) {
 					redirect = getRedirect(jses, appCookies);
+					redirect = redirect.isEmpty() ? request.getContextPath() : redirect;
 				} else {
 					Cookie cpCookie = new Cookie("calling_page", "0");
 					cpCookie.setMaxAge(0);

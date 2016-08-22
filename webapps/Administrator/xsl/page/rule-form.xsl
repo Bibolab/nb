@@ -81,6 +81,7 @@
                     </div>
                 </fieldset>
             </section>
+            <input type="hidden" name="fsid" value="{//response/content/fsid}"/>
         </form>
     </xsl:template>
 

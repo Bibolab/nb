@@ -6,7 +6,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.server.Server;
@@ -43,7 +42,7 @@ public class SlackAgent {
 	public void sendMessage(String userName, String text) {
 		SlackMessage msg = new SlackMessage();
 		msg.setToken(authToken);
-		msg.setSender(EnvConst.APP_ID);
+		msg.setSender(Environment.smtpUserName);
 		msg.setChannel(userName);
 		msg.setText(text);
 

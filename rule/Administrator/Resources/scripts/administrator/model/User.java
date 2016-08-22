@@ -28,6 +28,7 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.IUser;
+import com.exponentus.user.UserStatusCode;
 import com.exponentus.util.Util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -41,6 +42,8 @@ public class User implements IUser<Long>, IPOJOObject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	protected Long id;
+
+	private UserStatusCode status = UserStatusCode.UNKNOWN;
 
 	@Column(name = "reg_date", nullable = false, updatable = false)
 	protected Date regDate;
@@ -73,8 +76,6 @@ public class User implements IUser<Long>, IPOJOObject {
 	@ManyToMany
 	@JoinTable(name = "_allowed_apps", joinColumns = @JoinColumn(name = "app_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") )
 	private List<Application> allowedApps;
-
-	private int status;
 
 	private String theme;
 
@@ -217,7 +218,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		this.allowedApps = allowedApps;
 	}
 
-	public int getStatus() {
+	public UserStatusCode getStatus() {
 		return status;
 	}
 
@@ -234,6 +235,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		return defaultLang;
 	}
 
+	@Override
 	public void setDefaultLang(LanguageCode defaultLang) {
 		this.defaultLang = defaultLang;
 	}
@@ -247,7 +249,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		this.isSuperUser = isSuperUser;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(UserStatusCode status) {
 		this.status = status;
 	}
 
@@ -278,13 +280,14 @@ public class User implements IUser<Long>, IPOJOObject {
 
 	@Override
 	public String getURL() {
-		return "Provider?id=user-form&amp;docid=" + getId();
+		return "p?id=user-form&amp;docid=" + getId();
 	}
 
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
+		chunk.append("<status>" + status + "</status>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<defaultlang>" + defaultLang + "</defaultlang>");
 		chunk.append("<email>" + email + "</email>");

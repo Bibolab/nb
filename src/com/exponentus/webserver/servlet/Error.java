@@ -27,17 +27,23 @@ public class Error extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		LanguageCode lang = LanguageCode.ENG;
+		Vocabulary v = Environment.vocabulary;
 		HttpSession jses = request.getSession(false);
-		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
-		Vocabulary v = ses.getAppEnv().vocabulary;
-		LanguageCode lang = ses.getLang();
+		try {
+			_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
+			lang = ses.getLang();
+		} catch (NullPointerException e) {
+
+		}
+
 		String type = request.getParameter("type");
 		String msg = request.getParameter("msg");
 		File errorXslt = Environment.getServerXSLT("error.xsl");
 
 		try {
 			request.setCharacterEncoding(EnvConst.SUPPOSED_CODE_PAGE);
-			String outputContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request lang=\"" + ses.getLang().name() + "\" >";
+			String outputContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request lang=\"" + lang + "\" >";
 
 			if (type != null) {
 				if (type.equals("ws_auth_error")) {

@@ -218,6 +218,10 @@ public class User implements IUser<Long>, IPOJOObject {
 		this.allowedApps = allowedApps;
 	}
 
+	public void setStatus(UserStatusCode status) {
+		this.status = status;
+	}
+
 	public UserStatusCode getStatus() {
 		return status;
 	}
@@ -247,10 +251,6 @@ public class User implements IUser<Long>, IPOJOObject {
 
 	public void setSuperUser(boolean isSuperUser) {
 		this.isSuperUser = isSuperUser;
-	}
-
-	public void setStatus(UserStatusCode status) {
-		this.status = status;
 	}
 
 	@Override

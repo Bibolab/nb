@@ -125,4 +125,14 @@ public abstract class SystemUser implements IUser<Long> {
 	public void setPwdHash(String pwdHash) {
 
 	}
+
+	@Override
+	public void setStatus(UserStatusCode status) {
+
+	}
+
+	@Override
+	public UserStatusCode getStatus() {
+		return UserStatusCode.REGISTERED;
+	}
 }

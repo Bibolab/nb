@@ -54,4 +54,8 @@ public interface IUser<K> extends ISimpleAppEntity<K> {
 
 	void setPwdHash(String pwdHash);
 
+	public void setStatus(UserStatusCode status);
+
+	public UserStatusCode getStatus();
+
 }

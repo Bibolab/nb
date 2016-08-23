@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
 
 			Cookies appCookies = new Cookies(request);
 
-			IUser<Long> user = new Connect().getUser(login, pwd);
+			IUser<Long> user = new Connect().getUser(login.trim(), pwd);
 
 			if (user != null && user.isAuthorized()) {
 				jses = request.getSession(true);

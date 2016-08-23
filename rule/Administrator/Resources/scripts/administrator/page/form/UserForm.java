@@ -9,7 +9,6 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.scheduler._EnumWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
-import com.exponentus.scripting._Validator;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
@@ -41,6 +40,7 @@ public class UserForm extends _DoForm {
 			entity.setRegDate(new Date());
 			entity.setLogin("");
 			entity.setDefaultLang(LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
+			entity.setStatus(UserStatusCode.UNKNOWN);
 			entity.setEditable(true);
 		}
 		addContent((User) entity);
@@ -110,9 +110,7 @@ public class UserForm extends _DoForm {
 		if (formData.getValueSilently("login").isEmpty()) {
 			ve.addError("login", "required", getLocalizedWord("required", lang));
 		}
-		if (formData.getValueSilently("email").isEmpty() || !_Validator.checkEmail(formData.getValueSilently("email"))) {
-			ve.addError("email", "email", getLocalizedWord("email_invalid", lang));
-		}
+
 		if (!formData.getValueSilently("pwd").isEmpty()) {
 			if (formData.getValueSilently("pwd_confirm").isEmpty()) {
 				ve.addError("pwd_confirm", "required", getLocalizedWord("required", lang));

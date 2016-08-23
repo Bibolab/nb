@@ -119,6 +119,7 @@ public class MailAgent extends MessageAgent {
 			} else {
 				String error = "unable to send a message, probably SMTP host did not set";
 				logger.errorLogEntry(error);
+				logger.errorLogEntry(se);
 				throw new MsgException(error, LanguageCode.ENG);
 			}
 		} catch (AuthenticationFailedException e) {

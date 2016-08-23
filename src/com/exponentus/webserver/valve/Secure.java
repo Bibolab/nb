@@ -101,7 +101,7 @@ public class Secure extends ValveBase {
 				jses.invalidate();
 			}
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
+			request.getRequestDispatcher("/Error?type=session_lost").forward(request, response);
 		}
 	}
 

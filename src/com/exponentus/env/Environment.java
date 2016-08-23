@@ -508,6 +508,15 @@ public class Environment implements ICache {
 		return "xsl" + File.separator;
 	}
 
+	public static File getServerXSLT(String xslt) {
+		File xsltFile = new File(xslt);
+		if (!xsltFile.exists()) {
+			xsltFile = new File(kernelDir + "xsl" + File.separator + xslt);
+		}
+
+		return xsltFile;
+	}
+
 	public static String getDefaultRedirectURL() {
 		return "/Workspace/p?id=workspace";
 	}

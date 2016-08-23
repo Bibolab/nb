@@ -10,10 +10,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.TransformatorException;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.localization.Vocabulary;
+import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 
 import net.sf.saxon.s9api.SaxonApiException;
@@ -23,47 +27,38 @@ public class Error extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession jses = request.getSession(false);
+		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
+		Vocabulary v = ses.getAppEnv().vocabulary;
+		LanguageCode lang = ses.getLang();
 		String type = request.getParameter("type");
 		String msg = request.getParameter("msg");
-		String xslt = Environment.getXSLDir() + "error.xsl";
-		File errorXslt = new File(xslt);
-		if (!errorXslt.exists()) {
-			xslt = Environment.getKernelDir() + "xsl" + File.separator + "error.xsl";
-		}
+		File errorXslt = Environment.getServerXSLT("error.xsl");
+
 		try {
 			request.setCharacterEncoding(EnvConst.SUPPOSED_CODE_PAGE);
-			String outputContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+			String outputContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><request lang=\"" + ses.getLang().name() + "\" >";
 
 			if (type != null) {
 				if (type.equals("ws_auth_error")) {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					xslt = Environment.getXSLDir() + "authfailed.xsl";
-					errorXslt = new File(xslt);
-					if (!errorXslt.exists()) {
-						xslt = Environment.getKernelDir() + "xsl" + File.separator + "authfailed.xsl";
-					}
-					outputContent = outputContent + "<request><error type=\"authfailed\"><message>" + msg + "</message><version>"
-					        + Server.serverVersion + "</version></error></request>";
+					errorXslt = Environment.getServerXSLT("authfailed.xsl");
+					outputContent += "<error type=\"authfailed\"><message>" + v.getWord("authorization_was_failed", lang) + "</message>";
+				} else if (type.equals("session_lost")) {
+					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					errorXslt = Environment.getServerXSLT("authfailed.xsl");
+					outputContent += "<error type=\"session_lost\"><message>" + v.getWord("session_was_lost", lang) + "</message>";
 				} else if (type.equals("application_was_restricted")) {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					msg = "work with the application was restricted";
-					outputContent = outputContent + "<request><error type=\"" + type + "\"><message>" + msg + "</message><version>"
-					        + Server.serverVersion + "</version></error></request>";
-				} else if (type.equals("default_url_not_defined")) {
-					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					msg = "default URL has not defined in global setting";
-					outputContent = outputContent + "<request><error type=\"" + type + "\"><message>" + msg + "</message><version>"
-					        + Server.serverVersion + "</version></error></request>";
+					outputContent += "<message>" + msg + "</message>";
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					outputContent = outputContent + "<request><error type=\"" + type + "\"><message>" + msg + "</message><version>"
-					        + Server.serverVersion + "</version></error></request>";
+					outputContent += "<error type=\"" + type + "\"><message>" + msg + "</message>";
 				}
 			} else {
 				msg = (String) request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
 				int statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-				// String location = (String)
-				// request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
 				type = (String) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE);
 				Throwable exception = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
 
@@ -75,10 +70,11 @@ public class Error extends HttpServlet {
 				}
 
 				response.setStatus(statusCode);
-				outputContent = outputContent + "<request><error type=\"INTERNAL\"><code>" + statusCode + "</code><message>" + msg + "<errortext>"
-				        + exception + "</errortext></message><version>" + Server.serverVersion + "</version></error></request>";
+				outputContent += "<error type=\"INTERNAL\"><code>" + statusCode + "</code><message>" + msg + "<errortext>" + exception
+				        + "</errortext></message>";
 			}
 
+			outputContent += "<version>" + Server.serverVersion + "</version></error></request>";
 			if (request.getParameter("as") != null) {
 				response.setContentType("text/xml;charset=utf-8");
 				PrintWriter out = response.getWriter();

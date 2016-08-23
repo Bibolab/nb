@@ -31,6 +31,7 @@ public class MainNavigator extends _DoPage {
 		_Outline logsOutline = new _Outline("Log", "log");
 		logsOutline.addEntry(new _OutlineEntry("Server", "common server log", "server_log", "p?id=log-view&category=server"));
 		logsOutline.addEntry(new _OutlineEntry("Web", "web requests log", "server_log", "p?id=log-view&category=web"));
+		logsOutline.addEntry(new _OutlineEntry("Messaging", "messaging log", "server_log", "p?id=log-view&category=message"));
 		logsOutline.addEntry(new _OutlineEntry("Localization", "localizator logs", "server_log", "p?id=log-view&category=localization"));
 		logsOutline.addEntry(new _OutlineEntry("Report", "report logs", "server_log", "p?id=log-view&category=report"));
 

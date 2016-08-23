@@ -116,6 +116,10 @@ public class MailAgent extends MessageAgent {
 				String error = "relay rejected for policy reasons by SMTP server. Message has not sent";
 				logger.warningLogEntry(error);
 				throw new MsgException(error, LanguageCode.ENG);
+			} else if (se.getMessage().contains("No recipient addresses")) {
+				String error = "No recipient addresses. Message has not sent. Recipients=" + recipients;
+				logger.warningLogEntry(error);
+				throw new MsgException(error, LanguageCode.ENG);
 			} else {
 				String error = "unable to send a message, probably SMTP host did not set";
 				logger.errorLogEntry(error);

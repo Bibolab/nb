@@ -3,7 +3,6 @@ package administrator.page.view;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.log.LogFiles;
-import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoPage;
@@ -23,6 +22,6 @@ public class LogView extends _DoPage {
 			pageNum = maxPage;
 		}
 		ViewPage vp = new ViewPage(logs.getLogFiles(), count, maxPage, pageNum);
-		addContent(new _POJOListWrapper(vp.getResult(), vp.getMaxPage(), vp.getCount(), vp.getPageNum(), session));
+		addContent(vp.getResult(), vp.getMaxPage(), vp.getCount(), vp.getPageNum());
 	}
 }

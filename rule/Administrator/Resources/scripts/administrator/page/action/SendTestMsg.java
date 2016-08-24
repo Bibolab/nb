@@ -43,7 +43,7 @@ public class SendTestMsg extends _DoPage {
 
 		} else if (type.equalsIgnoreCase("slack")) {
 			SlackAgent sa = new SlackAgent();
-			sa.sendMessage(address, testMsg);
+			sa.sendMеssage(address, testMsg);
 
 		}
 

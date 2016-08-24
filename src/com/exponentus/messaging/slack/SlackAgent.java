@@ -39,7 +39,7 @@ public class SlackAgent {
 		System.out.println(bean + "=" + rr.getClass().getCanonicalName());
 	}
 
-	public void sendMessage(String userName, String text) {
+	public void sendMеssage(String userName, String text) {
 		SlackMessage msg = new SlackMessage();
 		msg.setToken(authToken);
 		msg.setSender(Environment.smtpUserName);

@@ -18,14 +18,15 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.exponentus.log.Log4jLogger;
 import com.exponentus.log.LogFiles;
-import com.exponentus.server.Server;
 
 public class LogsZip implements Job {
+	private Log4jLogger logger = new Log4jLogger("Scheduled");
 
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-		Server.logger.infoLogEntry("start scheduled: " + this.getClass().getSimpleName());
+		logger.infoLogEntry("start scheduled: " + this.getClass().getSimpleName());
 		int cutOffDays = 7;
 		LogFiles logs = new LogFiles("server");
 		String pathfile = logs.logDir.getAbsolutePath();
@@ -109,7 +110,7 @@ public class LogsZip implements Job {
 			}
 			out.closeEntry();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.errorLogEntry(e);
 		}
 
 		tempFile.delete();

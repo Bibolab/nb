@@ -16,17 +16,17 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+import com.exponentus.log.Log4jLogger;
 import com.exponentus.scheduler.tasks.TempFileCleaner;
 import com.exponentus.scriptprocessor.scheduled.HourScheduledTask;
 import com.exponentus.scriptprocessor.scheduled.Min5ScheduledTask;
 import com.exponentus.scriptprocessor.scheduled.NightScheduledTask;
-import com.exponentus.server.Server;
 
 public class PeriodicalServices {
 	private Scheduler sched;
+	private Log4jLogger logger = new Log4jLogger("Scheduled");
 
 	public PeriodicalServices() {
-		Server.logger.infoLogEntry("Starting scheduler");
 
 		SchedulerFactory sf = new StdSchedulerFactory();
 		try {
@@ -58,9 +58,10 @@ public class PeriodicalServices {
 			sched.scheduleJob(hourJob, triggerHour);
 			sched.scheduleJob(nightJob, triggerNight);
 			sched.start();
+			logger.infoLogEntry("Scheduler started");
 
 		} catch (SchedulerException e) {
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 		}
 	}
 
@@ -75,7 +76,7 @@ public class PeriodicalServices {
 			}
 			return result;
 		} catch (SchedulerException e) {
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 		}
 		return result;
 	}
@@ -84,7 +85,7 @@ public class PeriodicalServices {
 		try {
 			sched.shutdown(true);
 		} catch (SchedulerException e) {
-			Server.logger.errorLogEntry(e);
+			logger.errorLogEntry(e);
 		}
 	}
 }

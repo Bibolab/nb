@@ -17,12 +17,13 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.exponentus.env.Environment;
-import com.exponentus.server.Server;
+import com.exponentus.log.Log4jLogger;
 
 public class TempFileCleaner implements Job {
 	private static ArrayList<String> fileToDelete = new ArrayList<String>();
 	protected boolean isFirstStart = true;
 	private int ac;
+	private Log4jLogger logger = new Log4jLogger("Scheduled");
 
 	public TempFileCleaner() {
 
@@ -60,7 +61,7 @@ public class TempFileCleaner implements Job {
 			}
 		}
 		if (ac > 0) {
-			Server.logger.warningLogEntry(ac + " temporary files were deleted by a temp file cleaner task");
+			logger.warningLogEntry(ac + " temporary files were deleted by a temp file cleaner task");
 		}
 
 	}
@@ -98,7 +99,7 @@ public class TempFileCleaner implements Job {
 		} catch (NoSuchFileException e) {
 			// no need to inform
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.errorLogEntry(e);
 		}
 		return false;
 

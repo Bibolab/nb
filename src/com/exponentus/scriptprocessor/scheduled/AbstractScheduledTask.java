@@ -1,5 +1,6 @@
 package com.exponentus.scriptprocessor.scheduled;
 
+import com.exponentus.log.Log4jLogger;
 import com.exponentus.scripting._Session;
 import com.exponentus.scriptprocessor.ScriptHelper;
 import com.exponentus.scriptprocessor.page.InfoMessageType;
@@ -7,6 +8,8 @@ import com.exponentus.scriptprocessor.page.InfoMessageType;
 public abstract class AbstractScheduledTask extends ScriptHelper implements IScheduledScript {
 	private _Session ses;
 	private ScheduledTaskOutcome outcome;
+
+	protected Log4jLogger logger = new Log4jLogger("Scheduled");
 
 	@Override
 	public void setSession(_Session ses) {

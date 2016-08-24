@@ -58,6 +58,18 @@
             <param name="ConversionPattern" value="%d %-5p-%m%n" />
         </layout>
     </appender>
+    
+    <appender name="schedule"
+        class="com.exponentus.log.DailyRollingFileAppenderChanged">
+        <param name="File" value="logs/scheduler/scheduler.log" />
+        <param name="DatePattern" value="dd-MM-yyyy'.log'" />
+        <!--<param name="MaxFileSize" value="500KB" /> -->
+        <param name="maxBackupIndex" value="30" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p-%m%n" />
+        </layout>
+    </appender>
 
 	<!-- jasper report appender -->
 	<appender name="roller" class="org.apache.log4j.RollingFileAppender">
@@ -134,6 +146,12 @@
     <logger name="Messaging">
         <level value="INFO" />
         <appender-ref ref="message" />
+        <appender-ref ref="console" />
+    </logger>
+    
+     <logger name="Scheduled">
+        <level value="INFO" />
+        <appender-ref ref="schedule" />
         <appender-ref ref="console" />
     </logger>
     

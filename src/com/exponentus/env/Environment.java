@@ -260,6 +260,10 @@ public class Environment implements ICache {
 				slackEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/slack/@mode").equalsIgnoreCase("on") ? true : false;
 				if (slackEnable) {
 					slackToken = XMLUtil.getTextContent(xmlDocument, "/nextbase/slack/token");
+					if (slackToken.isEmpty()) {
+						slackEnable = false;
+						Server.logger.warningLogEntry("Slack token has not been provided");
+					}
 				} else {
 					// Server.logger.infoLogEntry("mailAgent is switch off");
 				}

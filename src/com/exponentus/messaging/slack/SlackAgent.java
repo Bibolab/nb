@@ -49,7 +49,8 @@ public class SlackAgent {
 		Client client = ClientBuilder.newClient();
 
 		WebTarget target = client.target("https://slack.com/api/chat.postMessage").queryParam("token", msg.getToken())
-		        .queryParam("username", msg.getSender()).queryParam("channel", msg.getChannel()).queryParam("text", msg.getText());
+		        .queryParam("username", msg.getSender()).queryParam("channel", msg.getChannel()).queryParam("mrkdwn", true)
+		        .queryParam("text", msg.getText());
 
 		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
 		Object rr = bean.getEntity();

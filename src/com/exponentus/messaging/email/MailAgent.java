@@ -23,6 +23,7 @@ import com.exponentus.env.Environment;
 import com.exponentus.exception.MsgException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.messaging.MessageAgent;
+import com.sun.mail.util.MailConnectException;
 
 public class MailAgent extends MessageAgent {
 	private Session mailerSes;
@@ -47,7 +48,7 @@ public class MailAgent extends MessageAgent {
 
 	}
 
-	public boolean sendMеssage(Memo mailMessage, List<String> recipients) throws MsgException {
+	public boolean sendMеssage(List<String> recipients, Memo mailMessage) throws MsgException {
 		MimeMessage msg = new MimeMessage(mailerSes);
 
 		try {
@@ -111,6 +112,8 @@ public class MailAgent extends MessageAgent {
 			} else {
 				logger.warningLogEntry("Mail agent disabled");
 			}
+		} catch (MailConnectException e) {
+			logger.errorLogEntry(e);
 		} catch (SendFailedException se) {
 			if (se.getMessage().contains("relay rejected for policy reasons")) {
 				String error = "relay rejected for policy reasons by SMTP server. Message has not sent";

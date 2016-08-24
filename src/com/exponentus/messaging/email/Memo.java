@@ -51,6 +51,13 @@ public class Memo {
 		return body;
 	}
 
+	public String getPlainBody() {
+		if (Environment.isDevMode()) {
+			ScriptHelper.println(toString());
+		}
+		return rawBody.render();
+	}
+
 	public void setBody(Multipart body) {
 		this.body = body;
 	}

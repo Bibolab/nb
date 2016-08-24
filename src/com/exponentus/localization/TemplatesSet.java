@@ -8,32 +8,33 @@ import org.apache.commons.io.FileUtils;
 import com.exponentus.messaging.MessageType;
 
 public class TemplatesSet {
-	private HashMap<String, String> templs;
+	private HashMap<String, TemplateType> templs;
 	private File templateDir;
 
 	public TemplatesSet(String templatesFilePath) {
 		templateDir = new File(templatesFilePath);
-		templs = new HashMap<String, String>();
+		templs = new HashMap<String, TemplateType>();
 	}
 
 	public String getTemplate(MessageType type, String templateName, LanguageCode lang) {
-		String tmpl = null;
-		String msgType = type.name().toLowerCase();
-		String key = msgType + "_" + templateName + "_" + lang.toString().toLowerCase();
+		TemplateType tmpl = null;
+		String key = type.name() + "_" + templateName + "_" + lang.toString();
 		try {
 			tmpl = templs.get(key);
 			if (tmpl == null) {
-				File templateFile = new File(templateDir.getAbsoluteFile() + File.separator + msgType + File.separator + templateName + File.separator
-				        + lang.toString().toLowerCase() + ".html");
+				tmpl = new TemplateType(type);
+				File templateFile = new File(templateDir.getAbsoluteFile() + File.separator + tmpl.getType() + File.separator + templateName
+				        + File.separator + lang.toString().toLowerCase() + "." + tmpl.getFileExt());
 				if (templateFile.exists()) {
-					tmpl = FileUtils.readFileToString(templateFile);
+					tmpl.content = FileUtils.readFileToString(templateFile);
 					templs.put(key, tmpl);
 				} else {
-					File defaultTemplFile = new File(templateDir.getAbsoluteFile() + File.separator + msgType + File.separator + "default.html");
-					tmpl = FileUtils.readFileToString(defaultTemplFile);
+					File defaultTemplFile = new File(
+					        templateDir.getAbsoluteFile() + File.separator + tmpl.getType() + File.separator + "default.html");
+					tmpl.content = FileUtils.readFileToString(defaultTemplFile);
 				}
 			}
-			return tmpl;
+			return tmpl.content;
 		} catch (Exception e) {
 			return null;
 		}
@@ -47,6 +48,36 @@ public class TemplatesSet {
 		StringBuffer output = new StringBuffer(1000);
 
 		return output;
+	}
+
+	class TemplateType {
+		public String content;
+		private MessageType type;
+
+		public TemplateType(MessageType type2) {
+			type = type2;
+		}
+
+		public String getType() {
+			return type.name().toLowerCase();
+		}
+
+		public void setType(MessageType type) {
+			this.type = type;
+		}
+
+		public String getFileExt() {
+			switch (type) {
+			case EMAIL:
+				return "html";
+			case SLACK:
+				return "md";
+			default:
+				return "txt";
+			}
+
+		}
+
 	}
 
 }

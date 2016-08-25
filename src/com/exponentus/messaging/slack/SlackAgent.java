@@ -1,5 +1,9 @@
 package com.exponentus.messaging.slack;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.RunnableFuture;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -53,6 +57,34 @@ public class SlackAgent extends MessageAgent {
 		        .queryParam("username", msg.getSender()).queryParam("channel", msg.getChannel()).queryParam("mrkdwn", true)
 		        .queryParam("text", msg.getText());
 
+		RunnableFuture<Boolean> f = new FutureTask<>(new Callable<Boolean>() {
+			@Override
+			public Boolean call() throws Exception {
+				return send(userName, target);
+
+			}
+		});
+		new Thread(f).start();
+		return true;
+	}
+
+	public boolean sendMеssageSync(String userName, String text) {
+		SlackMessage msg = new SlackMessage();
+		msg.setToken(authToken);
+		msg.setSender(Environment.smtpUserName);
+		msg.setChannel(userName);
+		msg.setText(text);
+
+		Client client = ClientBuilder.newClient();
+
+		WebTarget target = client.target("https://slack.com/api/chat.postMessage").queryParam("token", msg.getToken())
+		        .queryParam("username", msg.getSender()).queryParam("channel", msg.getChannel()).queryParam("mrkdwn", true)
+		        .queryParam("text", msg.getText());
+
+		return send(userName, target);
+	}
+
+	private boolean send(String userName, WebTarget target) {
 		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
 
 		try {
@@ -69,6 +101,5 @@ public class SlackAgent extends MessageAgent {
 			e.printStackTrace();
 			return true;
 		}
-		// System.out.println(bean + "=" + rr.getClass().getCanonicalName());
 	}
 }

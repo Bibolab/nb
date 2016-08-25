@@ -20,6 +20,7 @@ import org.omg.CORBA.UserException;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.exception.DatabasePoolException;
 import com.exponentus.env.EnvConst;
+import com.exponentus.env.ServletSessionPool;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.AuthFailedException;
 import com.exponentus.exception.AuthFailedExceptionType;
@@ -59,7 +60,7 @@ public class SessionService extends RestProvider {
 			IUser<Long> user = new Connect().getUser(login, authUser.getPwd());
 
 			if (user != null && user.isAuthorized()) {
-				jses = request.getSession(true);
+				jses = ServletSessionPool.get(request);
 				ses = new _Session(getAppEnv(), user);
 				ses.setAuthMode(AuthModeType.SESSION_SERVICE_LOGIN);
 				ses.setLang(LanguageCode.valueOf(appCookies.currentLang));

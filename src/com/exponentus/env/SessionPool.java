@@ -11,20 +11,11 @@ public class SessionPool {
 
 	public static String put(_Session us) {
 		String token = Util.generateRandomAsText("!'*-._qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(15, 20));
-		// int key =
-		// Base64.encodeBase64String(us.getUser().getUserID().getBytes(Charset.forName("UTF-8"))).hashCode();
 		userSessions.put(token, us);
 		return token;
 	}
 
 	public static _Session getLoggeedUser(String token) {
-		/*
-		 * int key = 0; try { key =
-		 * Integer.parseInt(token.substring(token.indexOf("#") + 1,
-		 * token.length())); } catch (NumberFormatException e) {
-		 * 
-		 * }
-		 */
 		_Session us = userSessions.get(token);
 		if (us != null) {
 			return us;
@@ -43,6 +34,11 @@ public class SessionPool {
 
 	public static HashMap<String, _Session> getUserSessions() {
 		return userSessions;
+	}
+
+	public static void flush() {
+		userSessions.clear();
+
 	}
 
 }

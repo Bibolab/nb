@@ -9,10 +9,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import javax.servlet.http.HttpSession;
 
 import org.eclipse.persistence.exceptions.DatabaseException;
 import org.joda.time.DateTime;
@@ -23,7 +25,7 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
-import com.exponentus.env.SessionPool;
+import com.exponentus.env.ServletSessionPool;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
@@ -116,7 +118,35 @@ public class Console implements Runnable {
 			System.out.printf(format, "            ", "-----");
 			System.out.printf(format, "     Total  ", Environment.adminApplication.getDataBase().getCount());
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
+			HashMap<String, HttpSession> info = ServletSessionPool.getSessions();
+			if (info.size() > 0) {
+				System.out.printf(format, "User", "Description");
+				System.out.printf(format, "--------------", "-----");
+				for (HttpSession entry : info.values()) {
+					String firstVal = "", secondVal = "";
+					try {
+						entry.getCreationTime();
+						_Session ses = (_Session) entry.getAttribute(EnvConst.SESSION_ATTR);
+						if (ses != null) {
+							firstVal = ses.getUser().getLogin();
+							secondVal = ses.toString();
+						} else {
+							firstVal = entry.getId();
+						}
+						secondVal += ", callingPage=" + entry.getAttribute("callingPage");
+						System.out.printf(format, firstVal, secondVal);
+					} catch (IllegalStateException ise) {
 
+					}
+
+				}
+				System.out.printf(format, "            ", "-----");
+				System.out.printf(format, "     Total  ", info.values().size());
+			} else {
+				System.out.println("There is no user sessions still");
+			}
+		} else if (command.equalsIgnoreCase("reset users") || command.equalsIgnoreCase("ru")) {
+			System.out.println(ServletSessionPool.flush() + " sessions were reseted");
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {
 			for (AppEnv env : Environment.getApplications()) {
 				env.ruleProvider.resetRules();
@@ -124,14 +154,6 @@ public class Console implements Runnable {
 			}
 			new Environment().flush();
 			Environment.flushSessionsCach();
-		} else if (command.equalsIgnoreCase("show server session pool") || command.equalsIgnoreCase("sssp")) {
-			System.out.printf(format, "Token id", "Session");
-			System.out.printf(format, "--------------", "-----");
-			for (Entry<String, _Session> entry : SessionPool.getUserSessions().entrySet()) {
-				System.out.printf(format, entry.getKey(), entry.getValue());
-			}
-			System.out.printf(format, "            ", "-----");
-			System.out.printf(format, "     Total  ", SessionPool.getUserSessions().size());
 		} else if (command.equalsIgnoreCase("show server cache") || command.equalsIgnoreCase("ssc")) {
 			System.out.println(Environment.getCacheInfo());
 		} else if (command.equalsIgnoreCase("show apps cache") || command.equalsIgnoreCase("sac")) {

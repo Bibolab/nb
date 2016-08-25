@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
+import com.exponentus.env.ServletSessionPool;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.AuthFailedException;
 import com.exponentus.exception.AuthFailedExceptionType;
@@ -51,7 +52,7 @@ public class Login extends HttpServlet {
 			IUser<Long> user = new Connect().getUser(login.trim(), pwd);
 
 			if (user != null && user.isAuthorized()) {
-				jses = request.getSession(true);
+				jses = ServletSessionPool.get(request);
 				ses = new _Session(env, user);
 				ses.setAuthMode(AuthModeType.DIRECT_LOGIN);
 				String token = SessionPool.put(ses);

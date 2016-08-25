@@ -14,6 +14,7 @@ import org.apache.catalina.valves.ValveBase;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.env.ServletSessionPool;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.AuthFailedException;
 import com.exponentus.exception.AuthFailedExceptionType;
@@ -25,9 +26,11 @@ import com.exponentus.webserver.servlet.SessionCooks;
 
 public class Secure extends ValveBase {
 	String appType;
+	String referer;
 
-	public void invoke(Request request, Response response, String appType) throws IOException, ServletException {
+	public void invoke(Request request, Response response, String appType, String referer) throws IOException, ServletException {
 		this.appType = appType;
+		this.referer = referer;
 		invoke(request, response);
 	}
 
@@ -75,11 +78,10 @@ public class Secure extends ValveBase {
 			_Session ses = SessionPool.getLoggeedUser(token.getValue());
 			// String token2 = "";
 			if (ses != null) {
-				HttpSession jses = http.getSession(true);
 				RequestURL ru = new RequestURL(http.getRequestURI());
 				AppEnv env = Environment.getAppEnv(ru.getAppType());
 				_Session clonedSes = ses.clone(env);
-				// token2 = SessionPool.put(clonedSes);
+				HttpSession jses = ServletSessionPool.get(request);
 				jses.setAttribute(EnvConst.SESSION_ATTR, clonedSes);
 				Server.logger.debugLogEntry(ses.getUser().getUserID() + "\" got from session pool " + jses.getServletContext().getContextPath());
 				invoke(request, response);
@@ -87,7 +89,8 @@ public class Secure extends ValveBase {
 				Server.logger.warningLogEntry("there is no associated user session for the token");
 				new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				// response.sendRedirect("Logout");
+				HttpSession jses = ServletSessionPool.get(request);
+				jses.setAttribute("callingPage", referer);
 				request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
 			}
 			if (token.isLimitedToken()) {

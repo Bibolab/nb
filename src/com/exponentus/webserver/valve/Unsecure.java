@@ -13,6 +13,7 @@ import org.apache.http.HttpStatus;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.env.ServletSessionPool;
 import com.exponentus.exception.ApplicationException;
 import com.exponentus.exception.RuleException;
 import com.exponentus.localization.LanguageCode;
@@ -36,12 +37,12 @@ public class Unsecure extends ValveBase {
 			AppEnv env = Environment.getAppEnv(appType);
 			if (env != null) {
 				if (ru.isAuthRequest()) {
-					HttpSession jses = request.getSession(true);
+					HttpSession jses = ServletSessionPool.get(request);
 					jses.setAttribute(EnvConst.SESSION_ATTR, new _Session(env, new AnonymousUser()));
 					getNext().getNext().invoke(request, response);
 				} else {
 					if (ru.isRest()) {
-						((Secure) getNext()).invoke(request, response, appType);
+						((Secure) getNext()).invoke(request, response, appType, ru.getUrl());
 					} else if (ru.isPage()) {
 						try {
 							String pageId = ru.getPageID();
@@ -52,7 +53,7 @@ public class Unsecure extends ValveBase {
 								gettingSession(request, response, env);
 								getNext().getNext().invoke(request, response);
 							} else {
-								((Secure) getNext()).invoke(request, response, appType);
+								((Secure) getNext()).invoke(request, response, appType, ru.getUrl());
 							}
 
 						} catch (RuleException e) {
@@ -63,7 +64,7 @@ public class Unsecure extends ValveBase {
 							response.getWriter().println(ae.getHTMLMessage());
 						}
 					} else if (ru.isProtected()) {
-						((Secure) getNext()).invoke(request, response, appType);
+						((Secure) getNext()).invoke(request, response, appType, ru.getUrl());
 					} else {
 						gettingSession(request, response, env);
 						getNext().getNext().invoke(request, response);

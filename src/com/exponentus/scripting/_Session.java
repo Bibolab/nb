@@ -81,8 +81,7 @@ public class _Session extends PageCacheAdapter {
 
 	@Override
 	public String toString() {
-		return "userid=" + user.getUserID() + ", lang=" + lang + ", from=" + Util.convertDataTimeToString(createTime) + ", app=" + env.appName + ", "
-		        + authMode;
+		return user.getUserID() + ", lang=" + lang + ", from=" + Util.convertDataTimeToString(createTime) + ", app=" + env.appName + ", " + authMode;
 	}
 
 	private void setPageSize(int ps) {

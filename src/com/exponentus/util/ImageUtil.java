@@ -15,27 +15,29 @@ public class ImageUtil {
     private ImageUtil() {
     }
 
-    public static void createImageThumbnail(File imageFile, float compressionQuality, String outputFile) {
+    public static void createImageThumbnail(File imageFile, float compressionQuality, String outputFile) throws IOException {
+        ImageWriter writer = null;
+        FileImageOutputStream output = null;
         try {
             Iterator iterator = ImageIO.getImageWritersByFormatName("jpeg");
 
-            ImageWriter writer = (ImageWriter) iterator.next();
+            writer = (ImageWriter) iterator.next();
 
             ImageWriteParam iwp = writer.getDefaultWriteParam();
             iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
             iwp.setCompressionQuality(compressionQuality);
 
             File file = new File(outputFile);
-            FileImageOutputStream output = new FileImageOutputStream(file);
+            output = new FileImageOutputStream(file);
             writer.setOutput(output);
 
             BufferedImage sourceImage = ImageIO.read(imageFile);
             IIOImage image = new IIOImage(sourceImage, null, null);
             writer.write(null, image, iwp);
             writer.dispose();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } finally {
+            if (writer != null) writer.dispose();
+            if (output != null) output.close();
         }
     }
 
@@ -43,6 +45,10 @@ public class ImageUtil {
         File imageFile = new File("/home/medin/temp/wallhaven-5370.jpg");
         String outFile = "/home/medin/temp/2002704-thumb.jpg";
 
-        ImageUtil.createImageThumbnail(imageFile, 0.03f, outFile);
+        try {
+            ImageUtil.createImageThumbnail(imageFile, 0.03f, outFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

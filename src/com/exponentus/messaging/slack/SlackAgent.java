@@ -58,8 +58,8 @@ public class SlackAgent extends MessageAgent {
 		try {
 			Object obj = bean.getEntity();
 			System.out.println("class=" + obj.getClass().getName());
-			ClientResponse resp = (ClientResponse) obj;
-			if (resp.getStatus() == 200) {
+			// ClientResponse resp = (ClientResponse) obj;
+			if (obj != null) {
 				logger.infoLogEntry("Message has been sent to " + userName);
 				return true;
 			} else {

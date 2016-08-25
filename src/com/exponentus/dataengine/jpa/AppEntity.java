@@ -68,7 +68,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	protected boolean isWasRead = true;
 
 	@PrePersist
-	private void prePersist() {
+	protected void prePersist() {
 		regDate = new Date();
 	}
 

@@ -7,7 +7,9 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 public class ImageUtil {
@@ -15,11 +17,16 @@ public class ImageUtil {
     private ImageUtil() {
     }
 
-    public static void createImageThumbnail(File imageFile, float compressionQuality, String outputFile) throws IOException {
+    public static void createJpegThumbnail(InputStream inputStream, String outputFile) throws IOException {
+        float compressionQuality = 0.03f;
+        createImageThumbnail(inputStream, compressionQuality, "jpeg", outputFile);
+    }
+
+    private static void createImageThumbnail(InputStream inputStream, float compressionQuality, String formatName, String outputFile) throws IOException {
         ImageWriter writer = null;
         FileImageOutputStream output = null;
         try {
-            Iterator iterator = ImageIO.getImageWritersByFormatName("jpeg");
+            Iterator iterator = ImageIO.getImageWritersByFormatName(formatName);
 
             writer = (ImageWriter) iterator.next();
 
@@ -31,10 +38,9 @@ public class ImageUtil {
             output = new FileImageOutputStream(file);
             writer.setOutput(output);
 
-            BufferedImage sourceImage = ImageIO.read(imageFile);
+            BufferedImage sourceImage = ImageIO.read(inputStream);
             IIOImage image = new IIOImage(sourceImage, null, null);
             writer.write(null, image, iwp);
-            writer.dispose();
         } finally {
             if (writer != null) writer.dispose();
             if (output != null) output.close();
@@ -42,11 +48,10 @@ public class ImageUtil {
     }
 
     public static void main(String[] args) {
-        File imageFile = new File("/home/medin/temp/wallhaven-5370.jpg");
-        String outFile = "/home/medin/temp/2002704-thumb.jpg";
-
         try {
-            ImageUtil.createImageThumbnail(imageFile, 0.03f, outFile);
+            FileInputStream is = new FileInputStream(new File("/home/medin/temp/2002704.jpg"));
+            String outFile = "/home/medin/temp/2002704-thumb.jpg";
+            ImageUtil.createJpegThumbnail(is, outFile);
         } catch (Exception e) {
             e.printStackTrace();
         }

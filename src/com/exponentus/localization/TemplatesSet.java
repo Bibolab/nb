@@ -24,13 +24,13 @@ public class TemplatesSet {
 			if (tmpl == null) {
 				tmpl = new TemplateType(type);
 				File templateFile = new File(templateDir.getAbsoluteFile() + File.separator + tmpl.getType() + File.separator + templateName
-				        + File.separator + lang.toString().toLowerCase() + "." + tmpl.getFileExt());
+				        + File.separator + lang.toString().toLowerCase() + tmpl.getFileExt());
 				if (templateFile.exists()) {
 					tmpl.content = FileUtils.readFileToString(templateFile);
 					templs.put(key, tmpl);
 				} else {
 					File defaultTemplFile = new File(
-					        templateDir.getAbsoluteFile() + File.separator + tmpl.getType() + File.separator + "default.html");
+					        templateDir.getAbsoluteFile() + File.separator + tmpl.getType() + File.separator + "default" + tmpl.getFileExt());
 					tmpl.content = FileUtils.readFileToString(defaultTemplFile);
 				}
 			}
@@ -69,11 +69,11 @@ public class TemplatesSet {
 		public String getFileExt() {
 			switch (type) {
 			case EMAIL:
-				return "html";
+				return ".html";
 			case SLACK:
-				return "md";
+				return ".md";
 			default:
-				return "txt";
+				return ".txt";
 			}
 
 		}

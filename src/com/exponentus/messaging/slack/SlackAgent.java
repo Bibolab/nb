@@ -10,9 +10,10 @@ import org.glassfish.jersey.client.ClientResponse;
 
 import com.exponentus.env.Environment;
 import com.exponentus.log.JavaConsoleLogger;
+import com.exponentus.messaging.MessageAgent;
 import com.exponentus.server.Server;
 
-public class SlackAgent {
+public class SlackAgent extends MessageAgent {
 	private static final String SLACK_HTTPS_AUTH_URL = "https://slack.com/api/rtm.start?token=";
 	private static String authToken = Environment.slackToken;
 
@@ -57,6 +58,7 @@ public class SlackAgent {
 		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
 		ClientResponse resp = (ClientResponse) bean.getEntity();
 		if (resp.getStatus() == 200) {
+			logger.infoLogEntry("Message has been sent to " + userName);
 			return true;
 		} else {
 			return false;

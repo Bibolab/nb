@@ -54,6 +54,6 @@ public class SlackAgent {
 
 		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
 		Object rr = bean.getEntity();
-		System.out.println(bean + "=" + rr.getClass().getCanonicalName());
+		// System.out.println(bean + "=" + rr.getClass().getCanonicalName());
 	}
 }

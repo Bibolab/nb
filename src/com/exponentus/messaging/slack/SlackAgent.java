@@ -6,6 +6,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.client.ClientResponse;
+
 import com.exponentus.env.Environment;
 import com.exponentus.log.JavaConsoleLogger;
 import com.exponentus.server.Server;
@@ -39,7 +41,7 @@ public class SlackAgent {
 		System.out.println(bean + "=" + rr.getClass().getCanonicalName());
 	}
 
-	public void sendMеssage(String userName, String text) {
+	public boolean sendMеssage(String userName, String text) {
 		SlackMessage msg = new SlackMessage();
 		msg.setToken(authToken);
 		msg.setSender(Environment.smtpUserName);
@@ -53,7 +55,12 @@ public class SlackAgent {
 		        .queryParam("text", msg.getText());
 
 		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
-		Object rr = bean.getEntity();
+		ClientResponse resp = (ClientResponse) bean.getEntity();
+		if (resp.getStatus() == 200) {
+			return true;
+		} else {
+			return false;
+		}
 		// System.out.println(bean + "=" + rr.getClass().getCanonicalName());
 	}
 }

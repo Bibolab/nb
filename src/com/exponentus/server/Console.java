@@ -9,7 +9,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -118,30 +117,32 @@ public class Console implements Runnable {
 			System.out.printf(format, "            ", "-----");
 			System.out.printf(format, "     Total  ", Environment.adminApplication.getDataBase().getCount());
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
-			HashMap<String, HttpSession> info = ServletSessionPool.getSessions();
-			if (info.size() > 0) {
-				System.out.printf(format, "User", "Description");
-				System.out.printf(format, "--------------", "-----");
-				for (HttpSession entry : info.values()) {
-					String firstVal = "", secondVal = "";
-					try {
-						entry.getCreationTime();
-						_Session ses = (_Session) entry.getAttribute(EnvConst.SESSION_ATTR);
-						if (ses != null) {
-							firstVal = ses.getUser().getLogin();
-							secondVal = ses.toString();
-						} else {
-							firstVal = entry.getId();
-						}
-						secondVal += ", callingPage=" + entry.getAttribute("callingPage");
-						System.out.printf(format, firstVal, secondVal);
-					} catch (IllegalStateException ise) {
-
-					}
+			List<HttpSession> actualUsers = new ArrayList<HttpSession>();
+			for (HttpSession entry : ServletSessionPool.getSessions().values()) {
+				try {
+					entry.getCreationTime();
+					actualUsers.add(entry);
+				} catch (IllegalStateException ise) {
 
 				}
+			}
+			if (actualUsers.size() > 0) {
+				System.out.printf(format, "User", "Description");
+				System.out.printf(format, "--------------", "-----");
+				for (HttpSession entry : actualUsers) {
+					String firstVal = "", secondVal = "";
+					_Session ses = (_Session) entry.getAttribute(EnvConst.SESSION_ATTR);
+					if (ses != null) {
+						firstVal = ses.getUser().getLogin();
+						secondVal = ses.toString();
+					} else {
+						firstVal = entry.getId();
+					}
+					secondVal += ", callingPage=" + entry.getAttribute("callingPage");
+					System.out.printf(format, firstVal, secondVal);
+				}
 				System.out.printf(format, "            ", "-----");
-				System.out.printf(format, "     Total  ", info.values().size());
+				System.out.printf(format, "     Total  ", actualUsers.size());
 			} else {
 				System.out.println("There is no user sessions still");
 			}

@@ -9,6 +9,7 @@ import com.exponentus.env.EnvConst;
 public class SessionCooks {
 
 	public String auth;
+	public String refferer;
 	private String currentLang;
 
 	public SessionCooks(HttpServletRequest request, HttpServletResponse response) {
@@ -20,6 +21,8 @@ public class SessionCooks {
 						currentLang = cooks[i].getValue();
 					} else if (cooks[i].getName().equals(EnvConst.AUTH_COOKIE_NAME)) {
 						auth = cooks[i].getValue();
+					} else if (cooks[i].getName().equals(EnvConst.CALLING_PAGE_COOKIE_NAME)) {
+						refferer = cooks[i].getValue();
 					}
 				}
 			}

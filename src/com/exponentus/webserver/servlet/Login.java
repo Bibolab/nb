@@ -68,13 +68,12 @@ public class Login extends HttpServlet {
 				authCookie.setPath("/");
 				response.addCookie(authCookie);
 
-				CallingPageCookie cpc = new CallingPageCookie(request);
-				redirect = cpc.page;
-				if (redirect.equals("")) {
+				SessionCooks cooks = new SessionCooks(request, response);
+				if (cooks.refferer == null) {
 					redirect = getRedirect(jses, appCookies);
-					redirect = redirect.isEmpty() ? request.getContextPath() : redirect;
 				} else {
-					Cookie cpCookie = new Cookie("calling_page", "0");
+					redirect = cooks.refferer;
+					Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, "0");
 					cpCookie.setMaxAge(0);
 					cpCookie.setPath("/");
 					response.addCookie(cpCookie);
@@ -105,31 +104,16 @@ public class Login extends HttpServlet {
 		}
 	}
 
-	private String getRedirect(HttpSession jses, Cookies appCookies) throws AuthFailedException {
+	private String getRedirect(HttpSession jses, Cookies appCookies) {
 		ApplicationDAO aDao = new ApplicationDAO();
 		Application app = aDao.findByName(env.appName);
 		if (app != null) {
 			return app.getDefaultURL();
 		} else {
-			AppEnv.logger.infoLogEntry("Authorization failed, redirecting page has been not pointed");
-			throw new AuthFailedException(AuthFailedExceptionType.NO_REDIRECT, "");
+			AppEnv.logger.warningLogEntry("Authorization failed, redirecting page has been not pointed");
+			return "";
 		}
 
-	}
-
-	public class CallingPageCookie {
-		public String page = "";
-
-		public CallingPageCookie(HttpServletRequest request) {
-			Cookie[] cooks = request.getCookies();
-			if (cooks != null) {
-				for (int i = 0; i < cooks.length; i++) {
-					if (cooks[i].getName().equals("calling_page")) {
-						page = cooks[i].getValue();
-					}
-				}
-			}
-		}
 	}
 
 }

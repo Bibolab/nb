@@ -3,6 +3,7 @@ package com.exponentus.webserver.valve;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -89,8 +90,10 @@ public class Secure extends ValveBase {
 				Server.logger.warningLogEntry("there is no associated user session for the token");
 				new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				HttpSession jses = ServletSessionPool.get(request);
-				jses.setAttribute("callingPage", referer);
+				Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, referer);
+				cpCookie.setMaxAge(360);
+				cpCookie.setPath("/");
+				response.addCookie(cpCookie);
 				request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
 			}
 			if (token.isLimitedToken()) {

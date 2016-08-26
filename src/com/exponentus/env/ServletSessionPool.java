@@ -21,7 +21,12 @@ public class ServletSessionPool {
 	public static int flush() {
 		int count = sessions.size();
 		for (HttpSession entry : sessions.values()) {
-			entry.invalidate();
+			try {
+				entry.getCreationTime();
+				entry.invalidate();
+			} catch (IllegalStateException ise) {
+
+			}
 		}
 		sessions.clear();
 		SessionPool.flush();

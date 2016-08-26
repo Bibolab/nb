@@ -20,6 +20,7 @@ public class EnvConst {
 	public static final String DEFAULT_PAGE = "index";
 	public final static String SESSION_ATTR = "usersession";
 	public static final String LANG_COOKIE_NAME = "lang";
+	public static final String CALLING_PAGE_COOKIE_NAME = "cp";
 	public static final String PAGE_SIZE_COOKIE_NAME = "pagesize";
 	public static final String ADMINISTRATOR_APP_NAME = "Administrator";
 	public final static String SHARED_RESOURCES_APP_NAME = "SharedResources";

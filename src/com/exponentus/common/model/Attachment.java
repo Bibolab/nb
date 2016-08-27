@@ -24,7 +24,7 @@ public class Attachment extends AppEntity<UUID> implements IAppFile {
     private boolean hasThumbnail = false;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     @CascadeOnDelete
     @PrimaryKeyJoinColumn
     private AttachmentThumbnail attachmentThumbnail;

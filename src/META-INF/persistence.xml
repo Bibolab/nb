@@ -9,7 +9,7 @@
         <class>administrator.model.Sentence</class>
         <!-- Common module entities -->
         <class>com.exponentus.common.model.Attachment</class>
+        <class>com.exponentus.common.model.AttachmentThumbnail</class>
         <class>com.exponentus.common.model.ReadingMark</class>
     </persistence-unit>
 </persistence>
-

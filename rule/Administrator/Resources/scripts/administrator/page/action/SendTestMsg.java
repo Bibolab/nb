@@ -26,10 +26,10 @@ public class SendTestMsg extends _DoPage {
 			List<String> recipients = new ArrayList<String>();
 			recipients.add(address);
 			MailAgent ma = new MailAgent();
-			Memo memo = new Memo(testMsg, testMsg + " " + Util.convertDataTimeToString(new Date()));
 
 			try {
-				if (ma.sendMеssageSync(memo, recipients)) {
+				Memo memo = new Memo();
+				if (ma.sendMеssageSync(recipients, testMsg, memo.getBody(testMsg + " " + Util.convertDataTimeToString(new Date())))) {
 					addValue("The message has been sent succesfully");
 				} else {
 					addWarning("The message has not been sent");

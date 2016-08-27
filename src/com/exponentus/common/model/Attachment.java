@@ -5,6 +5,7 @@ import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -21,6 +22,13 @@ public class Attachment extends AppEntity<UUID> implements IAppFile {
     protected String form = "attachment";
     protected Long author = AnonymousUser.ID;
     private boolean hasThumbnail = false;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @CascadeOnDelete
+    @PrimaryKeyJoinColumn
+    private AttachmentThumbnail attachmentThumbnail;
+
     @Transient
     private String sign = "";
 
@@ -28,20 +36,6 @@ public class Attachment extends AppEntity<UUID> implements IAppFile {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] file;
-
-    @PrePersist
-    protected void prePersist() {
-        super.prePersist();
-        // file extension
-        int lastDotIndex = realFileName.lastIndexOf(".");
-        if (lastDotIndex != -1) {
-            extension = realFileName.substring(lastDotIndex + 1).toLowerCase();
-        } else {
-            extension = "";
-        }
-        // file size
-        size = file.length;
-    }
 
     @Override
     public String getFieldName() {
@@ -60,6 +54,14 @@ public class Attachment extends AppEntity<UUID> implements IAppFile {
 
     @Override
     public void setRealFileName(String realFileName) {
+        // file extension
+        int lastDotIndex = realFileName.lastIndexOf(".");
+        if (lastDotIndex != -1) {
+            extension = realFileName.substring(lastDotIndex + 1).toLowerCase();
+        } else {
+            extension = "";
+        }
+        //
         this.realFileName = realFileName;
     }
 
@@ -87,6 +89,7 @@ public class Attachment extends AppEntity<UUID> implements IAppFile {
     @Override
     public void setFile(byte[] file) {
         this.file = file;
+        size = file.length;
     }
 
     @Override
@@ -105,6 +108,14 @@ public class Attachment extends AppEntity<UUID> implements IAppFile {
 
     public void setHasThumbnail(boolean hasThumbnail) {
         this.hasThumbnail = hasThumbnail;
+    }
+
+    public AttachmentThumbnail getAttachmentThumbnail() {
+        return attachmentThumbnail;
+    }
+
+    public void setAttachmentThumbnail(AttachmentThumbnail attachmentThumbnail) {
+        this.attachmentThumbnail = attachmentThumbnail;
     }
 
     @Override

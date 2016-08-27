@@ -42,6 +42,7 @@ public abstract class AbstractForm extends AbstractPage {
 					fsId = Util.generateRandomAsText();
 				}
 				addValue(EnvConst.FSID_FIELD_NAME, fsId);
+				//System.out.println("open=" + fsId + REFERRER_ATTR_NAME + " " + formData.getReferrer());
 				ses.setAttribute(fsId + REFERRER_ATTR_NAME, formData.getReferrer());
 			} else {
 				_Validation ve = validate(fsId);
@@ -51,7 +52,7 @@ public abstract class AbstractForm extends AbstractPage {
 				} else {
 					if (method.equalsIgnoreCase("POST")) {
 						doPOST(ses, formData);
-						// System.out.println(ses.getAttributes());
+						//System.out.println("post=" + fsId + REFERRER_ATTR_NAME + " " + formData.getReferrer());
 						String redirectURL = (String) ses.getAttribute(fsId + REFERRER_ATTR_NAME);
 						result.setRedirectURL(redirectURL);
 						if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR

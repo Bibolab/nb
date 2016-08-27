@@ -288,7 +288,7 @@ public class Console implements Runnable {
 			System.out.println(Util.readResource("/com/exponentus/server/console_commands.txt"));
 		} else {
 			if (!command.trim().equalsIgnoreCase("")) {
-				System.err.println("error -command \"" + command + "\" is not recognized");
+				System.err.println("error -command \"" + command + "\" is not recognized, try to type 'help' to get a short guide about commands");
 			}
 		}
 	}

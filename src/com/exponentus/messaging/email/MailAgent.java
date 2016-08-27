@@ -11,6 +11,7 @@ import javax.mail.AuthenticationFailedException;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.SendFailedException;
 import javax.mail.Session;
@@ -48,12 +49,12 @@ public class MailAgent extends MessageAgent {
 
 	}
 
-	public boolean sendMеssage(List<String> recipients, Memo mailMessage) throws MsgException {
+	public boolean sendMеssage(List<String> recipients, String subject, Multipart mailMessage) throws MsgException {
 		MimeMessage msg = new MimeMessage(mailerSes);
 
 		try {
-			msg.setContent(mailMessage.getBody());
-			msg.setSubject(mailMessage.getSubject(), "utf-8");
+			msg.setContent(mailMessage);
+			msg.setSubject(subject, "utf-8");
 		} catch (MessagingException e) {
 			String error = e.toString();
 			logger.errorLogEntry(e);
@@ -71,12 +72,12 @@ public class MailAgent extends MessageAgent {
 		return true;
 	}
 
-	public boolean sendMеssageSync(Memo mailMessage, List<String> recipients) throws MsgException {
+	public boolean sendMеssageSync(List<String> recipients, String subject, Multipart mailMessage) throws MsgException {
 		MimeMessage msg = new MimeMessage(mailerSes);
 
 		try {
-			msg.setContent(mailMessage.getBody());
-			msg.setSubject(mailMessage.getSubject(), "utf-8");
+			msg.setContent(mailMessage);
+			msg.setSubject(subject, "utf-8");
 		} catch (MessagingException e) {
 			String error = e.toString();
 			logger.errorLogEntry(e);

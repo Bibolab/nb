@@ -2,7 +2,7 @@
     display: none;
     height: 100%;
     left: 0;
-    padding: 3%;
+    padding: 4%;
     position: fixed;
     text-align: center;
     top: 0;
@@ -28,11 +28,13 @@
 }
 
 .img-view-close {
-    color: #e6e6e6;
-    font-size: 30px;
+    color: #ccc;
+    font-size: 50px;
+    line-height: 26px;
     position: absolute;
-    right: 30px;
-    top: 10px;
+    right: 0;
+    top: 0;
+    transition: color .15s;
 }
 
 .img-view-overlay:hover .img-view-close {
@@ -43,10 +45,9 @@
     display: inline-block;
     margin: auto;
     max-width: 98%;
-    min-width: 320px;
     position: relative;
 }
 
-.img-view-content > img {
+.img-view-content-img {
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
 }

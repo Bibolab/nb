@@ -10,6 +10,7 @@ import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
 
+import com.exponentus.env.Environment;
 import com.exponentus.log.Log4jLogger;
 
 public class Logging extends ValveBase {
@@ -32,15 +33,6 @@ public class Logging extends ValveBase {
 
 		RequestURL ru = new RequestURL(requestURI);
 
-		// System.out.println("-------------" + ru.getUrl());
-		Enumeration<String> headerNames = request.getHeaderNames();
-		while (headerNames.hasMoreElements()) {
-			String key = headerNames.nextElement();
-			String value = request.getHeader(key);
-			// System.out.println(key + "=" + value);
-		}
-		// System.out.println("-------------");
-
 		// Server.logger.normalLogEntry(ru.getUrl() + " ---- ispage=" +
 		// ru.isPage() + ", isprotected=" + ru.isProtected() + ", isdeafult=" +
 		// ru.isDefault() + ", isauth=" + ru.isAuthRequest());
@@ -58,6 +50,20 @@ public class Logging extends ValveBase {
 		// com.flabser.server.Server.logger.infoLogEntry(clientIpAddress + " " +
 		// ru.toString() + ", apptype="
 		// + ru.getAppType() + ", servername=" + request.getServerName());
+
+		if (Environment.isDevMode()) {
+			System.out.println("Request: " + ru.getUrl());
+			System.out.println("From: " + clientIpAddress + " " + ru.toString() + "," + ru.getAgent());
+			System.out.println("-----------headers -----------");
+			Enumeration<String> headerNames = request.getHeaderNames();
+			while (headerNames.hasMoreElements()) {
+				String key = headerNames.nextElement();
+				String value = request.getHeader(key);
+				System.out.println(key + "=" + value);
+			}
+			System.out.println("----------------------------");
+		}
+
 		((Unsecure) getNext()).invoke(request, response, ru);
 		return;
 	}

@@ -26,6 +26,7 @@ import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.env.EnvConst;
 import com.exponentus.server.Server;
 
+@Deprecated
 public class Util {
 	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat(EnvConst.DEFAULT_TIME_FORMAT);

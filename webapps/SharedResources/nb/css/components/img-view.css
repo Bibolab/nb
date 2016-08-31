@@ -1,0 +1,52 @@
+.img-view {
+    display: none;
+    height: 100%;
+    left: 0;
+    padding: 3%;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    overflow: auto;
+    width: 100%;
+    z-index: 10000;
+}
+
+.img-view.show {
+    display: block;
+}
+
+.img-view-overlay {
+    background: rgba(0, 0, 0, .5);
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    overflow: auto;
+    width: 100%;
+}
+
+.img-view-close {
+    color: #e6e6e6;
+    font-size: 30px;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.img-view-overlay:hover .img-view-close {
+    color: #fff;
+}
+
+.img-view-content {
+    display: inline-block;
+    margin: auto;
+    max-width: 98%;
+    min-width: 320px;
+    position: relative;
+}
+
+.img-view-content > img {
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}

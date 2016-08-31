@@ -32,14 +32,14 @@ public class Logging extends ValveBase {
 
 		RequestURL ru = new RequestURL(requestURI);
 
-		System.out.println("-------------" + ru.getUrl());
+		// System.out.println("-------------" + ru.getUrl());
 		Enumeration<String> headerNames = request.getHeaderNames();
 		while (headerNames.hasMoreElements()) {
 			String key = headerNames.nextElement();
 			String value = request.getHeader(key);
-			System.out.println(key + "=" + value);
+			// System.out.println(key + "=" + value);
 		}
-		System.out.println("-------------");
+		// System.out.println("-------------");
 
 		// Server.logger.normalLogEntry(ru.getUrl() + " ---- ispage=" +
 		// ru.isPage() + ", isprotected=" + ru.isProtected() + ", isdeafult=" +

@@ -9,6 +9,7 @@
 
 .header {
     border: none;
+    border-radius: 0;
     display: block;
     max-width: inherit;
     position: fixed;

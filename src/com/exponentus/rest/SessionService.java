@@ -55,37 +55,41 @@ public class SessionService extends RestProvider {
 		_Session ses = getSession();
 		LanguageCode lang = ses.getLang();
 		Cookies appCookies = new Cookies(request);
-		String login = authUser.getLogin();
-		try {
-			IUser<Long> user = new Connect().getUser(login, authUser.getPwd());
+		if (authUser != null) {
+			String login = authUser.getLogin();
+			try {
+				IUser<Long> user = new Connect().getUser(login, authUser.getPwd());
 
-			if (user != null && user.isAuthorized()) {
-				jses = ServletSessionPool.get(request);
-				ses = new _Session(getAppEnv(), user);
-				ses.setAuthMode(AuthModeType.SESSION_SERVICE_LOGIN);
-				ses.setLang(LanguageCode.valueOf(appCookies.currentLang));
+				if (user != null && user.isAuthorized()) {
+					jses = ServletSessionPool.get(request);
+					ses = new _Session(getAppEnv(), user);
+					ses.setAuthMode(AuthModeType.SESSION_SERVICE_LOGIN);
+					ses.setLang(LanguageCode.valueOf(appCookies.currentLang));
 
-				AppEnv.logger.infoLogEntry(user.getUserID() + " has connected");
+					AppEnv.logger.infoLogEntry(user.getUserID() + " has connected");
 
-				jses.setAttribute(EnvConst.SESSION_ATTR, ses);
-				int maxAge = -1;
-				String token = SessionPool.put(ses);
-				authUser.setToken(token);
-				NewCookie cookie = new NewCookie(EnvConst.AUTH_COOKIE_NAME, token, "/", null, null, maxAge, false);
-				return Response.status(HttpServletResponse.SC_OK).entity(authUser).cookie(cookie).build();
-			} else {
-				AppEnv.logger.infoLogEntry("Authorization failed, login or password is incorrect -");
-				throw new AuthFailedException(AuthFailedExceptionType.PASSWORD_INCORRECT, login);
+					jses.setAttribute(EnvConst.SESSION_ATTR, ses);
+					int maxAge = -1;
+					String token = SessionPool.put(ses);
+					authUser.setToken(token);
+					NewCookie cookie = new NewCookie(EnvConst.AUTH_COOKIE_NAME, token, "/", null, null, maxAge, false);
+					return Response.status(HttpServletResponse.SC_OK).entity(authUser).cookie(cookie).build();
+				} else {
+					AppEnv.logger.infoLogEntry("Authorization failed, login or password is incorrect -");
+					throw new AuthFailedException(AuthFailedExceptionType.PASSWORD_INCORRECT, login);
+				}
+
+			} catch (AuthFailedException e) {
+				authUser.setError(AuthFailedExceptionType.PASSWORD_INCORRECT, lang);
+				return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
+			} catch (Exception e) {
+				new PortalException(e, response, ProviderExceptionType.INTERNAL, PublishAsType.HTML);
 			}
 
-		} catch (AuthFailedException e) {
-			authUser.setError(AuthFailedExceptionType.PASSWORD_INCORRECT, lang);
 			return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
-		} catch (Exception e) {
-			new PortalException(e, response, ProviderExceptionType.INTERNAL, PublishAsType.HTML);
+		} else {
+			return Response.status(HttpServletResponse.SC_BAD_REQUEST).build();
 		}
-
-		return Response.status(HttpServletResponse.SC_UNAUTHORIZED).entity(authUser).build();
 	}
 
 	@DELETE

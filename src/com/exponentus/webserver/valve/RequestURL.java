@@ -10,6 +10,8 @@ public class RequestURL {
 	private String appType = "";
 	private String url;
 	private String pageID = "";
+	private String ip;
+	private String agent;
 
 	public RequestURL(String url) {
 		this.url = url;
@@ -71,6 +73,22 @@ public class RequestURL {
 	public void setAppType(String templateType) {
 		appType = templateType;
 
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getAgent() {
+		return agent;
+	}
+
+	public void setAgent(String agent) {
+		this.agent = agent;
 	}
 
 	@Override

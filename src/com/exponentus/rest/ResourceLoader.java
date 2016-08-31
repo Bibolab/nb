@@ -18,6 +18,7 @@ public class ResourceLoader extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
+		classes.add(RestProvider.class);
 		classes.add(SessionService.class);
 		classes.add(ApplicationService.class);
 		for (String clazz : appSite.getRestServices()) {

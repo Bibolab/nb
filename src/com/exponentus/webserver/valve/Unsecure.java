@@ -42,7 +42,7 @@ public class Unsecure extends ValveBase {
 					getNext().getNext().invoke(request, response);
 				} else {
 					if (ru.isRest()) {
-						((Secure) getNext()).invoke(request, response, appType, ru.getUrl());
+						((Secure) getNext()).invoke(request, response, ru);
 					} else if (ru.isPage()) {
 						try {
 							String pageId = ru.getPageID();
@@ -53,7 +53,7 @@ public class Unsecure extends ValveBase {
 								gettingSession(request, response, env);
 								getNext().getNext().invoke(request, response);
 							} else {
-								((Secure) getNext()).invoke(request, response, appType, ru.getUrl());
+								((Secure) getNext()).invoke(request, response, ru);
 							}
 
 						} catch (RuleException e) {
@@ -64,7 +64,7 @@ public class Unsecure extends ValveBase {
 							response.getWriter().println(ae.getHTMLMessage());
 						}
 					} else if (ru.isProtected()) {
-						((Secure) getNext()).invoke(request, response, appType, ru.getUrl());
+						((Secure) getNext()).invoke(request, response, ru);
 					} else {
 						gettingSession(request, response, env);
 						getNext().getNext().invoke(request, response);

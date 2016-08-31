@@ -1,6 +1,7 @@
 package com.exponentus.webserver.valve;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -27,11 +28,11 @@ import com.exponentus.webserver.servlet.SessionCooks;
 
 public class Secure extends ValveBase {
 	String appType;
-	String referer;
+	RequestURL ru;
 
-	public void invoke(Request request, Response response, String appType, String referer) throws IOException, ServletException {
-		this.appType = appType;
-		this.referer = referer;
+	public void invoke(Request request, Response response, RequestURL ru) throws IOException, ServletException {
+		this.appType = ru.getAppType();
+		this.ru = ru;
 		invoke(request, response);
 	}
 
@@ -90,7 +91,7 @@ public class Secure extends ValveBase {
 				Server.logger.warningLogEntry("there is no associated user session for the token");
 				new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, referer);
+				Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, ru.getUrl());
 				cpCookie.setMaxAge(360);
 				cpCookie.setPath("/");
 				response.addCookie(cpCookie);
@@ -101,7 +102,7 @@ public class Secure extends ValveBase {
 				// SessionPool.remove(token2);
 			}
 		} else {
-			Server.logger.warningLogEntry("user session was expired");
+			Server.logger.warningLogEntry("user session was expired (" + ru.getAgent() + ", " + ru.getIp() + ")");
 			HttpSession jses = request.getSession(false);
 			if (jses != null) {
 				jses.invalidate();
@@ -111,6 +112,7 @@ public class Secure extends ValveBase {
 		}
 	}
 
+	// TODO it need to perfect
 	private Token getToken(HttpServletRequest request, HttpServletResponse response) {
 		Token t = new Token();
 		SessionCooks appCookies = new SessionCooks(request, response);
@@ -118,6 +120,16 @@ public class Secure extends ValveBase {
 		if (token == null) {
 			token = request.getParameter("t");
 			t.setLimitedToken(true);
+			if (token == null) {
+				Enumeration<String> headerNames = request.getHeaderNames();
+				while (headerNames.hasMoreElements()) {
+					String key = headerNames.nextElement();
+					if (key.equals("nb3ses")) {
+						token = request.getHeader(key);
+						break;
+					}
+				}
+			}
 		}
 		t.setValue(token);
 		return t;

@@ -138,7 +138,7 @@ public class PageOutcome {
 			SaxonTransformator st = new SaxonTransformator();
 			return st.toTrans(null, toCompleteXML());
 		} else if (publishAs == PublishAsType.JSON) {
-			return getJSON();
+			return getJSONText();
 		} else {
 			return toCompleteXML();
 		}
@@ -207,16 +207,7 @@ public class PageOutcome {
 		this.exception = exception;
 	}
 
-	public String getJSON() {
-		JSONClass clazz = new JSONClass();
-
-		clazz.setObjects(objects);
-		clazz.setCaptions(captions);
-		clazz.setType(infoMessage);
-		clazz.setRedirectURL(redirectURL);
-		clazz.setFlash(flash);
-		clazz.setValidation(validation);
-
+	public String getJSONText() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT));
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
@@ -224,11 +215,22 @@ public class PageOutcome {
 
 		String jsonInString = null;
 		try {
-			jsonInString = mapper.writeValueAsString(clazz);
+			jsonInString = mapper.writeValueAsString(getJSON());
 		} catch (JsonProcessingException e) {
 			Server.logger.errorLogEntry(e);
 		}
 		return jsonInString;
+	}
+
+	public Object getJSON() {
+		JSONClass clazz = new JSONClass();
+		clazz.setObjects(objects);
+		clazz.setCaptions(captions);
+		clazz.setType(infoMessage);
+		clazz.setRedirectURL(redirectURL);
+		clazz.setFlash(flash);
+		clazz.setValidation(validation);
+		return clazz;
 	}
 
 	public void setContent(IOutcomeObject wrappedObj) {

@@ -151,7 +151,7 @@ public class Provider extends HttpServlet {
 			} else if (result.getPublishAs() == PublishAsType.JSON) {
 				response.setContentType("application/json;charset=utf-8");
 				PrintWriter out = response.getWriter();
-				String json = result.getJSON();
+				String json = result.getJSONText();
 				out.println(json);
 				out.close();
 			} else if (result.getPublishAs() == PublishAsType.XML) {

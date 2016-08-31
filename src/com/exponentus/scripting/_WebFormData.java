@@ -1,8 +1,11 @@
 package com.exponentus.scripting;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.exponentus.util.TimeUtil;
 
@@ -12,6 +15,11 @@ public class _WebFormData {
 
 	public _WebFormData(Map<String, String[]> formData, String r) {
 		this.data = formData;
+		setReferer(r);
+	}
+
+	public _WebFormData(MultivaluedMap<String, String> queryParams, String r) {
+		data = new HashMap(queryParams);
 		setReferer(r);
 	}
 

@@ -27,6 +27,7 @@ import com.exponentus.exception.AuthFailedExceptionType;
 import com.exponentus.exception.PortalException;
 import com.exponentus.extconnect.Connect;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.rest.pojo.Credentials;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;

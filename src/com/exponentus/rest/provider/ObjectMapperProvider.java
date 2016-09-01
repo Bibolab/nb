@@ -8,7 +8,6 @@ import javax.ws.rs.ext.Provider;
 import com.exponentus.env.EnvConst;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Provider
 public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
@@ -17,11 +16,12 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
 
 	public ObjectMapperProvider() {
 		om = new ObjectMapper();
-		om.setDateFormat(new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT));
-		om.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
-		om.enable(SerializationFeature.WRAP_ROOT_VALUE);
+
+		// om.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+		// om.enable(SerializationFeature.WRAP_ROOT_VALUE);
 		om.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		om.getSerializerProvider().setNullKeySerializer(new NullKeySerializer());
+		om.setDateFormat(new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT));
 
 	}
 
@@ -29,5 +29,4 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
 	public ObjectMapper getContext(@SuppressWarnings("rawtypes") Class type) {
 		return om;
 	}
-
 }

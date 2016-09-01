@@ -1,4 +1,4 @@
-package com.exponentus.rest;
+package com.exponentus.rest.pojo;
 
 import java.io.Serializable;
 

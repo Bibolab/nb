@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 import com.exponentus.env.Site;
+import com.exponentus.rest.provider.ObjectMapperProvider;
 import com.exponentus.server.Server;
 
 public class ResourceLoader extends Application {
@@ -19,6 +20,7 @@ public class ResourceLoader extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
+		classes.add(ObjectMapperProvider.class);
 		classes.add(RestProvider.class);
 		classes.add(SessionService.class);
 		classes.add(ApplicationService.class);

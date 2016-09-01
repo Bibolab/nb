@@ -52,9 +52,11 @@ public class Logging extends ValveBase {
 		// + ru.getAppType() + ", servername=" + request.getServerName());
 
 		if (Environment.isDevMode()) {
+			System.out.println("-----------request -----------");
 			System.out.println("Request: " + ru.getUrl());
-			System.out.println("From: " + clientIpAddress + " " + ru.toString() + "," + ru.getAgent());
-			System.out.println("-----------headers -----------");
+			System.out.println("From: " + clientIpAddress);
+			System.out.println("Agent: " + ru.getAgent());
+			System.out.println("-");
 			Enumeration<String> headerNames = request.getHeaderNames();
 			while (headerNames.hasMoreElements()) {
 				String key = headerNames.nextElement();

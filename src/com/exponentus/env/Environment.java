@@ -196,7 +196,6 @@ public class Environment implements ICache {
 								String serviceName = XMLUtil.getTextContent(servicesList.item(i1), "class", false);
 								if (!serviceName.isEmpty()) {
 									restServices.add(serviceName);
-									Server.logger.infoLogEntry("rest service \"" + serviceName + "\" was added");
 								}
 							}
 							site.setRestServices(restServices);

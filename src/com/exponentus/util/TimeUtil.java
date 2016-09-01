@@ -1,13 +1,16 @@
 package com.exponentus.util;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.EnvConst;
 
 public class TimeUtil {
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATE_FORMAT);
 
 	public static String timeConvert(int time) {
 		return time / 24 / 60 + ":" + time / 60 % 24 + ':' + time % 60;
@@ -21,6 +24,14 @@ public class TimeUtil {
 		} catch (ParseException e) {
 			AppEnv.logger.errorLogEntry("Unable convert text to date \"" + val + "\"");
 			return null;
+		}
+	}
+
+	public static String convertDateToStringSilently(Date date) {
+		try {
+			return dateFormat.format(date);
+		} catch (Exception e) {
+			return "";
 		}
 	}
 

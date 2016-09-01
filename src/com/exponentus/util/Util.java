@@ -67,6 +67,7 @@ public class Util {
 		}
 	}
 
+	@Deprecated
 	public static String convertDateToStringSilently(Date date) {
 		try {
 			return dateFormat.format(date);

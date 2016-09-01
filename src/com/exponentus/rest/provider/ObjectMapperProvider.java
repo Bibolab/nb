@@ -1,8 +1,11 @@
 package com.exponentus.rest.provider;
 
+import java.text.SimpleDateFormat;
+
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+import com.exponentus.env.EnvConst;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -14,7 +17,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
 
 	public ObjectMapperProvider() {
 		om = new ObjectMapper();
-
+		om.setDateFormat(new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT));
 		om.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 		om.enable(SerializationFeature.WRAP_ROOT_VALUE);
 		om.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);

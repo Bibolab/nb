@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 import com.exponentus.env.Site;
+import com.exponentus.server.Server;
 
 public class ResourceLoader extends Application {
 	private Site appSite;
@@ -23,9 +24,10 @@ public class ResourceLoader extends Application {
 		classes.add(ApplicationService.class);
 		for (String clazz : appSite.getRestServices()) {
 			try {
+				Server.logger.infoLogEntry("REST service class \"" + clazz + "\" loaded");
 				classes.add(Class.forName(clazz));
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				Server.logger.errorLogEntry(e);
 			}
 		}
 

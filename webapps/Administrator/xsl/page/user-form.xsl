@@ -87,6 +87,14 @@
                     </div>
                     <div class="form-group">
                         <div class="control-label">
+                            Status
+                        </div>
+                        <div class="controls">
+                            <input type="text" name="status" value="{fields/status}" class="span4" autofocus="false" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label">
                            Default language
                         </div>
                         <div class="controls">

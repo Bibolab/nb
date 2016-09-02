@@ -32,9 +32,13 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 
 	public void addReaderEditor(IUser<Long> user) {
 		long id = user.getId();
+		addReaderEditor(id);
+	}
+
+	public void addReaderEditor(Long id) {
 		if (id != 0) {
-			this.editors.add(id);
-			addReader(user);
+			editors.add(id);
+			readers.add(id);
 		}
 	}
 
@@ -57,9 +61,13 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 		readers.addAll(r);
 	}
 
-	public void resetReaderEditor() {
+	public void resetReadersEditors() {
 		editors.clear();
 		readers.clear();
+	}
+
+	public void resetEditors() {
+		editors.clear();
 	}
 
 	@Override

@@ -21,6 +21,7 @@ public class Logging extends ValveBase {
 		logger = new Log4jLogger(getClass().getSimpleName());
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void invoke(Request request, Response response) throws IOException, ServletException {
 		HttpServletRequest http = request;
@@ -51,7 +52,7 @@ public class Logging extends ValveBase {
 		// ru.toString() + ", apptype="
 		// + ru.getAppType() + ", servername=" + request.getServerName());
 
-		if (Environment.isDevMode()) {
+		if (Environment.isDevMode() && false) {
 			System.out.println("-----------request -----------");
 			System.out.println("Request: " + ru.getUrl());
 			System.out.println("From: " + clientIpAddress);

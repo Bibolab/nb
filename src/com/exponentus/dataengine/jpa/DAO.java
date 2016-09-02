@@ -17,6 +17,7 @@ import javax.persistence.criteria.Root;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
+import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.user.SuperUser;
 
@@ -77,6 +78,9 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 			}
 			return entity;
 		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			Server.logger.errorLogEntry(e.toString());
 			return null;
 		} finally {
 			em.close();
@@ -143,9 +147,13 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 
 		try {
-			if (user.getId() != SuperUser.ID && SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
-				if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
-					throw new SecureException(ses.getAppEnv().appName, "editing_is_restricted", ses.getLang());
+			if (SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
+				if (user.getId() != SuperUser.ID) {
+					if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
+						throw new SecureException(ses.getAppEnv().appName, "editing_is_restricted", ses.getLang());
+					}
+				} else {
+					Server.logger.warningLogEntry("Update behalf SuperUser " + entity.toString());
 				}
 			}
 			EntityTransaction t = em.getTransaction();
@@ -170,10 +178,14 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 	public void delete(T entity) throws SecureException {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 		try {
-			if (user.getId() != SuperUser.ID && SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
-				if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
-					throw new SecureException(ses.getAppEnv().appName, "deleting_is_restricted", ses.getLang());
+			if (user.getId() != SuperUser.ID) {
+				if (SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
+					if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
+						throw new SecureException(ses.getAppEnv().appName, "deleting_is_restricted", ses.getLang());
+					}
 				}
+			} else {
+				Server.logger.warningLogEntry("Delete behalf SuperUser " + entity.toString());
 			}
 			EntityTransaction t = em.getTransaction();
 			try {

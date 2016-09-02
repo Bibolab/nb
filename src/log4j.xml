@@ -27,6 +27,7 @@
 	<appender name="requests"
 		class="com.exponentus.log.DailyRollingFileAppenderChanged">
 		<param name="File" value="logs/web/requests.log" />	
+		<param name="DatePattern" value="dd-MM-yyyy'.log'" />
 		<param name="MaxFileSize" value="5MB" /> 
 		<param name="maxBackupIndex" value="5" />
 		<param name="Append" value="true" />

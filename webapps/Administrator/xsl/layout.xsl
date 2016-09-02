@@ -117,8 +117,8 @@
                             <i class="fa fa-times"></i>
                         </button>
                         <select name="id" class="native search-target">
-                            <option value="{//request/@id}" selected="selected">Здесь</option>
-                            <option value="search">Везде</option>
+                            <option value="{//request/@id}" selected="selected">Here</option>
+                            <option value="search">Everywhere</option>
                         </select>
                         <input type="submit" value="search"/>
                     </form>

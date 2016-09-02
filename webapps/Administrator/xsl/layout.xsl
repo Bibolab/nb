@@ -93,15 +93,17 @@
                             </a>
                             <ul class="dropdown-menu right">
                                 <li>
+
                                     <a class="user-profile" title="{//captions/user_profile/@caption}"
                                        href="Provider?id=userprofile">
-                                        <xsl:value-of select="@username"/>
+                                        <i class="fa fa-user"></i><xsl:value-of select="' '"/> <xsl:value-of select="@username"/>
                                     </a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
                                     <a class="logout" href="Logout">
-                                        Logout
+                                        <i class="fa fa-th"></i>
+                                        <span> Workspace</span>
                                     </a>
                                 </li>
                             </ul>

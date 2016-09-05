@@ -184,7 +184,7 @@
     padding: 11px 3px;
     vertical-align: top;
     white-space: normal;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .phone .entry-fields > div,

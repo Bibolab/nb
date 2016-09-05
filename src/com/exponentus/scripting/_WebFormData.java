@@ -18,6 +18,7 @@ public class _WebFormData {
 		setReferer(r);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public _WebFormData(MultivaluedMap<String, String> queryParams, String r) {
 		data = new HashMap(queryParams);
 		setReferer(r);

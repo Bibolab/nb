@@ -1,5 +1,6 @@
 package com.exponentus.dataengine.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPage<T> {
@@ -14,6 +15,14 @@ public class ViewPage<T> {
 		this.count = count2;
 		this.maxPage = maxPage;
 		this.pageNum = pageNum;
+	}
+
+	public ViewPage(T entity) {
+		this.result = new ArrayList<T>();
+		result.add(entity);
+		this.count = 1;
+		this.maxPage = 1;
+		this.pageNum = 1;
 	}
 
 	public long getCount() {

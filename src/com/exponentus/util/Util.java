@@ -286,6 +286,10 @@ public class Util {
 		return generateRandomAsText(setOfTheLetters, 16);
 	}
 
+	@Deprecated
+	/**
+	 * Use the similar method in com.exponentus.util.StringUtil
+	 **/
 	public static String generateRandomAsText(String setOfTheLetters, int len) {
 		Random r = new Random();
 		String key = "";

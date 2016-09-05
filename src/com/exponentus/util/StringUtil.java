@@ -1,5 +1,6 @@
 package com.exponentus.util;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +20,26 @@ public class StringUtil {
 	}
 
 	public static String getRandomText() {
-		return Util.generateRandomAsText("qwertyuiopasdfghjklzxcvbnm", 10);
+		return generateRandomAsText("qwertyuiopasdfghjklzxcvbnm", 10);
+	}
+
+	public static String generateRandomAsText(String setOfTheLetters, int len) {
+		Random r = new Random();
+		String key = "";
+		char[] letters = new char[setOfTheLetters.length() + 10];
+
+		for (int i = 0; i < 10; i++) {
+			letters[i] = Character.forDigit(i, 10);
+		}
+
+		for (int i = 0; i < setOfTheLetters.length(); i++) {
+			letters[i + 10] = setOfTheLetters.charAt(i);
+		}
+
+		for (int i = 0; i < len; i++) {
+			key += letters[Math.abs(r.nextInt()) % letters.length];
+		}
+
+		return key;
 	}
 }

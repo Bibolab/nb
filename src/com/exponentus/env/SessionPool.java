@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.util.NumberUtil;
-import com.exponentus.util.Util;
+import com.exponentus.util.StringUtil;
 
 public class SessionPool {
 	private static HashMap<String, _Session> userSessions = new HashMap<String, _Session>();
 
 	public static String put(_Session us) {
-		String token = Util.generateRandomAsText("!'*-._qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(15, 20));
+		String token = StringUtil.generateRandomAsText("!'*-._qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(15, 20));
 		userSessions.put(token, us);
 		return token;
 	}

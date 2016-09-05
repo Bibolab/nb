@@ -78,7 +78,6 @@ public class Secure extends ValveBase {
 
 		if (token.getValue() != null) {
 			_Session ses = SessionPool.getLoggeedUser(token.getValue());
-			// String token2 = "";
 			if (ses != null) {
 				RequestURL ru = new RequestURL(http.getRequestURI());
 				AppEnv env = Environment.getAppEnv(ru.getAppType());

@@ -10,6 +10,7 @@ import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 
 public class TimeUtil {
+	public static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATETIME_FORMAT);
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat(EnvConst.DEFAULT_DATE_FORMAT);
 
 	public static String timeConvert(int time) {
@@ -35,4 +36,11 @@ public class TimeUtil {
 		}
 	}
 
+	public static String convertDateTimeToStringSilently(Date date) {
+		try {
+			return dateTimeFormat.format(date);
+		} catch (Exception e) {
+			return "";
+		}
+	}
 }

@@ -29,7 +29,7 @@ import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.IUser;
 import com.exponentus.user.UserStatusCode;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -218,10 +218,12 @@ public class User implements IUser<Long>, IPOJOObject {
 		this.allowedApps = allowedApps;
 	}
 
+	@Override
 	public void setStatus(UserStatusCode status) {
 		this.status = status;
 	}
 
+	@Override
 	public UserStatusCode getStatus() {
 		return status;
 	}
@@ -286,7 +288,7 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
+		chunk.append("<regdate>" + TimeUtil.convertDateTimeToStringSilently(regDate) + "</regdate>");
 		chunk.append("<status>" + status + "</status>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<defaultlang>" + defaultLang + "</defaultlang>");
@@ -311,7 +313,7 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
+		chunk.append("<regdate>" + TimeUtil.convertDateTimeToStringSilently(regDate) + "</regdate>");
 		chunk.append("<login>" + login + "</login>");
 		chunk.append("<defaultlang>" + defaultLang + "</defaultlang>");
 		chunk.append("<email>" + email + "</email>");

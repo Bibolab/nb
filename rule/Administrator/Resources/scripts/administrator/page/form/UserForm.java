@@ -91,6 +91,10 @@ public class UserForm extends _DoForm {
 			}
 		}
 
+		Application app = aDao.findByName(EnvConst.WORKSPACE_NAME);
+		if (app != null) {
+			apps.add(app);
+		}
 		entity.setAllowedApps(apps);
 
 		if (isNew) {

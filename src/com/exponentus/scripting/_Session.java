@@ -81,7 +81,7 @@ public class _Session extends PageCacheAdapter {
 
 	@Override
 	public String toString() {
-		return user.getUserID() + ", lang=" + lang + ", from=" + TimeUtil.convertDateTimeToStringSilently(createTime) + ", app=" + env.appName + ", "
+		return user.getUserID() + ", lang=" + lang + ", from=" + TimeUtil.dateTimeToStringSilently(createTime) + ", app=" + env.appName + ", "
 		        + authMode;
 	}
 

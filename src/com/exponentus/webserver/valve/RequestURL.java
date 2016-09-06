@@ -46,6 +46,7 @@ public class RequestURL {
 		return ulc.contains("login") || ulc.contains("logout") || ulc.contains("/session");
 	}
 
+	// TODO it need to check Site class instance
 	public boolean isRest() {
 		return url.matches(".*/((rest)).*");
 	}

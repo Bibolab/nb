@@ -83,7 +83,7 @@ public class Environment implements ICache {
 	public static List<LanguageCode> langs = new ArrayList<LanguageCode>();
 
 	public static Boolean mailEnable = false;
-	public static String smtpPort;
+	public static String smtpPort = "25";
 	public static boolean smtpAuth;
 	public static String SMTPHost;
 	public static String smtpUser;
@@ -242,6 +242,7 @@ public class Environment implements ICache {
 				mailEnable = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/@mode").equalsIgnoreCase("on") ? true : false;
 				if (mailEnable) {
 					SMTPHost = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtphost");
+					Server.logger.warningLogEntry("SMTP host is not set");
 					smtpAuth = Boolean.valueOf(XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpauth"));
 					smtpUser = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtpuser");
 					smtpPassword = XMLUtil.getTextContent(xmlDocument, "/nextbase/mail/smtppassword");

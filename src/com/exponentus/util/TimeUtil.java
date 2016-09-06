@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 
@@ -17,18 +15,21 @@ public class TimeUtil {
 		return time / 24 / 60 + ":" + time / 60 % 24 + ':' + time % 60;
 	}
 
-	public static Date convertStringToDate(String val) {
+	public static Date stringToDate(String val) {
 		try {
-			return DateUtils.parseDate(val, "yyyy", "dd.MM.yy", "dd.MM.yyyy", "dd-MM-yyyy", "dd.MM.yyyy hh:mm", "dd.MM.yyyy hh:mm:ss", "yyyy.MM.dd",
-			        "yyyy.MM.dd hh:mm:ss");
-
+			return dateTimeFormat.parse(val);
 		} catch (ParseException e) {
-			AppEnv.logger.errorLogEntry("Unable convert text to date \"" + val + "\"");
-			return null;
+			try {
+				return dateFormat.parse(val);
+			} catch (ParseException e1) {
+				AppEnv.logger
+				        .errorLogEntry("Unable convert text to date \"" + val + "\" (supposed format " + dateTimeFormat + " or " + dateFormat + ")");
+				return null;
+			}
 		}
 	}
 
-	public static String convertDateToStringSilently(Date date) {
+	public static String dateToStringSilently(Date date) {
 		try {
 			return dateFormat.format(date);
 		} catch (Exception e) {
@@ -36,7 +37,7 @@ public class TimeUtil {
 		}
 	}
 
-	public static String convertDateTimeToStringSilently(Date date) {
+	public static String dateTimeToStringSilently(Date date) {
 		try {
 			return dateTimeFormat.format(date);
 		} catch (Exception e) {

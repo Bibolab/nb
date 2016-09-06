@@ -18,7 +18,8 @@ import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.constants.AppCode;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
+import com.exponentus.util.XMLUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import administrator.dao.LanguageDAO;
@@ -139,7 +140,7 @@ public class Application extends AppEntity<UUID> {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
+		chunk.append("<regdate>" + TimeUtil.dateTimeToStringSilently(regDate) + "</regdate>");
 		chunk.append("<name>" + name + "</name>");
 		chunk.append("<ison>" + isOn + "</ison>");
 		chunk.append("<appcode>" + code + "</appcode>");
@@ -158,7 +159,7 @@ public class Application extends AppEntity<UUID> {
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		return "<app id=\"" + name + "\">" + getLocalizedName(ses.getLang()) + "</app><pos>" + position + "</pos><url>"
-		        + Util.getAsTagValue(getDefaultURL()) + "</url>";
+		        + XMLUtil.getAsTagValue(getDefaultURL()) + "</url>";
 	}
 
 	public String getLocalizedName(LanguageCode lang) {
@@ -185,4 +186,5 @@ public class Application extends AppEntity<UUID> {
 		}
 		return "p?id=" + defaultPage;
 	}
+
 }

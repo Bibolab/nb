@@ -90,10 +90,12 @@ public class Secure extends ValveBase {
 				Server.logger.warningLogEntry("there is no associated user session for the token");
 				new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, ru.getUrl());
-				cpCookie.setMaxAge(360);
-				cpCookie.setPath("/");
-				response.addCookie(cpCookie);
+				if (!ru.isRest()) {
+					Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, ru.getUrl());
+					cpCookie.setMaxAge(360);
+					cpCookie.setPath("/");
+					response.addCookie(cpCookie);
+				}
 				request.getRequestDispatcher("/Error?type=ws_auth_error").forward(request, response);
 			}
 			if (token.isLimitedToken()) {

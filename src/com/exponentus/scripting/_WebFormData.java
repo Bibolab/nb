@@ -194,7 +194,7 @@ public class _WebFormData {
 	public Date getDateSilently(String fn) {
 		try {
 			String value[] = data.get(fn);
-			return TimeUtil.convertStringToDate(value[0].trim());
+			return TimeUtil.stringToDate(value[0].trim());
 		} catch (Exception e) {
 			return null;
 		}

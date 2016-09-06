@@ -1,5 +1,6 @@
 package com.exponentus.dataengine.jpa;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,6 +60,11 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 
 	public void addReaders(List<Long> r) {
 		readers.addAll(r);
+	}
+
+	public void addReaders(Set<Long> r) {
+		readers.addAll(new ArrayList<Long>(r));
+
 	}
 
 	public void resetReadersEditors() {

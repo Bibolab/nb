@@ -1,5 +1,6 @@
 package com.exponentus.dataengine.jpa;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -141,6 +142,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 
 	}
 
+	// TODO it is need to try to use "greedy" mode to avoid "while"
 	@SuppressWarnings("unchecked")
 	@Override
 	public T update(T entity) throws SecureException {
@@ -149,7 +151,17 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		try {
 			if (SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
 				if (user.getId() != SuperUser.ID) {
-					if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
+					boolean isEditor = false;
+					SecureAppEntity<UUID> se = (SecureAppEntity<UUID>) entity;
+					Iterator<Long> it = se.getReaders().iterator();
+					while (it.hasNext()) {
+						if (it.next() == user.getId()) {
+							isEditor = true;
+							break;
+						}
+					}
+
+					if (!isEditor) {
 						throw new SecureException(ses.getAppEnv().appName, "editing_is_restricted", ses.getLang());
 					}
 				} else {
@@ -179,10 +191,18 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 		try {
 			if (user.getId() != SuperUser.ID) {
-				if (SecureAppEntity.class.isAssignableFrom(getEntityClass())) {
-					if (!((SecureAppEntity<UUID>) entity).getEditors().contains(user.getId())) {
-						throw new SecureException(ses.getAppEnv().appName, "deleting_is_restricted", ses.getLang());
+				boolean isEditor = false;
+				SecureAppEntity<UUID> se = (SecureAppEntity<UUID>) entity;
+				Iterator<Long> it = se.getReaders().iterator();
+				while (it.hasNext()) {
+					if (it.next() == user.getId()) {
+						isEditor = true;
+						break;
 					}
+				}
+
+				if (!isEditor) {
+					throw new SecureException(ses.getAppEnv().appName, "deleting_is_restricted", ses.getLang());
 				}
 			} else {
 				Server.logger.warningLogEntry("Delete behalf SuperUser " + entity.toString());

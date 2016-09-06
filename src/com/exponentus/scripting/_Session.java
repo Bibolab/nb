@@ -17,7 +17,7 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 public class _Session extends PageCacheAdapter {
 	private IDatabase dataBase;
@@ -81,7 +81,8 @@ public class _Session extends PageCacheAdapter {
 
 	@Override
 	public String toString() {
-		return user.getUserID() + ", lang=" + lang + ", from=" + Util.convertDataTimeToString(createTime) + ", app=" + env.appName + ", " + authMode;
+		return user.getUserID() + ", lang=" + lang + ", from=" + TimeUtil.convertDateTimeToStringSilently(createTime) + ", app=" + env.appName + ", "
+		        + authMode;
 	}
 
 	private void setPageSize(int ps) {

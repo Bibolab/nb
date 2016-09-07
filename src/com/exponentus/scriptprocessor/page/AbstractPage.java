@@ -226,11 +226,13 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		result.addContent(new _POJOListWrapper(list, maxPage, count, currentPage, getSes(), keyword));
 	}
 
+	@Deprecated
 	protected void startSaveFormTransact(IAppEntity entity) {
 		getSes().addFormTransaction(entity, formData.getReferrer());
 
 	}
 
+	@Deprecated
 	protected void finishSaveFormTransact(IAppEntity entity) {
 		result.setRedirectURL(getSes().getTransactRedirect(entity));
 		if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {

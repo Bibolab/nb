@@ -18,8 +18,8 @@ public class TemplatesSet {
 
 	public String getTemplate(MessageType type, String templateName, LanguageCode lang) {
 		TemplateType tmpl = null;
-		String key = type.name() + "_" + templateName + "_" + lang.toString();
 		try {
+			String key = type.name() + "_" + templateName + "_" + lang.toString();
 			tmpl = templs.get(key);
 			if (tmpl == null) {
 				tmpl = new TemplateType(type);

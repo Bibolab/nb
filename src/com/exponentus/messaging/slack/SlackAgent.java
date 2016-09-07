@@ -102,4 +102,27 @@ public class SlackAgent extends MessageAgent {
 			return true;
 		}
 	}
+
+	public boolean createChannel(String channelName) {
+
+		Client client = ClientBuilder.newClient();
+
+		WebTarget target = client.target("https://slack.com/api/groups.create").queryParam("token", authToken).queryParam("name", channelName);
+		Response bean = target.request(MediaType.APPLICATION_JSON_TYPE).get();
+		try {
+			Object obj = bean.getEntity();
+			System.out.println("class=" + obj.toString());
+			// ClientResponse resp = (ClientResponse) obj;
+			if (obj != null) {
+				logger.infoLogEntry("Message has been sent  ");
+				return true;
+			} else {
+				return false;
+			}
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
 }

@@ -230,6 +230,10 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		this.form = form;
 	}
 
+	public boolean isNew() {
+		return id == null;
+	}
+
 	@Override
 	public boolean isEditable() {
 		return isEditable;

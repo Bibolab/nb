@@ -57,7 +57,7 @@ public class Error extends HttpServlet {
 				} else if (type.equals("application_was_restricted")) {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					msg = "work with the application was restricted";
-					outputContent += "<message>" + msg + "</message>";
+					outputContent += "<error type=\"" + type + "\"><message>" + msg + "</message>";
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					outputContent += "<error type=\"" + type + "\"><message>" + msg + "</message>";

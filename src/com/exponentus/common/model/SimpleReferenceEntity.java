@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 import administrator.dao.LanguageDAO;
 import administrator.model.Language;
@@ -56,7 +56,7 @@ public class SimpleReferenceEntity extends AppEntity<UUID> {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
+		chunk.append("<regdate>" + TimeUtil.dateTimeToStringSilently(regDate) + "</regdate>");
 		chunk.append("<name>" + getName() + "</name>");
 		chunk.append("<localizednames>");
 		LanguageDAO lDao = new LanguageDAO(ses);

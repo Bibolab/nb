@@ -32,6 +32,8 @@ import com.exponentus.user.UserStatusCode;
 import com.exponentus.util.TimeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import administrator.model.constants.MessagingType;
+
 @Entity
 @Table(name = "_users")
 @NamedQuery(name = "User.findAll", query = "SELECT m FROM User AS m ORDER BY m.regDate")
@@ -44,6 +46,8 @@ public class User implements IUser<Long>, IPOJOObject {
 	protected Long id;
 
 	private UserStatusCode status = UserStatusCode.UNKNOWN;
+
+	private MessagingType messagingType = MessagingType.EMAIL;
 
 	@Column(name = "reg_date", nullable = false, updatable = false)
 	protected Date regDate;
@@ -226,6 +230,14 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public UserStatusCode getStatus() {
 		return status;
+	}
+
+	public MessagingType getMessagingType() {
+		return messagingType;
+	}
+
+	public void setMessagingType(MessagingType messagingType) {
+		this.messagingType = messagingType;
 	}
 
 	public String getTheme() {

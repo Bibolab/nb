@@ -193,7 +193,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 			if (user.getId() != SuperUser.ID) {
 				boolean isEditor = false;
 				SecureAppEntity<UUID> se = (SecureAppEntity<UUID>) entity;
-				Iterator<Long> it = se.getReaders().iterator();
+				Iterator<Long> it = se.getEditors().iterator();
 				while (it.hasNext()) {
 					if (it.next() == user.getId()) {
 						isEditor = true;

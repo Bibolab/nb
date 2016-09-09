@@ -327,7 +327,7 @@ public class Environment implements ICache {
 	}
 
 	public static String getWorkspaceURL() {
-		return "Workspace";
+		return "/Workspace";
 	}
 
 	private static void initMimeTypes() {

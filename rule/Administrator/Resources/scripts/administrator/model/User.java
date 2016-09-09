@@ -23,6 +23,7 @@ import org.eclipse.persistence.config.CacheIsolationType;
 import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.system.IEmployee;
 import com.exponentus.dataengine.system.IExtUserDAO;
+import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
@@ -250,6 +251,9 @@ public class User implements IUser<Long>, IPOJOObject {
 
 	@Override
 	public LanguageCode getDefaultLang() {
+		if (defaultLang == null) {
+			defaultLang = LanguageCode.valueOf(EnvConst.DEFAULT_LANG);
+		}
 		return defaultLang;
 	}
 

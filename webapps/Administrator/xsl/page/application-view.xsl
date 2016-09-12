@@ -47,7 +47,7 @@
                 <a href="{@url}" class="entry-link">
                     <div class="entry-fields">
                         <span>
-                            <xsl:value-of select="viewcontent/app"/>
+                            <xsl:value-of select="viewcontent/app/@id"/>
                         </span>
                     </div>
                 </a>

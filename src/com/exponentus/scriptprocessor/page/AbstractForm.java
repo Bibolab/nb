@@ -2,9 +2,12 @@ package com.exponentus.scriptprocessor.page;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.common.service.AttachmentThumbnailService;
 import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.dataengine.jpa.TempFile;
 import com.exponentus.env.EnvConst;
@@ -15,7 +18,7 @@ import com.exponentus.scripting._POJOObjectWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
-import com.exponentus.util.Util;
+import com.exponentus.util.StringUtil;
 
 public abstract class AbstractForm extends AbstractPage {
 	private final static String REFERRER_ATTR_NAME = "_referrer";
@@ -39,10 +42,11 @@ public abstract class AbstractForm extends AbstractPage {
 			if (method.equalsIgnoreCase("GET")) {
 				doGET(ses, formData);
 				if (fsId.isEmpty()) {
-					fsId = Util.generateRandomAsText();
+					fsId = StringUtil.getRandomText();
 				}
 				addValue(EnvConst.FSID_FIELD_NAME, fsId);
-				//System.out.println("open=" + fsId + REFERRER_ATTR_NAME + " " + formData.getReferrer());
+				// System.out.println("open=" + fsId + REFERRER_ATTR_NAME + " "
+				// + formData.getReferrer());
 				ses.setAttribute(fsId + REFERRER_ATTR_NAME, formData.getReferrer());
 			} else {
 				_Validation ve = validate(fsId);
@@ -52,7 +56,8 @@ public abstract class AbstractForm extends AbstractPage {
 				} else {
 					if (method.equalsIgnoreCase("POST")) {
 						doPOST(ses, formData);
-						//System.out.println("post=" + fsId + REFERRER_ATTR_NAME + " " + formData.getReferrer());
+						// System.out.println("post=" + fsId +
+						// REFERRER_ATTR_NAME + " " + formData.getReferrer());
 						String redirectURL = (String) ses.getAttribute(fsId + REFERRER_ATTR_NAME);
 						result.setRedirectURL(redirectURL);
 						if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR
@@ -89,6 +94,25 @@ public abstract class AbstractForm extends AbstractPage {
 		}
 		return result;
 
+	}
+
+	protected void doGetAttachment(_Session session, _WebFormData formData, AppEntity<UUID> entity) {
+		String attachmentId = formData.getValueSilently("attachment");
+		Attachment att = entity.getAttachments().stream().filter(it -> it.getIdentifier().equals(attachmentId)).findFirst().get();
+
+		if (formData.containsField("_thumbnail")) {
+			File tf = AttachmentThumbnailService.createThumbnailFileIfSupported(session, att);
+			if (tf != null) {
+				showFile(tf.getAbsolutePath(), att.getRealFileName());
+			} else {
+				setBadRequest();
+				addContent("error", "Unsupported format, try without _thumbnail");
+			}
+		} else if (showAttachment(attachmentId, entity)) {
+			//
+		} else {
+			setBadRequest();
+		}
 	}
 
 	protected List<Attachment> getActualAttachments(List<Attachment> atts) {

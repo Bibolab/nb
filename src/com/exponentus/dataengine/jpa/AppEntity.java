@@ -27,7 +27,7 @@ import com.exponentus.dataengine.jpa.util.UUIDConverter;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.IUser;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 import com.exponentus.util.XMLUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -160,7 +160,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 						Object val = method.invoke(this, noparams);
 						// System.out.println(val.getClass().getName());
 						if (val instanceof Date) {
-							methodValue = Util.dateFormat.format((Date) val);
+							methodValue = TimeUtil.dateToStringSilently((Date) val);
 						} else if (val instanceof IndirectList) {
 							@SuppressWarnings("unchecked")
 							List<IPOJOObject> list = (List<IPOJOObject>) val;

@@ -232,13 +232,15 @@ public class _WebFormData {
 	}
 
 	public boolean getBoolSilently(String fn) {
-		try {
-			String value[] = data.get(fn);
-			if (value[0].equalsIgnoreCase("true") || value[0].equals("1")) {
-				return true;
-			}
-		} catch (Exception e) {
+		if (fn != null) {
+			try {
+				String value[] = data.get(fn);
+				if (value[0].equalsIgnoreCase("true") || value[0].equals("1")) {
+					return true;
+				}
+			} catch (Exception e) {
 
+			}
 		}
 		return false;
 	}

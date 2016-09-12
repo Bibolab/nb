@@ -3,7 +3,6 @@ package administrator.page.form;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._AppEntourage;
 import com.exponentus.scripting._Exception;
-import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.event._DoForm;
@@ -22,6 +21,6 @@ public class LoginForm extends _DoForm {
 			session.setLang(LanguageCode.valueOf(lang));
 		}
 
-		addContent(new _POJOListWrapper(new LanguageDAO(session).findAll(), session));
+		addContent(new LanguageDAO(session).findAll());
 	}
 }

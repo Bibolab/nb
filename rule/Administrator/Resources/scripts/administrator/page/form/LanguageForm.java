@@ -34,7 +34,6 @@ public class LanguageForm extends _DoForm {
 		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
 		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
-		startSaveFormTransact(entity);
 	}
 
 	@Override

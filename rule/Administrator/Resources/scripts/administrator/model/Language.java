@@ -16,7 +16,7 @@ import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 import administrator.dao.LanguageDAO;
 
@@ -58,7 +58,7 @@ public class Language extends AppEntity<UUID> {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.dateFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + TimeUtil.dateToStringSilently(regDate) + "</regdate>");
 		chunk.append("<name>" + name + "</name>");
 		chunk.append("<code>" + code + "</code>");
 		chunk.append("<localizednames>");

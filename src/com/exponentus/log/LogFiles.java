@@ -11,7 +11,7 @@ import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._Session;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 public class LogFiles {
 	public File logDir;
@@ -52,7 +52,7 @@ public class LogFiles {
 					StringBuffer val = new StringBuffer(500);
 					val.append("<name>" + element.getName() + "</name>");
 					val.append("<size>" + element.length() / 1024 + "KB</size>");
-					val.append("<lastmodified>" + Util.convertDataTimeToString(new Date(element.lastModified())) + "</lastmodified>");
+					val.append("<lastmodified>" + TimeUtil.dateTimeToStringSilently(new Date(element.lastModified())) + "</lastmodified>");
 					return val.toString();
 				}
 			});

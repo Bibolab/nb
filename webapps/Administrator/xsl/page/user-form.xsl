@@ -122,11 +122,18 @@
                                 <xsl:for-each select="//query[@entity = 'application']/entry">
                                     <li>
                                         <label>
-                                            <input type="checkbox" name="app" value="{@id}">
+                                            <input type="checkbox" name="app" value="{@id}" autocomplete="off">
                                                 <xsl:if test="$apps/entry/@id = @id">
                                                     <xsl:attribute name="checked" select="'checked'"/>
                                                 </xsl:if>
+                                                <xsl:if test="viewcontent/app = 'Workspace'">
+                                                    <xsl:attribute name="checked" select="'checked'"/>
+                                                    <xsl:attribute name="disabled" select="'disabled'"/>
+                                                </xsl:if>
                                             </input>
+                                            <xsl:if test="viewcontent/app = 'Workspace'">
+                                                <input type="hidden" name="app" value="{@id}"/>
+                                            </xsl:if>
                                             <span>
                                                 <xsl:value-of select="viewcontent/app"/>
                                             </span>

@@ -19,7 +19,7 @@ import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoForm;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 public class ServerForm extends _DoForm {
 
@@ -33,7 +33,7 @@ public class ServerForm extends _DoForm {
 		addValue("devmode", Environment.isDevMode());
 		addValue("officeframe", Environment.getOfficeFrameDir());
 		addValue("kernel", Environment.getKernelDir());
-		addValue("starttime", Util.convertDataTimeToString(Environment.startTime));
+		addValue("starttime", TimeUtil.dateTimeToStringSilently(Environment.startTime));
 		addValue("devmode", Environment.isDevMode());
 		_ActionBar actionBar = new _ActionBar(session);
 		actionBar.addAction(new _Action("Save", "Save and close the form", _ActionType.SAVE_AND_CLOSE));

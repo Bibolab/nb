@@ -2,7 +2,7 @@
 <rule  mode="on" >
     <description>UserProfile</description>
     <caching>NO_CACHING</caching>
-    <xsltfile>DEFAULT_STAFF</xsltfile>
+    <xsltfile>DEFAULT</xsltfile>
     <element mode="ON" type="SCRIPT">
         <events>
             <doscript source="JAVA_CLASS">staff.page.UserProfile</doscript>

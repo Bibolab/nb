@@ -26,6 +26,9 @@ public class LogView extends _DoPage {
 		if (pageNum == 0) {
 			pageNum = maxPage;
 		}
+		if (!dir.isEmpty()) {
+			addValue("request_param", "category=" + dir);
+		}
 		ViewPage vp = new ViewPage(logs.getLogFiles(), count, maxPage, pageNum);
         addContent(actionBar);
 		addContent(vp.getResult(), vp.getMaxPage(), vp.getCount(), vp.getPageNum());

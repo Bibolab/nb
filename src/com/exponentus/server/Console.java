@@ -10,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -25,6 +26,7 @@ import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.env.ServletSessionPool;
+import com.exponentus.env.SessionPool;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
@@ -146,6 +148,16 @@ public class Console implements Runnable {
 			}
 		} else if (command.equalsIgnoreCase("reset users") || command.equalsIgnoreCase("ru")) {
 			System.out.println(ServletSessionPool.flush() + " sessions were reseted");
+		} else if (command.equalsIgnoreCase("show session pool") || command.equalsIgnoreCase("ssp")) {
+			for (Entry<String, _Session> entry : SessionPool.getUserSessions().entrySet()) {
+				try {
+					_Session ses = entry.getValue();
+					System.out.println(entry.getKey() + " " + ses.toString());
+				} catch (IllegalStateException ise) {
+
+				}
+			}
+
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {
 			for (AppEnv env : Environment.getApplications()) {
 				env.ruleProvider.resetRules();

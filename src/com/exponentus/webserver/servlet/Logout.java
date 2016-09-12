@@ -63,7 +63,7 @@ public class Logout extends HttpServlet {
 
 	public static String getRedirect() {
 		if (Environment.authMethod == AuthMethodType.WORKSPACE_LOGIN_PAGE) {
-			return "/" + EnvConst.WORKSPACE_NAME + "/p?id=workspace";
+			return "/" + EnvConst.WORKSPACE_NAME + "/p?id=" + Environment.getAppEnv(EnvConst.WORKSPACE_NAME).getDefaultPage();
 		} else {
 			return "/" + EnvConst.ADMINISTRATOR_APP_NAME + "/p?id=login";
 		}

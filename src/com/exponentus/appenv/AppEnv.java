@@ -50,6 +50,10 @@ public class AppEnv extends PageCacheAdapter {
 			}
 		}
 
+		if (appName.equals(EnvConst.WORKSPACE_NAME)) {
+			isWorkspace = true;
+		}
+
 		rulePath += File.separator + appName;
 
 		try {

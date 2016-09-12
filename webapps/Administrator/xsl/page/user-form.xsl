@@ -126,12 +126,12 @@
                                                 <xsl:if test="$apps/entry/@id = @id">
                                                     <xsl:attribute name="checked" select="'checked'"/>
                                                 </xsl:if>
-                                                <xsl:if test="viewcontent/app = 'Workspace'">
+                                                <xsl:if test="viewcontent/app/@id = 'Workspace'">
                                                     <xsl:attribute name="checked" select="'checked'"/>
                                                     <xsl:attribute name="disabled" select="'disabled'"/>
                                                 </xsl:if>
                                             </input>
-                                            <xsl:if test="viewcontent/app = 'Workspace'">
+                                            <xsl:if test="viewcontent/app/@id = 'Workspace'">
                                                 <input type="hidden" name="app" value="{@id}"/>
                                             </xsl:if>
                                             <span>

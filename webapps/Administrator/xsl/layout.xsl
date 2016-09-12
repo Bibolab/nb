@@ -101,7 +101,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a class="logout" href="Logout">
+                                    <a class="logout" href="/Workspace/p?id=workspace">
                                         <i class="fa fa-th"></i>
                                         <span> Workspace</span>
                                     </a>

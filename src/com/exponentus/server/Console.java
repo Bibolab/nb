@@ -67,7 +67,7 @@ public class Console implements Runnable {
 			DateTime now = DateTime.now();
 			Minutes mins = Minutes.minutesBetween(new DateTime(Environment.startTime), now);
 			System.out.printf(format, "started at",
-			        Util.convertDataTimeToString(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
+			        TimeUtil.dateToStringSilently(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
 			System.out.printf(format, "application server name", EnvConst.APP_ID);
 			System.out.printf(format, "server directory", new File("").getAbsolutePath());
 			System.out.printf(format, "officeframe directory", Environment.getOfficeFrameDir());
@@ -99,8 +99,6 @@ public class Console implements Runnable {
 				System.out.printf(format, "developer mode: ", "OFF");
 			}
 			System.out.printf(format, "temporary files", Environment.fileToDelete.size());
-		} else if (command.equalsIgnoreCase("server info") || command.equalsIgnoreCase("si")) {
-			System.out.printf(format, "server version", Server.serverVersion);
 		} else if (command.equalsIgnoreCase("modules info") || command.equalsIgnoreCase("mi")) {
 			for (AppEnv app : Environment.getApplications()) {
 				System.out.printf(format, app.appName + ": ", app.getDefaultPage());

@@ -15,7 +15,7 @@ import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoForm;
-import com.exponentus.util.Util;
+import com.exponentus.util.StringUtil;
 
 import administrator.dao.ApplicationDAO;
 import administrator.model.Application;
@@ -64,7 +64,7 @@ public class ApplicationForm extends _DoForm {
 		}
 
 		entity.setName(formData.getValueSilently("name"));
-		entity.setPosition(Util.convertStringToInt(formData.getValueSilently("position"), 99));
+		entity.setPosition(StringUtil.stringToInt(formData.getValueSilently("position"), 99));
 		entity.setDefaultPage(formData.getValueSilently("defaulturl"));
 		entity.setLocalizedName(getLocalizedNames(session, formData));
 

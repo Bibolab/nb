@@ -90,11 +90,11 @@
                             Properties
                         </a>
                     </li>
-                    <li>
+                   <!-- <li>
                         <a href="#tabs-3" role="tab" data-toggle="tab">
                             Iinterface
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="tabs-1">

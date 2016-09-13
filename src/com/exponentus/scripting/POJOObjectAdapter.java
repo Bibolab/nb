@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class POJOObjectAdapter<UUID> implements IPOJOObject {
 
@@ -52,6 +53,7 @@ public class POJOObjectAdapter<UUID> implements IPOJOObject {
 		return new ArrayList<Attachment>();
 	}
 
+	@JsonIgnore
 	@Override
 	public void setAttachments(List<Attachment> attachments) {
 

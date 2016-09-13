@@ -343,11 +343,6 @@ public class User implements IUser<Long>, IPOJOObject {
 	}
 
 	@Override
-	public String getEntityKind() {
-		return this.getClass().getSimpleName().toLowerCase();
-	}
-
-	@Override
 	public String getIdentifier() {
 		Long id = getId();
 		if (id == null) {
@@ -381,6 +376,11 @@ public class User implements IUser<Long>, IPOJOObject {
 	@Override
 	public void setAttachments(List<Attachment> attachments) {
 
+	}
+
+	@Override
+	public String getEntityKind() {
+		return "User";
 	}
 
 }

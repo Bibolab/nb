@@ -2,6 +2,7 @@ package com.exponentus.common.model;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -17,9 +18,10 @@ import com.exponentus.user.AnonymousUser;
 import com.exponentus.user.SuperUser;
 import com.exponentus.user.UndefinedUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "entityKind", "identifier", "readers", "editors" })
+@JsonPropertyOrder({ "kind", "identifier", "readers", "editors" })
 public class ACL extends POJOObjectAdapter<UUID> {
 	public Map<Long, Object> readers = new HashMap<>();
 	public Map<Long, Object> editors = new HashMap<>();
@@ -47,6 +49,7 @@ public class ACL extends POJOObjectAdapter<UUID> {
 		}
 	}
 
+	@JsonProperty("kind")
 	@Override
 	public String getEntityKind() {
 		return "ACL";
@@ -112,6 +115,12 @@ public class ACL extends POJOObjectAdapter<UUID> {
 	@Override
 	public boolean isEditable() {
 		return false;
+	}
+
+	@JsonIgnore
+	@Override
+	public List<Attachment> getAttachments() {
+		return null;
 	}
 
 	private String getUserName(long id) {

@@ -34,10 +34,12 @@ public class _ActionBar implements IOutcomeObject {
 		return this;
 	}
 
+	@JsonIgnore
 	public UUID getId() {
 		return null;
 	}
 
+	@JsonIgnore
 	public String getURL() {
 		return null;
 	}

@@ -18,11 +18,12 @@ import administrator.model.User;
 
 public class UserView extends _DoPage {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
 		_ActionBar actionBar = new _ActionBar(session);
 		_Action newDocAction = new _Action("New user", "Registration of the new user", "new_user");
-		newDocAction.setURL("Provider?id=user-form");
+		newDocAction.setURL("p?id=user-form");
 		actionBar.addAction(newDocAction);
 		actionBar.addAction(new _Action("Delete", "Delete user", _ActionType.DELETE_DOCUMENT));
 

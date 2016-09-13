@@ -316,7 +316,7 @@ public class User implements IUser<Long>, IPOJOObject {
 		try {
 			String asText = "";
 			for (Application a : allowedApps) {
-				asText += "<entry name=\""+a.getName()+"\" id=\"" + a.getId() + "\">" + a.getLocalizedName().get(ses.getLang()) + "</entry>";
+				asText += "<entry name=\"" + a.getName() + "\" id=\"" + a.getId() + "\">" + a.getLocalizedName().get(ses.getLang()) + "</entry>";
 			}
 			chunk.append("<apps>" + asText + "</apps>");
 		} catch (NullPointerException e) {
@@ -380,7 +380,7 @@ public class User implements IUser<Long>, IPOJOObject {
 
 	@Override
 	public String getEntityKind() {
-		return "User";
+		return "user";
 	}
 
 }

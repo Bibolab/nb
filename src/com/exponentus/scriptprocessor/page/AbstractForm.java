@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.common.model.SimpleReferenceEntity;
 import com.exponentus.common.service.AttachmentThumbnailService;
 import com.exponentus.dataengine.IDatabase;
 import com.exponentus.dataengine.jpa.AppEntity;
@@ -18,6 +19,7 @@ import com.exponentus.scripting._POJOObjectWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
+import com.exponentus.user.IUser;
 import com.exponentus.util.StringUtil;
 
 public abstract class AbstractForm extends AbstractPage {
@@ -94,6 +96,12 @@ public abstract class AbstractForm extends AbstractPage {
 		}
 		return result;
 
+	}
+
+	protected SimpleReferenceEntity getDefaultEntity(IUser<Long> user, SimpleReferenceEntity entity) {
+		entity.setAuthor(user);
+		entity.setName("");
+		return entity;
 	}
 
 	protected void doGetAttachment(_Session session, _WebFormData formData, AppEntity<UUID> entity) {

@@ -77,6 +77,11 @@ public class Login extends HttpServlet {
 					cpCookie.setPath("/");
 					response.addCookie(cpCookie);
 				}
+
+				if (Environment.monitoringEnable) {
+					Environment.getMonitoringDAO().postLogin(user.getId());
+				}
+
 				response.sendRedirect(redirect);
 
 			} else {

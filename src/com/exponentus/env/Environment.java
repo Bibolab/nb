@@ -43,6 +43,7 @@ import com.exponentus.dataengine.IDatabaseDeployer;
 import com.exponentus.dataengine.jpadatabase.Database;
 import com.exponentus.dataengine.jpadatabase.DatabaseDeployer;
 import com.exponentus.dataengine.system.IExtUserDAO;
+import com.exponentus.dataengine.system.IMonitoringDAO;
 import com.exponentus.exception.RuleException;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Localizator;
@@ -116,6 +117,9 @@ public class Environment implements ICache {
 	private static String kernelDir = "";
 
 	private static IExtUserDAO eDao;
+
+	public static Boolean monitoringEnable = false;
+	private static IMonitoringDAO mDao;
 
 	public static void init() {
 		startTime = new Date();
@@ -420,6 +424,15 @@ public class Environment implements ICache {
 
 	public static IExtUserDAO getExtUserDAO() {
 		return eDao;
+	}
+
+	public static void setMonitoringDAO(IMonitoringDAO d) {
+		monitoringEnable = true;
+		mDao = d;
+	}
+
+	public static IMonitoringDAO getMonitoringDAO() {
+		return mDao;
 	}
 
 	private static void loadProperties() {

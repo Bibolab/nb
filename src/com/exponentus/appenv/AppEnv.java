@@ -2,6 +2,8 @@ package com.exponentus.appenv;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -12,6 +14,7 @@ import org.codehaus.groovy.control.CompilerConfiguration;
 
 import com.exponentus.caching.PageCacheAdapter;
 import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.system.IMonitoringDAO;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.Localizator;
@@ -19,7 +22,9 @@ import com.exponentus.localization.TemplatesSet;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.log.ILogger;
 import com.exponentus.rule.RuleProvider;
+import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
+import com.exponentus.user.SuperUser;
 
 import groovy.lang.GroovyClassLoader;
 
@@ -52,6 +57,23 @@ public class AppEnv extends PageCacheAdapter {
 
 		if (appName.equals(EnvConst.WORKSPACE_NAME)) {
 			isWorkspace = true;
+		}
+
+		if (appName.equals(EnvConst.MONITORING_NAME)) {
+			try {
+				Class<?> clazz = Class.forName(EnvConst.MONITORING_DAO_CLASS);
+				@SuppressWarnings("rawtypes")
+				Class[] args = new Class[] { _Session.class };
+				Constructor<?> contructor = clazz.getConstructor(args);
+				_Session ses = new _Session(this, new SuperUser());
+				Environment.setMonitoringDAO((IMonitoringDAO) contructor.newInstance(new Object[] { ses }));
+				Server.logger.infoLogEntry("Monitoring has been attached");
+			} catch (ClassNotFoundException e) {
+				Server.logger.warningLogEntry("Monitoring DAO has not been initialized (" + EnvConst.MONITORING_DAO_CLASS + ")");
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+			        | SecurityException e) {
+				Server.logger.errorLogEntry(e);
+			}
 		}
 
 		rulePath += File.separator + appName;

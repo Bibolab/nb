@@ -47,7 +47,7 @@ public class UserForm extends _DoForm {
 		addContent(new _EnumWrapper<>(LanguageCode.class.getEnumConstants()));
 		addContent(new ApplicationDAO(session).findAll());
 		_ActionBar actionBar = new _ActionBar(session);
-		actionBar.addAction(new _Action("Save &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));
+		actionBar.addAction(new _Action("Save &amp; Close", "Save and close the form", _ActionType.SAVE_AND_CLOSE));
 		actionBar.addAction(new _Action("Close", "Just close the form", _ActionType.CLOSE));
 		addContent(actionBar);
 	}

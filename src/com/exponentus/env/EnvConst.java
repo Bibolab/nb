@@ -33,7 +33,9 @@ public class EnvConst {
 	public static final String OFFICEFRAME = "officeframe";
 	public static final String WORKSPACE_NAME = "Workspace";
 	public static final String STAFF_NAME = "Staff";
-	public static final String[] OFFICEFRAME_APPS = { STAFF_NAME, "Reference", WORKSPACE_NAME, "DataIntegration", "DataExport", "Monitoring" };
+	public static final String MONITORING_NAME = "Monitoring";
+	public static final String MONITORING_DAO_CLASS = "monitoring.dao.UserActivityDAO";
+	public static final String[] OFFICEFRAME_APPS = { STAFF_NAME, "Reference", WORKSPACE_NAME, "Integration", "DataExport", MONITORING_NAME };
 
 	public static String CLI = "ON";
 	public static String AUTH_COOKIE_NAME = "nb3ses";

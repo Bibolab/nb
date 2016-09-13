@@ -11,9 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.PortalException;
 import com.exponentus.scripting._Session;
+import com.exponentus.user.IUser;
 
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +34,7 @@ public class Logout extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		long userId = 0;
 		try {
 
 			if (env != null && env.isWorkspace) {
@@ -45,11 +48,17 @@ public class Logout extends HttpServlet {
 			if (jses != null) {
 				_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 				if (ses != null) {
+					IUser<Long> user = ses.getUser();
+					userId = user.getId();
 					ses.getUser().setAuthorized(false);
 					SessionPool.remove(ses);
 				}
 				jses.removeAttribute(EnvConst.SESSION_ATTR);
 				jses.invalidate();
+			}
+
+			if (Environment.monitoringEnable) {
+				Environment.getMonitoringDAO().postLogout(userId);
 			}
 
 			response.sendRedirect(Login.getRedirect());

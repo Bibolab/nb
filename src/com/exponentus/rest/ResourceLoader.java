@@ -1,6 +1,8 @@
 package com.exponentus.rest;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.core.Application;
@@ -11,6 +13,7 @@ import com.exponentus.server.Server;
 
 public class ResourceLoader extends Application {
 	private Site appSite;
+	private static List<String> loaded = new ArrayList<String>();
 
 	public ResourceLoader(Site appSite) {
 		super();
@@ -31,8 +34,14 @@ public class ResourceLoader extends Application {
 			} catch (ClassNotFoundException e) {
 				Server.logger.errorLogEntry(e);
 			}
+			loaded.add(clazz);
 		}
 
 		return classes;
 	}
+
+	public static List<String> getLoaded() {
+		return loaded;
+	}
+
 }

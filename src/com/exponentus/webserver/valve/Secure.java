@@ -24,7 +24,7 @@ import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
 import com.exponentus.user.IUser;
-import com.exponentus.webserver.servlet.Logout;
+import com.exponentus.webserver.servlet.Login;
 import com.exponentus.webserver.servlet.SessionCooks;
 
 public class Secure extends ValveBase {
@@ -112,7 +112,7 @@ public class Secure extends ValveBase {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			// request.getRequestDispatcher("/Error?type=session_lost").forward(request,
 			// response);
-			request.getRequestDispatcher(Logout.getRedirect()).forward(request, response);
+			request.getRequestDispatcher(Login.getRedirect()).forward(request, response);
 		}
 	}
 

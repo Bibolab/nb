@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.env.AuthMethodType;
 import com.exponentus.env.EnvConst;
+import com.exponentus.env.Environment;
 import com.exponentus.env.ServletSessionPool;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.AuthFailedException;
@@ -25,9 +27,6 @@ import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
-
-import administrator.dao.ApplicationDAO;
-import administrator.model.Application;
 
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -70,7 +69,7 @@ public class Login extends HttpServlet {
 
 				SessionCooks cooks = new SessionCooks(request, response);
 				if (cooks.refferer == null) {
-					redirect = getRedirect(jses, appCookies);
+					redirect = getRedirect();
 				} else {
 					redirect = cooks.refferer;
 					Cookie cpCookie = new Cookie(EnvConst.CALLING_PAGE_COOKIE_NAME, "0");
@@ -104,16 +103,12 @@ public class Login extends HttpServlet {
 		}
 	}
 
-	private String getRedirect(HttpSession jses, Cookies appCookies) {
-		ApplicationDAO aDao = new ApplicationDAO();
-		Application app = aDao.findByName(env.appName);
-		if (app != null) {
-			return app.getDefaultURL();
+	public static String getRedirect() {
+		if (Environment.authMethod == AuthMethodType.WORKSPACE_LOGIN_PAGE) {
+			return "/" + EnvConst.WORKSPACE_NAME + "/p?id=" + Environment.getAppEnv(EnvConst.WORKSPACE_NAME).getDefaultPage();
 		} else {
-			AppEnv.logger.warningLogEntry("Authorization failed, redirecting page has been not pointed");
-			return "";
+			return "/" + EnvConst.ADMINISTRATOR_APP_NAME + "/p?id=login";
 		}
-
 	}
 
 }

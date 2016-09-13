@@ -284,6 +284,7 @@ public class Database implements IDatabase {
 		entity.setSuperUser(true);
 		entity.setLogin(userName);
 		entity.setPwd(pwd);
+		entity.setDefaultLang(LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
 		ApplicationDAO aDao = new ApplicationDAO(ses);
 		entity.setAllowedApps(aDao.findAll());
 		UserDAO uDao = new UserDAO(this);

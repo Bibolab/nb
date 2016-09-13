@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.exponentus.appenv.AppEnv;
-import com.exponentus.env.AuthMethodType;
 import com.exponentus.env.EnvConst;
-import com.exponentus.env.Environment;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.PortalException;
 import com.exponentus.scripting._Session;
@@ -54,19 +52,11 @@ public class Logout extends HttpServlet {
 				jses.invalidate();
 			}
 
-			response.sendRedirect(getRedirect());
+			response.sendRedirect(Login.getRedirect());
 		} catch (Exception e) {
 			new PortalException(e, env, response, ProviderExceptionType.LOGOUTERROR);
 		}
 
-	}
-
-	public static String getRedirect() {
-		if (Environment.authMethod == AuthMethodType.WORKSPACE_LOGIN_PAGE) {
-			return "/" + EnvConst.WORKSPACE_NAME + "/p?id=" + Environment.getAppEnv(EnvConst.WORKSPACE_NAME).getDefaultPage();
-		} else {
-			return "/" + EnvConst.ADMINISTRATOR_APP_NAME + "/p?id=login";
-		}
 	}
 
 }

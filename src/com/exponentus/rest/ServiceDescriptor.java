@@ -2,13 +2,10 @@ package com.exponentus.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.ws.rs.HttpMethod;
 
-import com.exponentus.scripting.POJOObjectAdapter;
-
-public class ServiceDescriptor extends POJOObjectAdapter<UUID> {
+public class ServiceDescriptor {
 	private String name;
 	private boolean isLoaded;
 	private List<Method> methods = new ArrayList<Method>();

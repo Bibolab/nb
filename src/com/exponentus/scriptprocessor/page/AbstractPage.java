@@ -32,7 +32,7 @@ import com.exponentus.scriptprocessor.SimpleValue;
 import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.util.StringUtil;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 import com.exponentus.webserver.servlet.PublishAsType;
 
 public abstract class AbstractPage extends ScriptHelper implements IPageScript {
@@ -57,7 +57,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		} else if (value instanceof String) {
 			result.addContent(new SimpleValue(entryName, (String) value));
 		} else if (value instanceof Date) {
-			result.addContent(new SimpleValue(entryName, Util.convertDataTimeToString(((Date) value))));
+			result.addContent(new SimpleValue(entryName, TimeUtil.dateTimeToStringSilently(((Date) value))));
 		} else if (value instanceof Integer) {
 			result.addContent(new SimpleValue(entryName, value.toString()));
 		} else if (value instanceof BigDecimal) {

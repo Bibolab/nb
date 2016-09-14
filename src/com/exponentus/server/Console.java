@@ -34,7 +34,6 @@ import com.exponentus.scheduler.SchedulerHelper;
 import com.exponentus.scripting._Session;
 import com.exponentus.util.StringUtil;
 import com.exponentus.util.TimeUtil;
-import com.exponentus.util.Util;
 
 public class Console implements Runnable {
 	private static final String format = "%-30s%s%n";
@@ -295,7 +294,7 @@ public class Console implements Runnable {
 			}
 
 		} else if (command.equals("help") || command.equalsIgnoreCase("h")) {
-			System.out.println(Util.readResource("/com/exponentus/server/console_commands.txt"));
+			System.out.println(StringUtil.readResource("/com/exponentus/server/console_commands.txt"));
 		} else {
 			if (!command.trim().equalsIgnoreCase("")) {
 				System.err.println("error -command \"" + command + "\" is not recognized, try to type 'help' to get a short guide about commands");

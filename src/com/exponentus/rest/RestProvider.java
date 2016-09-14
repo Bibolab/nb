@@ -1,8 +1,5 @@
 package com.exponentus.rest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,8 +26,6 @@ import com.exponentus.server.Server;
 
 @Path("/")
 public class RestProvider implements IRestService {
-	protected List<ServiceDescriptor> services = new ArrayList<ServiceDescriptor>();
-
 	@Context
 	protected ServletContext context;
 	@Context
@@ -81,8 +76,10 @@ public class RestProvider implements IRestService {
 	}
 
 	@Override
-	public List<ServiceDescriptor> getServices() {
-		return services;
+	public ServiceDescriptor getDescription() {
+		ServiceDescriptor sd = new ServiceDescriptor();
+		sd.setName(getClass().getName());
+		return sd;
 	}
 
 }

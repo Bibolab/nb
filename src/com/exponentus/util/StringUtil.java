@@ -1,10 +1,17 @@
 package com.exponentus.util;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.catalina.realm.RealmBase;
+import org.apache.commons.io.IOUtils;
+
+import com.exponentus.server.Server;
 
 public class StringUtil {
 	public static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
@@ -50,5 +57,30 @@ public class StringUtil {
 		} catch (Exception e) {
 			return defaultValue;
 		}
+	}
+
+	public static String readResource(String file) {
+		InputStreamReader reader = null;
+		try {
+
+			InputStream in = Object.class.getClass().getResourceAsStream(file);
+			reader = new InputStreamReader(in);
+			String myInputStream = IOUtils.toString(reader);
+
+			return myInputStream;
+		} catch (FileNotFoundException e) {
+			Server.logger.errorLogEntry(e);
+		} catch (IOException e) {
+			Server.logger.errorLogEntry(e);
+		} finally {
+			try {
+				if (reader != null) {
+					reader.close();
+				}
+			} catch (IOException e) {
+				Server.logger.errorLogEntry(e);
+			}
+		}
+		return "";
 	}
 }

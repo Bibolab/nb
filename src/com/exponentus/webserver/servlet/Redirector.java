@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.exponentus.env.Environment;
+import com.exponentus.env.EnvConst;
 
 public class Redirector extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class Redirector extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-			response.sendRedirect(Environment.getDefaultRedirectURL());
+			response.sendRedirect(EnvConst.DEFAULT_APPLICATION);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

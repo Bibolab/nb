@@ -43,6 +43,7 @@ public class EnvConst {
 	public static String DUMMY_PASSWORD = "secret";
 	public static String JPA_LOG_LEVEL = "OFF";
 	public static String DEFAULT_LANG = LanguageCode.ENG.name();
+	public static String DEFAULT_APPLICATION = WORKSPACE_NAME;
 	public static int DEFAULT_PAGE_SIZE = 20;
 	public static String DEFAULT_DATE_FORMAT = "dd.MM.yyyy";
 	public static String DEFAULT_DATETIME_FORMAT = "dd.MM.yyyy kk:mm";

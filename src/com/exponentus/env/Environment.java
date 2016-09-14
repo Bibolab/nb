@@ -534,8 +534,4 @@ public class Environment implements ICache {
 		return xsltFile;
 	}
 
-	public static String getDefaultRedirectURL() {
-		return "/Workspace/p?id=workspace";
-	}
-
 }

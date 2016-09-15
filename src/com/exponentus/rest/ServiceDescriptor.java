@@ -3,12 +3,10 @@ package com.exponentus.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.HttpMethod;
-
 public class ServiceDescriptor {
 	private String name;
-	private boolean isLoaded;
-	private List<Method> methods = new ArrayList<Method>();
+	private boolean isLoaded = true;
+	private List<ServiceMethod> serviceMethods = new ArrayList<ServiceMethod>();
 
 	public void setName(String name) {
 		this.name = name;
@@ -26,43 +24,16 @@ public class ServiceDescriptor {
 		return isLoaded;
 	}
 
-	public List<Method> getMethods() {
-		return methods;
+	public List<ServiceMethod> getMethods() {
+		return serviceMethods;
 	}
 
-	public void setMethods(List<Method> methods) {
-		this.methods = methods;
+	public void setMethods(List<ServiceMethod> serviceMethods) {
+		this.serviceMethods = serviceMethods;
 	}
 
-	class Method {
-		private String name;
-
-		private HttpMethod method;
-		private String example;
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setMethod(HttpMethod method) {
-			this.method = method;
-		}
-
-		public HttpMethod getMethod() {
-			return method;
-		}
-
-		public String getExample() {
-			return example;
-		}
-
-		public void setExample(String example) {
-			this.example = example;
-		}
+	public void addMethod(ServiceMethod serviceMethod) {
+		serviceMethods.add(serviceMethod);
 	}
 
 }

@@ -118,7 +118,7 @@
                         </div>
                         <div class="controls">
                             <ul class="list-style-none">
-                                <xsl:variable name="apps" select="fields/apps/apps"/>
+                                <xsl:variable name="apps" select="fields/apps"/>
                                 <xsl:for-each select="//query[@entity = 'application']/entry">
                                     <li>
                                         <label>

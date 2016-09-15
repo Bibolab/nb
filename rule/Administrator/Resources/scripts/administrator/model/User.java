@@ -312,7 +312,6 @@ public class User implements IUser<Long>, IPOJOObject {
 		chunk.append("<xmpp>" + xmpp + "</xmpp>");
 		chunk.append("<slack>" + slack + "</slack>");
 		chunk.append("<issuperuser>" + isSuperUser + "</issuperuser>");
-		chunk.append("<apps>");
 		try {
 			String asText = "";
 			for (Application a : allowedApps) {
@@ -322,7 +321,6 @@ public class User implements IUser<Long>, IPOJOObject {
 		} catch (NullPointerException e) {
 			chunk.append("<apps></apps>");
 		}
-		chunk.append("</apps>");
 		return chunk.toString();
 	}
 

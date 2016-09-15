@@ -76,9 +76,7 @@ public class RestProvider implements IRestService {
 	}
 
 	@Override
-	public ServiceDescriptor getDescription() {
-		ServiceDescriptor sd = new ServiceDescriptor();
-		sd.setName(getClass().getName());
+	public ServiceDescriptor updateDescription(ServiceDescriptor sd) {
 		return sd;
 	}
 

@@ -5,7 +5,9 @@ import java.util.List;
 
 public class ServiceDescriptor {
 	private String name;
-	private boolean isLoaded = true;
+	private String appName;
+	private boolean isLoaded;
+	private String urlMapping;
 	private List<ServiceMethod> serviceMethods = new ArrayList<ServiceMethod>();
 
 	public void setName(String name) {
@@ -34,6 +36,22 @@ public class ServiceDescriptor {
 
 	public void addMethod(ServiceMethod serviceMethod) {
 		serviceMethods.add(serviceMethod);
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public String getUrlMapping() {
+		return urlMapping;
+	}
+
+	public void setUrlMapping(String urlMapping) {
+		this.urlMapping = urlMapping;
 	}
 
 }

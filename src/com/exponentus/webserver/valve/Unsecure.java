@@ -17,6 +17,7 @@ import com.exponentus.env.ServletSessionPool;
 import com.exponentus.exception.ApplicationException;
 import com.exponentus.exception.RuleException;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.rest.ResourceLoader;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
@@ -42,7 +43,12 @@ public class Unsecure extends ValveBase {
 					getNext().getNext().invoke(request, response);
 				} else {
 					if (ru.isRest()) {
-						((Secure) getNext()).invoke(request, response, ru);
+						if (ResourceLoader.getUnsecureMethods().contains(ru.getUrl())) {
+							gettingSession(request, response, env);
+							getNext().getNext().invoke(request, response);
+						} else {
+							((Secure) getNext()).invoke(request, response, ru);
+						}
 					} else if (ru.isPage()) {
 						try {
 							String pageId = ru.getPageID();

@@ -1,5 +1,5 @@
 package com.exponentus.rest;
 
 public interface IRestService {
-	ServiceDescriptor getDescription();
+	ServiceDescriptor updateDescription(ServiceDescriptor sd);
 }

@@ -2,7 +2,8 @@ package com.exponentus.rest;
 
 public class ServiceMethod {
 	private String method;
-	private String example;
+	private String url;
+	private boolean isAnonymous;
 
 	public void setMethod(String get) {
 		this.method = get;
@@ -12,11 +13,19 @@ public class ServiceMethod {
 		return method;
 	}
 
-	public String getExample() {
-		return example;
+	public String getURL() {
+		return url;
 	}
 
-	public void setExample(String example) {
-		this.example = example;
+	public void setURL(String example) {
+		this.url = example;
+	}
+
+	public boolean isAnonymous() {
+		return isAnonymous;
+	}
+
+	public void setAnonymous(boolean isAnonymous) {
+		this.isAnonymous = isAnonymous;
 	}
 }

@@ -194,6 +194,10 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 		}, getSes()));
 	}
 
+	protected void addContent(String key, IPOJOObject obj) {
+		result.addContent(key, obj);
+	}
+
 	protected void addContent(IOutcomeObject obj) {
 		result.addContent(obj);
 	}

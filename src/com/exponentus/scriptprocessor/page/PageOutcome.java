@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.exponentus.scripting.IPOJOObject;
 import org.apache.http.HttpStatus;
 
 import com.exponentus.env.EnvConst;
@@ -35,6 +36,7 @@ public class PageOutcome {
 	private static final String xmlTextUTF8Header = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 	private List<PageOutcome> includedPage = new ArrayList<PageOutcome>();
 	private Collection<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
+	private Map<String, IPOJOObject> objectsMap = new HashMap<>();
 	private _Session ses;
 	private LanguageCode lang;
 	private InfoMessageType infoMessage = InfoMessageType.OK;
@@ -225,6 +227,7 @@ public class PageOutcome {
 	public Object getJSON() {
 		JSONClass clazz = new JSONClass();
 		clazz.setObjects(objects);
+		clazz.setData(objectsMap);
 		clazz.setCaptions(captions);
 		clazz.setType(infoMessage);
 		clazz.setRedirectURL(redirectURL);
@@ -246,6 +249,10 @@ public class PageOutcome {
 	public void addContent(Collection<IOutcomeObject> elements) {
 		objects.addAll(elements);
 
+	}
+
+	public void addContent(String key, IPOJOObject obj) {
+		objectsMap.put(key, obj);
 	}
 
 	public int getHttpStatus() {

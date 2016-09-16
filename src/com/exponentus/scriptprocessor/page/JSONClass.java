@@ -2,14 +2,17 @@ package com.exponentus.scriptprocessor.page;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
+import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Validation;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("outcome")
 public class JSONClass {
 	private Collection<Object> objects = new ArrayList<Object>();
+	private Map<String, IPOJOObject> data = new HashMap<>();
 	private Map<String, String> captions;
 	private InfoMessageType type;
 	private String redirectURL;
@@ -68,5 +71,9 @@ public class JSONClass {
 
 	public _Validation getValidation() {
 		return this.validation;
+	}
+
+	public void setData(Map<String, IPOJOObject> data) {
+		this.data = data;
 	}
 }

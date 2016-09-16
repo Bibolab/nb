@@ -37,6 +37,11 @@ public abstract class AbstractForm extends AbstractPage {
 	}
 
 	@Override
+	protected void addContent(String key, IPOJOObject document) {
+		result.addContent(key, document);
+	}
+
+	@Override
 	public PageOutcome processCode(String method) {
 		String fsId = formData.getAnyValueSilently(EnvConst.FSID_FIELD_NAME);
 		_Session ses = getSes();

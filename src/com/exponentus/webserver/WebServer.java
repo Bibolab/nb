@@ -93,7 +93,7 @@ public class WebServer {
 			Wrapper w1 = Tomcat.addServlet(context, "REST", new ServletContainer(rc));
 			w1.setLoadOnStartup(1);
 			w1.addInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
-			context.addServletMapping(site.getRestUrlMapping(), "REST");
+			context.addServletMapping(site.getRestUrlMapping() + "/*", "REST");
 
 			// TODO it needed to adding CORS mapping
 			if (!site.getAllowCORS().isEmpty()) {

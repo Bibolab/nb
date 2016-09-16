@@ -1,17 +1,38 @@
+selection.selection {
+    display: block;
+}
+
+.selection.is-multiple .selection-item {
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 1px;
+    padding: 4px 6px;
+}
+
 .select {
     display: inline-block;
+    height: 100%;
     max-width: 100%;
+    position: relative;
     width: 100%;
 }
 
 .select .select-selection {
+    cursor: pointer;
+    height: 100%;
     position: relative;
     padding-right: 22px;
     min-width: 50px;
 }
 
+.select.open .select-selection {
+    border-color: #4D90FE;
+    box-shadow: 0 0 1px rgba(39, 128, 248, 0.196);
+}
+
 .select.allow-clear .select-selection {
-    padding-right: 36px;
+    padding-right: 40px;
 }
 
 .select .select-selection:after {
@@ -21,19 +42,70 @@
     content: '';
     display: block;
     height: 0;
-    margin-top: -4px;
+    margin-top: -3px;
     position: absolute;
     right: 5px;
     top: 50%;
     width: 0;
 }
 
-.select .clear {
-    padding: 8px 6px;
+.select .select-selection.input {
+    min-height: auto;
+}
+
+.select .select-search-input {
+    background: rgba(255, 255, 255, 0);
+    border: 0;
+    cursor: pointer;
     height: 100%;
+    left: 0;
+    min-height: 0;
+    outline: 0;
     position: absolute;
-    right: 14px;
     top: 0;
+    width: 100%;
+}
+
+/*.select .select-search-input {
+    border: 0;
+    display: inline;
+    line-height: 1;
+    min-height: 0;
+    outline: 0;
+    padding: 0;
+    width: auto;
+}*/
+.select .select-search-input,
+.select .select-search-input:focus {
+    box-shadow: none;
+}
+
+.select .select-search-input:focus {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.select .clear,
+.select .select-clear {
+    color: #ccc;
+    display: none;
+    font-size: 18px;
+    font-weight: bold;
+    height: 100%;
+    line-height: 1;
+    padding: 8px 0;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    text-align: center;
+    width: 18px;
+}
+
+.select.allow-clear .select-clear {
+    display: inline-block;
+}
+
+.select .select-clear:hover {
+    color: #666;
 }
 
 .select .clear .fa {
@@ -42,11 +114,6 @@
 
 .select .clear:hover .fa {
     color: #888;
-}
-
-.select.open .select-selection {
-    border-color: #4D90FE;
-    box-shadow: 0 0 1px rgba(39, 128, 248, 0.196);
 }
 
 .select .placeholder {
@@ -69,17 +136,32 @@
 }
 
 .select .select-dropdown {
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0;
-    /*box-shadow: 0 8px 30px -5px rgba(0, 0, 0, .5);*/
-    box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 4px 1px rgba(0,0,0,.2);
+    display: none;
+    font-size: 13px;
+    line-height: 1.4;
+    list-style: none;
     margin: -1px 0 0;
+    min-width: 170px;
     padding: 0;
+    position: absolute;
+    top: 100%;
     width: 100%;
+    z-index: 1000;
 }
 
 .select .select-dropdown:after,
 .select .select-dropdown:before {
     content: none;
+}
+
+.select.open > .select-dropdown {
+    display: block;
 }
 
 .select-list {

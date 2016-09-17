@@ -32,7 +32,7 @@
 						<font style="font-size:1.9em;">NextBase</font>
 						<div style="clear:both; height:10px"/>
 						<font style="font-size:1.1em;">
-							version <xsl:value-of select="error/version"/> &#169; Exponentus 2016
+							version <xsl:value-of select="error/version"/>&#169;Exponentus 2016
 						</font>
 						<br/>
 					</td>

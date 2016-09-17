@@ -1,5 +1,633 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- common vocabulary file -->
-<vocabulary primary="ENG">
-  
+<vocabulary>
+    <sentence mode="on" keyword="workspace">
+        <entry lang="ENG">Workspace</entry>
+        <entry lang="RUS">Рабочая область</entry>
+        <entry lang="KAZ">Рабочая область</entry>
+        <entry lang="SPA">Еspacio de trabajo</entry>
+        <entry lang="POR">Area de trabalho</entry>
+        <entry lang="BUL">работно място</entry>
+    </sentence>
+    <sentence mode="on" keyword="ACCEPTED">
+        <entry lang="ENG">Accepted</entry>
+        <entry lang="RUS">Принято</entry>
+        <entry lang="KAZ">Кабылданған</entry>
+        <entry lang="SPA">Aceptado</entry>
+        <entry lang="POR">Aceitaram</entry>
+        <entry lang="BUL">Признат</entry>
+    </sentence>
+    <sentence mode="on" keyword="DECLINE">
+        <entry lang="ENG">Decline</entry>
+        <entry lang="RUS">Отклонено</entry>
+        <entry lang="KAZ">Құлдырау</entry>
+        <entry lang="SPA">Declínio</entry>
+        <entry lang="POR">Disminución</entry>
+        <entry lang="BUL">Упадък</entry>
+    </sentence>
+    <sentence mode="on" keyword="UNKNOWN">
+        <entry lang="ENG">Unknown</entry>
+        <entry lang="RUS">Не определено</entry>
+        <entry lang="KAZ">Белгісіз</entry>
+        <entry lang="SPA">Desconocido</entry>
+        <entry lang="POR">Desconhecido</entry>
+        <entry lang="BUL">Неизвестен</entry>
+    </sentence>
+    <sentence mode="on" keyword="authorization_was_failed">
+        <entry lang="ENG">Authorization was failed</entry>
+        <entry lang="RUS">Авторизация неудачна</entry>
+    </sentence>
+    <sentence mode="on" keyword="session_was_lost">
+        <entry lang="ENG">User session was expired</entry>
+        <entry lang="RUS">Сессия была сброшена сервером</entry>
+    </sentence>
+    <sentence mode="on" keyword="action_completed_successfully">
+        <entry lang="RUS">Действие выполнено успешно</entry>
+        <entry lang="KAZ">Действие выполнено успешно</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="no_connection">
+        <entry lang="ENG">No connection to the server</entry>
+        <entry lang="RUS">Отсутствует соединение с сервером</entry>
+        <entry lang="KAZ">Сервермен байланыс орнатылмаған</entry>
+        <entry lang="CHI">没有连接到服务器</entry>
+    </sentence>
+    <sentence mode="on" keyword="internal_server_error">
+        <entry lang="ENG">Internal server error</entry>
+        <entry lang="RUS">Внутреняя ошибка серевера</entry>
+        <entry lang="KAZ">Внутреняя ошибка серевера</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="validation_error">
+        <entry lang="ENG">Validation error</entry>
+        <entry lang="RUS">Ошибка значения формы</entry>
+        <entry lang="KAZ">Ошибка значения формы</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="search">
+        <entry lang="RUS">Поиск</entry>
+        <entry lang="KAZ">Іздеу</entry>
+        <entry lang="ENG">Search</entry>
+    </sentence>
+    <sentence mode="on" keyword="filter">
+        <entry lang="RUS">Фильтр</entry>
+        <entry lang="KAZ">Фильтр</entry>
+        <entry lang="ENG">Filter</entry>
+    </sentence>
+    <sentence mode="on" keyword="report_file_type">
+        <entry lang="RUS">Тип файла отчета</entry>
+        <entry lang="KAZ">Есептеме файлының түрi</entry>
+        <entry lang="ENG">File type of the report</entry>
+    </sentence>
+    <sentence mode="on" keyword="create_report">
+        <entry lang="RUS">Сформировать отчет</entry>
+        <entry lang="KAZ">Есептемені құрастыру</entry>
+        <entry lang="ENG">Generate a report</entry>
+    </sentence>
+    <sentence mode="on" keyword="field_is_empty">
+        <entry lang="RUS">Поле не заполнено</entry>
+        <entry lang="KAZ">Поле не заполнено</entry>
+        <entry lang="ENG">The field is empty</entry>
+    </sentence>
+    <sentence mode="on" keyword="field_is_too_long">
+        <entry lang="RUS">Содержимое поля слишком большое</entry>
+        <entry lang="KAZ">Содержимое поля слишком большое</entry>
+        <entry lang="ENG">The field is too long</entry>
+    </sentence>
+    <sentence mode="on" keyword="date_format_does_not_match_to">
+        <entry lang="RUS">Формат даты не соответствует шаблону</entry>
+        <entry lang="KAZ">Формат даты не соответствует шаблону</entry>
+        <entry lang="ENG">Date format does not match to pattern</entry>
+    </sentence>
+    <sentence mode="on" keyword="required">
+        <entry lang="RUS">Обязательноe</entry>
+        <entry lang="KAZ">Обязательноe</entry>
+        <entry lang="ENG">Required</entry>
+    </sentence>
+    <sentence mode="on" keyword="markdown_write">
+        <entry lang="RUS">Редактор</entry>
+        <entry lang="KAZ">Редактор</entry>
+        <entry lang="ENG">Write</entry>
+    </sentence>
+    <sentence mode="on" keyword="markdown_preview">
+        <entry lang="RUS">Просмотр</entry>
+        <entry lang="KAZ">Просмотр</entry>
+        <entry lang="ENG">Preview</entry>
+    </sentence>
+
+    <sentence mode="on" keyword="the_field">
+        <entry lang="RUS">Поле</entry>
+        <entry lang="KAZ"></entry>
+        <entry lang="ENG">The field</entry>
+    </sentence>
+    <sentence mode="on" keyword="has_been_not_filled">
+        <entry lang="RUS">не заполено</entry>
+        <entry lang="KAZ">жолы толтырылмады</entry>
+        <entry lang="ENG">has been not filled</entry>
+    </sentence>
+    <sentence mode="on" keyword="code_is_not_unique">
+        <entry lang="RUS">Запись с таким кодом уже существует</entry>
+        <entry lang="KAZ">Запись с таким кодом уже существует</entry>
+        <entry lang="ENG">There is a record with such code</entry>
+    </sentence>
+    <sentence mode="on" keyword="name_is_not_unique">
+        <entry lang="RUS">Запись с таким значением поля уже существует</entry>
+        <entry lang="KAZ">Запись с таким значением поля уже существует</entry>
+        <entry lang="ENG">There is a record with such value</entry>
+    </sentence>
+    <sentence mode="on" keyword="should_be_contain_value_more_than_zero">
+        <entry lang="RUS">Поле должно содержать значение больше нуля</entry>
+        <entry lang="KAZ">Поле должно содержать значение больше нуля</entry>
+        <entry lang="ENG">The fiels should be contain value more than zero</entry>
+    </sentence>
+    <sentence mode="on" keyword="change_skin">
+        <entry lang="RUS">Изменить оформление</entry>
+        <entry lang="KAZ">Изменить оформление</entry>
+        <entry lang="ENG">Change interface skin</entry>
+    </sentence>
+    <sentence mode="on" keyword="document_was_saved_succesfully">
+        <entry lang="RUS">Документ сохранен</entry>
+        <entry lang="KAZ">Құжат сақталды</entry>
+        <entry lang="ENG">The document has been saved</entry>
+    </sentence>
+    <sentence mode="on" keyword="editable">
+        <entry lang="RUS">Редактирование</entry>
+        <entry lang="KAZ">Өңдеу</entry>
+        <entry lang="ENG">Editing</entry>
+        <entry lang="CHI">编辑</entry>
+    </sentence>
+    <sentence mode="on" keyword="reg_date">
+        <entry lang="RUS">Дата регистрации</entry>
+        <entry lang="KAZ"></entry>
+        <entry lang="ENG">Registration date</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="reg_number">
+        <entry lang="RUS">№</entry>
+        <entry lang="KAZ">№</entry>
+        <entry lang="ENG">ID</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="status">
+        <entry lang="RUS">Статус</entry>
+        <entry lang="KAZ">Статус</entry>
+        <entry lang="ENG">Status</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="comment">
+        <entry lang="RUS">Комментарий</entry>
+        <entry lang="KAZ">Комментарий</entry>
+        <entry lang="ENG">Comment</entry>
+        <entry lang="CHN">Comment</entry>
+    </sentence>
+
+    <sentence mode="on" keyword="wait_while_document_save">
+        <entry lang="KAZ">Күте тұрыңыз... Құжаттың сақталуы жүріп жатыр</entry>
+        <entry lang="RUS">Пожалуйста ждите... Идет сохранение документа</entry>
+        <entry lang="ENG">Please wait... There is a saving of the document</entry>
+        <entry lang="CHI">請稍候. 保存一個文件</entry>
+    </sentence>
+    <sentence mode="on" keyword="dialog_no_selected_value">
+        <entry lang="KAZ">Сіз таңдау жасамадыңыз</entry>
+        <entry lang="RUS">Вы не сделали выбор</entry>
+        <entry lang="ENG">No selected</entry>
+        <entry lang="CHI">No selected</entry>
+    </sentence>
+    <sentence mode="on" keyword="cancel">
+        <entry lang="RUS">Отмена</entry>
+        <entry lang="KAZ">Болдырмау</entry>
+        <entry lang="ENG">Cancel</entry>
+        <entry lang="CHI">廢除</entry>
+    </sentence>
+    <sentence mode="on" keyword="часов">
+        <entry lang="KAZ">сағат</entry>
+        <entry lang="ENG">hours</entry>
+        <entry lang="CHI">時間</entry>
+    </sentence>
+    <sentence mode="on" keyword="logout">
+        <entry lang="RUS">Завершить работу</entry>
+        <entry lang="KAZ">Жұмысты аяқтау</entry>
+        <entry lang="ENG">Logout</entry>
+        <entry lang="CHI">退出</entry>
+    </sentence>
+    <sentence mode="on" keyword="limit_view">
+        <entry lang="RUS">Количество документов в виде</entry>
+        <entry lang="KAZ">Көрінетін құжаттардың саны</entry>
+        <entry lang="ENG">An amount of documents is in a kind</entry>
+        <entry lang="CHI">表单中的文件数量</entry>
+    </sentence>
+    <sentence mode="on" keyword="password">
+        <entry lang="RUS">Пароль</entry>
+        <entry lang="KAZ">Құпия сөз</entry>
+        <entry lang="ENG">Password</entry>
+        <entry lang="CHI">密码</entry>
+    </sentence>
+    <sentence mode="on" keyword="password_new">
+        <entry lang="ENG">New password</entry>
+        <entry lang="RUS">Новый пароль</entry>
+        <entry lang="KAZ">Жаңа құпия сөз</entry>
+        <entry lang="ENG">New password</entry>
+        <entry lang="CHO">新密码</entry>
+    </sentence>
+    <sentence mode="on" keyword="password_confirm">
+        <entry lang="ENG">Confirm password</entry>
+        <entry lang="RUS">Confirm password</entry>
+        <entry lang="KAZ">Confirm password</entry>
+        <entry lang="CHO">Confirm password</entry>
+    </sentence>
+    <sentence mode="on" keyword="password_confirm_not_equals">
+        <entry lang="ENG">Passwords do not match</entry>
+        <entry lang="RUS">Passwords do not match</entry>
+        <entry lang="KAZ">Passwords do not match</entry>
+        <entry lang="CHO">Passwords do not match</entry>
+    </sentence>
+    <sentence mode="on" keyword="change_password">
+        <entry lang="RUS">Изменить пароль</entry>
+        <entry lang="ENG">Change password</entry>
+    </sentence>
+    <sentence mode="on" keyword="edit">
+        <entry lang="RUS">Редактирование</entry>
+        <entry lang="KAZ">Өңдеу</entry>
+        <entry lang="ENG">Editing</entry>
+        <entry lang="CHI">编辑</entry>
+    </sentence>
+    <sentence mode="on" keyword="close">
+        <entry lang="RUS">Закрыть</entry>
+        <entry lang="KAZ">Жабу</entry>
+        <entry lang="ENG">Close</entry>
+        <entry lang="CHI">关闭</entry>
+    </sentence>
+    <sentence mode="on" keyword="select">
+        <entry lang="RUS">Выбрать</entry>
+        <entry lang="KAZ">Таңдау</entry>
+        <entry lang="ENG">Select</entry>
+        <entry lang="CHI">Select</entry>
+    </sentence>
+    <sentence mode="on" keyword="just_close">
+        <entry lang="RUS">Закрыть форму</entry>
+        <entry lang="KAZ">Жабу</entry>
+        <entry lang="ENG">Just close the form</entry>
+        <entry lang="CHI">关闭</entry>
+    </sentence>
+    <sentence mode="on" keyword="back">
+        <entry lang="RUS">Назад</entry>
+        <entry lang="KAZ">Артқа</entry>
+        <entry lang="ENG">Back</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="just_back">
+        <entry lang="RUS">Вернутся на предыдущую страницу</entry>
+        <entry lang="KAZ">Жабу</entry>
+        <entry lang="ENG">Return to the previous page</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="basic_properties">
+        <entry lang="RUS">Основные свойства</entry>
+        <entry lang="KAZ">Негізгі қасиеттері</entry>
+        <entry lang="ENG">Basic properties</entry>
+        <entry lang="CHI">基本性能</entry>
+    </sentence>
+    <sentence mode="on" keyword="localized_names">
+        <entry lang="RUS">Локализованные названия</entry>
+        <entry lang="KAZ">Жекешелендірілген атақтары</entry>
+        <entry lang="ENG">Localized titles</entry>
+        <entry lang="CHI">基本性能</entry>
+    </sentence>
+    <sentence mode="on" keyword="iin">
+        <entry lang="RUS">ИИН</entry>
+        <entry lang="KAZ">ИИН</entry>
+        <entry lang="ENG">IIN</entry>
+    </sentence>
+    <sentence mode="on" keyword="bin">
+        <entry lang="RUS">БИН</entry>
+        <entry lang="KAZ">БИН</entry>
+        <entry lang="ENG">BIN</entry>
+    </sentence>
+    <sentence mode="on" keyword="properties">
+        <entry lang="RUS">Свойства</entry>
+        <entry lang="KAZ">Қасиеттері</entry>
+        <entry lang="ENG">Properties</entry>
+        <entry lang="CHI">物业</entry>
+    </sentence>
+    <sentence mode="on" keyword="description">
+        <entry lang="RUS">Описание</entry>
+        <entry lang="KAZ">Сипаттама</entry>
+        <entry lang="ENG">Description</entry>
+    </sentence>
+    <sentence mode="on" keyword="files">
+        <entry lang="RUS">Вложения</entry>
+        <entry lang="KAZ">Тіркемелер</entry>
+        <entry lang="ENG">Attachments</entry>
+        <entry lang="CHI">嵌入</entry>
+    </sentence>
+    <sentence mode="on" keyword="attachments">
+        <entry lang="RUS">Вложения</entry>
+        <entry lang="KAZ">Тіркемелер</entry>
+        <entry lang="ENG">Attachments</entry>
+        <entry lang="CHI">嵌入</entry>
+    </sentence>
+    <sentence mode="on" keyword="attach_file">
+        <entry lang="RUS">Прикрепить файл</entry>
+        <entry lang="KAZ">Тіркеу</entry>
+        <entry lang="ENG">Attach file</entry>
+        <entry lang="CHI">附上</entry>
+    </sentence>
+    <sentence mode="on" keyword="author">
+        <entry lang="RUS">Автор</entry>
+        <entry lang="KAZ">Автор</entry>
+        <entry lang="ENG">Author</entry>
+        <entry lang="CHI">笔者</entry>
+    </sentence>
+    <sentence mode="on" keyword="Page">
+        <entry lang="RUS">Страница</entry>
+        <entry lang="KAZ">Бет</entry>
+        <entry lang="ENG">Page</entry>
+        <entry lang="CHI">首页</entry>
+    </sentence>
+    <sentence mode="on" keyword="page">
+        <entry lang="RUS">страница</entry>
+        <entry lang="KAZ">бет</entry>
+        <entry lang="ENG">page</entry>
+        <entry lang="CHI">首页</entry>
+    </sentence>
+    <sentence mode="on" keyword="additional">
+        <entry lang="RUS">Дополнительно</entry>
+        <entry lang="KAZ">Қосымша</entry>
+        <entry lang="ENG">More</entry>
+        <entry lang="CHI">此外</entry>
+    </sentence>
+
+    <sentence mode="on" keyword="new_">
+        <entry lang="RUS">Добавить</entry>
+        <entry lang="KAZ">Қосу</entry>
+        <entry lang="ENG">Add</entry>
+        <entry lang="CHI">加</entry>
+    </sentence>
+    <sentence mode="on" keyword="del_document">
+        <entry lang="RUS">Удалить</entry>
+        <entry lang="KAZ">Жою</entry>
+        <entry lang="ENG">Delete</entry>
+        <entry lang="CHI">删除</entry>
+    </sentence>
+    <sentence mode="on" keyword="Открыть">
+        <entry lang="KAZ">Ашу</entry>
+        <entry lang="ENG">Open</entry>
+        <entry lang="CHI">开放</entry>
+    </sentence>
+    <sentence mode="on" keyword="type">
+        <entry lang="RUS">Тип</entry>
+        <entry lang="KAZ">Түрі</entry>
+        <entry lang="ENG">Type</entry>
+        <entry lang="CHI">类型</entry>
+    </sentence>
+    <sentence mode="on" keyword="Обзор">
+        <entry lang="KAZ">Шолу</entry>
+        <entry lang="ENG">Review</entry>
+        <entry lang="CHI">檢討</entry>
+    </sentence>
+    <sentence mode="on" keyword="Только для чтения">
+        <entry lang="KAZ">Тек оқу үшін</entry>
+        <entry lang="ENG">Reading only</entry>
+        <entry lang="CHI">只读</entry>
+    </sentence>
+    <sentence mode="on" keyword="new_document">
+        <entry lang="RUS">Новый документ</entry>
+        <entry lang="KAZ">Жаңа құжат</entry>
+        <entry lang="ENG">New document</entry>
+        <entry lang="CHI">新的文档</entry>
+    </sentence>
+    <sentence mode="on" keyword="Новая роль">
+        <entry lang="KAZ">Жаңа рөл</entry>
+        <entry lang="ENG">New role</entry>
+        <entry lang="CHI">新角色</entry>
+    </sentence>
+    <sentence mode="on" keyword="Содержание отчета">
+        <entry lang="KAZ">Есептеменің мазмұны</entry>
+        <entry lang="ENG">Report Content</entry>
+        <entry lang="CHI">报告内容</entry>
+    </sentence>
+    <sentence mode="on" keyword="save_close">
+        <entry lang="RUS">Сохранить и закрыть</entry>
+        <entry lang="KAZ">Сақтау және жабу</entry>
+        <entry lang="ENG">Save and close</entry>
+        <entry lang="CHI">保存并关闭</entry>
+    </sentence>
+    <sentence mode="on" keyword="save">
+        <entry lang="RUS">Сохранить</entry>
+        <entry lang="KAZ">Сақтау</entry>
+        <entry lang="ENG">Save</entry>
+        <entry lang="CHI">保存</entry>
+    </sentence>
+    <sentence mode="on" keyword="notes">
+        <entry lang="RUS">Примечания</entry>
+        <entry lang="KAZ">Ескерту</entry>
+        <entry lang="ENG">Notes</entry>
+        <entry lang="CHI">注意：</entry>
+    </sentence>
+    <sentence mode="on" keyword="employee">
+        <entry lang="RUS">Сотрудник</entry>
+        <entry lang="KAZ">Қызметкер</entry>
+        <entry lang="ENG">Employee</entry>
+        <entry lang="CHI">雇员</entry>
+    </sentence>
+    <sentence mode="on" keyword="departments">
+        <entry lang="RUS">Подразделения</entry>
+        <entry lang="KAZ">Бөлім</entry>
+        <entry lang="ENG">Departments</entry>
+        <entry lang="CHI">部</entry>
+    </sentence>
+    <sentence mode="on" keyword="department">
+        <entry lang="RUS">Департамент</entry>
+        <entry lang="KAZ">Бөлім</entry>
+        <entry lang="ENG">Department</entry>
+        <entry lang="CHI">部</entry>
+    </sentence>
+    <sentence mode="on" keyword="position">
+        <entry lang="RUS">Должность</entry>
+        <entry lang="KAZ">Қызмет</entry>
+        <entry lang="ENG">Position</entry>
+        <entry lang="CHI">文章</entry>
+    </sentence>
+    <sentence mode="on" keyword="user_name">
+        <entry lang="ENG">User name</entry>
+        <entry lang="RUS">Имя пользователя</entry>
+        <entry lang="KAZ">Есімі</entry>
+    </sentence>
+    <sentence mode="on" keyword="login_name">
+        <entry lang="ENG">Login</entry>
+        <entry lang="RUS">Логин</entry>
+        <entry lang="KAZ">Логин</entry>
+    </sentence>
+    <sentence mode="on" keyword="email">
+        <entry lang="ENG">E-mail</entry>
+        <entry lang="RUS">Электронная почта</entry>
+        <entry lang="KAZ">Электронная почта</entry>
+    </sentence>
+    <sentence mode="on" keyword="color">
+        <entry lang="ENG">Color</entry>
+        <entry lang="RUS">Цвет</entry>
+        <entry lang="KAZ">Түс</entry>
+    </sentence>
+    <sentence mode="on" keyword="interface_lang">
+        <entry lang="RUS">Язык интерфейса</entry>
+        <entry lang="KAZ">Интерфейс тілі</entry>
+        <entry lang="ENG">Interface language</entry>
+        <entry lang="CHI">语言</entry>
+    </sentence>
+    <sentence mode="on" keyword="interface">
+        <entry lang="RUS">Внешний вид</entry>
+        <entry lang="KAZ">Интерфейс</entry>
+        <entry lang="ENG">interface</entry>
+        <entry lang="CHI">它的界面</entry>
+    </sentence>
+    <sentence mode="on" keyword="country">
+        <entry lang="ENG">Country</entry>
+        <entry lang="RUS">Страна</entry>
+        <entry lang="KAZ">Страна</entry>
+        <entry lang="CHO"></entry>
+    </sentence>
+    <sentence mode="on" keyword="region">
+        <entry lang="RUS">Область</entry>
+        <entry lang="KAZ">Облыс</entry>
+        <entry lang="ENG">Region</entry>
+    </sentence>
+    <sentence mode="on" keyword="locality">
+        <entry lang="ENG">Locality</entry>
+        <entry lang="RUS">Населенный пункт</entry>
+        <entry lang="KAZ">Населенный пункт</entry>
+        <entry lang="CHO"></entry>
+    </sentence>
+    <sentence mode="on" keyword="street">
+        <entry lang="ENG">Street</entry>
+        <entry lang="RUS">Улица</entry>
+        <entry lang="KAZ">Улица</entry>
+        <entry lang="CHO"></entry>
+    </sentence>
+    <sentence mode="on" keyword="Телефон">
+        <entry lang="KAZ">Телефон</entry>
+        <entry lang="ENG">Phone</entry>
+        <entry lang="CHI">电话</entry>
+    </sentence>
+    <sentence mode="on" keyword="district">
+        <entry lang="ENG">District</entry>
+        <entry lang="RUS">Район</entry>
+        <entry lang="KAZ"></entry>
+        <entry lang="CHO"></entry>
+    </sentence>
+    <sentence mode="on" keyword="roles">
+        <entry lang="RUS">Роли</entry>
+        <entry lang="KAZ">Рөлдер</entry>
+        <entry lang="ENG">Roles</entry>
+        <entry lang="CHI">電郵通知</entry>
+    </sentence>
+    <sentence mode="on" keyword="code">
+        <entry lang="KAZ">Код</entry>
+        <entry lang="ENG">Code</entry>
+        <entry lang="CHI">代码</entry>
+    </sentence>
+    <sentence mode="on" keyword="recycle_bin">
+        <entry lang="KAZ">Кәрзеңке</entry>
+        <entry lang="ENG">Recycle Bin</entry>
+        <entry lang="CHI">篮</entry>
+    </sentence>
+    <sentence mode="on" keyword="reports">
+        <entry lang="RUS">Отчеты</entry>
+        <entry lang="KAZ">Есептемелер</entry>
+        <entry lang="ENG">Reports</entry>
+        <entry lang="CHI">篮</entry>
+    </sentence>
+    <sentence mode="on" keyword="report">
+        <entry lang="RUS">Отчеты</entry>
+        <entry lang="KAZ">Есептеме</entry>
+        <entry lang="ENG">Report</entry>
+        <entry lang="CHI">篮</entry>
+    </sentence>
+    <sentence mode="on" keyword="name">
+        <entry lang="RUS">Наименование</entry>
+        <entry lang="KAZ">Атауы</entry>
+        <entry lang="ENG">Name</entry>
+        <entry lang="CHI">名称</entry>
+    </sentence>
+    <sentence mode="on" keyword="short_name">
+        <entry lang="RUS">Сокращенное наименование</entry>
+        <entry lang="KAZ">Қысқартылған атауы</entry>
+        <entry lang="ENG">Short name</entry>
+        <entry lang="CHI">短名称</entry>
+    </sentence>
+    <sentence mode="on" keyword="organization">
+        <entry lang="RUS">Организация</entry>
+        <entry lang="KAZ">Мекеме</entry>
+        <entry lang="ENG">Organization</entry>
+        <entry lang="CHI">组织</entry>
+    </sentence>
+    <sentence mode="on" keyword="org_name">
+        <entry lang="RUS">Организация</entry>
+        <entry lang="KAZ">Мекеме</entry>
+        <entry lang="ENG">Organization</entry>
+        <entry lang="CHI">组织</entry>
+    </sentence>
+    <sentence mode="on" keyword="org_category">
+        <entry lang="RUS">Тип организации</entry>
+        <entry lang="KAZ">Мекеме</entry>
+        <entry lang="ENG">Organization type</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
+    <sentence mode="on" keyword="Все">
+        <entry lang="KAZ">Барлығы</entry>
+        <entry lang="ENG">All</entry>
+        <entry lang="CHI">所有</entry>
+    </sentence>
+    <sentence mode="on" keyword="send">
+        <entry lang="KAZ">Жіберу</entry>
+        <entry lang="ENG">Send</entry>
+        <entry lang="CHI">问责</entry>
+    </sentence>
+    <sentence mode="on" keyword="user_profile">
+        <entry lang="RUS">Посмотреть свойства текущего пользователя</entry>
+        <entry lang="KAZ">Ағымдағы қолданушының қасиеттерін көру</entry>
+        <entry lang="ENG">View the properties current user</entry>
+        <entry lang="CHI">查看當前用戶的屬性</entry>
+    </sentence>
+    <sentence mode="on" keyword="no_data">
+        <entry lang="ENG">There is no any data</entry>
+        <entry lang="RUS">Нет данных</entry>
+        <entry lang="KAZ"></entry>
+    </sentence>
+    <sentence mode="on" keyword="ft_search_result">
+        <entry lang="RUS">Найдено</entry>
+        <entry lang="KAZ"></entry>
+        <entry lang="ENG">Search result</entry>
+    </sentence>
+    <sentence mode="on" keyword="back_to_doc_list">
+        <entry lang="RUS">Вернуться к списку документов</entry>
+        <entry lang="KAZ">Құжаттар тізіміне оралу</entry>
+        <entry lang="ENG">Return to the list of documents</entry>
+        <entry lang="CHI">備份的文件清單</entry>
+    </sentence>
+    <sentence mode="on" keyword="ft_search_resturn_null">
+        <entry lang="ENG">Documnets have been not found, keyword</entry>
+        <entry lang="RUS">Документы не найдены, строка поиска</entry>
+        <entry lang="KAZ">Документы не найдены, строка поиска</entry>
+    </sentence>
+    <sentence mode="on" keyword="sender">
+        <entry lang="ENG">Sender</entry>
+        <entry lang="RUS">Отправитель</entry>
+        <entry lang="KAZ">Отправитель</entry>
+    </sentence>
+    <sentence mode="on" keyword="recipient">
+        <entry lang="ENG">Recipient</entry>
+        <entry lang="RUS">Получатель</entry>
+        <entry lang="KAZ">Получатель</entry>
+    </sentence>
+    <sentence mode="on" keyword="sendtime">
+        <entry lang="ENG">Send time</entry>
+        <entry lang="RUS">Дата отправки</entry>
+        <entry lang="KAZ">Дата отправки</entry>
+    </sentence>
+    <sentence mode="on" keyword="content">
+        <entry lang="RUS">Содержание</entry>
+        <entry lang="KAZ">Мазмұны</entry>
+        <entry lang="ENG">Content</entry>
+        <entry lang="CHI">内容</entry>
+    </sentence>
 </vocabulary>

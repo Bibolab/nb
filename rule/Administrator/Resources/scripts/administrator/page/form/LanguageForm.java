@@ -6,6 +6,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.scheduler._EnumWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
@@ -29,6 +30,7 @@ public class LanguageForm extends _DoForm {
 		} else {
 			entity = new Language();
 		}
+		addContent(new _EnumWrapper<>(LanguageCode.class.getEnumConstants()));
 		addContent(entity);
 		_ActionBar actionBar = new _ActionBar(session);
 		actionBar.addAction(new _Action("Save &amp; Compile &amp; Close", "Recompile the class and save", _ActionType.SAVE_AND_CLOSE));

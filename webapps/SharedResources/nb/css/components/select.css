@@ -26,6 +26,7 @@ selection.selection {
     min-width: 50px;
 }
 
+.select.is-focused .select-selection,
 .select.open .select-selection {
     border-color: #4D90FE;
     box-shadow: 0 0 1px rgba(39, 128, 248, 0.196);

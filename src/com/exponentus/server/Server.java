@@ -43,7 +43,6 @@ public class Server {
 		if (webServerInst.init(Environment.hostName)) {
 
 			for (Site webApp : Environment.webAppToStart.values()) {
-				// System.out.println(webApp.name);
 				webServerInst.addApplication(webApp);
 			}
 

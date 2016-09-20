@@ -6,6 +6,7 @@ import com.exponentus.common.model.AttachmentThumbnail;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
+import com.exponentus.util.thumbnailer.ResizeImage;
 import org.apache.commons.io.FileUtils;
 
 import javax.imageio.IIOImage;
@@ -38,10 +39,11 @@ public class AttachmentThumbnailService {
             return null;
         }
 
-        String outFile = Environment.tmpDir + File.separator + "thumbnails" + File.separator + att.getIdentifier() + ".jpg";
+        String outFile = Environment.tmpDir + File.separator + "thumbnails" + File.separator + att.getIdentifier() + ".png";
         File attFile = new File(outFile);
         attFile.getParentFile().mkdirs();
 
+        FileOutputStream fos = null;
         File tf = null;
         try {
             // return thumb if exists
@@ -50,11 +52,23 @@ public class AttachmentThumbnailService {
                 return attFile;
             }
             // create
-            AttachmentDAO attachmentDAO = new AttachmentDAO(session);
-            ByteArrayInputStream bis = new ByteArrayInputStream(att.getFile());
-            tf = createJpegThumbnail(bis, outFile);
-            Path path = Paths.get(tf.getAbsolutePath());
-            byte[] thumbFileBytes = Files.readAllBytes(path);
+            byte[] thumbFileBytes;
+            byte[] attBytes = att.getFile();
+            int minFileSizeForThumbnailProcessStart = 80000; // 80KB
+            if (attBytes.length > minFileSizeForThumbnailProcessStart) {
+                ByteArrayInputStream bis = new ByteArrayInputStream(attBytes);
+                //
+                tf = createResizedImageThumbnail(bis, attFile);
+                // tf = createJpegThumbnail(bis, outFile);
+                //
+                Path path = Paths.get(tf.getAbsolutePath());
+                thumbFileBytes = Files.readAllBytes(path);
+            } else {
+                thumbFileBytes = attBytes;
+                fos = new FileOutputStream(attFile);
+                fos.write(thumbFileBytes);
+                tf = attFile;
+            }
 
             AttachmentThumbnail attachmentThumbnail = att.getAttachmentThumbnail();
             if (attachmentThumbnail == null) {
@@ -65,11 +79,21 @@ public class AttachmentThumbnailService {
             att.setHasThumbnail(true);
             att.setAttachmentThumbnail(attachmentThumbnail);
 
+            AttachmentDAO attachmentDAO = new AttachmentDAO(session);
             attachmentDAO.update(att);
         } catch (SecureException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return tf;
     }
@@ -83,7 +107,7 @@ public class AttachmentThumbnailService {
     }
 
     private static File createJpegThumbnail(InputStream inputStream, String outputFile) throws IOException {
-        float compressionQuality = 0.03f;
+        float compressionQuality = 0.5f;
         return createImageThumbnail(inputStream, compressionQuality, "jpeg", outputFile);
     }
 
@@ -114,11 +138,24 @@ public class AttachmentThumbnailService {
         }
     }
 
+    private static File createResizedImageThumbnail(InputStream inputStream, File outFile) throws IOException {
+        ResizeImage resizeImage = new ResizeImage(200, 200);
+        resizeImage.setInputImage(inputStream);
+        resizeImage.writeOutput(outFile);
+        return outFile;
+    }
+
     public static void main(String[] args) {
         try {
-            FileInputStream is = new FileInputStream(new File("/home/medin/temp/2002704.jpg"));
-            String outFile = "/home/medin/temp/2002704-thumb.jpg";
-            createJpegThumbnail(is, outFile);
+            File inputFile = new File("/home/medin/temp/Screenshot+2016-09-19+16.35.47.png");
+            File outFile = new File("/home/medin/temp/_thumb.png");
+
+            ResizeImage resizeImage = new ResizeImage(230, 230);
+            resizeImage.setInputImage(new FileInputStream(inputFile));
+            resizeImage.writeOutput(outFile);
+
+            // FileInputStream fis = new FileInputStream(outFile);
+            // createJpegThumbnail(fis, "/home/medin/temp/_thumb-.png");
         } catch (Exception e) {
             e.printStackTrace();
         }

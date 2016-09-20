@@ -7,7 +7,7 @@ import com.exponentus.util.NumberUtil;
 import com.exponentus.util.StringUtil;
 
 public class SessionPool {
-	private static HashMap<String, _Session> userSessions = new HashMap<String, _Session>();
+	private static HashMap<String, _Session> userSessions = new HashMap<>();
 
 	public static String put(_Session us) {
 		String token = StringUtil.generateRandomAsText("!'*-._qwertyuiopasdfghjklzxcvbnm1234567890", NumberUtil.getRandomNumber(15, 20));
@@ -25,11 +25,8 @@ public class SessionPool {
 	}
 
 	public static void remove(_Session us) {
-		userSessions.remove(us.getUser().getUserID());
-	}
 
-	public static void remove(String key) {
-		userSessions.remove(key);
+		userSessions.remove(us.getUser().getUserID());
 	}
 
 	public static HashMap<String, _Session> getUserSessions() {

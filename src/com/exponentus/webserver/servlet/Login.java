@@ -54,6 +54,7 @@ public class Login extends HttpServlet {
 				jses = ServletSessionPool.get(request);
 				ses = new _Session(env, user);
 				ses.setAuthMode(AuthModeType.DIRECT_LOGIN);
+				ses.setJsesId(jses.getId());
 				String token = SessionPool.put(ses);
 				ses.setLang(LanguageCode.valueOf(appCookies.currentLang));
 

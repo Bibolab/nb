@@ -42,6 +42,7 @@
 }
 
 .img-view-content {
+    background: rgba(255, 255, 255, 0.8);
     display: inline-block;
     margin: auto;
     max-width: 98%;

@@ -22,15 +22,16 @@ import com.exponentus.util.TimeUtil;
 public class _Session extends PageCacheAdapter {
 	private IDatabase dataBase;
 	private IUser<Long> user;
+	private String jsesId;
 	private AppEnv env;
 	private LanguageCode lang = LanguageCode.valueOf(EnvConst.DEFAULT_LANG);
 	public int pageSize = EnvConst.DEFAULT_PAGE_SIZE;
 	private AuthModeType authMode = AuthModeType.UNDEFINED;
-	private ArrayList<_Session> descendants = new ArrayList<_Session>();
+	private ArrayList<_Session> descendants = new ArrayList<>();
 	private _Session parent;
-	private HashMap<UUID, FormTransaction> formTrans = new HashMap<UUID, FormTransaction>();
-	private Map<String, Object> valuesMap = new HashMap<String, Object>();
-	private Map<String, PersistValue> persistValuesMap = new HashMap<String, PersistValue>();
+	private HashMap<UUID, FormTransaction> formTrans = new HashMap<>();
+	private Map<String, Object> valuesMap = new HashMap<>();
+	private Map<String, PersistValue> persistValuesMap = new HashMap<>();
 	private Date createTime;
 
 	public _Session(AppEnv env, IUser<Long> user) {
@@ -77,6 +78,14 @@ public class _Session extends PageCacheAdapter {
 
 	public IUser<Long> getUser() {
 		return user;
+	}
+
+	public String getJsesId() {
+		return jsesId;
+	}
+
+	public void setJsesId(String jsesId) {
+		this.jsesId = jsesId;
 	}
 
 	@Override

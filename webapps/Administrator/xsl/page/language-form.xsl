@@ -41,6 +41,7 @@
                                         <xsl:if test="@attrval = //fields/code">
                                             <xsl:attribute name="selected">selected</xsl:attribute>
                                         </xsl:if>
+
                                         <xsl:value-of select="."/>
                                     </option>
                                 </xsl:for-each>

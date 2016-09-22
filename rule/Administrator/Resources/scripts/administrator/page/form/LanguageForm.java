@@ -58,7 +58,9 @@ public class LanguageForm extends _DoForm {
 		} else {
 			entity = dao.findById(UUID.fromString(id));
 		}
-
+		entity.setName(formData.getAnyValueSilently("name"));
+		entity.setLanguageCode(formData.getValueSilently("code"));
+		entity.setLocalizedName(getLocalizedNames(session, formData));
 		try {
 			if (isNew) {
 				dao.add(entity);

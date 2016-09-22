@@ -1,5 +1,12 @@
 $(function() {
     $.datepicker.setDefaults($.datepicker.regional['ru']);
+    $('input[name=pwd], input[name=pwd_confirm]').on("input propertychange" ,function(){
+        if($('input[name=pwd]').val().length == 0 && $('input[name=pwd_confirm]').val().length == 0){
+            $('input[name=pwd], input[name=pwd_confirm]').removeAttr("required");
+            $('input[name=pwd]').next("div.error-message").remove();
+            $('input[name=pwd_confirm]').next("div.error-message").remove();
+        }
+    });
 
     // fix fox memorize checkbox, blyat'
     $(':checkbox.all').attr('checked', false);

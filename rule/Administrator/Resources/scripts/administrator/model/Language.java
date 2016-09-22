@@ -41,6 +41,10 @@ public class Language extends AppEntity<UUID> {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public void setLanguageCode(String id) {
+		this.code = LanguageCode.valueOf(id);
+	}
+
 
 	@Override
 	public String toString() {

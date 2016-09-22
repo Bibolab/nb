@@ -35,7 +35,17 @@
                            Code
                         </div>
                         <div class="controls">
-                            <input type="text" name="code" value="{fields/code}" class="span2"/>
+                            <select name="code" class="span2">
+                                <xsl:for-each select="//constants[@entity = 'languagecode']/entry">
+                                    <option value="{@attrval}">
+                                        <xsl:if test="@attrval = //fields/code">
+                                            <xsl:attribute name="selected">selected</xsl:attribute>
+                                        </xsl:if>
+
+                                        <xsl:value-of select="."/>
+                                    </option>
+                                </xsl:for-each>
+                            </select>
                         </div>
                     </div>
                 </fieldset>

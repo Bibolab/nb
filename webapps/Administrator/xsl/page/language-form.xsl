@@ -37,7 +37,7 @@
                         <div class="controls">
                             <select name="code" class="span2">
                                 <xsl:for-each select="//constants[@entity = 'languagecode']/entry">
-                                    <option value="@attrval">
+                                    <option value="{@attrval}">
                                         <xsl:if test="@attrval = //fields/code">
                                             <xsl:attribute name="selected">selected</xsl:attribute>
                                         </xsl:if>

@@ -36,7 +36,7 @@ public class PageOutcome {
 	private static final String xmlTextUTF8Header = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 	private List<PageOutcome> includedPage = new ArrayList<PageOutcome>();
 	private Collection<IOutcomeObject> objects = new ArrayList<IOutcomeObject>();
-	private Map<String, IPOJOObject> objectsMap = new HashMap<>();
+	private Map<String, Object> objectsMap = new HashMap<>();
 	private _Session ses;
 	private LanguageCode lang;
 	private InfoMessageType infoMessage = InfoMessageType.OK;
@@ -253,6 +253,10 @@ public class PageOutcome {
 
 	public void addContent(String key, IPOJOObject obj) {
 		objectsMap.put(key, obj);
+	}
+
+	public void addContent(String key, List<IPOJOObject> list) {
+		objectsMap.put(key, list);
 	}
 
 	public int getHttpStatus() {

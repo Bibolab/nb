@@ -1,6 +1,7 @@
 package com.exponentus.env;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.util.NumberUtil;
@@ -25,8 +26,12 @@ public class SessionPool {
 	}
 
 	public static void remove(_Session us) {
+		for (Entry<String, _Session> entry : userSessions.entrySet()) {
+			if (us.getUser().getId() == entry.getValue().getUser().getId()) {
+				userSessions.remove(entry.getKey());
+			}
+		}
 
-		userSessions.remove(us.getUser().getUserID());
 	}
 
 	public static HashMap<String, _Session> getUserSessions() {

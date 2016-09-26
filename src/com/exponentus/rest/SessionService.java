@@ -117,7 +117,7 @@ public class SessionService extends RestProvider {
 				jses.invalidate();
 			}
 		} catch (Exception e) {
-			new PortalException(e, env, response, ProviderExceptionType.LOGOUTERROR);
+			new PortalException(e, env, response, ProviderExceptionType.LOGOUTERROR, PublishAsType.HTML);
 		}
 
 		if (cookie != null) {

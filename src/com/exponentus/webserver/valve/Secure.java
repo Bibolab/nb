@@ -74,16 +74,15 @@ public class Secure extends ValveBase {
 	}
 
 	private void gettingSession(Request request, Response response) throws IOException, ServletException {
-		HttpServletRequest http = request;
 		Token token = getToken(request, response);
 
 		if (token.getValue() != null) {
 			_Session ses = SessionPool.getLoggeedUser(token.getValue());
 			if (ses != null) {
-				RequestURL ru = new RequestURL(http.getRequestURI());
 				AppEnv env = Environment.getAppEnv(ru.getAppType());
 				_Session clonedSes = ses.clone(env);
 				HttpSession jses = ServletSessionPool.get(request);
+				clonedSes.setJsesId(jses.getId());
 				jses.setAttribute(EnvConst.SESSION_ATTR, clonedSes);
 				Server.logger.debugLogEntry(ses.getUser().getUserID() + "\" got from session pool " + jses.getServletContext().getContextPath());
 				invoke(request, response);
@@ -128,7 +127,7 @@ public class Secure extends ValveBase {
 				Enumeration<String> headerNames = request.getHeaderNames();
 				while (headerNames.hasMoreElements()) {
 					String key = headerNames.nextElement();
-					if (key.equals("nb3ses")) {
+					if (key.equals(EnvConst.AUTH_COOKIE_NAME)) {
 						token = request.getHeader(key);
 						break;
 					}

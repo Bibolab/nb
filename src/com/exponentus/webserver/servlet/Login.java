@@ -61,8 +61,8 @@ public class Login extends HttpServlet {
 				AppEnv.logger.infoLogEntry(user.getUserID() + " has connected");
 
 				String redirect = "";
-
 				jses.setAttribute(EnvConst.SESSION_ATTR, ses);
+
 				Cookie authCookie = new Cookie(EnvConst.AUTH_COOKIE_NAME, token);
 				authCookie.setMaxAge(-1);
 				authCookie.setPath("/");

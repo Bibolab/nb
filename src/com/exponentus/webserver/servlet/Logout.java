@@ -1,5 +1,7 @@
 package com.exponentus.webserver.servlet;
 
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import com.exponentus.appenv.AppEnv;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
+import com.exponentus.env.ServletSessionPool;
 import com.exponentus.env.SessionPool;
 import com.exponentus.exception.PortalException;
 import com.exponentus.scripting._Session;
-import com.exponentus.user.IUser;
 
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,26 +38,28 @@ public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		long userId = 0;
 		try {
-
-			if (env != null && env.isWorkspace) {
-				Cookie wLoginCook = new Cookie(EnvConst.AUTH_COOKIE_NAME, "0");
-				wLoginCook.setMaxAge(0);
-				wLoginCook.setPath("/");
-				response.addCookie(wLoginCook);
-			}
-
 			HttpSession jses = request.getSession(false);
 			if (jses != null) {
 				_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 				if (ses != null) {
-					IUser<Long> user = ses.getUser();
-					userId = user.getId();
-					ses.getUser().setAuthorized(false);
+					String userName = ses.getUser().getUserID();
+					List<_Session> allSes = ses.getAllRelatedSessions();
+					for (_Session subSes : allSes) {
+						ServletSessionPool.resetSessions(subSes.getJsesId());
+						SessionPool.remove(subSes);
+					}
+					ServletSessionPool.resetSessions(ses.getJsesId());
 					SessionPool.remove(ses);
+					AppEnv.logger.infoLogEntry(userName + " has connected");
+				} else {
+					jses.invalidate();
 				}
-				jses.removeAttribute(EnvConst.SESSION_ATTR);
-				jses.invalidate();
 			}
+
+			Cookie wLoginCook = new Cookie(EnvConst.AUTH_COOKIE_NAME, "0");
+			wLoginCook.setMaxAge(0);
+			wLoginCook.setPath("/");
+			response.addCookie(wLoginCook);
 
 			if (Environment.monitoringEnable) {
 				Environment.getMonitoringDAO().postLogout(userId);
@@ -63,7 +67,7 @@ public class Logout extends HttpServlet {
 
 			response.sendRedirect(Login.getRedirect());
 		} catch (Exception e) {
-			new PortalException(e, env, response, ProviderExceptionType.LOGOUTERROR);
+			new PortalException(e, env, response, ProviderExceptionType.LOGOUTERROR, PublishAsType.HTML);
 		}
 
 	}

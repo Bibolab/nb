@@ -36,23 +36,18 @@ public class PortalException extends Exception {
 		message(errorMessage(e), response, publishAs);
 	}
 
-	public PortalException(Exception e, AppEnv env, HttpServletResponse response, PublishAsType publishAs, String defaultSkin) {
+	public PortalException(Exception e, AppEnv env, HttpServletResponse response, PublishAsType publishAs) {
 		super(e);
 		this.env = env;
-		if (defaultSkin != null) {
-		}
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.setContentType("text/xml;charset=utf-8");
 		xsltSource = getXSLT();
 		message(errorMessage(e), response, publishAs);
 	}
 
-	public PortalException(String text, Exception e, AppEnv env, HttpServletResponse response, ProviderExceptionType type, PublishAsType publishAs,
-	        String defaultSkin) {
+	public PortalException(String text, Exception e, AppEnv env, HttpServletResponse response, ProviderExceptionType type, PublishAsType publishAs) {
 		super(e);
 		this.env = env;
-		if (defaultSkin != null) {
-		}
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.setContentType("text/xml;charset=utf-8");
 		this.type = type;
@@ -60,20 +55,9 @@ public class PortalException extends Exception {
 		message("<errorcontex>" + text + "</errorcontext>" + errorMessage(e), response, publishAs);
 	}
 
-	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum<?> type) {
+	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum<?> type, PublishAsType publishAs) {
 		super(e);
 		this.env = env;
-		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-		response.setContentType("text/xml;charset=utf-8");
-		this.type = type;
-		message(errorMessage(e), response, PublishAsType.XML);
-	}
-
-	public PortalException(Exception e, AppEnv env, HttpServletResponse response, Enum<?> type, PublishAsType publishAs, String defaultSkin) {
-		super(e);
-		this.env = env;
-		if (defaultSkin != null) {
-		}
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.setContentType("text/xml;charset=utf-8");
 		this.type = type;

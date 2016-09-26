@@ -38,8 +38,10 @@ public class Unsecure extends ValveBase {
 			AppEnv env = Environment.getAppEnv(appType);
 			if (env != null) {
 				if (ru.isAuthRequest()) {
-					HttpSession jses = ServletSessionPool.get(request);
-					jses.setAttribute(EnvConst.SESSION_ATTR, new _Session(env, new AnonymousUser()));
+					if (request.getMethod().equalsIgnoreCase("POST") || !ru.isLogout()) {
+						HttpSession jses = ServletSessionPool.get(request);
+						jses.setAttribute(EnvConst.SESSION_ATTR, new _Session(env, new AnonymousUser()));
+					}
 					getNext().getNext().invoke(request, response);
 				} else {
 					if (ru.isRest()) {
@@ -107,7 +109,6 @@ public class Unsecure extends ValveBase {
 				jses.setAttribute(EnvConst.SESSION_ATTR, getAnonymousSes(request, response, jses, env));
 			}
 		}
-
 	}
 
 	private _Session getAnonymousSes(Request request, Response response, HttpSession jses, AppEnv env) {

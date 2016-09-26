@@ -3,6 +3,8 @@ package com.exponentus.webserver.valve;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.exponentus.env.EnvConst;
 
 public class RequestURL {
@@ -12,6 +14,7 @@ public class RequestURL {
 	private String pageID = "";
 	private String ip;
 	private String agent;
+	private boolean isLogout;
 
 	public RequestURL(String url) {
 		this.url = url;
@@ -37,13 +40,54 @@ public class RequestURL {
 
 	}
 
+	public RequestURL(HttpServletRequest http) {
+		String requestURI = http.getRequestURI();
+		String params = http.getQueryString();
+
+		if (params != null) {
+			url = requestURI + "?" + http.getQueryString();
+		} else {
+			url = "";
+		}
+
+		String urlVal = url != null ? url.trim() : "";
+		Pattern pattern = Pattern.compile("^/(\\p{Alpha}+)(/[\\p{Lower}0-9]{16})?.*$");
+		Matcher matcher = pattern.matcher(urlVal);
+		if (matcher.matches()) {
+			appType = matcher.group(1) == null ? "" : matcher.group(1);
+		}
+
+		if (!isPage()) {
+			return;
+		}
+
+		for (String pageIdRegex : new String[] { "^.*/page/([\\w\\-~\\.]+)", "^.*/((Provider)|(P)|(p))\\?(.+&)?id=([\\w\\-~\\.]+).*" }) {
+			Pattern pagePattern = Pattern.compile(pageIdRegex);
+			Matcher pageMatcher = pagePattern.matcher(urlVal);
+			if (pageMatcher.matches()) {
+				pageID = pageMatcher.group(6);
+				break;
+			}
+		}
+	}
+
 	public String getAppType() {
 		return appType;
 	}
 
 	public boolean isAuthRequest() {
 		String ulc = url.toLowerCase();
-		return ulc.contains("login") || ulc.contains("logout") || ulc.contains("/session");
+		if (ulc.contains("login") || ulc.contains("/session")) {
+			return true;
+		} else if (ulc.contains("logout")) {
+			isLogout = true;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isLogout() {
+		return isLogout;
 	}
 
 	// TODO it need to check Site class instance

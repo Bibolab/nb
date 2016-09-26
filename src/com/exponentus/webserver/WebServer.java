@@ -47,6 +47,9 @@ public class WebServer {
 		tomcat.setPort(Environment.httpPort);
 		tomcat.setHostname(defaultHostName);
 		tomcat.setBaseDir("webserver");
+		Host host = tomcat.getHost();
+		host.setAutoDeploy(false);
+		host.setDeployOnStartup(false);
 		engine = tomcat.getEngine();
 
 		StandardServer server = (StandardServer) tomcat.getServer();

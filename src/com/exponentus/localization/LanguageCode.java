@@ -6,7 +6,8 @@ package com.exponentus.localization;
  */
 public enum LanguageCode {
 	UNKNOWN(0, "unknown"), ENG(45, "english"), RUS(570, "russian"), KAZ(255, "kazakh"), BUL(115, "bulgarian"), POR(545, "portuguese"), SPA(230,
-	        "spanish"), CHI(315, "chinese"), DEU(316, "german"), @Deprecated CHN(3150, "chinese"), @Deprecated CHO(3151, "chinese");
+	        "spanish"), CHI(315, "chinese"), DEU(316, "german");
+	// @Deprecated CHN(3150, "chinese"), @Deprecated CHO(3151, "chinese");
 
 	private int code;
 	private String lang;
@@ -32,4 +33,5 @@ public enum LanguageCode {
 		}
 		return UNKNOWN;
 	}
+
 }

@@ -230,6 +230,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		this.form = form;
 	}
 
+	@JsonProperty("isNew")
 	public boolean isNew() {
 		return id == null;
 	}

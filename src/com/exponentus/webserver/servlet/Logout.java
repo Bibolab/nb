@@ -50,7 +50,7 @@ public class Logout extends HttpServlet {
 					}
 					ServletSessionPool.resetSessions(ses.getJsesId());
 					SessionPool.remove(ses);
-					AppEnv.logger.infoLogEntry(userName + " has connected");
+					AppEnv.logger.infoLogEntry(userName + " has disconnected");
 				} else {
 					jses.invalidate();
 				}

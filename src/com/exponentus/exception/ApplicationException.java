@@ -35,7 +35,7 @@ public class ApplicationException extends Exception implements IOutcomeObject {
 	@JsonIgnore
 	private String servletName = "Provider";
 
-	private String appType;
+	public String appType;
 
 	public ApplicationException(String appType, String error, LanguageCode lang) {
 		super(error);

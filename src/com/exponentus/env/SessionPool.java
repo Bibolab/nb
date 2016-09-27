@@ -1,7 +1,10 @@
 package com.exponentus.env;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.util.NumberUtil;
@@ -25,12 +28,23 @@ public class SessionPool {
 		}
 	}
 
-	public static void remove(_Session us) {
-		for (Entry<String, _Session> entry : userSessions.entrySet()) {
-			if (us.getUser().getId() == entry.getValue().getUser().getId()) {
-				userSessions.remove(entry.getKey());
+	public static Set<String> remove(_Session ses) {
+		String tokenToDelete = "";
+		Set<String> httpSesToDelete = new HashSet<>();
+		httpSesToDelete.add(ses.getJsesId());
+		List<_Session> allSes = ses.getAllRelatedSessions();
+
+		for (_Session relSes : allSes) {
+			for (Entry<String, _Session> entry : userSessions.entrySet()) {
+				if (relSes.getUser().getId() == entry.getValue().getUser().getId()) {
+					tokenToDelete = entry.getKey();
+					break;
+				}
 			}
+			httpSesToDelete.add(relSes.getJsesId());
 		}
+		userSessions.remove(tokenToDelete);
+		return httpSesToDelete;
 
 	}
 
@@ -40,6 +54,10 @@ public class SessionPool {
 
 	public static void flush() {
 		userSessions.clear();
+
+	}
+
+	public static void remove(List<_Session> allSes) {
 
 	}
 

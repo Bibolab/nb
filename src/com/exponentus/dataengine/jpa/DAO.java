@@ -265,7 +265,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 			}
 			List<T> result = typedQuery.getResultList();
 
-			ViewPage<T> r = new ViewPage<T>(result, count, maxPage, pageNum);
+			ViewPage<T> r = new ViewPage<>(result, count, maxPage, pageNum);
 			return r;
 		} finally {
 			em.close();
@@ -303,7 +303,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 			}
 			List<T> result = typedQuery.getResultList();
 
-			ViewPage<T> r = new ViewPage<T>(result, count, maxPage, pageNum);
+			ViewPage<T> r = new ViewPage<>(result, count, maxPage, pageNum);
 			return r;
 		} finally {
 			em.close();
@@ -340,7 +340,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 				typedQuery.setMaxResults(pageSize);
 			}
 			List<T> result = typedQuery.getResultList();
-			ViewPage<T> r = new ViewPage<T>(result, count, maxPage, pageNum);
+			ViewPage<T> r = new ViewPage<>(result, count, maxPage, pageNum);
 			return r;
 		} finally {
 			em.close();

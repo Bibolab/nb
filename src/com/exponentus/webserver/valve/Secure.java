@@ -45,25 +45,25 @@ public class Secure extends ValveBase {
 			HttpSession jses = http.getSession(false);
 			if (jses != null) {
 				_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
-				if (ses != null) {
-					IUser<Long> user = ses.getUser();
-					if (!user.getUserID().equals(AnonymousUser.USER_NAME)) {
-						if (user.isAllowed(appType)) {
-							getNext().invoke(request, response);
-						} else {
-							Server.logger.warningLogEntry("work with the application was restricted");
-							if (jses != null) {
-								jses.invalidate();
-							}
-							response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-							request.getRequestDispatcher("/Error?type=application_was_restricted").forward(request, response);
-						}
+				// if (ses != null) {
+				IUser<Long> user = ses.getUser();
+				if (!user.getUserID().equals(AnonymousUser.USER_NAME)) {
+					if (user.isAllowed(appType)) {
+						getNext().invoke(request, response);
 					} else {
-						gettingSession(request, response);
+						Server.logger.warningLogEntry("work with the application was restricted");
+						if (jses != null) {
+							jses.invalidate();
+						}
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						request.getRequestDispatcher("/Error?type=application_was_restricted").forward(request, response);
 					}
 				} else {
 					gettingSession(request, response);
 				}
+				// } else {
+				// gettingSession(request, response);
+				// }
 			} else {
 				gettingSession(request, response);
 			}
@@ -75,16 +75,18 @@ public class Secure extends ValveBase {
 
 	private void gettingSession(Request request, Response response) throws IOException, ServletException {
 		Token token = getToken(request, response);
-
+		HttpServletRequest http = request;
 		if (token.getValue() != null) {
 			_Session ses = SessionPool.getLoggeedUser(token.getValue());
 			if (ses != null) {
+				RequestURL ru = new RequestURL(http.getRequestURI());
 				AppEnv env = Environment.getAppEnv(ru.getAppType());
 				_Session clonedSes = ses.clone(env);
 				HttpSession jses = ServletSessionPool.get(request);
 				clonedSes.setJsesId(jses.getId());
 				jses.setAttribute(EnvConst.SESSION_ATTR, clonedSes);
 				Server.logger.debugLogEntry(ses.getUser().getUserID() + "\" got from session pool " + jses.getServletContext().getContextPath());
+
 				invoke(request, response);
 			} else {
 				Server.logger.warningLogEntry("there is no associated user session for the token");

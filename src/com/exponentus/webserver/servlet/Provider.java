@@ -36,11 +36,13 @@ public class Provider extends HttpServlet {
 
 	private static final long serialVersionUID = 2352885167311108325L;
 	private ServletContext context;
+	private AppEnv env;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		try {
 			context = config.getServletContext();
+			env = (AppEnv) context.getAttribute(EnvConst.APP_ATTR);
 		} catch (Exception e) {
 			Server.logger.errorLogEntry(e);
 		}
@@ -66,11 +68,13 @@ public class Provider extends HttpServlet {
 		HttpSession jses = request.getSession(false);
 		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 		AppEnv env = ses.getAppEnv();
+
 		PageOutcome result = new PageOutcome();
 		String id = request.getParameter("id");
 		if (id == null) {
 			id = env.getDefaultPage();
 		}
+
 		String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
 		if (acceptHeader != null && acceptHeader.indexOf("application/json") != -1) {
 			result.setPublishAs(PublishAsType.JSON);
@@ -183,7 +187,7 @@ public class Provider extends HttpServlet {
 	}
 
 	private void pushError(PageOutcome result, HttpServletResponse response, ApplicationException ae) {
-		Server.logger.errorLogEntry(ae.toString());
+		Server.logger.errorLogEntry(ae.appType + " " + ae.toString());
 		try {
 			if (result.getPublishAs() == PublishAsType.JSON) {
 				response.setContentType("application/json;charset=utf-8");

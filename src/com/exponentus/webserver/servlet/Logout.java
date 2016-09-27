@@ -1,6 +1,6 @@
 package com.exponentus.webserver.servlet;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -43,13 +43,10 @@ public class Logout extends HttpServlet {
 				_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 				if (ses != null) {
 					String userName = ses.getUser().getUserID();
-					List<_Session> allSes = ses.getAllRelatedSessions();
-					for (_Session subSes : allSes) {
-						ServletSessionPool.resetSessions(subSes.getJsesId());
-						SessionPool.remove(subSes);
+					Set<String> allSes = SessionPool.remove(ses);
+					for (String id : allSes) {
+						ServletSessionPool.resetSessions(id);
 					}
-					ServletSessionPool.resetSessions(ses.getJsesId());
-					SessionPool.remove(ses);
 					AppEnv.logger.infoLogEntry(userName + " has disconnected");
 				} else {
 					jses.invalidate();

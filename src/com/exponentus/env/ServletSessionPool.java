@@ -21,7 +21,13 @@ public class ServletSessionPool {
 	public static boolean resetSessions(String id) {
 		HttpSession jses = sessions.get(id);
 		if (jses != null) {
-			jses.invalidate();
+			try {
+				jses.getCreationTime();
+				jses.invalidate();
+			} catch (IllegalStateException ise) {
+
+			}
+
 		}
 		return true;
 	}

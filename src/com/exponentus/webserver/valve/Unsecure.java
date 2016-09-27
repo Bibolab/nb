@@ -41,6 +41,7 @@ public class Unsecure extends ValveBase {
 					if (request.getMethod().equalsIgnoreCase("POST") || !ru.isLogout()) {
 						HttpSession jses = ServletSessionPool.get(request);
 						jses.setAttribute(EnvConst.SESSION_ATTR, new _Session(env, new AnonymousUser()));
+
 					}
 					getNext().getNext().invoke(request, response);
 				} else {

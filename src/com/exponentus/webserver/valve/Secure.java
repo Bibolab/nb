@@ -40,35 +40,39 @@ public class Secure extends ValveBase {
 	@Override
 	public void invoke(Request request, Response response) throws IOException, ServletException {
 		HttpServletRequest http = request;
-
 		if (!appType.equalsIgnoreCase("")) {
 			HttpSession jses = http.getSession(false);
 			if (jses != null) {
-				_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
-				if (ses != null) {
-					IUser<Long> user = ses.getUser();
-					if (!user.getUserID().equals(AnonymousUser.USER_NAME)) {
-						if (user.isAllowed(appType)) {
-							getNext().invoke(request, response);
-						} else {
-							Server.logger.warningLogEntry("work with the application was restricted");
-							if (jses != null) {
-								jses.invalidate();
-							}
-							response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-							request.getRequestDispatcher("/Error?type=application_was_restricted").forward(request, response);
-						}
-					} else {
-						gettingSession(request, response);
-					}
-				} else {
-					gettingSession(request, response);
-				}
+				invokeRequest(request, response, jses);
 			} else {
 				gettingSession(request, response);
 			}
 		} else {
 			getNext().invoke(request, response);
+		}
+
+	}
+
+	private void invokeRequest(Request request, Response response, HttpSession jses) throws IOException, ServletException {
+		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
+		if (ses != null) {
+			IUser<Long> user = ses.getUser();
+			if (!user.getUserID().equals(AnonymousUser.USER_NAME)) {
+				if (user.isAllowed(appType)) {
+					getNext().invoke(request, response);
+				} else {
+					Server.logger.warningLogEntry("work with the application was restricted");
+					if (jses != null) {
+						jses.invalidate();
+					}
+					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					request.getRequestDispatcher("/Error?type=application_was_restricted").forward(request, response);
+				}
+			} else {
+				gettingSession(request, response);
+			}
+		} else {
+			gettingSession(request, response);
 		}
 
 	}
@@ -79,15 +83,13 @@ public class Secure extends ValveBase {
 		if (token.getValue() != null) {
 			_Session ses = SessionPool.getLoggeedUser(token.getValue());
 			if (ses != null) {
-				RequestURL ru = new RequestURL(http.getRequestURI());
-				AppEnv env = Environment.getAppEnv(ru.getAppType());
+				AppEnv env = Environment.getAppEnv(new RequestURL(http.getRequestURI()).getAppType());
 				_Session clonedSes = ses.clone(env);
 				HttpSession jses = ServletSessionPool.get(request);
 				clonedSes.setJsesId(jses.getId());
 				jses.setAttribute(EnvConst.SESSION_ATTR, clonedSes);
 				Server.logger.debugLogEntry(ses.getUser().getUserID() + "\" got from session pool " + jses.getServletContext().getContextPath());
-
-				invoke(request, response);
+				invokeRequest(request, response, jses);
 			} else {
 				Server.logger.warningLogEntry("there is no associated user session for the token");
 				new AuthFailedException(AuthFailedExceptionType.NO_ASSOCIATED_SESSION_FOR_THE_TOKEN, appType);
@@ -111,8 +113,6 @@ public class Secure extends ValveBase {
 				jses.invalidate();
 			}
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			// request.getRequestDispatcher("/Error?type=session_lost").forward(request,
-			// response);
 			request.getRequestDispatcher(Login.getRedirect()).forward(request, response);
 		}
 	}

@@ -9,7 +9,7 @@ public class ServletSessionPool {
 	private static HashMap<String, HttpSession> sessions = new HashMap<>();
 
 	public static HttpSession get(HttpServletRequest request) {
-		HttpSession jses = request.getSession(true);
+		HttpSession jses = request.getSession();
 		sessions.put(jses.getId(), jses);
 		return jses;
 	}

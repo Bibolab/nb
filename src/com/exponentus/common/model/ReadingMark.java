@@ -14,7 +14,7 @@ import org.eclipse.persistence.annotations.Convert;
 import com.exponentus.dataengine.jpa.SimpleAppEntity;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._Session;
-import com.exponentus.util.Util;
+import com.exponentus.util.TimeUtil;
 
 /**
  * Created by Kaira on 27/12/15.
@@ -77,7 +77,7 @@ public class ReadingMark extends SimpleAppEntity implements IPOJOObject {
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<user>" + user + "</user>");
-		chunk.append("<markdate>" + Util.convertDataTimeToStringSilently(markDate) + "</markdate>");
+		chunk.append("<markdate>" + TimeUtil.dateTimeToStringSilently(markDate) + "</markdate>");
 		return chunk.toString();
 	}
 

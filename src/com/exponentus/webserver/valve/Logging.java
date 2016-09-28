@@ -12,6 +12,7 @@ import org.apache.catalina.valves.ValveBase;
 
 import com.exponentus.env.Environment;
 import com.exponentus.log.Log4jLogger;
+import com.exponentus.util.NetUtil;
 
 public class Logging extends ValveBase {
 	private Log4jLogger logger;
@@ -47,7 +48,7 @@ public class Logging extends ValveBase {
 		ru.setIp(clientIpAddress);
 		ru.setAgent(request.getHeader("user-agent"));
 
-		logger.infoLogEntry(clientIpAddress + " " + ru.toString() + "," + ru.getAgent());
+		logger.infoLogEntry(clientIpAddress + " " + NetUtil.getCountry(clientIpAddress) + " " + ru.toString() + "," + ru.getAgent());
 		// com.flabser.server.Server.logger.infoLogEntry(clientIpAddress + " " +
 		// ru.toString() + ", apptype="
 		// + ru.getAppType() + ", servername=" + request.getServerName());

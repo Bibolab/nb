@@ -70,18 +70,18 @@ public class Environment implements ICache {
 	public static String hostName;
 	public static int httpPort = EnvConst.DEFAULT_HTTP_PORT;
 	public static AppEnv adminApplication;
-	public static HashMap<String, String> mimeHash = new HashMap<String, String>();
-	public static HashMap<String, Site> webAppToStart = new HashMap<String, Site>();
+	public static HashMap<String, String> mimeHash = new HashMap<>();
+	public static HashMap<String, Site> webAppToStart = new HashMap<>();
 	public static String tmpDir;
 	public static String trash;
-	public static ArrayList<String> fileToDelete = new ArrayList<String>();
+	public static ArrayList<String> fileToDelete = new ArrayList<>();
 
 	public static Boolean isTLSEnable = false;
 	public static int secureHttpPort;
 	public static String certFile = "";
 	public static String certKeyFile = "";
 
-	public static List<LanguageCode> langs = new ArrayList<LanguageCode>();
+	public static List<LanguageCode> langs = new ArrayList<>();
 
 	public static Boolean mailEnable = false;
 	public static String smtpPort = "25";
@@ -104,13 +104,13 @@ public class Environment implements ICache {
 	public static Vocabulary vocabulary;
 	public static AuthMethodType authMethod = AuthMethodType.WORKSPACE_LOGIN_PAGE;
 	public static PeriodicalServices periodicalServices;
-	public static final String vocabuarFilePath = EnvConst.RESOURCES_DIR + File.separator + "vocabulary.xml";
+	public static String vocabuarFilePath = EnvConst.RESOURCES_DIR + File.separator + "vocabulary.xml";
 
-	private static HashMap<String, AppEnv> applications = new HashMap<String, AppEnv>();
-	private static ConcurrentHashMap<String, AppEnv> allApplications = new ConcurrentHashMap<String, AppEnv>();
+	private static HashMap<String, AppEnv> applications = new HashMap<>();
+	private static ConcurrentHashMap<String, AppEnv> allApplications = new ConcurrentHashMap<>();
 
-	private static HashMap<String, Object> cache = new HashMap<String, Object>();
-	private static ArrayList<_Session> sess = new ArrayList<_Session>();
+	private static HashMap<String, Object> cache = new HashMap<>();
+	private static ArrayList<_Session> sess = new ArrayList<>();
 	private static boolean isDevMode;
 
 	private static String officeFrameDir = "";
@@ -194,7 +194,7 @@ public class Environment implements ICache {
 							site.setRestUrlMapping(XMLUtil.getTextContent(appNode, "rest/urlmapping"));
 							site.setAllowCORS(XMLUtil.getTextContent(appNode, "rest/allowcors"));
 							site.setRestType(RestType.JERSEY);
-							List<String> restServices = new ArrayList<String>();
+							List<String> restServices = new ArrayList<>();
 							NodeList servicesList = XMLUtil.getNodeList(appNode, "rest/services");
 							for (int i1 = 0; i1 < servicesList.getLength(); i1++) {
 								String serviceName = XMLUtil.getTextContent(servicesList.item(i1), "class", false);
@@ -319,7 +319,7 @@ public class Environment implements ICache {
 	}
 
 	public static Collection<AppEnv> getApplications() {
-		return new HashSet<AppEnv>(applications.values());
+		return new HashSet<>(applications.values());
 	}
 
 	public static String getFullHostName() {
@@ -386,7 +386,7 @@ public class Environment implements ICache {
 	}
 
 	public static List<String> getSessionCachesInfo() {
-		List<String> cachesList = new ArrayList<String>();
+		List<String> cachesList = new ArrayList<>();
 		for (_Session ses : sess) {
 			String ci = ses.getCacheInfo();
 			if (ci.equals("")) {
@@ -398,7 +398,7 @@ public class Environment implements ICache {
 	}
 
 	public static List<String> getAppsCachesInfo() {
-		List<String> cachesList = new ArrayList<String>();
+		List<String> cachesList = new ArrayList<>();
 		for (AppEnv env : applications.values()) {
 			String ci = env.getCacheInfo();
 			cachesList.add(env.appName + ":" + ci);
@@ -511,6 +511,7 @@ public class Environment implements ICache {
 		Path parent = Paths.get(System.getProperty("user.dir")).getParent();
 		officeFrameDir = parent + File.separator + EnvConst.OFFICEFRAME + File.separator;
 		kernelDir = parent + File.separator + EnvConst.FRAMEWORK_NAME + File.separator;
+		vocabuarFilePath = kernelDir + EnvConst.RESOURCES_DIR + File.separator + "vocabulary.xml";
 	}
 
 	public static String getOfficeFrameDir() {

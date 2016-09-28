@@ -13,6 +13,7 @@ import com.exponentus.env.Site;
 import com.exponentus.log.ILogger;
 import com.exponentus.log.Log4jLogger;
 import com.exponentus.scheduler.PeriodicalServices;
+import com.exponentus.util.NetUtil;
 import com.exponentus.webserver.WebServer;
 
 public class Server {
@@ -35,32 +36,39 @@ public class Server {
 			logger.warningLogEntry("Debug logging is turned on");
 
 		}
-		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
 
 		Environment.init();
 
-		webServerInst = new WebServer();
-		if (webServerInst.init(Environment.hostName)) {
+		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
 
-			for (Site webApp : Environment.webAppToStart.values()) {
-				webServerInst.addApplication(webApp);
-			}
+		if (NetUtil.portAvailable(Environment.hostName, Environment.httpPort)) {
 
-			String info = webServerInst.initConnectors();
-			Server.logger.infoLogEntry("Web server using: " + info);
-			webServerInst.startContainer();
+			webServerInst = new WebServer();
+			if (webServerInst.init(Environment.hostName)) {
 
-			Environment.periodicalServices = new PeriodicalServices();
+				for (Site webApp : Environment.webAppToStart.values()) {
+					webServerInst.addApplication(webApp);
+				}
 
-			if (EnvConst.CLI.equalsIgnoreCase("on") || keepCLI) {
-				Thread thread = new Thread(new Console());
-				thread.setPriority(Thread.MIN_PRIORITY);
-				thread.start();
+				String info = webServerInst.initConnectors();
+				Server.logger.infoLogEntry("Web server using: " + info);
+				webServerInst.startContainer();
+
+				Environment.periodicalServices = new PeriodicalServices();
+
+				if (EnvConst.CLI.equalsIgnoreCase("on") || keepCLI) {
+					Thread thread = new Thread(new Console());
+					thread.setPriority(Thread.MIN_PRIORITY);
+					thread.start();
+				} else {
+					Server.logger.warningLogEntry("CLI is disabled");
+				}
+
 			} else {
-				Server.logger.warningLogEntry("CLI is disabled");
+				shutdown();
 			}
-
 		} else {
+			System.err.println("Http port is not available (" + Environment.hostName + ":" + Environment.httpPort + ")\n");
 			shutdown();
 		}
 	}

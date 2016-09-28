@@ -17,11 +17,11 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 
 	@JsonIgnore
 	@ElementCollection
-	private Set<Long> editors = new HashSet<Long>();
+	private Set<Long> editors = new HashSet<>();
 
 	@JsonIgnore
 	@ElementCollection
-	private Set<Long> readers = new HashSet<Long>();
+	private Set<Long> readers = new HashSet<>();
 
 	public Set<Long> getEditors() {
 		return editors;
@@ -63,7 +63,7 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 	}
 
 	public void addReaders(Set<Long> r) {
-		readers.addAll(new ArrayList<Long>(r));
+		readers.addAll(new ArrayList<>(r));
 
 	}
 
@@ -74,6 +74,7 @@ public abstract class SecureAppEntity<K extends UUID> extends AppEntity<UUID> {
 
 	public void resetEditors() {
 		editors.clear();
+		editors.add(author);
 	}
 
 	@Override

@@ -33,8 +33,8 @@ public class NetUtil {
 			IP2Country ip2c = new IP2Country(caching);
 			Country c = ip2c.getCountry(ip);
 			return c.getName();
-		} catch (IOException e) {
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return "unknown";
 

@@ -34,7 +34,7 @@ public class NetUtil {
 			Country c = ip2c.getCountry(ip);
 			return c.getName();
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return "unknown";
 

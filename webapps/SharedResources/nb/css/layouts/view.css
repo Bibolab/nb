@@ -416,21 +416,21 @@
     width: 84px;
 }
 
-/* .expandable-cell */
-.expandable-cell {
+/* .tree-indentation */
+.tree-indentation {
     display: block;
     margin: -11px -3px;
     padding: 11px 3px;
     position: relative;
 }
 
-.expandable-cell:hover {
+.tree-indentation:hover {
     background: #eee;
 }
 
-.expandable-cell_indent {
-    /*border-bottom: 1px solid #666;*/
-    border-left: 1px solid #666;
+.tree-indentation_indent {
+    /*border-bottom: 1px solid #888;*/
+    /*border-left: 1px solid #888;*/
     display: inline-block;
     height: 8px;
     /* margin-top: -7px; */
@@ -440,28 +440,43 @@
     width: 10px;
 }
 
-/*.expandable-cell.is-last > .expandable-cell_indent {
+.tree-indentation_indent.has-sibling {
+    border-left: 1px solid #888;
+}
+
+.tree-indentation_indent.has-sibling.is-last:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 8px;
+    width: 1px;
+    background: #888;
+    left: -1px;
+    top: 100%;
+}
+
+/*.tree-indentation.is-last > .tree-indentation_indent {
     border-left-color: transparent;
 }*/
 
-.expandable-cell_indent.is-last {
-    border-bottom: 1px solid #666 !important;
-    border-left: 1px solid #666 !important;
+.tree-indentation_indent.is-last {
+    border-bottom: 1px solid #888 !important;
+    border-left: 1px solid #888 !important;
 }
 
-.expandable-cell > .expandable-cell_icon {
+.tree-indentation > .tree-indentation_icon {
     margin: 0 0 0 2px;
 }
 
-.expandable-cell.is-expandable.is-expanded > .expandable-cell_icon:before {
+.tree-indentation.is-expandable.is-expanded > .tree-indentation_icon:before {
     content: "\f0d7";
 }
 
-.expandable-cell.is-expandable > .expandable-cell_icon:before {
+.tree-indentation.is-expandable > .tree-indentation_icon:before {
     content: "\f0da";
 }
 
-.expandable-cell > .expandable-cell_content {
+.tree-indentation > .tree-indentation_content {
     display: inline-block;
     vertical-align: middle;
 }

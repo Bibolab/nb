@@ -273,7 +273,7 @@
 }
 
 /* .top-entry */
-.top-entry {
+/* .top-entry {
     display: block;
     position: relative;
 }
@@ -304,12 +304,11 @@
 
 .entries > .top-entry:nth-child(even):after {
     background: #4CAF50;
-}
+} */
 
 /* entry-expander */
 
-.entry-expander {
-    /*border: 1px solid red;*/
+/* .entry-expander {
     display: none;
     height: 100%;
     left: 0;
@@ -414,76 +413,11 @@
 
 .level-5 .entry-expander {
     width: 84px;
-}
-
-/* .tree-indentation */
-.tree-indentation {
-    display: block;
-    margin: -11px -3px;
-    padding: 11px 3px;
-    position: relative;
-}
-
-.tree-indentation:hover {
-    background: #eee;
-}
-
-.tree-indentation_indent {
-    /*border-bottom: 1px solid #888;*/
-    /*border-left: 1px solid #888;*/
-    display: inline-block;
-    height: 8px;
-    /* margin-top: -7px; */
-    margin-left: 6px;
-    position: relative;
-    top: -4px;
-    width: 10px;
-}
-
-.tree-indentation_indent.has-sibling {
-    border-left: 1px solid #888;
-}
-
-.tree-indentation_indent.has-sibling.is-last:after {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 8px;
-    width: 1px;
-    background: #888;
-    left: -1px;
-    top: 100%;
-}
-
-/*.tree-indentation.is-last > .tree-indentation_indent {
-    border-left-color: transparent;
-}*/
-
-.tree-indentation_indent.is-last {
-    border-bottom: 1px solid #888 !important;
-    border-left: 1px solid #888 !important;
-}
-
-.tree-indentation > .tree-indentation_icon {
-    margin: 0 0 0 2px;
-}
-
-.tree-indentation.is-expandable.is-expanded > .tree-indentation_icon:before {
-    content: "\f0d7";
-}
-
-.tree-indentation.is-expandable > .tree-indentation_icon:before {
-    content: "\f0da";
-}
-
-.tree-indentation > .tree-indentation_content {
-    display: inline-block;
-    vertical-align: middle;
-}
+} */
 
 /* child */
 
-.child .indent {
+/* .child .indent {
     display: inline-block;
     padding-left: 16px;
 }
@@ -511,4 +445,4 @@ i.has-parent {
 
 .entry-action-open i.has-parent {
     display: none;
-}
+} */

@@ -1,0 +1,240 @@
+/* .md-editor */
+.md-editor {
+    display: block;
+    margin: 0;
+    min-height: 34px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    transition: all .15s;
+}
+
+.md-editor.edit {
+    background: #fff;
+}
+
+.md-editor.fullscreen {
+    background: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    left: 0;
+    margin: 0 auto;
+    overflow: auto;
+    padding: 1%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.md-editor.split-mode {
+    width: 100%;
+}
+
+.md-editor.fullscreen .md-editor-container {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 3px #333;
+    margin: 0 auto;
+    padding: 8px;
+    position: relative;
+    width: 100%;
+}
+
+.md-editor__area {
+    background: transparent;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #000;
+    display: block;
+    font-size: 1em;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: inherit;
+    outline: 0;
+    padding: 7px;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.md-editor.edit .md-editor__area {
+    border-color: transparent;
+    min-height: 3em;
+    min-height: 100%;
+}
+
+.md-editor.edit .md-editor__area:hover {
+    border-color: #888;
+}
+
+.md-editor.edit .md-editor__area:focus {
+    border-color: #4d90fe;
+    box-shadow: 0 0 1px rgba(39,128,248,.196);
+    outline: none;
+}
+
+.md-editor__placeholder {
+    color: #888;
+    display: inline-block;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    top: 0;
+    transition: padding .15s;
+}
+
+.md-editor.edit .md-editor__placeholder {
+    position: relative;
+}
+
+.md-editor.has-value .md-editor__placeholder {
+    color: #303333;
+    position: relative;
+}
+
+.md-editor__help {
+    background: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-top: 0;
+    display: none;
+    padding: 6px;
+    position: relative;
+}
+
+.md-editor__help.show {
+    display: block;
+}
+
+.md-editor__btn-fullscreen,
+.md-editor__btn-help,
+.md-editor__btn-split-mode {
+    cursor: pointer;
+    display: inline-block;
+    margin: 1px;
+    min-width: 30px;
+    padding: 5px 8px;
+    text-align: center;
+}
+
+.md-editor__btn-fullscreen:active,
+.md-editor__btn-fullscreen:hover,
+.md-editor__btn-help:active,
+.md-editor__btn-help:hover,
+.md-editor__btn-split-mode:active,
+.md-editor__btn-split-mode:hover {
+    background: #eee;
+}
+
+.md-editor.fullscreen .md-editor__btn-fullscreen,
+.md-editor.help-is-visible .md-editor__btn-help,
+.md-editor.split-mode .md-editor__btn-split-mode {
+    background: #e6e6e6;
+}
+
+.md-editor__tab-content {
+    display: block;
+    display: flex;
+    position: relative;
+}
+
+.md-editor__tab-title-md,
+.md-editor__tab-title-preview {
+    border: 1px solid #ccc;
+    border-bottom-color: transparent;
+    border-radius: 2px 2px 0 0;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: -1px;
+    padding: 6px 8px;
+}
+
+.md-editor__tab-title-md:hover,
+.md-editor__tab-title-preview:hover {
+    background: #eee;
+}
+
+.md-editor__tabs.md-active .md-editor__tab-title-md,
+.md-editor__tabs.preview-active .md-editor__tab-title-preview {
+    background: #e6e6e6;
+    border-bottom-color: #fff;
+}
+
+.md-editor__markdown,
+.md-editor__preview {
+    border: 1px solid #ccc;
+    display: none;
+    flex: 1;
+    font-size: 1.3em;
+    min-height: 34px;
+    padding: 7px;
+    position: relative;
+    width: 100%;
+}
+
+.md-editor.edit .md-editor__markdown {}
+
+.md-editor:not(.edit) .md-editor__preview {
+    border-radius: 2px;
+}
+
+.md-editor__tabs.md-active .md-editor__markdown {
+    display: block;
+}
+
+.md-editor__tabs.preview-active .md-editor__preview {
+    display: block;
+}
+
+/* .split-mode */
+.md-editor.split-mode .md-editor__markdown,
+.md-editor.split-mode .md-editor__preview {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+}
+
+.md-editor.split-mode .md-editor__markdown {
+    float: left;
+}
+
+.md-editor.split-mode .md-editor__preview {
+    border-left: 0;
+    float: right;
+}
+
+.md-editor__help-list {
+    border-radius: 3px;
+    display: flex;
+    overflow: auto;
+}
+
+.md-editor__help-item {
+    background: white;
+    border: 1px solid #f5f5f5;
+    box-shadow: inset 0 0 3px #aaa;
+    font-size: 1.15em;
+    margin-left: 1px;
+    min-width: 130px;
+    overflow: hidden;
+    padding: 4px 6px;
+}
+
+.md-editor__help-item-md {
+    border-right: 1px solid #ccc;
+    display: inline-block;
+    /*height: 100%;*/
+    float: left;
+    width: 50%;
+}
+
+.md-editor__help-item-html {
+    display: inline-block;
+    /*height: 100%;*/
+    width: 50%;
+}
+
+.md-editor__help-item-h {
+    margin: 0;
+    padding: 0;
+}

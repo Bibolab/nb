@@ -46,6 +46,7 @@ public class EnvConst {
 	public static String DEFAULT_LANG = LanguageCode.ENG.name();
 	public static String DEFAULT_APPLICATION = WORKSPACE_NAME;
 	public static int DEFAULT_PAGE_SIZE = 20;
+	public static int HTTP_SESSION_TIMEOUT = 1440;
 	public static String DEFAULT_DATE_FORMAT = "dd.MM.yyyy";
 	public static String DEFAULT_DATETIME_FORMAT = "dd.MM.yyyy kk:mm";
 	public static String DEFAULT_TIME_FORMAT = "kk:mm";

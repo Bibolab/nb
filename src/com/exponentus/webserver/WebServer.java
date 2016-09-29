@@ -167,6 +167,8 @@ public class WebServer {
 
 		initRestService(site, context);
 
+		context.setSessionTimeout(EnvConst.HTTP_SESSION_TIMEOUT);
+
 		return null;
 	}
 

@@ -1,6 +1,7 @@
 quit, exit (q) - stop server with safety;
 reset rules(rr) - reset loaded rules and caches;
-reload vocabulary(rv) - reload vocabularies, templates and reset cashes;
+reload vocabulary(rv) - reload vocabularies, templates and reset caches;
+reload all(ra) - reload rules, vocabularies, templates and reset caches;
 show initializers(si) - show all available Initializers;
 start initializer(stini) * - run a initializer;
 run batch (rubat) * - run a batch file;

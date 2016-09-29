@@ -116,7 +116,7 @@ public class Console implements Runnable {
 			System.out.printf(format, "            ", "-----");
 			System.out.printf(format, "     Total  ", Environment.adminApplication.getDataBase().getCount());
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
-			List<HttpSession> actualUsers = new ArrayList<HttpSession>();
+			List<HttpSession> actualUsers = new ArrayList<>();
 			for (HttpSession entry : ServletSessionPool.getSessions().values()) {
 				try {
 					entry.getCreationTime();
@@ -159,7 +159,7 @@ public class Console implements Runnable {
 
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {
 			for (AppEnv env : Environment.getApplications()) {
-				env.ruleProvider.resetRules();
+				env.ruleProvider.resetRules(true);
 				env.flush();
 			}
 			new Environment().flush();
@@ -185,6 +185,28 @@ public class Console implements Runnable {
 				env.flush();
 				env.templates.reset();
 				System.out.println("Templates and the dictionary were reloaded (" + env.appName + ")");
+			}
+
+			new Environment().flush();
+			Environment.flushSessionsCach();
+		} else if (command.equalsIgnoreCase("reload all") || command.equalsIgnoreCase("ra")) {
+			for (AppEnv env : Environment.getApplications()) {
+				env.ruleProvider.resetRules(true);
+				env.flush();
+			}
+			new Environment().flush();
+			Environment.flushSessionsCach();
+
+			Localizator l = new Localizator();
+			Environment.vocabulary = l.populate();
+			if (Environment.vocabulary == null) {
+				Environment.vocabulary = new Vocabulary("system");
+			}
+			for (AppEnv env : Environment.getApplications()) {
+				env.reloadVocabulary();
+				env.flush();
+				env.templates.reset();
+				System.out.println("Templates, rules and the dictionary were reloaded (" + env.appName + ")");
 			}
 
 			new Environment().flush();
@@ -304,7 +326,7 @@ public class Console implements Runnable {
 
 	public static List<String> getValFromConsole(String prefix, String pattern) {
 		System.out.print(prefix);
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		String value = "";
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);

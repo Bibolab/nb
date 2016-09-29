@@ -29,6 +29,18 @@ public class TimeUtil {
 		}
 	}
 
+	public static Date stringToDateSilently(String val) {
+		try {
+			return dateTimeFormat.parse(val);
+		} catch (ParseException e) {
+			try {
+				return dateFormat.parse(val);
+			} catch (ParseException e1) {
+				return null;
+			}
+		}
+	}
+
 	public static String dateToStringSilently(Date date) {
 		try {
 			return dateFormat.format(date);

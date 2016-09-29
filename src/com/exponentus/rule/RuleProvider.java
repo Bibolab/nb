@@ -10,7 +10,7 @@ import com.exponentus.rule.page.PageRule;
 
 public class RuleProvider {
 
-	private HashMap<String, PageRule> pageRuleMap = new HashMap<String, PageRule>();
+	private HashMap<String, PageRule> pageRuleMap = new HashMap<>();
 	private AppEnv env;
 
 	public RuleProvider(AppEnv env) {
@@ -30,10 +30,14 @@ public class RuleProvider {
 
 	}
 
-	public boolean resetRules() {
-		AppEnv.logger.infoLogEntry("reload \"" + env.appName + "\" application rules ...");
+	public boolean resetRules(boolean showConsoleOutput) {
+		if (showConsoleOutput) {
+			System.out.println("reload \"" + env.appName + "\" application rules ...");
+		}
 		pageRuleMap.clear();
-		AppEnv.logger.infoLogEntry("application rules have been reset");
+		if (showConsoleOutput) {
+			System.out.println("application rules have been reset");
+		}
 		return true;
 	}
 

@@ -85,7 +85,6 @@ selection {
     background: rgba(255, 255, 255, 0.8);
 }
 
-.select .clear,
 .select .select-clear {
     color: #ccc;
     display: none;
@@ -109,14 +108,6 @@ selection {
     color: #666;
 }
 
-.select .clear .fa {
-    color: #ccc;
-}
-
-.select .clear:hover .fa {
-    color: #888;
-}
-
 .select .placeholder {
     color: #888;
     display: inline-block;
@@ -124,16 +115,6 @@ selection {
 
 .select.has-selected .placeholder {
     display: none;
-}
-
-.select .select-search {
-    background: #fff;
-    border-bottom: 1px solid #aaa;
-    padding: .3em;
-}
-
-.select .select-search input {
-    border: 1px solid #aaa;
 }
 
 .select .select-dropdown {
@@ -180,7 +161,7 @@ selection {
     cursor: pointer;
     margin: 0;
     overflow: hidden;
-    padding: .8em .8em .8em 1.5em;
+    padding: .8em .8em .8em 1.8em;
     position: relative;
 }
 
@@ -188,20 +169,38 @@ selection {
     background-color: #F5F5F5;
 }
 
-.select-list .select-option.selected {
-    background-color: #eee;
+.select-list .select-option.focus {
+    background-color: #F5F5F5;
 }
 
-.select-list .select-option.selected:after {
-    border-style: solid;
-    border-width: 6px 0 6px 8px;
-    border-color: transparent transparent transparent #444;
+/* .select-checkmark-icon */
+.select .select-checkmark-icon {
+    display: inline-block;
+    height: 16px;
+    font-size: 14px;
+    left: 5px;
+    position: absolute;
+    top: 25%;
+    visibility: hidden;
+    width: 16px;
+}
+
+.select .selected > .select-checkmark-icon {
+    visibility: visible;
+}
+
+.select-checkmark-icon:after {
+    border: solid #555;
+    border-width: 0 .2em .2em 0;
     content: '';
     display: block;
-    height: 0;
-    left: 3px;
-    margin-top: -6px;
-    position: absolute;
-    top: 50%;
-    width: 0;
+    height: 14px;
+    left: 4px;
+    position: relative;
+    top: 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 7px;
 }

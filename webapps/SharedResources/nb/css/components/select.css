@@ -82,7 +82,7 @@ selection {
 }
 
 .select .select-search-input:focus {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .select .select-clear {
@@ -157,6 +157,7 @@ selection {
 }
 
 .select-list .select-option {
+    background-color: transparent;
     border-bottom: 1px solid #F5F5F5;
     cursor: pointer;
     margin: 0;
@@ -170,7 +171,7 @@ selection {
 }
 
 .select-list .select-option.focus {
-    background-color: #F5F5F5;
+    background-color: #F4F4F4;
 }
 
 /* .select-checkmark-icon */

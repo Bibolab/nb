@@ -56,6 +56,9 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Column(name = "reg_date", nullable = false, updatable = false)
 	protected Date regDate;
 
+	@Column(length = 64)
+	protected String title;
+
 	@Column(name = "form", nullable = false, updatable = false, length = 64)
 	protected String form;
 
@@ -219,6 +222,14 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 		return this.getClass().getSimpleName().toLowerCase() + "-view";
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@JsonIgnore
 	@Override
 	public String getForm() {
@@ -262,7 +273,7 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 
 	@Override
 	public List<Attachment> getAttachments() {
-		return new ArrayList<Attachment>();
+		return new ArrayList<>();
 	}
 
 	@Override

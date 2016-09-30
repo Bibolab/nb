@@ -1,179 +1,201 @@
 package com.exponentus.common.model;
 
+import java.util.UUID;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-
-import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "attachments")
 public class Attachment extends AppEntity<UUID> implements IAppFile {
 
-    private String fieldName = "attachment";
-    private String realFileName;
-    @Column(length = 32)
-    private String extension;
-    private long size;
-    protected String form = "attachment";
-    protected Long author = AnonymousUser.ID;
-    private boolean hasThumbnail = false;
+	protected String form = "attachment";
+	protected Long author = AnonymousUser.ID;
 
-    @JsonIgnore
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
-    @CascadeOnDelete
-    @PrimaryKeyJoinColumn
-    private AttachmentThumbnail attachmentThumbnail;
+	@Column(length = 64)
+	private String fieldName = "attachment";
+	private String realFileName;
+	@Column(length = 32)
+	private String extension;
+	private long size;
+	private boolean hasThumbnail = false;
+	private String comment;
 
-    @Transient
-    private String sign = "";
+	@JsonIgnore
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true)
+	@CascadeOnDelete
+	@PrimaryKeyJoinColumn
+	private AttachmentThumbnail attachmentThumbnail;
 
-    @JsonIgnore
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] file;
+	@Transient
+	private String sign = "";
 
-    @Override
-    public String getFieldName() {
-        return fieldName;
-    }
+	@JsonIgnore
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	private byte[] file;
 
-    @Override
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
-    }
+	@Override
+	public String getFieldName() {
+		return fieldName;
+	}
 
-    @Override
-    public String getRealFileName() {
-        return realFileName;
-    }
+	@Override
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
 
-    @Override
-    public void setRealFileName(String realFileName) {
-        // file extension
-        int lastDotIndex = realFileName.lastIndexOf(".");
-        if (lastDotIndex != -1) {
-            extension = realFileName.substring(lastDotIndex + 1).toLowerCase();
-        } else {
-            extension = "";
-        }
-        //
-        this.realFileName = realFileName;
-    }
+	@Override
+	public String getRealFileName() {
+		return realFileName;
+	}
 
-    public String getExtension() {
-        return extension;
-    }
+	@Override
+	public void setRealFileName(String realFileName) {
+		// file extension
+		int lastDotIndex = realFileName.lastIndexOf(".");
+		if (lastDotIndex != -1) {
+			extension = realFileName.substring(lastDotIndex + 1).toLowerCase();
+		} else {
+			extension = "";
+		}
+		//
+		this.realFileName = realFileName;
+	}
 
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
+	public String getExtension() {
+		return extension;
+	}
 
-    public long getSize() {
-        return size;
-    }
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
 
-    public void setSize(long size) {
-        this.size = size;
-    }
+	public long getSize() {
+		return size;
+	}
 
-    @Override
-    public byte[] getFile() {
-        return file;
-    }
+	public void setSize(long size) {
+		this.size = size;
+	}
 
-    @Override
-    public void setFile(byte[] file) {
-        this.file = file;
-        size = file.length;
-    }
+	@Override
+	public byte[] getFile() {
+		return file;
+	}
 
-    @Override
-    public String getSign() {
-        return sign;
-    }
+	@Override
+	public void setFile(byte[] file) {
+		this.file = file;
+		size = file.length;
+	}
 
-    @Override
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
+	@Override
+	public String getSign() {
+		return sign;
+	}
 
-    public boolean isHasThumbnail() {
-        return hasThumbnail;
-    }
+	@Override
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
 
-    public void setHasThumbnail(boolean hasThumbnail) {
-        this.hasThumbnail = hasThumbnail;
-    }
+	public boolean isHasThumbnail() {
+		return hasThumbnail;
+	}
 
-    public AttachmentThumbnail getAttachmentThumbnail() {
-        return attachmentThumbnail;
-    }
+	public void setHasThumbnail(boolean hasThumbnail) {
+		this.hasThumbnail = hasThumbnail;
+	}
 
-    public void setAttachmentThumbnail(AttachmentThumbnail attachmentThumbnail) {
-        this.attachmentThumbnail = attachmentThumbnail;
-    }
+	public String getComment() {
+		return comment;
+	}
 
-    @Override
-    public String getDefaultFormName() {
-        return "attachment";
-    }
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
-    @Override
-    public String getShortXMLChunk(_Session ses) {
-        StringBuilder chunk = new StringBuilder(400);
-        chunk.append("<fieldname>" + fieldName + "</fieldname>");
-        chunk.append("<filename>" + realFileName + "</filename>");
-        return chunk.toString();
-    }
+	public AttachmentThumbnail getAttachmentThumbnail() {
+		return attachmentThumbnail;
+	}
 
-    @Override
-    public String getFullXMLChunk(_Session ses) {
-        return getShortXMLChunk(ses);
-    }
+	public void setAttachmentThumbnail(AttachmentThumbnail attachmentThumbnail) {
+		this.attachmentThumbnail = attachmentThumbnail;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
+	@Override
+	public String getDefaultFormName() {
+		return "attachment";
+	}
 
-        if (obj == null) {
-            return false;
-        }
+	@Override
+	public String getShortXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(400);
+		chunk.append("<fieldname>" + fieldName + "</fieldname>");
+		chunk.append("<filename>" + realFileName + "</filename>");
+		return chunk.toString();
+	}
 
-        if (!(getClass() == obj.getClass())) {
-            return false;
-        } else {
-            Attachment tmp = (Attachment) obj;
+	@Override
+	public String getFullXMLChunk(_Session ses) {
+		return getShortXMLChunk(ses);
+	}
 
-            if (tmp.id == null) {
-                return false;
-            }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
 
-            if (tmp.fieldName != null && this.fieldName == null) {
-                return false;
-            }
+		if (obj == null) {
+			return false;
+		}
 
-            if (tmp.realFileName != null && this.realFileName == null) {
-                return false;
-            }
+		if (!(getClass() == obj.getClass())) {
+			return false;
+		} else {
+			Attachment tmp = (Attachment) obj;
 
-            if ((tmp.fieldName == null && this.fieldName == null || tmp.fieldName.equals(this.fieldName))
-                    && (tmp.realFileName == null && this.realFileName == null || tmp.realFileName.equals(this.realFileName))) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+			if (tmp.id == null) {
+				return false;
+			}
 
-    @Override
-    public String toString() {
-        return "fieldName=" + fieldName + ", realFileName=" + realFileName;
-    }
+			if (tmp.fieldName != null && this.fieldName == null) {
+				return false;
+			}
+
+			if (tmp.realFileName != null && this.realFileName == null) {
+				return false;
+			}
+
+			if ((tmp.fieldName == null && this.fieldName == null || tmp.fieldName.equals(this.fieldName))
+			        && (tmp.realFileName == null && this.realFileName == null || tmp.realFileName.equals(this.realFileName))) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "fieldName=" + fieldName + ", realFileName=" + realFileName;
+	}
 }

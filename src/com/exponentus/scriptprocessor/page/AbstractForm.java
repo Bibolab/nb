@@ -3,6 +3,7 @@ package com.exponentus.scriptprocessor.page;
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import com.exponentus.common.model.Attachment;
 import com.exponentus.common.model.SimpleReferenceEntity;
@@ -47,9 +48,7 @@ public abstract class AbstractForm extends AbstractPage {
 					fsId = StringUtil.getRandomText();
 				}
 				addValue(EnvConst.FSID_FIELD_NAME, fsId);
-				// System.out.println("open=" + fsId + REFERRER_ATTR_NAME + " "
-				// + formData.getReferrer());
-				ses.setAttribute(fsId + REFERRER_ATTR_NAME, formData.getReferrer());
+				ses.setAttribute(fsId + REFERRER_ATTR_NAME, formData.getReferrer(), TimeUnit.HOURS);
 			} else {
 				_Validation ve = validate(fsId);
 				if (ve.hasError()) {
@@ -58,16 +57,13 @@ public abstract class AbstractForm extends AbstractPage {
 				} else {
 					if (method.equalsIgnoreCase("POST")) {
 						doPOST(ses, formData);
-						// System.out.println("post=" + fsId +
-						// REFERRER_ATTR_NAME + " " + formData.getReferrer());
 						String redirectURL = (String) ses.getAttribute(fsId + REFERRER_ATTR_NAME);
 						result.setRedirectURL(redirectURL);
 						if (result.getInfoMessageType() != InfoMessageType.VALIDATION_ERROR
 						        && result.getInfoMessageType() != InfoMessageType.SERVER_ERROR) {
-							// result.setFlash(entity.getId().toString());
 							result.setInfoMessageType(InfoMessageType.DOCUMENT_SAVED);
+							ses.removeAttribute(fsId + REFERRER_ATTR_NAME);
 						}
-						ses.removeAttribute(fsId + REFERRER_ATTR_NAME);
 						File userTmpDir = new File(Environment.tmpDir + File.separator + ses.getUser().getUserID());
 						File dirToUploadedFile = new File(userTmpDir.getAbsolutePath() + File.separator + fsId);
 						if (dirToUploadedFile.exists()) {

@@ -68,6 +68,7 @@ public class Environment implements ICache {
 	public static Date startTime;
 	public static String orgName;
 	public static String hostName;
+	public static String virtualHostName;
 	public static int httpPort = EnvConst.DEFAULT_HTTP_PORT;
 	public static AppEnv adminApplication;
 	public static HashMap<String, String> mimeHash = new HashMap<>();
@@ -168,6 +169,11 @@ public class Environment implements ICache {
 			hostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/hostname");
 			if (hostName.isEmpty()) {
 				hostName = getHostName();
+			}
+
+			String virtualHostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/virtualhostname");
+			if (!virtualHostName.isEmpty()) {
+				hostName = virtualHostName;
 			}
 
 			String portAsText = XMLUtil.getTextContent(xmlDocument, "/nextbase/port");
@@ -323,11 +329,10 @@ public class Environment implements ICache {
 	}
 
 	public static String getFullHostName() {
-		String port = "";
 		if (Environment.httpPort != 80) {
-			port = ":" + Environment.httpPort;
+			return WebServer.httpSchema + "://" + hostName + ":" + Environment.httpPort;
 		}
-		return WebServer.httpSchema + "://" + Environment.hostName + port;
+		return WebServer.httpSchema + "://" + hostName;
 	}
 
 	public static String getWorkspaceURL() {
@@ -353,7 +358,7 @@ public class Environment implements ICache {
 			DocumentBuilder builder;
 
 			builder = domFactory.newDocumentBuilder();
-			return builder.parse("cfg.xml");
+			return builder.parse(EnvConst.CFG_FILE);
 		} catch (SAXException e) {
 			Server.logger.errorLogEntry(e);
 		} catch (IOException e) {

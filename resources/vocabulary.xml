@@ -180,7 +180,12 @@
         <entry lang="ENG">Comment</entry>
         <entry lang="CHI">Comment</entry>
     </sentence>
-
+    <sentence mode="on" keyword="category">
+        <entry lang="RUS">Категория</entry>
+        <entry lang="KAZ">Категория</entry>
+        <entry lang="ENG">Category</entry>
+        <entry lang="CHI"></entry>
+    </sentence>
     <sentence mode="on" keyword="wait_while_document_save">
         <entry lang="KAZ">Күте тұрыңыз... Құжаттың сақталуы жүріп жатыр</entry>
         <entry lang="RUS">Пожалуйста ждите... Идет сохранение документа</entry>
@@ -379,16 +384,6 @@
         <entry lang="KAZ">Түрі</entry>
         <entry lang="ENG">Type</entry>
         <entry lang="CHI">类型</entry>
-    </sentence>
-    <sentence mode="on" keyword="Обзор">
-        <entry lang="KAZ">Шолу</entry>
-        <entry lang="ENG">Review</entry>
-        <entry lang="CHI">檢討</entry>
-    </sentence>
-    <sentence mode="on" keyword="Только для чтения">
-        <entry lang="KAZ">Тек оқу үшін</entry>
-        <entry lang="ENG">Reading only</entry>
-        <entry lang="CHI">只读</entry>
     </sentence>
     <sentence mode="on" keyword="new_document">
         <entry lang="RUS">Новый документ</entry>

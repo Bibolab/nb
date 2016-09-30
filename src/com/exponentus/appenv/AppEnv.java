@@ -32,7 +32,7 @@ public class AppEnv extends PageCacheAdapter {
 	public boolean isValid;
 	public String appName;
 	public RuleProvider ruleProvider;
-	public HashMap<String, File> xsltFileMap = new HashMap<String, File>();
+	public HashMap<String, File> xsltFileMap = new HashMap<>();
 	public boolean isWorkspace;
 	public Vocabulary vocabulary;
 	public TemplatesSet templates;

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.Cookie;
 
@@ -136,6 +137,12 @@ public class _Session extends PageCacheAdapter {
 	}
 
 	public void setAttribute(String varName, Object fn) {
+		if (!valuesMap.containsKey(varName)) {
+			valuesMap.put(varName, fn);
+		}
+	}
+
+	public void setAttribute(String varName, Object fn, TimeUnit time) {
 		if (!valuesMap.containsKey(varName)) {
 			valuesMap.put(varName, fn);
 		}

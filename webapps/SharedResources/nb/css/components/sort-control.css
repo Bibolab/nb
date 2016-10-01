@@ -11,7 +11,7 @@
 
 .sort-control:focus,
 .sort-control:hover {
-    background: rgba(0,0,0,.075);
+    background: rgba(0, 0, 0, .075);
 }
 
 .sort-control:after,
@@ -20,23 +20,23 @@
     content: '';
     display: none;
     height: 0;
-    right: 2px;
+    right: 4px;
     position: absolute;
     width: 0;
 }
 
 /* arrow up */
 .sort-control:before {
-    border-color: transparent transparent #ccc transparent;
-    border-width: 0 6px 6px 6px;
+    border-color: #aaa transparent;
+    border-width: 0 5px 5px;
     margin-top: -6px;
     top: 50%;
 }
 
 /* arrow down */
 .sort-control:after {
-    border-color: #ccc transparent transparent transparent;
-    border-width: 6px 6px 0 6px;
+    border-color: #aaa transparent;
+    border-width: 5px 5px 0;
     margin-top: 1px;
     top: 50%;
 }

@@ -48,10 +48,10 @@
 .head-wrap {
     background: #F8F8F8;
     border-bottom: 1px solid #EEE;
-    border-top: 1px solid transparent;
+    /*border-top: 1px solid transparent;*/
     display: block;
     max-height: 90px;
-    min-height: 40px;
+    min-height: 34px;
     overflow: hidden;
     padding: 0;
     position: relative;
@@ -234,6 +234,7 @@
     border-left: 1px dotted #eee;
     display: table-cell;
     padding: 8px 3px;
+    position: relative;
 }
 
 /* entry-actions */

@@ -1,8 +1,12 @@
 .sort-control {
     cursor: pointer;
     display: block;
-    padding-right: 14px;
-    position: relative;
+    height: 100%;
+    left: 0;
+    padding: 8px 15px 8px 3px;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
 .sort-control:focus,
@@ -16,7 +20,7 @@
     content: '';
     display: none;
     height: 0;
-    right: 1px;
+    right: 2px;
     position: absolute;
     width: 0;
 }

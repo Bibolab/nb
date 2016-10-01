@@ -220,6 +220,22 @@
     padding-top: 20px;
 }
 
+/* table */
+.entry-captions,
+.entry-fields {
+    display: table;
+    width: 100%;
+}
+
+.entry-captions > div,
+.entry-captions > span,
+.entry-fields > div,
+.entry-fields > span {
+    border-left: 1px dotted #eee;
+    display: table-cell;
+    padding: 8px 3px;
+}
+
 /* entry-actions */
 
 .entry-actions {

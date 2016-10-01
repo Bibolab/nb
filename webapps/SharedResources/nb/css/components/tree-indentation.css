@@ -5,7 +5,7 @@
     position: relative;
 }
 
-.tree-indentation:hover {
+.tree-indentation.is-expandable:hover {
     background: #eee;
 }
 
@@ -58,6 +58,6 @@
 }
 
 .tree-indentation > .tree-indentation_content {
-    display: inline-block;
+    display: inline;
     vertical-align: middle;
 }

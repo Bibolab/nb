@@ -1,8 +1,13 @@
 .sort-control {
     cursor: pointer;
     display: block;
-    padding-right: 13px;
+    padding-right: 14px;
     position: relative;
+}
+
+.sort-control:focus,
+.sort-control:hover {
+    background: rgba(0,0,0,.075);
 }
 
 .sort-control:after,
@@ -11,7 +16,7 @@
     content: '';
     display: none;
     height: 0;
-    right: 0;
+    right: 1px;
     position: absolute;
     width: 0;
 }
@@ -43,10 +48,14 @@
 
 .sort-control.asc:before {
     display: block;
+    margin-top: -3px;
+    top: 50%;
 }
 
 .sort-control.desc:after {
     display: block;
+    margin-top: -3px;
+    top: 50%;
 }
 
 .sort-control.is-asc:before {

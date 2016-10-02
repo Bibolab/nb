@@ -8,6 +8,18 @@
     "name": "Staff",
     "path": "../../../../officeframe/webapps/Staff"
 }, {
+    "name": "DataExport",
+    "path": "../../../../officeframe/webapps/DataExport"
+}, {
+    "name": "Discussing",
+    "path": "../../../../officeframe/webapps/Discussing"
+}, {
+    "name": "Integration",
+    "path": "../../../../officeframe/webapps/Integration"
+}, {
+    "name": "Monitoring",
+    "path": "../../../../officeframe/webapps/Monitoring"
+}, {
     "name": "Accountant",
     "path": "../../../../ComProperty/webapps/Accountant"
 }, {
@@ -25,4 +37,7 @@
 }, {
     "name": "GisServProvider",
     "path": "../../../../ComProperty/webapps/GisServProvider"
+}, {
+    "name": "Workflow",
+    "path": "../../../../poema/webapps/Workflow"
 }]

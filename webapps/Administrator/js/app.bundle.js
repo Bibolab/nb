@@ -2559,9 +2559,17 @@ nb.getSelectOptions = function(selectOptions) {
             list = {},
             buff = {};
 
-        if (data.objects.length) {
-            meta = data.objects[0].meta;
-            list = data.objects[0].list;
+        var objects = data.objects;
+        if (objects.length) {
+            for (var i in objects) {
+                if (objects[i].type && objects[i].meta && objects[i].list) {
+                    meta = objects[i].meta;
+                    list = objects[i].list;
+                    break;
+                }
+            }
+            // meta = data.objects[0].meta;
+            // list = data.objects[0].list;
 
             for (var k in list) {
                 buff = {

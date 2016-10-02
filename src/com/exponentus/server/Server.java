@@ -41,10 +41,10 @@ public class Server {
 
 		compilationTime = ((Log4jLogger) logger).getBuildDateTime();
 
-		if (NetUtil.portAvailable(Environment.hostName, Environment.httpPort)) {
+		if (NetUtil.portAvailable(Environment.getHostName(), Environment.httpPort)) {
 
 			webServerInst = new WebServer();
-			if (webServerInst.init(Environment.hostName)) {
+			if (webServerInst.init(Environment.getHostName())) {
 
 				for (Site webApp : Environment.webAppToStart.values()) {
 					webServerInst.addApplication(webApp);
@@ -68,7 +68,7 @@ public class Server {
 				shutdown();
 			}
 		} else {
-			System.err.println("Http port is not available (" + Environment.hostName + ":" + Environment.httpPort + ")\n");
+			System.err.println("Http port is not available (" + Environment.getHostName() + ":" + Environment.httpPort + ")\n");
 			shutdown();
 		}
 	}

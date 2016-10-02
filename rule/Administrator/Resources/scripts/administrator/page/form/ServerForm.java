@@ -25,7 +25,7 @@ public class ServerForm extends _DoForm {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {
-		addValue("hostname", Environment.hostName);
+		addValue("hostname", Environment.getHostName());
 		addValue("port", Environment.httpPort);
 		addValue("tmpdir", Environment.tmpDir);
 		addValue("orgname", Environment.orgName);

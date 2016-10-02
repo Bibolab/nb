@@ -67,8 +67,6 @@ public class Environment implements ICache {
 	public static boolean verboseLogging;
 	public static Date startTime;
 	public static String orgName;
-	public static String hostName;
-	public static String virtualHostName;
 	public static int httpPort = EnvConst.DEFAULT_HTTP_PORT;
 	public static AppEnv adminApplication;
 	public static HashMap<String, String> mimeHash = new HashMap<>();
@@ -107,6 +105,8 @@ public class Environment implements ICache {
 	public static PeriodicalServices periodicalServices;
 	public static String vocabuarFilePath = EnvConst.RESOURCES_DIR + File.separator + "vocabulary.xml";
 
+	private static String hostName;
+	private static String virtualHostName;
 	private static HashMap<String, AppEnv> applications = new HashMap<>();
 	private static ConcurrentHashMap<String, AppEnv> allApplications = new ConcurrentHashMap<>();
 
@@ -168,13 +168,16 @@ public class Environment implements ICache {
 
 			hostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/hostname");
 			if (hostName.isEmpty()) {
-				hostName = getHostName();
+				InetAddress addr = null;
+				try {
+					addr = InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					Server.logger.errorLogEntry(e);
+				}
+				hostName = addr.getHostName();
 			}
 
-			String virtualHostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/virtualhostname");
-			if (!virtualHostName.isEmpty()) {
-				hostName = virtualHostName;
-			}
+			virtualHostName = XMLUtil.getTextContent(xmlDocument, "/nextbase/virtualhostname");
 
 			String portAsText = XMLUtil.getTextContent(xmlDocument, "/nextbase/port");
 			try {
@@ -328,11 +331,19 @@ public class Environment implements ICache {
 		return new HashSet<>(applications.values());
 	}
 
+	public static String getHostName() {
+		return hostName;
+	}
+
 	public static String getFullHostName() {
-		if (Environment.httpPort != 80) {
-			return WebServer.httpSchema + "://" + hostName + ":" + Environment.httpPort;
+		if (virtualHostName.isEmpty()) {
+			if (Environment.httpPort != 80) {
+				return WebServer.httpSchema + "://" + hostName + ":" + Environment.httpPort;
+			}
+			return WebServer.httpSchema + "://" + hostName;
+		} else {
+			return WebServer.httpSchema + "://" + virtualHostName;
 		}
-		return WebServer.httpSchema + "://" + hostName;
 	}
 
 	public static String getWorkspaceURL() {
@@ -367,16 +378,6 @@ public class Environment implements ICache {
 			Server.logger.errorLogEntry(e);
 		}
 		return null;
-	}
-
-	private static String getHostName() {
-		InetAddress addr = null;
-		try {
-			addr = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			Server.logger.errorLogEntry(e);
-		}
-		return addr.getHostName();
 	}
 
 	@Override

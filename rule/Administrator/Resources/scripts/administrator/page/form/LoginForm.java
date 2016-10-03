@@ -1,6 +1,5 @@
 package administrator.page.form;
 
-import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._AppEntourage;
 import com.exponentus.scripting._Exception;
 import com.exponentus.scripting._Session;
@@ -15,12 +14,6 @@ public class LoginForm extends _DoForm {
 		_AppEntourage ent = session.getAppEntourage();
 		addValue("serverversion", ent.getServerVersion());
 		addValue("build", ent.getBuildTime());
-
-		String lang = formData.getValueSilently("lang");
-		if (!lang.isEmpty()) {
-			session.setLang(LanguageCode.valueOf(lang));
-		}
-
 		addContent(new LanguageDAO(session).findAll());
 	}
 }

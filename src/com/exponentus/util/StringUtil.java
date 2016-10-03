@@ -51,12 +51,7 @@ public class StringUtil {
 	}
 
 	public static int stringToInt(String d, int defaultValue) {
-		d = d.replaceAll("\\s+", "").replaceAll(",", "").replaceAll("/\\D/g", "");
-		try {
-			return Integer.parseInt(d);
-		} catch (Exception e) {
-			return defaultValue;
-		}
+		return NumberUtil.stringToInt(d, defaultValue);
 	}
 
 	public static String readResource(String file) {

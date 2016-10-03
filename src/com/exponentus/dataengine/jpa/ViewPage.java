@@ -17,8 +17,13 @@ public class ViewPage<T> {
 		this.pageNum = pageNum;
 	}
 
+	public ViewPage(List<T> result, long count2, int maxPage, int pageNum, String k) {
+		this(result, count2, maxPage, pageNum);
+		keyWord = k;
+	}
+
 	public ViewPage(T entity) {
-		this.result = new ArrayList<T>();
+		this.result = new ArrayList<>();
 		result.add(entity);
 		this.count = 1;
 		this.maxPage = 1;
@@ -39,6 +44,10 @@ public class ViewPage<T> {
 
 	public int getPageNum() {
 		return pageNum;
+	}
+
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
 	}
 
 	public String getKeyWord() {

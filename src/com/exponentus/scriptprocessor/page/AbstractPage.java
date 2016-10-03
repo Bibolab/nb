@@ -20,6 +20,7 @@ import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
+import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting.POJOObjectAdapter;
 import com.exponentus.scripting._POJOListWrapper;
@@ -162,7 +163,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 	}
 
 	protected void addContent(String elementName, List<?> list) {
-		List<IPOJOObject> newList = new ArrayList<IPOJOObject>();
+		List<IPOJOObject> newList = new ArrayList<>();
 		for (Object element : list) {
 			newList.add(new POJOObjectAdapter<Object>() {
 				@Override
@@ -175,7 +176,7 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 			});
 
 		}
-		result.addObject(new _POJOListWrapper<IPOJOObject>(newList, getSes(), elementName));
+		result.addObject(new _POJOListWrapper<>(newList, getSes(), elementName));
 	}
 
 	protected void addContent(String elementName, String someValue) {
@@ -292,15 +293,23 @@ public abstract class AbstractPage extends ScriptHelper implements IPageScript {
 
 	@Override
 	public PageOutcome processCode(String method) {
+		_Session ses = getSes();
+		if (formData.containsField("lang")) {
+			try {
+				ses.setLang(LanguageCode.valueOf(formData.getValueSilently("lang").toUpperCase()));
+			} catch (IllegalArgumentException e) {
+
+			}
+		}
 		try {
 			if (method.equalsIgnoreCase("POST")) {
-				doPOST(getSes(), formData);
+				doPOST(ses, formData);
 			} else if (method.equalsIgnoreCase("PUT")) {
-				doPUT(getSes(), formData);
+				doPUT(ses, formData);
 			} else if (method.equalsIgnoreCase("DELETE")) {
-				doDELETE(getSes(), formData);
+				doDELETE(ses, formData);
 			} else {
-				doGET(getSes(), formData);
+				doGET(ses, formData);
 			}
 		} catch (Exception e) {
 			result.setException(e);

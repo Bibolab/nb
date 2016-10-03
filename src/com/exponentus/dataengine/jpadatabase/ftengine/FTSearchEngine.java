@@ -19,10 +19,11 @@ import com.exponentus.dataengine.jpa.IDAO;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
+import com.exponentus.server.Server;
 
 public class FTSearchEngine implements IFTIndexEngine {
 	private IDBConnectionPool dbPool;
-	private List<FTEntity> indexTables = new ArrayList<FTEntity>();
+	private List<FTEntity> indexTables = new ArrayList<>();
 	private Class[] intArgsClass = new Class[] { _Session.class };
 
 	public FTSearchEngine(IDatabase db) {
@@ -74,7 +75,7 @@ public class FTSearchEngine implements IFTIndexEngine {
 							result.addAll(vPage.getResult());
 						} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 						        | NoSuchMethodException | SecurityException e) {
-							e.printStackTrace();
+							Server.logger.errorLogEntry(e);
 						}
 
 					}
@@ -87,12 +88,12 @@ public class FTSearchEngine implements IFTIndexEngine {
 			}
 
 		} catch (Exception pe) {
-			System.out.println(pe);
+			Server.logger.errorLogEntry(pe);
 		} finally {
 			dbPool.returnConnection(conn);
 		}
 
-		return result.size() > 0 ? new ViewPage<>(result, result.size(), pageNum, pageSize) : null;
+		return result.size() > 0 ? new ViewPage<>(result, result.size(), pageNum, pageSize, keyWord) : null;
 
 	}
 

@@ -17,4 +17,13 @@ public class NumberUtil {
 		int result = r.nextInt(high - low) + low;
 		return result;
 	}
+
+	public static int stringToInt(String d, int defaultValue) {
+		d = d.replaceAll("\\s+", "").replaceAll(",", "").replaceAll("/\\D/g", "");
+		try {
+			return Integer.parseInt(d);
+		} catch (Exception e) {
+			return defaultValue;
+		}
+	}
 }

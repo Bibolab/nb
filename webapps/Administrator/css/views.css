@@ -1,8 +1,10 @@
 .vw-inv-number {
+    min-width: 130px;
     width: 130px;
 }
 
 .vw-regdate {
+    min-width: 180px;
     width: 180px;
 }
 
@@ -12,14 +14,17 @@
 }
 
 .vw-original-cost {
+    min-width: 135px;
     width: 135px;
 }
 
 .vw-balance-holder {
+    min-width: 320px;
     width: 320px;
 }
 
 .vw-tags {
+    min-width: 200px;
     width: 200px;
 }
 

@@ -110,7 +110,7 @@ public class UserDAO {
 				typedQuery.setMaxResults(pageSize);
 			}
 			List<User> result = typedQuery.getResultList();
-			return new ViewPage<User>(result, count, maxPage, pageNum);
+			return new ViewPage<>(result, count, maxPage, pageNum);
 		} finally {
 			em.close();
 		}
@@ -141,7 +141,7 @@ public class UserDAO {
 			typedQuery.setFirstResult(firstRec);
 			typedQuery.setMaxResults(pageSize);
 			List<User> result = typedQuery.getResultList();
-			return new ViewPage<User>(result, count, maxPage, pageNum);
+			return new ViewPage<>(result, count, maxPage, pageNum);
 		} finally {
 			em.close();
 		}

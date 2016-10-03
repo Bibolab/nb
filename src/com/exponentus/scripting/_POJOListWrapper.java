@@ -55,7 +55,7 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 	@SuppressWarnings("unchecked")
 	public _POJOListWrapper(String msg, String keyWord) {
 		this.count = 0;
-		List<T> l = new ArrayList<T>();
+		List<T> l = new ArrayList<>();
 		l.add((T) new SimplePOJO(msg));
 		this.list = l;
 		this.keyWord = " keyword=\"" + keyWord + "\" ";
@@ -87,7 +87,8 @@ public class _POJOListWrapper<T extends IPOJOObject> implements IOutcomeObject {
 		String result = "<query entity=\"" + entityType + "\"  maxpage=\"" + maxPage + "\" count=\"" + count + "\" currentpage=\"" + currentPage
 		        + "\"" + keyWord + ">";
 		for (T val : list) {
-			result += "<entry isread=\"" + val.isWasRead() + "\" id=\"" + val.getIdentifier() + "\" " + "url=\"" + val.getURL() + "\"><viewcontent>";
+			result += "<entry isread=\"" + val.isWasRead() + "\" id=\"" + val.getIdentifier() + "\" " + "url=\"" + val.getURL().replace("&", "&amp;")
+			        + "\"><viewcontent>";
 			result += val.getShortXMLChunk(ses) + "</viewcontent></entry>";
 		}
 		return result + "</query>";

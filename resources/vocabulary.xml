@@ -597,12 +597,16 @@
         <entry lang="RUS">Вернуться к списку документов</entry>
         <entry lang="KAZ">Құжаттар тізіміне оралу</entry>
         <entry lang="ENG">Return to the list of documents</entry>
-        <entry lang="CHI">備份的文件清單</entry>
     </sentence>
-    <sentence mode="on" keyword="ft_search_resturn_null">
+    <sentence mode="on" keyword="ft_search_return_null">
         <entry lang="ENG">Documnets have been not found, keyword</entry>
         <entry lang="RUS">Документы не найдены, строка поиска</entry>
         <entry lang="KAZ">Документы не найдены, строка поиска</entry>
+    </sentence>
+    <sentence mode="on" keyword="ft_search_keyword_is_empty">
+        <entry lang="ENG">Keyword is empty</entry>
+        <entry lang="RUS">Ключевое слово не указано</entry>
+        <entry lang="KAZ">Ключевое слово не указано</entry>
     </sentence>
     <sentence mode="on" keyword="sender">
         <entry lang="ENG">Sender</entry>

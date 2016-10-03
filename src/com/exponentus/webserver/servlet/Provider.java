@@ -36,13 +36,11 @@ public class Provider extends HttpServlet {
 
 	private static final long serialVersionUID = 2352885167311108325L;
 	private ServletContext context;
-	private AppEnv env;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		try {
 			context = config.getServletContext();
-			env = (AppEnv) context.getAttribute(EnvConst.APP_ATTR);
 		} catch (Exception e) {
 			Server.logger.errorLogEntry(e);
 		}

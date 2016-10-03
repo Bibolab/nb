@@ -7,7 +7,6 @@ import com.exponentus.dataengine.IFTIndexEngine;
 import com.exponentus.dataengine.jpa.AppEntity;
 import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.localization.LanguageCode;
-import com.exponentus.scripting.IPOJOObject;
 import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
@@ -26,7 +25,7 @@ public class FTSearch extends _DoPage {
 		LanguageCode lang = session.getLang();
 		String keyWord = formData.getValueSilently("keyword");
 		if (keyWord.isEmpty()) {
-			setBadRequest();
+			addContent(new _POJOListWrapper<>(getLocalizedWord("ft_search_keyword_is_empty", lang), keyWord));
 			return;
 		}
 		int pageNum = formData.getNumberValueSilently("page", 1);
@@ -43,7 +42,7 @@ public class FTSearch extends _DoPage {
 			ViewPage<AppEntity<UUID>> res = (ViewPage<AppEntity<UUID>>) result;
 			addContent(new _POJOListWrapper<>(res.getResult(), res.getMaxPage(), res.getCount(), res.getPageNum(), session, keyWord));
 		} else {
-			addContent(new _POJOListWrapper<IPOJOObject>(getLocalizedWord("ft_search_resturn_null", lang) + ": '" + keyWord + "'", keyWord));
+			addContent(new _POJOListWrapper<>(getLocalizedWord("ft_search_return_null", lang) + ": '" + keyWord + "'", keyWord));
 		}
 		addValue("request_param", "keyword=" + keyWord);
 	}

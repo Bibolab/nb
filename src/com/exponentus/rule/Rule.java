@@ -30,11 +30,12 @@ public abstract class Rule implements IElement {
 	public String description;
 	public String id = "unknown";
 	public String xsltFile;
+	@Deprecated
 	public PublishAsType publishAs = PublishAsType.XML;
 	public int hits;
-	public ArrayList<Caption> captions = new ArrayList<Caption>();
+	public ArrayList<Caption> captions = new ArrayList<>();
 	public AppEnv env;
-	public ArrayList<ElementRule> elements = new ArrayList<ElementRule>();
+	public ArrayList<ElementRule> elements = new ArrayList<>();
 	protected org.w3c.dom.Document doc;
 	protected RuleType type = RuleType.UNKNOWN;
 

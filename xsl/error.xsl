@@ -5,8 +5,8 @@
 	<html>
 		<head>
 			<title>Nextbase - Error</title>						
-			<link rel="stylesheet" href="classic/css/main.css"/>	
-			<link rel="stylesheet" href="classic/css/actionbar.css"/>			
+	
+			 <link rel="stylesheet" href="/SharedResources/nb/css/nb.min.css"/>		
 			<script>
 				<![CDATA[
 					function CancelForm(){
@@ -25,14 +25,14 @@
 				]]>
 			</script>
 		</head>
-		<body style="Go back...ground-image:url(/SharedResources/img/classic/f.gif); font-family:arial;">
+		<body style="Go back...ground-image:url(/SharedResources/img/f.gif); font-family:arial;">
 			<table width="100%" border="0" style="margin-top:140px">
 				<tr>
 					<td width="20%" align="right" style="font-size:9pt;">
-						<font style="font-size:1.9em;">NextBase</font>
+						<font style="font-size:1.9em;"><xsl:value-of select="error/server"/></font>
 						<div style="clear:both; height:10px"/>
 						<font style="font-size:1.1em;">
-							version <xsl:value-of select="error/version"/>&#169;Exponentus 2016
+							Exponentus 2016
 						</font>
 						<br/>
 					</td>
@@ -177,7 +177,7 @@
 						</td>
 					</tr>
 				</table>
-				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://dev.exponentus.com" target="_blank">Exponentus</a></div>
+				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://exponentus.com" target="_blank">Exponentus</a></div>
 			</body>
 		</html>
 	</xsl:template>

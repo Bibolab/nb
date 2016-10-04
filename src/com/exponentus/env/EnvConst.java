@@ -66,4 +66,9 @@ public class EnvConst {
 	public static String OLD_STRUCTDB_USER = DB_USER;
 	public static String OLD_STRUCTDB_PWD = "";
 	public static String OLD_STRUCTDB_URL = "";
+
+	public static LanguageCode getDefaultLang() {
+		return LanguageCode.valueOf(EnvConst.DEFAULT_LANG);
+	}
+
 }

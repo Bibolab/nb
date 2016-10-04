@@ -57,12 +57,12 @@ public class SimpleReferenceEntity extends AppEntity<UUID> {
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regdate>" + TimeUtil.dateTimeToStringSilently(regDate) + "</regdate>");
-		chunk.append("<name>" + getName() + "</name>");
+		chunk.append("<name>" + getName().replace("&", "&amp;") + "</name>");
 		chunk.append("<localizednames>");
 		LanguageDAO lDao = new LanguageDAO(ses);
 		List<Language> list = lDao.findAll();
 		for (Language l : list) {
-			chunk.append("<entry id=\"" + l.getCode() + "\">" + getLocalizedName(l.getCode()) + "</entry>");
+			chunk.append("<entry id=\"" + l.getCode() + "\">" + getLocalizedName(l.getCode()).replace("&", "&amp;") + "</entry>");
 		}
 		chunk.append("</localizednames>");
 		return chunk.toString();
@@ -70,12 +70,12 @@ public class SimpleReferenceEntity extends AppEntity<UUID> {
 
 	@Override
 	public String getShortXMLChunk(_Session ses) {
-		return "<name>" + getLocalizedName(ses.getLang()) + "</name>";
+		return "<name>" + getName().replace("&", "&amp;") + "</name>";
 	}
 
 	@Override
 	public List<Attachment> getAttachments() {
-		return new ArrayList<Attachment>();
+		return new ArrayList<>();
 	}
 
 	@Override

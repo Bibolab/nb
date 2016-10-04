@@ -63,7 +63,7 @@
                     </tr>
                 </table>
                 <footer>
-                    <a href="http://dev.exponentus.com" target="_blank">Exponentus</a>
+                    <a href="http://exponentus.com" target="_blank">Exponentus</a>
                   
                 </footer>
             </body>

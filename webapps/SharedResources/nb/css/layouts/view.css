@@ -233,7 +233,7 @@
 .entry-fields > span {
     border-left: 1px dotted #eee;
     display: table-cell;
-    padding: 8px 3px;
+    /*padding: 11px 3px;*/
     position: relative;
 }
 

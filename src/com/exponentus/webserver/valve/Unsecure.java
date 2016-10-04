@@ -83,7 +83,7 @@ public class Unsecure extends ValveBase {
 				if (appType.equals("favicon")) {
 					getNext().getNext().invoke(request, response);
 				} else {
-					if (appType.trim().equals("") || appType.trim().equals("p") || appType.trim().equals("p")) {
+					if (appType.trim().equals("") || appType.trim().equals("p") || appType.trim().equals("е")) {
 						if (!"".equals(EnvConst.WELCOME_APPLICATION)) {
 							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
 						}

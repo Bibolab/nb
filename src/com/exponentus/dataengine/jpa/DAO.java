@@ -25,7 +25,7 @@ import com.exponentus.user.SuperUser;
 public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
 	public IUser<Long> user;
 	protected final Class<T> entityClass;
-	private EntityManagerFactory emf;
+	protected EntityManagerFactory emf;
 	protected _Session ses;
 
 	public DAO(Class<T> entityClass, _Session session) {

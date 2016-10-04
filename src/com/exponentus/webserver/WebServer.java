@@ -135,7 +135,6 @@ public class WebServer {
 
 		Tomcat.addServlet(context, "Provider", "com.exponentus.webserver.servlet.Provider");
 		context.addServletMapping("/Provider", "Provider");
-		context.addServletMapping("/P", "Provider");
 		context.addServletMapping("/p", "Provider");
 
 		Tomcat.addServlet(context, "Login", "com.exponentus.webserver.servlet.Login");
@@ -151,12 +150,10 @@ public class WebServer {
 
 		Tomcat.addServlet(context, "UploadFile", "com.exponentus.webserver.servlet.UploadFile");
 		context.addServletMapping("/UploadFile", "UploadFile");
-		context.addServletMapping("/UF", "UploadFile");
 		context.addServletMapping("/uf", "UploadFile");
 
 		Tomcat.addServlet(context, "Error", "com.exponentus.webserver.servlet.Error");
 		context.addServletMapping("/Error", "Error");
-		context.addServletMapping("/E", "Error");
 		context.addServletMapping("/e", "Error");
 
 		context.addMimeMapping("css", "text/css");
@@ -178,7 +175,6 @@ public class WebServer {
 
 			Tomcat.addServlet(defaultContext, "Provider", "com.exponentus.webserver.servlet.Provider");
 			defaultContext.addServletMapping("/Provider", "Provider");
-			defaultContext.addServletMapping("/P", "Provider");
 			defaultContext.addServletMapping("/p", "Provider");
 
 			Wrapper w = Tomcat.addServlet(defaultContext, "PortalInit", "com.exponentus.webserver.servlet.PortalInit");
@@ -196,7 +192,6 @@ public class WebServer {
 			Tomcat.addServlet(defaultContext, "Redirector", "com.exponentus.webserver.servlet.Redirector");
 			defaultContext.addServletMapping("/Redirector", "Redirector");
 			defaultContext.addServletMapping("/r", "Redirector");
-			defaultContext.addServletMapping("/R", "Redirector");
 		}
 
 		engine.getPipeline().addValve(new Logging());
@@ -205,7 +200,6 @@ public class WebServer {
 
 		Tomcat.addServlet(defaultContext, "Error", "com.exponentus.webserver.servlet.Error");
 		defaultContext.addServletMapping("/Error", "Error");
-		defaultContext.addServletMapping("/E", "Error");
 		defaultContext.addServletMapping("/e", "Error");
 
 		initErrorPages(defaultContext);

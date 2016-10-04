@@ -16,28 +16,28 @@
 
 .sort-control:after,
 .sort-control:before {
+    border-color: #aaa;
     border-style: solid;
     content: '';
     display: none;
-    height: 0;
-    right: 4px;
+    height: 6px;
+    right: 5px;
     position: absolute;
-    width: 0;
+    transform: rotate(-45deg);
+    width: 6px;
 }
 
 /* arrow up */
 .sort-control:before {
-    border-color: #aaa transparent;
-    border-width: 0 5px 5px;
-    margin-top: -6px;
+    border-width: 1px 1px 0 0;
+    margin-top: -4px;
     top: 50%;
 }
 
 /* arrow down */
 .sort-control:after {
-    border-color: #aaa transparent;
-    border-width: 5px 5px 0;
-    margin-top: 1px;
+    border-width: 0 0 1px 1px;
+    /*margin-top: 1px;*/
     top: 50%;
 }
 
@@ -62,10 +62,15 @@
     top: 50%;
 }
 
+.sort-control.is-asc:before,
+.sort-control.is-desc:after {
+    border-color: #444;
+}
+
 .sort-control.is-asc:before {
-    border-color: transparent transparent #666 transparent;
+    border-width: 2px 2px 0 0;
 }
 
 .sort-control.is-desc:after {
-    border-color: #666 transparent transparent transparent;
+    border-width: 0 0 2px 2px;
 }

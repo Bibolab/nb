@@ -30,8 +30,15 @@ public class PortalInit extends HttpServlet {
 		String contextName = context.getServletContextName();
 		Server.logger.infoLogEntry("# Start application \"" + contextName + "\"");
 		try {
-			IDatabase db = new Database(contextName);
-			AppEnv env = new AppEnv(contextName, db);
+			IDatabase db = null;
+			AppEnv env = null;
+			if ("welcome".equals(contextName)) {
+				db = new Database(EnvConst.WELCOME_APPLICATION);
+				env = new AppEnv(EnvConst.WELCOME_APPLICATION, db);
+			} else {
+				db = new Database(contextName);
+				env = new AppEnv(contextName, db);
+			}
 			try {
 				Class<?> c = Class.forName(env.appName.toLowerCase() + ".init.AppConst");
 

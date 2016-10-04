@@ -45,10 +45,11 @@ public class Server {
 
 			webServerInst = new WebServer();
 			if (webServerInst.init(Environment.getHostName())) {
-
 				for (Site webApp : Environment.webAppToStart.values()) {
 					webServerInst.addApplication(webApp);
 				}
+
+				webServerInst.initDefaultURL();
 
 				String info = webServerInst.initConnectors();
 				Server.logger.infoLogEntry("Web server using: " + info);

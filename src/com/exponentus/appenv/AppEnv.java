@@ -43,7 +43,7 @@ public class AppEnv extends PageCacheAdapter {
 	private String defaultPage;
 
 	public AppEnv(String n, IDatabase db) {
-		this.appName = n;
+		appName = n;
 		this.dataBase = db;
 
 		if (Environment.isDevMode()) {

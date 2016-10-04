@@ -32,10 +32,11 @@ import com.exponentus.webserver.valve.Secure;
 import com.exponentus.webserver.valve.Unsecure;
 
 public class WebServer {
-	private static Tomcat tomcat;
-	private static Engine engine;
 	public static final String httpSchema = "http";
 	public static final String httpSecureSchema = "https";
+
+	private static Tomcat tomcat;
+	private static Engine engine;
 
 	// private static final String defaultWelcomeList[] = { "index.html",
 	// "index.htm" };
@@ -60,7 +61,6 @@ public class WebServer {
 			Server.logger.fatalLogEntry("there is no \"" + EnvConst.SHARED_RESOURCES_APP_NAME + "\" resource");
 			return false;
 		}
-		initDefaultURL();
 		return true;
 
 	}
@@ -167,30 +167,51 @@ public class WebServer {
 
 		initRestService(site, context);
 
-		context.setSessionTimeout(EnvConst.HTTP_SESSION_TIMEOUT);
-
 		return null;
 	}
 
 	public void initDefaultURL() {
-		String db = new File("webapps/ROOT").getAbsolutePath();
-		Context context = tomcat.addContext(tomcat.getHost(), "", db);
-		context.setDisplayName("root");
-		context.addWelcomeFile("r");
+		Context defaultContext = null;
+		if (!"".equals(EnvConst.WELCOME_APPLICATION)) {
+			defaultContext = tomcat.addContext(tomcat.getHost(), "",
+			        new File("webapps" + File.separator + EnvConst.WELCOME_APPLICATION).getAbsolutePath());
+
+			Tomcat.addServlet(defaultContext, "Provider", "com.exponentus.webserver.servlet.Provider");
+			defaultContext.addServletMapping("/Provider", "Provider");
+			defaultContext.addServletMapping("/P", "Provider");
+			defaultContext.addServletMapping("/p", "Provider");
+
+			Wrapper w = Tomcat.addServlet(defaultContext, "PortalInit", "com.exponentus.webserver.servlet.PortalInit");
+			w.setLoadOnStartup(1);
+
+			defaultContext.setDisplayName("welcome");
+
+			defaultContext.addWelcomeFile("p");
+
+		} else {
+			defaultContext = tomcat.addContext(tomcat.getHost(), "", new File("webapps/ROOT").getAbsolutePath());
+			defaultContext.addWelcomeFile("r");
+			defaultContext.setDisplayName("root");
+
+			Tomcat.addServlet(defaultContext, "Redirector", "com.exponentus.webserver.servlet.Redirector");
+			defaultContext.addServletMapping("/Redirector", "Redirector");
+			defaultContext.addServletMapping("/r", "Redirector");
+			defaultContext.addServletMapping("/R", "Redirector");
+		}
 
 		engine.getPipeline().addValve(new Logging());
 		engine.getPipeline().addValve(new Unsecure());
 		engine.getPipeline().addValve(new Secure());
 
-		Tomcat.addServlet(context, "Redirector", "com.exponentus.webserver.servlet.Redirector");
-		context.addServletMapping("/Redirector", "Redirector");
-		context.addServletMapping("/r", "Redirector");
-		context.addServletMapping("/R", "Redirector");
+		Tomcat.addServlet(defaultContext, "Error", "com.exponentus.webserver.servlet.Error");
+		defaultContext.addServletMapping("/Error", "Error");
+		defaultContext.addServletMapping("/E", "Error");
+		defaultContext.addServletMapping("/e", "Error");
 
-		initErrorPages(context);
+		initErrorPages(defaultContext);
 
-		Tomcat.addServlet(context, "default", "org.apache.catalina.servlets.DefaultServlet");
-		context.addServletMapping("/", "default");
+		Tomcat.addServlet(defaultContext, "default", "org.apache.catalina.servlets.DefaultServlet");
+		defaultContext.addServletMapping("/", "default");
 	}
 
 	public String initConnectors() {

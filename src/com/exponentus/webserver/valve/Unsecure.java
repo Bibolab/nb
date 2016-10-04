@@ -84,6 +84,9 @@ public class Unsecure extends ValveBase {
 					getNext().getNext().invoke(request, response);
 				} else {
 					if (appType.trim().equals("")) {
+						if (!"".equals(EnvConst.WELCOME_APPLICATION)) {
+							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
+						}
 						getNext().getNext().invoke(request, response);
 					} else {
 						String msg = "unknown application type \"" + appType + "\"";

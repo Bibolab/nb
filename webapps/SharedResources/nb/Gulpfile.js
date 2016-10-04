@@ -27,60 +27,64 @@ var isProduction = argv.production;
 
 // create module task
 for (var i = 0; i < modules.length; i++) {
-    var module = modules[i];
-    // _styles
-    _styles[module.name] = ['../css/normalize.css',
-        '../vendor/select2/css/select2.min.css',
-        '../vendor/spectrum/spectrum.css',
-        '../themes/**/*.css',
-        // '../knca/eds.css',
-        'css/nb.min.css',
-        module.path + '/css/**/*.css',
-        '!' + module.path + '/css/*.min.css'
-    ];
-    // _templates
-    _templates[module.name] = [module.path + '/js/templates/*.hbs'];
-    // _scripts
-    _scripts[module.name] = ['js/nb.build.js',
-        '../vendor/select2/js/select2.full.min.js',
-        '../vendor/select2/js/i18n/ru.js',
-        '../vendor/spectrum/spectrum.js',
-        '../vendor/spectrum/i18n/jquery.spectrum-ru.js',
-        // '../knca/knca.js',
-        module.path + '/js/**/*.js',
-        '!' + module.path + '/js/app.bundle.js'
-    ];
+    try {
+        var module = modules[i];
+        // _styles
+        _styles[module.name] = ['../css/normalize.css',
+            '../vendor/select2/css/select2.min.css',
+            '../vendor/spectrum/spectrum.css',
+            '../themes/**/*.css',
+            // '../knca/eds.css',
+            'css/nb.min.css',
+            module.path + '/css/**/*.css',
+            '!' + module.path + '/css/*.min.css'
+        ];
+        // _templates
+        _templates[module.name] = [module.path + '/js/templates/*.hbs'];
+        // _scripts
+        _scripts[module.name] = ['js/nb.build.js',
+            '../vendor/select2/js/select2.full.min.js',
+            '../vendor/select2/js/i18n/ru.js',
+            '../vendor/spectrum/spectrum.js',
+            '../vendor/spectrum/i18n/jquery.spectrum-ru.js',
+            // '../knca/knca.js',
+            module.path + '/js/**/*.js',
+            '!' + module.path + '/js/app.bundle.js'
+        ];
 
-    (function() { // scope
-        var m = module;
-        gulp.task(m.name + '_styles', function() {
-            gulp.src(_styles[m.name])
-                .pipe(concat('all.min.css'))
-                .pipe(csso())
-                .pipe(gulp.dest(m.path + '/css'));
-        });
+        (function() { // scope
+            var m = module;
+            gulp.task(m.name + '_styles', function() {
+                gulp.src(_styles[m.name])
+                    .pipe(concat('all.min.css'))
+                    .pipe(csso())
+                    .pipe(gulp.dest(m.path + '/css'));
+            });
 
-        gulp.task(m.name + '_templates', function() {
-            gulp.src(_templates[m.name])
-                .pipe(handlebars({
-                    handlebars: require('handlebars')
-                }))
-                .pipe(wrap('Handlebars.template(<%= contents %>)'))
-                .pipe(declare({
-                    namespace: 'nb.templates',
-                    noRedeclare: false,
-                }))
-                .pipe(concat('templates.js'))
-                .pipe(gulp.dest(m.path + '/js/templates/compiled'));
-        });
+            gulp.task(m.name + '_templates', function() {
+                gulp.src(_templates[m.name])
+                    .pipe(handlebars({
+                        handlebars: require('handlebars')
+                    }))
+                    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+                    .pipe(declare({
+                        namespace: 'nb.templates',
+                        noRedeclare: false,
+                    }))
+                    .pipe(concat('templates.js'))
+                    .pipe(gulp.dest(m.path + '/js/templates/compiled'));
+            });
 
-        gulp.task(m.name + '_scripts', function() {
-            gulp.src(_scripts[m.name])
-                .pipe(concat('app.bundle.js'))
-                .pipe(gulpif(isProduction, uglify()))
-                .pipe(gulp.dest(m.path + '/js'));
-        });
-    })();
+            gulp.task(m.name + '_scripts', function() {
+                gulp.src(_scripts[m.name])
+                    .pipe(concat('app.bundle.js'))
+                    .pipe(gulpif(isProduction, uglify()))
+                    .pipe(gulp.dest(m.path + '/js'));
+            });
+        })();
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 // nb task

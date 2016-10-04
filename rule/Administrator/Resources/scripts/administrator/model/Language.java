@@ -41,10 +41,12 @@ public class Language extends AppEntity<UUID> {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public void setLanguageCode(String id) {
 		this.code = LanguageCode.valueOf(id);
 	}
 
+	private int position;
 
 	@Override
 	public String toString() {
@@ -63,24 +65,24 @@ public class Language extends AppEntity<UUID> {
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regdate>" + TimeUtil.dateToStringSilently(regDate) + "</regdate>");
-		if(name != null) {
+		if (name != null) {
 			chunk.append("<name>" + name + "</name>");
 		}
-		if(code != LanguageCode.UNKNOWN) {
+		if (code != LanguageCode.UNKNOWN) {
 			chunk.append("<code>" + code + "</code>");
 		}
 
-			chunk.append("<localizednames>");
-			LanguageDAO lDao = new LanguageDAO(ses);
-			List<Language> list = lDao.findAll();
-			String localizedName = "";
-			for (Language l : list) {
-				if(name != null) {
-					localizedName = getLocalizedName(l.getCode());
-				}
-				chunk.append("<entry id=\"" + l.getCode() + "\">" + localizedName + "</entry>");
+		chunk.append("<localizednames>");
+		LanguageDAO lDao = new LanguageDAO(ses);
+		List<Language> list = lDao.findAll();
+		String localizedName = "";
+		for (Language l : list) {
+			if (name != null) {
+				localizedName = getLocalizedName(l.getCode());
 			}
-			chunk.append("</localizednames>");
+			chunk.append("<entry id=\"" + l.getCode() + "\">" + localizedName + "</entry>");
+		}
+		chunk.append("</localizednames>");
 
 		return chunk.toString();
 	}
@@ -108,12 +110,20 @@ public class Language extends AppEntity<UUID> {
 
 	@Override
 	public List<Attachment> getAttachments() {
-		return new ArrayList<Attachment>();
+		return new ArrayList<>();
 	}
 
 	@Override
 	public void setAttachments(List<Attachment> attachments) {
 
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 
 }

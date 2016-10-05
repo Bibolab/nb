@@ -59,7 +59,6 @@ public class EnvConst {
 	public static String DATABASE_NAME = APP_ID;
 	public static String DATABASE_HOST = "127.0.0.1";
 	public static String CONN_PORT = "5432";
-	public static String CAPTCHA_CODE = "";
 	public static String STAFF_APP_NAME = STAFF_NAME;
 	public static String STAFF_DAO_CLASS = "staff.dao.EmployeeDAO";
 	public static String RESOURCES_DIR = "resources";

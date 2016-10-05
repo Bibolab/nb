@@ -15,8 +15,8 @@ import com.exponentus.server.Server;
 
 public class ResourceLoader extends Application {
 	private Site appSite;
-	private static List<com.exponentus.rest.ServiceDescriptor> loaded = new ArrayList<com.exponentus.rest.ServiceDescriptor>();
-	private static List<String> unsecure = new ArrayList<String>();
+	private static List<com.exponentus.rest.ServiceDescriptor> loaded = new ArrayList<>();
+	private static List<String> unsecure = new ArrayList<>();
 
 	public ResourceLoader(Site appSite) {
 		super();
@@ -25,7 +25,7 @@ public class ResourceLoader extends Application {
 
 	@Override
 	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> classes = new HashSet<Class<?>>();
+		final Set<Class<?>> classes = new HashSet<>();
 		classes.add(ObjectMapperProvider.class);
 		classes.add(RestProvider.class);
 		classes.add(SessionService.class);
@@ -42,7 +42,7 @@ public class ResourceLoader extends Application {
 				descr = serv.updateDescription(descr);
 				descr.setLoaded(true);
 				classes.add(c);
-				Server.logger.infoLogEntry("REST service class \"" + clazz + "\" loaded");
+				Server.logger.infoLogEntry("REST service class \"" + clazz + "\" was loaded");
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 			        | SecurityException e) {
 				Server.logger.errorLogEntry(e);

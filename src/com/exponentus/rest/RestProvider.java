@@ -1,10 +1,14 @@
 package com.exponentus.rest;
 
+import java.util.UUID;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,8 +19,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTIndexEngine;
+import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.EnvConst;
 import com.exponentus.exception.RuleException;
+import com.exponentus.localization.LanguageCode;
+import com.exponentus.rest.pojo.Outcome;
+import com.exponentus.rest.pojo.SearchViewRequest;
 import com.exponentus.rule.page.PageRule;
 import com.exponentus.runtimeobj.Page;
 import com.exponentus.scripting._Session;
@@ -47,6 +58,36 @@ public class RestProvider implements IRestService {
 		HttpSession jses = request.getSession(false);
 		_Session us = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 		return us;
+	}
+
+	@POST
+	@Path("/search")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response searchService(SearchViewRequest r) {
+		Outcome outcome = new Outcome();
+		_Session ses = getSession();
+		LanguageCode lang = ses.getLang();
+		if (!r.getKeyword().isEmpty()) {
+			int pageSize = ses.pageSize;
+
+			IDatabase db = ses.getDatabase();
+			IFTIndexEngine ftEngine = db.getFTSearchEngine();
+			ViewPage<?> result = ftEngine.search(r.getKeyword(), ses, r.getPageNum(), pageSize);
+
+			if (result != null) {
+				@SuppressWarnings("unchecked")
+				ViewPage<AppEntity<UUID>> res = (ViewPage<AppEntity<UUID>>) result;
+				outcome.setPayload(res);
+				return Response.status(HttpServletResponse.SC_OK).entity(outcome).build();
+			} else {
+				outcome.setMessage("ft_search_return_null", lang);
+			}
+		} else {
+			outcome.setMessage("ft_search_keyword_is_empty", lang);
+		}
+		return Response.status(HttpServletResponse.SC_BAD_REQUEST).entity(outcome).build();
+
 	}
 
 	@GET

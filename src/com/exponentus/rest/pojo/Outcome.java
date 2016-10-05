@@ -15,7 +15,8 @@ public class Outcome {
 	private OutcomeType type = OutcomeType.OK;
 	private String errorId;
 	private String warningId;
-	private HashMap<LanguageCode, String> message = new HashMap<LanguageCode, String>();
+	private HashMap<LanguageCode, String> message = new HashMap<>();
+	private Object payload;
 
 	public OutcomeType getType() {
 		return type;
@@ -84,6 +85,14 @@ public class Outcome {
 	public Outcome setMessages(HashMap<LanguageCode, String> associatedList) {
 		this.message = associatedList;
 		return this;
+	}
+
+	public Object getPayload() {
+		return payload;
+	}
+
+	public void setPayload(Object payLoad) {
+		this.payload = payLoad;
 	}
 
 }

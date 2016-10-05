@@ -93,7 +93,7 @@ public class FTSearchEngine implements IFTIndexEngine {
 			dbPool.returnConnection(conn);
 		}
 
-		return result.size() > 0 ? new ViewPage<>(result, result.size(), pageNum, pageSize, keyWord) : null;
+		return new ViewPage<>(result, result.size(), pageNum, pageSize, keyWord);
 
 	}
 

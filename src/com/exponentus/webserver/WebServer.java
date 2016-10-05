@@ -31,6 +31,9 @@ import com.exponentus.webserver.valve.Logging;
 import com.exponentus.webserver.valve.Secure;
 import com.exponentus.webserver.valve.Unsecure;
 
+import administrator.dao.LanguageDAO;
+import administrator.model.Language;
+
 public class WebServer {
 	public static final String httpSchema = "http";
 	public static final String httpSecureSchema = "https";
@@ -177,19 +180,11 @@ public class WebServer {
 			defaultContext.addServletMapping("/p", "Provider");
 
 			Tomcat.addServlet(defaultContext, "lang", "com.exponentus.webserver.servlet.Lang");
-			defaultContext.addServletMapping("/eng", "lang");
-			defaultContext.addServletMapping("/bul", "lang");
-			defaultContext.addServletMapping("/rus", "lang");
-			defaultContext.addServletMapping("/spa", "lang");
-			defaultContext.addServletMapping("/por", "lang");
-			defaultContext.addServletMapping("/kaz", "lang");
-
-			defaultContext.addServletMapping("/ENG", "lang");
-			defaultContext.addServletMapping("/BUL", "lang");
-			defaultContext.addServletMapping("/RUS", "lang");
-			defaultContext.addServletMapping("/SPA", "lang");
-			defaultContext.addServletMapping("/POR", "lang");
-			defaultContext.addServletMapping("/KAZ", "lang");
+			LanguageDAO lDao = new LanguageDAO();
+			for (Language l : lDao.findAll()) {
+				defaultContext.addServletMapping("/" + l.getCode().name().toLowerCase(), "lang");
+				defaultContext.addServletMapping("/" + l.getCode().name(), "lang");
+			}
 
 			Wrapper w = Tomcat.addServlet(defaultContext, "PortalInit", "com.exponentus.webserver.servlet.PortalInit");
 			w.setLoadOnStartup(1);

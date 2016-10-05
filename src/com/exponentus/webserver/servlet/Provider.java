@@ -66,7 +66,6 @@ public class Provider extends HttpServlet {
 		HttpSession jses = request.getSession(false);
 		_Session ses = (_Session) jses.getAttribute(EnvConst.SESSION_ATTR);
 		AppEnv env = ses.getAppEnv();
-		System.out.println(request.getServletPath());
 		PageOutcome result = new PageOutcome();
 		String id = request.getParameter("id");
 		if (id == null) {

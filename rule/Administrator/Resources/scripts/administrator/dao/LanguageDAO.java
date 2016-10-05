@@ -36,7 +36,6 @@ public class LanguageDAO extends DAO<Language, UUID> {
 		} finally {
 			em.close();
 		}
-
 	}
 
 }

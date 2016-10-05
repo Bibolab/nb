@@ -20,19 +20,20 @@ public class Lang extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		doPost(request, response);
+		response.sendError(HttpServletResponse.SC_FORBIDDEN);
+		return;
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		doPost(request, response);
+		response.sendError(HttpServletResponse.SC_FORBIDDEN);
+		return;
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String servletType = request.getServletPath();
-		String lang = servletType.substring(1, servletType.length());
-		RequestDispatcher rd = request.getRequestDispatcher("p?lang=" + lang);
+		RequestDispatcher rd = request.getRequestDispatcher("p?lang=" + servletType.substring(1));
 		try {
 			rd.forward(request, response);
 		} catch (IOException | ServletException e) {

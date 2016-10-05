@@ -23,6 +23,8 @@ import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
 import com.exponentus.webserver.servlet.SessionCooks;
 
+import administrator.dao.LanguageDAO;
+
 public class Unsecure extends ValveBase {
 	private RequestURL ru;
 
@@ -83,20 +85,33 @@ public class Unsecure extends ValveBase {
 				if (appType.equals("favicon")) {
 					getNext().getNext().invoke(request, response);
 				} else {
-					if (appType.trim().equals("") || appType.trim().equals("p") || appType.trim().equals("е")
-					        || appType.trim().equalsIgnoreCase("eng") || appType.trim().equalsIgnoreCase("bul")
-					        || appType.trim().equalsIgnoreCase("rus") || appType.trim().equalsIgnoreCase("spa")
-					        || appType.trim().equalsIgnoreCase("por") || appType.trim().equalsIgnoreCase("kaz")) {
-						if (!"".equals(EnvConst.WELCOME_APPLICATION)) {
-							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
+					String val = appType.trim();
+					// String val = request.getServletPath().substring(1,
+					// request.getServletPath().length());
+					if (EnvConst.WELCOME_APPLICATION.isEmpty()) {
+						if (val.equals("") || val.equals("p") || val.equals("е")) {
+							getNext().getNext().invoke(request, response);
+						} else {
+							String msg = "unknown application type \"" + appType + "\"";
+							Server.logger.warningLogEntry(msg);
+							ApplicationException ae = new ApplicationException(val, msg, LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
+							response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+							response.getWriter().println(ae.getHTMLMessage());
 						}
-						getNext().getNext().invoke(request, response);
 					} else {
-						String msg = "unknown application type \"" + appType + "\"";
-						Server.logger.warningLogEntry(msg);
-						ApplicationException ae = new ApplicationException(ru.getAppType(), msg, LanguageCode.valueOf(EnvConst.DEFAULT_LANG));
-						response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-						response.getWriter().println(ae.getHTMLMessage());
+						String req = request.getServletPath();
+						if (val.equals("") || val.equals("p") || new LanguageDAO().findAll().stream()
+						        .filter(o -> o.getCode().name().equalsIgnoreCase(req.substring(1))).findFirst().isPresent()) {
+
+							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
+							getNext().getNext().invoke(request, response);
+						} else {
+							String msg = "unknown request \"" + req + "\"";
+							Server.logger.warningLogEntry(msg);
+							ApplicationException ae = new ApplicationException(req, msg, EnvConst.getDefaultLang());
+							response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+							response.getWriter().println(ae.getHTMLMessage());
+						}
 					}
 				}
 			}

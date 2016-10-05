@@ -44,7 +44,7 @@
 								<td>
 									<xsl:choose>
 										<xsl:when test="error/@type = 'INTERNAL'">	
-											<font style="font-size:3em;"><xsl:value-of select="error/code"/></font><br/><br/>							
+											<font style="font-size:4em;"><xsl:value-of select="error/code"/></font><br/><br/>							
 											<font style="font-size:2em;">Internal server error</font><br/><br/>
 											<font style="font-size:1em;"><xsl:value-of select="error/message"/></font><br/><br/>
 											<font style="font-size:1em;"><xsl:value-of select="error/message/errortext"/></font>												
@@ -80,6 +80,7 @@
 											<font style="font-size:2em;">Server error</font>
 										</xsl:when>
 										<xsl:otherwise>
+										     <font style="font-size:4em;"><xsl:value-of select="error/code"/></font><br/><br/>
 											<font style="font-size:2em;">Error</font><br/><br/>
 											<font style="font-size:1em;"><xsl:value-of select="error/message"/></font>
 										</xsl:otherwise>
@@ -177,7 +178,7 @@
 						</td>
 					</tr>
 				</table>
-				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://exponentus.com" target="_blank">Exponentus</a></div>
+				<div style="z-index:999; margin-top:-2%; margin-left:22.5%; font-family:arial; font-size:0.71em">&#xA0;<a href="http://exponentus.com" target="_blank">exponentus.com</a></div>
 			</body>
 		</html>
 	</xsl:template>

@@ -61,7 +61,7 @@ public class RequestURL {
 			return;
 		}
 
-		for (String pageIdRegex : new String[] { "^.*/page/([\\w\\-~\\.]+)", "^.*/((Provider)|(P)|(p))\\?(.+&)?id=([\\w\\-~\\.]+).*" }) {
+		for (String pageIdRegex : new String[] { "^.*/page/([\\w\\-~\\.]+)", "^.*/((Provider)|(p))\\?(.+&)?id=([\\w\\-~\\.]+).*" }) {
 			Pattern pagePattern = Pattern.compile(pageIdRegex);
 			Matcher pageMatcher = pagePattern.matcher(urlVal);
 			if (pageMatcher.matches()) {

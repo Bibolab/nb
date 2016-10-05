@@ -109,7 +109,6 @@ public class WebServer {
 	}
 
 	public Host addApplication(Site site) throws LifecycleException, MalformedURLException {
-
 		Context context = null;
 		String docBase = site.name;
 		String URLPath = "/" + docBase;
@@ -176,6 +175,14 @@ public class WebServer {
 			Tomcat.addServlet(defaultContext, "Provider", "com.exponentus.webserver.servlet.Provider");
 			defaultContext.addServletMapping("/Provider", "Provider");
 			defaultContext.addServletMapping("/p", "Provider");
+
+			Tomcat.addServlet(defaultContext, "lang", "com.exponentus.webserver.servlet.Lang");
+			defaultContext.addServletMapping("/eng", "lang");
+			defaultContext.addServletMapping("/bul", "lang");
+			defaultContext.addServletMapping("/rus", "lang");
+			defaultContext.addServletMapping("/spa", "lang");
+			defaultContext.addServletMapping("/por", "lang");
+			defaultContext.addServletMapping("/kaz", "lang");
 
 			Wrapper w = Tomcat.addServlet(defaultContext, "PortalInit", "com.exponentus.webserver.servlet.PortalInit");
 			w.setLoadOnStartup(1);

@@ -169,7 +169,7 @@ public class WebServer {
 		return null;
 	}
 
-	public void initDefaultURL() {
+	public void initDefaultURL() throws MalformedURLException, LifecycleException {
 		Context defaultContext = null;
 		if (!"".equals(EnvConst.WELCOME_APPLICATION)) {
 			defaultContext = tomcat.addContext(tomcat.getHost(), "",
@@ -192,6 +192,8 @@ public class WebServer {
 			defaultContext.setDisplayName("welcome");
 
 			defaultContext.addWelcomeFile("p");
+
+			initRestService(Environment.webAppToStart.get(EnvConst.WELCOME_APPLICATION), defaultContext);
 
 		} else {
 			defaultContext = tomcat.addContext(tomcat.getHost(), "", new File("webapps/ROOT").getAbsolutePath());

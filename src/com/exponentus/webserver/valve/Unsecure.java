@@ -105,6 +105,9 @@ public class Unsecure extends ValveBase {
 
 							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
 							getNext().getNext().invoke(request, response);
+						} else if ("/rest".equals(req)) {
+							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
+							getNext().getNext().invoke(request, response);
 						} else {
 							String msg = "unknown request \"" + req + "\"";
 							Server.logger.warningLogEntry(msg);

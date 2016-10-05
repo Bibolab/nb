@@ -11,10 +11,7 @@ import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.messaging.MessageType;
-import com.exponentus.scripting.IPOJOObject;
-import com.exponentus.scripting._POJOListWrapper;
-import com.exponentus.scripting._Session;
-import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.*;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
@@ -93,7 +90,8 @@ public class ScriptHelper {
 			pageNum = maxPage;
 		}
 		int startRec = RuntimeObjUtil.calcStartEntry(pageNum, pageSize);
-		List<? extends IPOJOObject> list = dao.findAll(startRec, pageSize);
+		_SortMap sortMap = formData.getSortMap(_SortMap.desc("regDate"));
+		List<? extends IPOJOObject> list = dao.findAll(sortMap, startRec, pageSize);
 		return new _POJOListWrapper(list, maxPage, count, pageNum, getSes());
 	}
 

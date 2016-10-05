@@ -184,6 +184,13 @@ public class WebServer {
 			defaultContext.addServletMapping("/por", "lang");
 			defaultContext.addServletMapping("/kaz", "lang");
 
+			defaultContext.addServletMapping("/ENG", "lang");
+			defaultContext.addServletMapping("/BUL", "lang");
+			defaultContext.addServletMapping("/RUS", "lang");
+			defaultContext.addServletMapping("/SPA", "lang");
+			defaultContext.addServletMapping("/POR", "lang");
+			defaultContext.addServletMapping("/KAZ", "lang");
+
 			Wrapper w = Tomcat.addServlet(defaultContext, "PortalInit", "com.exponentus.webserver.servlet.PortalInit");
 			w.setLoadOnStartup(1);
 

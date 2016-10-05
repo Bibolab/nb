@@ -278,34 +278,6 @@ public class Util {
 		return random.nextBoolean();
 	}
 
-	public static String generateRandomAsText(String setOfTheLetters) {
-		return generateRandomAsText(setOfTheLetters, 16);
-	}
-
-	@Deprecated
-	/**
-	 * Use the similar method in com.exponentus.util.StringUtil
-	 **/
-	public static String generateRandomAsText(String setOfTheLetters, int len) {
-		Random r = new Random();
-		String key = "";
-		char[] letters = new char[setOfTheLetters.length() + 10];
-
-		for (int i = 0; i < 10; i++) {
-			letters[i] = Character.forDigit(i, 10);
-		}
-
-		for (int i = 0; i < setOfTheLetters.length(); i++) {
-			letters[i + 10] = setOfTheLetters.charAt(i);
-		}
-
-		for (int i = 0; i < len; i++) {
-			key += letters[Math.abs(r.nextInt()) % letters.length];
-		}
-
-		return key;
-	}
-
 	public static boolean addrIsCorrect(String email) {
 		String validate = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -313,13 +285,6 @@ public class Util {
 		Matcher matcher = pattern.matcher(email);
 
 		return matcher.matches();
-	}
-
-	public static String getTimeDiffInMilSec(long start_time) {
-		long time = System.currentTimeMillis() - start_time;
-		int sec = (int) time / 1000;// find seconds
-		int msec = (int) time % 1000;// find milliseconds
-		return Integer.toString(sec) + "." + Integer.toString(msec);
 	}
 
 	public static String getTimeDiffInSec(long start_time) {

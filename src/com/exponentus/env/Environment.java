@@ -57,6 +57,7 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.PageOutcome;
 import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
+import com.exponentus.util.TimeUtil;
 import com.exponentus.util.XMLUtil;
 import com.exponentus.webserver.WebServer;
 
@@ -160,6 +161,7 @@ public class Environment implements ICache {
 
 			Server.logger.infoLogEntry("Initialize runtime environment");
 			initMimeTypes();
+			TimeUtil.init();
 
 			orgName = XMLUtil.getTextContent(xmlDocument, "/nextbase/orgname");
 			if (orgName.isEmpty()) {

@@ -14,7 +14,8 @@
         <form name="{@entity}" action="" data-edit="{@editable}">
             <header class="content-header">
                 <h1 class="header-title">
-                   Language <xsl:value-of select="fields/name"/>
+                    Language
+                    <xsl:value-of select="fields/name"/>
                 </h1>
                 <div class="content-actions">
                     <xsl:apply-templates select="//actionbar"/>
@@ -32,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                           Code
+                            Code
                         </div>
                         <div class="controls">
                             <select name="code" class="span2">
@@ -41,11 +42,18 @@
                                         <xsl:if test="@attrval = //fields/code">
                                             <xsl:attribute name="selected">selected</xsl:attribute>
                                         </xsl:if>
-
                                         <xsl:value-of select="."/>
                                     </option>
                                 </xsl:for-each>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label">
+                            Position
+                        </div>
+                        <div class="controls">
+                            <input type="number" name="position" value="{fields/position}" class="span2"/>
                         </div>
                     </div>
                 </fieldset>
@@ -65,7 +73,7 @@
                     </xsl:for-each>
                 </fieldset>
             </section>
-            <input type="hidden" name="fsid" value="{//response/content/fsid}"/>
+            <input type="hidden" name="fsid" value="{//fsid}"/>
         </form>
     </xsl:template>
 

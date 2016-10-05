@@ -117,10 +117,8 @@ public class UploadFile extends HttpServlet {
 		sb.append(fns.stream().collect(Collectors.joining(",")));
 		sb.append("]}");
 
-		// System.out.println(">>" + fileItem.getString() + " " +
-		// fileItem.getFieldName());
-
 		if (fsidItem != null) {
+			System.out.println(">>" + ses.hashCode());
 			_FormAttachments attachs = ses.getFormAttachments(fsidItem.getString());
 			if (sign != null && !sign.isEmpty()) {
 				attachs.addFileWithSign(uploadedFile, fn, fieldName, sign);

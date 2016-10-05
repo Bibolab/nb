@@ -9,8 +9,8 @@ import java.util.Map;
 import com.exponentus.dataengine.jpa.TempFile;
 
 public class _FormAttachments {
-	private Map<String, Map<String, TempFile>> addedAttachments = new HashMap<String, Map<String, TempFile>>();
-	private Map<String, TempFile> deletedAttachments = new HashMap<String, TempFile>();
+	private Map<String, Map<String, TempFile>> addedAttachments = new HashMap<>();
+	private Map<String, TempFile> deletedAttachments = new HashMap<>();
 
 	_FormAttachments(_Session ses) {
 
@@ -24,7 +24,7 @@ public class _FormAttachments {
 		Map<String, TempFile> attachField = addedAttachments.get(fieldName);
 		// TODO it need to improve
 		if (attachField == null || fieldName.equalsIgnoreCase("avatar")) {
-			attachField = new HashMap<String, TempFile>();
+			attachField = new HashMap<>();
 			addedAttachments.put(fieldName, attachField);
 		}
 		attachField.put(fileName, tmpFile);
@@ -37,10 +37,9 @@ public class _FormAttachments {
 	}
 
 	public List<TempFile> getFiles(String fieldName) {
-		ArrayList<TempFile> atts = new ArrayList<TempFile>();
-		Map<String, TempFile> attachField = addedAttachments.get(fieldName);
-		if (attachField != null) {
-			for (TempFile att : attachField.values()) {
+		ArrayList<TempFile> atts = new ArrayList<>();
+		for (Map<String, TempFile> attsMap : addedAttachments.values()) {
+			for (TempFile att : attsMap.values()) {
 				atts.add(getFile(fieldName, att.getRealFileName()));
 			}
 		}
@@ -48,7 +47,7 @@ public class _FormAttachments {
 	}
 
 	public List<TempFile> getFiles() {
-		ArrayList<TempFile> atts = new ArrayList<TempFile>();
+		ArrayList<TempFile> atts = new ArrayList<>();
 		for (Map<String, TempFile> attsMap : addedAttachments.values()) {
 			for (TempFile att : attsMap.values()) {
 				atts.add(getFile(att.getRealFileName()));
@@ -84,6 +83,6 @@ public class _FormAttachments {
 
 	// TODO it need to consider name of field
 	public List<TempFile> getDeletedFiles() {
-		return new ArrayList<TempFile>(deletedAttachments.values());
+		return new ArrayList<>(deletedAttachments.values());
 	}
 }

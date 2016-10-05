@@ -82,7 +82,6 @@
 		</layout>
 	</appender>
 
-
     <category name="org.apache.catalina.core">
         <priority value="INFO" />
         <appender-ref ref="console" />
@@ -99,6 +98,11 @@
         <appender-ref ref="console" />
     </category>  
         
+    <category name="org.apache.catalina.loader">
+        <priority value="INFO" />
+        <appender-ref ref="console" />
+    </category>  
+    
 	<category name="net.sf.jasperreports">
 		<priority value="debug" />
 		<appender-ref ref="roller" />

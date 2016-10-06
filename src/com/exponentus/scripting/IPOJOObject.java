@@ -3,8 +3,9 @@ package com.exponentus.scripting;
 import java.util.List;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.scriptprocessor.page.IOutcomeObject;
 
-public interface IPOJOObject {
+public interface IPOJOObject extends IOutcomeObject {
 
 	String getEntityKind();
 

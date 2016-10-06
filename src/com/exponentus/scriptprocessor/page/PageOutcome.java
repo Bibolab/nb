@@ -251,12 +251,8 @@ public class PageOutcome {
 
 	}
 
-	public void addContent(String key, IPOJOObject obj) {
+	public void addContent(String key, IOutcomeObject obj) {
 		objectsMap.put(key, obj);
-	}
-
-	public void addContent(String key, List<IPOJOObject> list) {
-		objectsMap.put(key, list);
 	}
 
 	public int getHttpStatus() {

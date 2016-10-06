@@ -625,7 +625,7 @@
     </sentence>
 
       
-      <sentence mode="on" keyword="message_has_sent_succesfully">
+    <sentence mode="on" keyword="message_has_sent_succesfully">
         <entry lang="ENG">The message has been sent</entry>
         <entry lang="RUS">Сообщение не отправлено</entry>
         <entry lang="KAZ">The message has been sent</entry>  
@@ -633,6 +633,31 @@
         <entry lang="POR">A mensagem foi enviada</entry>
         <entry lang="SPA">El mensaje fue enviado</entry>    
     </sentence> 
+    <sentence mode="on" keyword="captcha_incorrect">
+        <entry lang="ENG">Captcha is incorrect</entry>
+        <entry lang="RUS">Капча не верная</entry>
+        <entry lang="KAZ">Captcha is incorrect</entry>  
+        <entry lang="BUL">Капча е неправилен</entry>
+        <entry lang="POR">Captcha is incorrect</entry>
+        <entry lang="SPA">Captcha is incorrect</entry>    
+    </sentence> 
+    <sentence mode="on" keyword="message_too_short">
+        <entry lang="ENG">The message is too short</entry>
+        <entry lang="RUS">Сообщение слишком короткое</entry>
+        <entry lang="KAZ">The message is too short</entry>  
+        <entry lang="BUL">Посланието е твърде кратък</entry>
+        <entry lang="POR">The message is too short</entry>
+        <entry lang="SPA">The message is too short</entry>    
+    </sentence> 
+    <sentence mode="on" keyword="message_too_long">
+        <entry lang="ENG">The message is too long</entry>
+        <entry lang="RUS">Капча не верная</entry>
+        <entry lang="KAZ">The message is too long</entry>  
+        <entry lang="BUL">Посланието е твърде дълго</entry>
+        <entry lang="POR">The message is too long</entry>
+        <entry lang="SPA">The message is too long</entry>    
+    </sentence> 
+    
       <sentence mode="on" keyword="error_404">
         <entry lang="ENG">The requested resource could not be found but may be available in the future</entry>
         <entry lang="RUS">Запрашиваемы ресур не найден</entry>

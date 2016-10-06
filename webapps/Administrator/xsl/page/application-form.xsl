@@ -41,8 +41,8 @@
                     </div>
                     <div class="form-group">
                         <div class="control-label">
-                            Position on workspace
-                        </div>
+                            Position 
+                                                   </div>
                         <div class="controls">
                             <input type="number" name="position" value="{fields/position}" class="span1"/>
                         </div>

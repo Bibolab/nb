@@ -61,7 +61,7 @@ public class WebServer {
 		server.addLifecycleListener(listener);
 
 		if (!initSharedResources("/" + EnvConst.SHARED_RESOURCES_APP_NAME)) {
-			Server.logger.fatalLogEntry("there is no \"" + EnvConst.SHARED_RESOURCES_APP_NAME + "\" resource");
+			Server.logger.fatalLogEntry("There is no \"" + EnvConst.SHARED_RESOURCES_APP_NAME + "\" resource");
 			return false;
 		}
 		return true;
@@ -162,7 +162,7 @@ public class WebServer {
 		context.addMimeMapping("js", "text/javascript");
 		context.addMimeMapping("html", "text/html");
 
-		initErrorPages(context);
+		// initErrorPages(context);
 
 		initRestService(site, context);
 
@@ -213,7 +213,7 @@ public class WebServer {
 		defaultContext.addServletMapping("/Error", "Error");
 		defaultContext.addServletMapping("/e", "Error");
 
-		initErrorPages(defaultContext);
+		// initErrorPages(defaultContext);
 
 		Tomcat.addServlet(defaultContext, "default", "org.apache.catalina.servlets.DefaultServlet");
 		defaultContext.addServletMapping("/", "default");
@@ -282,15 +282,15 @@ public class WebServer {
 		context.addErrorPage(er);
 		ErrorPage er401 = new ErrorPage();
 		er401.setErrorCode(HttpServletResponse.SC_UNAUTHORIZED);
-		er401.setLocation("/Error");
+		er401.setLocation("/e");
 		context.addErrorPage(er401);
 		ErrorPage er400 = new ErrorPage();
 		er400.setErrorCode(HttpServletResponse.SC_BAD_REQUEST);
-		er400.setLocation("/Error");
+		er400.setLocation("/e");
 		context.addErrorPage(er400);
 		ErrorPage er500 = new ErrorPage();
 		er500.setErrorCode(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		er500.setLocation("/Error");
+		er500.setLocation("/e");
 		context.addErrorPage(er500);
 	}
 

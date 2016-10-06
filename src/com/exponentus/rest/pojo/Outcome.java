@@ -1,9 +1,7 @@
 package com.exponentus.rest.pojo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -15,7 +13,7 @@ public class Outcome {
 	private OutcomeType type = OutcomeType.OK;
 	private String errorId;
 	private String warningId;
-	private HashMap<LanguageCode, String> message = new HashMap<>();
+	private String localizedMessage;
 	private Object payload;
 
 	public OutcomeType getType() {
@@ -28,7 +26,7 @@ public class Outcome {
 	}
 
 	public Outcome addMessage(String message, LanguageCode lang) {
-		this.message.put(lang, Environment.vocabulary.getWord(message, lang));
+		localizedMessage = Environment.vocabulary.getWord(message, lang);
 		return this;
 	}
 
@@ -37,7 +35,6 @@ public class Outcome {
 	}
 
 	public Outcome setMessage(String s, LanguageCode lang) {
-		message.clear();
 		addMessage(s, lang);
 		return this;
 	}
@@ -46,10 +43,10 @@ public class Outcome {
 		type = OutcomeType.ERROR;
 		if (Environment.isDevMode()) {
 			errorId = e.name();
-			message.put(LanguageCode.ENG, exception.toString());
+			localizedMessage = errorId;
 		} else {
 			errorId = e.name();
-			message.put(lang, Environment.vocabulary.getWord(e.name(), lang));
+			localizedMessage = Environment.vocabulary.getWord(e.name(), lang);
 		}
 		return this;
 	}
@@ -57,7 +54,7 @@ public class Outcome {
 	public Outcome setMessage(ServerServiceWarningType w, LanguageCode lang) {
 		type = OutcomeType.WARNING;
 		warningId = w.name();
-		message.put(lang, Environment.vocabulary.getWord(w.name(), lang));
+		localizedMessage = Environment.vocabulary.getWord(w.name(), lang);
 		return this;
 	}
 
@@ -66,7 +63,7 @@ public class Outcome {
 	}
 
 	public Outcome addMessage(String msg) {
-		this.message.put(LanguageCode.valueOf(EnvConst.DEFAULT_LANG), msg);
+		localizedMessage = msg;
 		return this;
 
 	}
@@ -78,13 +75,12 @@ public class Outcome {
 		return this;
 	}
 
-	public HashMap<LanguageCode, String> getMessages() {
-		return message;
+	public String getLocalizedMessage() {
+		return localizedMessage;
 	}
 
-	public Outcome setMessages(HashMap<LanguageCode, String> associatedList) {
-		this.message = associatedList;
-		return this;
+	public void setLocalizedMessage(String localizedMessage) {
+		this.localizedMessage = localizedMessage;
 	}
 
 	public Object getPayload() {

@@ -623,7 +623,16 @@
         <entry lang="ENG">Content</entry>
         <entry lang="CHI">内容</entry>
     </sentence>
-    
+
+      
+      <sentence mode="on" keyword="message_has_sent_succesfully">
+        <entry lang="ENG">The message has been sent</entry>
+        <entry lang="RUS">Сообщение не отправлено</entry>
+        <entry lang="KAZ">The message has been sent</entry>  
+        <entry lang="BG">Съобщението е изпратено</entry>
+        <entry lang="POR">A mensagem foi enviada</entry>
+        <entry lang="SPA">El mensaje fue enviado</entry>    
+    </sentence> 
       <sentence mode="on" keyword="error_404">
         <entry lang="ENG">The requested resource could not be found but may be available in the future</entry>
         <entry lang="RUS">Запрашиваемы ресур не найден</entry>

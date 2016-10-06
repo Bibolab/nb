@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("outcome")
-@JsonPropertyOrder({ "type", "warningId", "errorId", "messages" })
+@JsonPropertyOrder({ "type", "warningId", "errorId", "localizedMessage" })
 public class Outcome {
 	private OutcomeType type = OutcomeType.OK;
 	private String errorId;

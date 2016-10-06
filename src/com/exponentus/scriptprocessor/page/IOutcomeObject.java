@@ -1,9 +1,11 @@
 package com.exponentus.scriptprocessor.page;
 
-
 public interface IOutcomeObject {
-	String toXML();
+    default String toXML() {
+        return toString();
+    }
 
-	Object toJSON();
-
+    default Object toJSON() {
+        return this;
+    }
 }

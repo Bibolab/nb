@@ -61,21 +61,25 @@ public class Site {
 	}
 
 	private static String normalizeRestURL(String v) {
-		String v2 = v.substring(v.length() - 1, v.length());
-		if (v2.equals("/") || v2.equals("*")) {
-			if (v2.equals("/")) {
-				return v.substring(0, v.length() - 1);
-			} else {
-				String v1 = v.substring(v.length() - 2, v.length());
-				if (v1.equals("/*")) {
-					return v.substring(0, v.length() - 2);
-				} else {
-					return v.substring(0, v.length() - 1);
-				}
-			}
-
+		if (v.isEmpty()) {
+			return "/do";
 		} else {
-			return v;
+			String v2 = v.substring(v.length() - 1, v.length());
+			if (v2.equals("/") || v2.equals("*")) {
+				if (v2.equals("/")) {
+					return v.substring(0, v.length() - 1);
+				} else {
+					String v1 = v.substring(v.length() - 2, v.length());
+					if (v1.equals("/*")) {
+						return v.substring(0, v.length() - 2);
+					} else {
+						return v.substring(0, v.length() - 1);
+					}
+				}
+
+			} else {
+				return v;
+			}
 		}
 	}
 }

@@ -29,10 +29,10 @@
 			<table width="100%" border="0" style="margin-top:140px">
 				<tr>
 					<td width="20%" align="right" style="font-size:9pt;">
-						<font style="font-size:1.9em;"><xsl:value-of select="error/server"/></font>
+						<font style="font-size:1.9em;">NextBase</font>
 						<div style="clear:both; height:10px"/>
 						<font style="font-size:1.1em;">
-							Exponentus 2016
+							version:&#xA0;<xsl:value-of select="error/server"/>
 						</font>
 						<br/>
 					</td>
@@ -45,9 +45,9 @@
 									<xsl:choose>
 										<xsl:when test="error/@type = 'INTERNAL'">	
 											<font style="font-size:4em;"><xsl:value-of select="error/code"/></font><br/><br/>							
-											<font style="font-size:2em;">Internal server error</font><br/><br/>
+											<font style="font-size:2em;">Server error</font><br/><br/>
 											<font style="font-size:1em;"><xsl:value-of select="error/message"/></font><br/><br/>
-											<font style="font-size:1em;"><xsl:value-of select="error/message/errortext"/></font>												
+											<font style="font-size:1em;"><xsl:value-of select="error/addmessage"/></font>												
 										</xsl:when>
 										<xsl:when test="error/@type = 'RULENOTFOUND'">
 											<font style="font-size:2em;">Rule not found</font>

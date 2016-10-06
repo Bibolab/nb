@@ -105,7 +105,8 @@ public class Unsecure extends ValveBase {
 
 							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
 							getNext().getNext().invoke(request, response);
-						} else if ("/rest".equals(req)) {
+						} else if (req.contains("/rest")) { // TODO it is hard
+						                                    // coding !!
 							gettingSession(request, response, Environment.getAppEnv(EnvConst.WELCOME_APPLICATION));
 							getNext().getNext().invoke(request, response);
 						} else {

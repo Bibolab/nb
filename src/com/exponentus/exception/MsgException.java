@@ -24,7 +24,7 @@ public class MsgException extends ApplicationException implements IOutcomeObject
 	@Override
 	public String toXML() {
 		return "<request><error><message>" + errorMsg + "</message><type>" + type + "</type><exception><![CDATA[" + errorMsg
-		        + "]]></exception><server>" + Server.serverTitle + "</server></error></request>";
+		        + "]]></exception><server>" + Server.serverVersion + "</server></error></request>";
 	}
 
 	@Override

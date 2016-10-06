@@ -52,12 +52,6 @@
         <entry lang="KAZ">Сервермен байланыс орнатылмаған</entry>
         <entry lang="CHI">没有连接到服务器</entry>
     </sentence>
-    <sentence mode="on" keyword="internal_server_error">
-        <entry lang="ENG">Internal server error</entry>
-        <entry lang="RUS">Внутреняя ошибка серевера</entry>
-        <entry lang="KAZ">Внутреняя ошибка серевера</entry>
-        <entry lang="CHI"></entry>
-    </sentence>
     <sentence mode="on" keyword="validation_error">
         <entry lang="ENG">Validation error</entry>
         <entry lang="RUS">Ошибка значения формы</entry>
@@ -628,5 +622,38 @@
         <entry lang="KAZ">Мазмұны</entry>
         <entry lang="ENG">Content</entry>
         <entry lang="CHI">内容</entry>
+    </sentence>
+    
+      <sentence mode="on" keyword="error_404">
+        <entry lang="ENG">The requested resource could not be found but may be available in the future</entry>
+        <entry lang="RUS">Запрашиваемы ресур не найден</entry>
+        <entry lang="KAZ">The requested resource could not be found but may be available in the future</entry>
+        <entry lang="SPA">The requested resource could not be found but may be available in the future</entry>
+        <entry lang="POR">The requested resource could not be found but may be available in the future</entry>
+        <entry lang="BUL">The requested resource could not be found but may be available in the future</entry>      
+    </sentence>
+      <sentence mode="on" keyword="error_401">
+        <entry lang="ENG">Unauthorized </entry>
+        <entry lang="RUS">Вы не авторизованы</entry>
+        <entry lang="KAZ">Unauthorized</entry>
+        <entry lang="SPA">Unauthorized</entry>
+        <entry lang="POR">Unauthorized</entry>
+        <entry lang="BUL">Unauthorized</entry>      
+    </sentence>
+       <sentence mode="on" keyword="error_400">
+        <entry lang="ENG">The server cannot or will not process the request due to an apparent client error </entry>
+        <entry lang="RUS">Неверный запрос</entry>
+        <entry lang="KAZ">The server cannot or will not process the request due to an apparent client error </entry>
+        <entry lang="SPA">The server cannot or will not process the request due to an apparent client error </entry>
+        <entry lang="POR">The server cannot or will not process the request due to an apparent client error </entry>
+        <entry lang="BUL">The server cannot or will not process the request due to an apparent client error </entry>      
+    </sentence>
+       <sentence mode="on" keyword="error_500">
+        <entry lang="ENG">Internal Server Error</entry>
+        <entry lang="RUS">Внутренняя ошибка сервера</entry>
+        <entry lang="KAZ">Internal Server Error</entry>
+        <entry lang="SPA">Internal Server Error</entry>
+        <entry lang="POR">Internal Server Error</entry>
+        <entry lang="BUL">Internal Server Error</entry>      
     </sentence>
 </vocabulary>

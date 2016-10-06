@@ -162,7 +162,7 @@ public class WebServer {
 		context.addMimeMapping("js", "text/javascript");
 		context.addMimeMapping("html", "text/html");
 
-		// initErrorPages(context);
+		initErrorPages(context);
 
 		initRestService(site, context);
 
@@ -248,9 +248,6 @@ public class WebServer {
 	public void startContainer() {
 		try {
 			tomcat.start();
-			// } catch (BindException e) {
-			// Server.logger.debugLogEntry("tcnative-1.dll has been not
-			// linked");
 		} catch (UnsatisfiedLinkError e) {
 			Server.logger.debugLogEntry("tcnative-1.dll has been not linked");
 		} catch (LifecycleException e) {
@@ -281,7 +278,7 @@ public class WebServer {
 	private void initErrorPages(Context context) {
 		ErrorPage er = new ErrorPage();
 		er.setErrorCode(HttpServletResponse.SC_NOT_FOUND);
-		er.setLocation("/Error");
+		er.setLocation("/e");
 		context.addErrorPage(er);
 		ErrorPage er401 = new ErrorPage();
 		er401.setErrorCode(HttpServletResponse.SC_UNAUTHORIZED);

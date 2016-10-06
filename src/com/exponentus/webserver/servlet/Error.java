@@ -69,18 +69,18 @@ public class Error extends HttpServlet {
 				Throwable exception = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
 
 				Enumeration<?> attrs = request.getAttributeNames();
-				while (attrs.hasMoreElements()) {
-					// String name = (String) attrs.nextElement();
-					// System.out.println(name + "=" +
-					// request.getAttribute(name));
-				}
+				// while (attrs.hasMoreElements()) {
+				// String name = (String) attrs.nextElement();
+				// System.out.println(name + "=" +
+				// request.getAttribute(name));
+				// }
 
 				response.setStatus(statusCode);
-				outputContent += "<error type=\"INTERNAL\"><code>" + statusCode + "</code><message>" + msg + "<errortext>" + exception
-				        + "</errortext></message>";
+				outputContent += "<error type=\"INTERNAL\"><code>" + statusCode + "</code><message>" + msg + "</message><addmessage>"
+				        + v.getWord("error_" + statusCode, lang) + "</addmessage>";
 			}
 
-			outputContent += "<version>" + Server.serverVersion + "</version></error></request>";
+			outputContent += "<server>" + Server.serverVersion + "</server></error></request>";
 			if (request.getParameter("as") != null) {
 				response.setContentType("text/xml;charset=utf-8");
 				PrintWriter out = response.getWriter();

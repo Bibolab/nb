@@ -1,6 +1,9 @@
 package com.exponentus.rest.pojo;
 
+import com.exponentus.rest.pojo.constants.RequestType;
+
 public class SearchViewRequest extends ViewRequest {
+	protected RequestType type = RequestType.FT_SEARCH;
 	protected String keyword = "";
 
 	public String getKeyword() {

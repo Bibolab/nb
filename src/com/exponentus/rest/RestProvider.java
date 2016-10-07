@@ -70,7 +70,9 @@ public class RestProvider implements IRestService {
 		Outcome outcome = new Outcome();
 		_Session ses = getSession();
 		LanguageCode lang = ses.getLang();
-		if (r.getType() == RequestType.FT_SEARCH) {
+		if (r.getType() == RequestType.VIEW) {
+
+		} else if (r.getType() == RequestType.FT_SEARCH) {
 			SearchViewRequest svr = (SearchViewRequest) r;
 			if (!svr.getKeyword().isEmpty()) {
 				int pageSize = ses.pageSize;

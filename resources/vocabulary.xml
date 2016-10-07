@@ -561,11 +561,6 @@
         <entry lang="ENG">Organization type</entry>
         <entry lang="CHI"></entry>
     </sentence>
-    <sentence mode="on" keyword="Все">
-        <entry lang="KAZ">Барлығы</entry>
-        <entry lang="ENG">All</entry>
-        <entry lang="CHI">所有</entry>
-    </sentence>
     <sentence mode="on" keyword="send">
         <entry lang="KAZ">Жіберу</entry>
         <entry lang="ENG">Send</entry>

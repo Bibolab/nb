@@ -16,7 +16,7 @@ public class _ColumnOptions implements IOutcomeObject {
         columns = new LinkedList<>();
     }
 
-    public List<_ColumnOption> getOptions() {
+    public List<_ColumnOption> getColumns() {
         return columns;
     }
 
@@ -28,7 +28,7 @@ public class _ColumnOptions implements IOutcomeObject {
 
         /**
          * json
-         * { name: 'name', value: 'name', type: 'localizedName', sort: 'desc', className: 'vw-name' }
+         * { name: 'column_name', value: 'model_field', type: 'localizedName', sort: 'desc', className: 'vw-name' }
          */
 
         String name; // Column name. Caption key or translated

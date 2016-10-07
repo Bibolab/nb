@@ -3,7 +3,7 @@ package com.exponentus.dataengine.jpa;
 import com.exponentus.dataengine.RuntimeObjUtil;
 import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
-import com.exponentus.scripting._SortMap;
+import com.exponentus.scripting._SortParams;
 import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.user.SuperUser;
@@ -338,7 +338,7 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
         }
     }
 
-    public List<T> findAll(_SortMap sortMap, int pageNum, int pageSize) {
+    public List<T> findAll(_SortParams sortParams, int pageNum, int pageSize) {
         EntityManager em = getEntityManagerFactory().createEntityManager();
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -352,16 +352,16 @@ public abstract class DAO<T extends IAppEntity, K> implements IDAO<T, K> {
                 condition = cb.and(root.get("readers").in(user.getId()));
             }
 
-            if (sortMap != null && !sortMap.isEmpty()) {
-                List<Order> orderBy = new ArrayList<>();
-                sortMap.values().forEach((fieldName, direction) -> {
+            if (sortParams != null && !sortParams.isEmpty()) {
+                List<Order> orderByList = new ArrayList<>();
+                sortParams.values().forEach((fieldName, direction) -> {
                     if (direction.isAscending()) {
-                        orderBy.add(cb.asc(root.get(fieldName)));
+                        orderByList.add(cb.asc(root.get(fieldName)));
                     } else {
-                        orderBy.add(cb.desc(root.get(fieldName)));
+                        orderByList.add(cb.desc(root.get(fieldName)));
                     }
                 });
-                cq.orderBy(orderBy);
+                cq.orderBy(orderByList);
             }
 
             if (condition != null) {

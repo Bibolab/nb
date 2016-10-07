@@ -6,23 +6,23 @@ import java.util.Map;
 /**
  * Created by medin on 27.09.16.
  */
-public class _SortMap {
+public class _SortParams {
 
     private Map<String, _Direction> sort = new HashMap<>();
 
-    public static _SortMap asc(String fieldName) {
-        _SortMap sortMap = new _SortMap();
+    public static _SortParams asc(String fieldName) {
+        _SortParams sortMap = new _SortParams();
         sortMap.addAsc(fieldName);
         return sortMap;
     }
 
-    public static _SortMap desc(String fieldName) {
-        _SortMap sortMap = new _SortMap();
+    public static _SortParams desc(String fieldName) {
+        _SortParams sortMap = new _SortParams();
         sortMap.addDesc(fieldName);
         return sortMap;
     }
 
-    public _SortMap addAsc(String fieldName) {
+    public _SortParams addAsc(String fieldName) {
         if (fieldName == null || fieldName.isEmpty()) {
             throw new IllegalArgumentException("fieldName can not be empty");
         }
@@ -31,7 +31,7 @@ public class _SortMap {
         return this;
     }
 
-    public _SortMap addDesc(String fieldName) {
+    public _SortParams addDesc(String fieldName) {
         if (fieldName == null || fieldName.isEmpty()) {
             throw new IllegalArgumentException("fieldName can not be empty");
         }

@@ -659,12 +659,12 @@
     </sentence> 
     
       <sentence mode="on" keyword="error_404">
-        <entry lang="ENG">The requested resource could not be found but may be available in the future</entry>
-        <entry lang="RUS">Запрашиваемы ресур не найден</entry>
-        <entry lang="KAZ">The requested resource could not be found but may be available in the future</entry>
-        <entry lang="SPA">The requested resource could not be found but may be available in the future</entry>
-        <entry lang="POR">The requested resource could not be found but may be available in the future</entry>
-        <entry lang="BUL">The requested resource could not be found but may be available in the future</entry>      
+        <entry lang="ENG">The requested resource could not be found</entry>
+        <entry lang="RUS">Запрашиваемый ресурс не найден</entry>
+        <entry lang="KAZ">The requested resource could not be found</entry>
+        <entry lang="SPA">The requested resource could not be found</entry>
+        <entry lang="POR">The requested resource could not be found</entry>
+        <entry lang="BUL">The requested resource could not be found</entry>      
     </sentence>
       <sentence mode="on" keyword="error_401">
         <entry lang="ENG">Unauthorized </entry>

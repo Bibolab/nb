@@ -1,4 +1,4 @@
-package com.exponentus.rest.pojo;
+package com.exponentus.rest.pojo.view;
 
 import com.exponentus.rest.pojo.constants.RequestType;
 

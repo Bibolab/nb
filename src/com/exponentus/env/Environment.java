@@ -57,6 +57,7 @@ import com.exponentus.scripting._WebFormData;
 import com.exponentus.scriptprocessor.page.PageOutcome;
 import com.exponentus.server.Server;
 import com.exponentus.user.AnonymousUser;
+import com.exponentus.user.constants.AuthMethodType;
 import com.exponentus.util.TimeUtil;
 import com.exponentus.util.XMLUtil;
 import com.exponentus.webserver.WebServer;

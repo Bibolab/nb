@@ -162,7 +162,7 @@ public class WebServer {
 		context.addMimeMapping("js", "text/javascript");
 		context.addMimeMapping("html", "text/html");
 
-		// initErrorPages(context);
+		initErrorPages(context);
 
 		initRestService(site, context);
 
@@ -213,7 +213,7 @@ public class WebServer {
 		defaultContext.addServletMapping("/Error", "Error");
 		defaultContext.addServletMapping("/e", "Error");
 
-		// initErrorPages(defaultContext);
+		initErrorPages(defaultContext);
 
 		Tomcat.addServlet(defaultContext, "default", "org.apache.catalina.servlets.DefaultServlet");
 		defaultContext.addServletMapping("/", "default");

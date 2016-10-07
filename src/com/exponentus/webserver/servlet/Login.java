@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.exponentus.appenv.AppEnv;
-import com.exponentus.env.AuthMethodType;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.env.ServletSessionPool;
@@ -27,8 +26,10 @@ import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 import com.exponentus.user.AuthModeType;
 import com.exponentus.user.IUser;
+import com.exponentus.user.constants.AuthMethodType;
 
 public class Login extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 	private AppEnv env;
 

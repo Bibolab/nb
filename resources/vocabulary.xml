@@ -622,7 +622,7 @@
       
     <sentence mode="on" keyword="message_has_sent_succesfully">
         <entry lang="ENG">The message has been sent</entry>
-        <entry lang="RUS">Сообщение не отправлено</entry>
+        <entry lang="RUS">Сообщение было успешно отправлено</entry>
         <entry lang="KAZ">The message has been sent</entry>  
         <entry lang="BUL">Съобщението е изпратено</entry>
         <entry lang="POR">A mensagem foi enviada</entry>

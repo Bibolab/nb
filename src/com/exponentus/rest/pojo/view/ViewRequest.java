@@ -1,9 +1,11 @@
 package com.exponentus.rest.pojo.view;
 
+import com.exponentus.dataengine.jpa.IAppEntity;
 import com.exponentus.rest.pojo.Request;
 import com.exponentus.rest.pojo.constants.RequestType;
 
 public class ViewRequest extends Request {
+	protected IAppEntity entity;
 	protected RequestType type = RequestType.VIEW;
 	protected int pageNum = 1;
 	protected int pageSize = 20;

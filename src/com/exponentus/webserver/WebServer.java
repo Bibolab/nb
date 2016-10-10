@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.exponentus.webserver.valve.ContentEncoding;
 import org.apache.catalina.Context;
 import org.apache.catalina.Engine;
 import org.apache.catalina.Host;
@@ -208,6 +209,7 @@ public class WebServer {
 		engine.getPipeline().addValve(new Logging());
 		engine.getPipeline().addValve(new Unsecure());
 		engine.getPipeline().addValve(new Secure());
+		engine.getPipeline().addValve(new ContentEncoding());
 
 		Tomcat.addServlet(defaultContext, "Error", "com.exponentus.webserver.servlet.Error");
 		defaultContext.addServletMapping("/Error", "Error");
@@ -244,6 +246,7 @@ public class WebServer {
 		// gzip content
 		tomcat.getConnector().setProperty("compression", "on");
 		tomcat.getConnector().setProperty("compressionMinSize", "2048");
+		tomcat.getConnector().setProperty("noCompressionUserAgents", "gozilla, traviata");
 		tomcat.getConnector().setProperty("compressableMimeType", "text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json");
 
 		return portInfo;

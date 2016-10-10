@@ -1,4 +1,4 @@
-package administrator.page.action;
+package administrator.page.other;
 
 import java.util.ArrayList;
 import java.util.Date;

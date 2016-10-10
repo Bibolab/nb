@@ -1,7 +1,11 @@
 package com.exponentus.rest.pojo;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.UUID;
 
+import com.exponentus.dataengine.jpa.AppEntity;
+import com.exponentus.dataengine.jpa.ViewPage;
 import com.exponentus.env.Environment;
 import com.exponentus.localization.LanguageCode;
 import com.exponentus.rest.pojo.constants.OutcomeType;
@@ -15,7 +19,7 @@ public class Outcome {
 	private String errorId;
 	private String warningId;
 	private String localizedMessage;
-	private Object payload;
+	private Map<String, Object> payload;
 
 	public OutcomeType getType() {
 		return type;
@@ -84,12 +88,17 @@ public class Outcome {
 		this.localizedMessage = localizedMessage;
 	}
 
-	public Object getPayload() {
+	public Map<String, Object> getPayload() {
 		return payload;
 	}
 
-	public void setPayload(Object payLoad) {
-		this.payload = payLoad;
+	public void setPayload(Map<String, Object> payload) {
+		this.payload = payload;
+	}
+
+	public void addPayload(ViewPage<AppEntity<UUID>> res) {
+		payload.put(res.getClass().getSimpleName().toLowerCase(), res);
+
 	}
 
 }

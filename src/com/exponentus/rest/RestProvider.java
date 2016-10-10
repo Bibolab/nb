@@ -84,7 +84,7 @@ public class RestProvider implements IRestService {
 				if (result != null) {
 					@SuppressWarnings("unchecked")
 					ViewPage<AppEntity<UUID>> res = (ViewPage<AppEntity<UUID>>) result;
-					outcome.setPayload(res);
+					outcome.addPayload(res);
 					return Response.status(HttpServletResponse.SC_OK).entity(outcome).build();
 				} else {
 					outcome.setMessage("ft_search_return_null", lang);

@@ -241,6 +241,11 @@ public class WebServer {
 			portInfo = Environment.getFullHostName();
 		}
 
+		// gzip content
+		tomcat.getConnector().setProperty("compression", "on");
+		tomcat.getConnector().setProperty("compressionMinSize", "2048");
+		tomcat.getConnector().setProperty("compressableMimeType", "text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json");
+
 		return portInfo;
 
 	}

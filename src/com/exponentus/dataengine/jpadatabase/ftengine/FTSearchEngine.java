@@ -5,11 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import javax.persistence.Table;
 
 import com.exponentus.dataengine.IDBConnectionPool;
 import com.exponentus.dataengine.IDatabase;
@@ -21,7 +24,7 @@ import com.exponentus.localization.LanguageCode;
 import com.exponentus.scripting._Session;
 import com.exponentus.server.Server;
 
-public class FTSearchEngine implements IFTIndexEngine {
+public class FTSearchEngine<T> implements IFTIndexEngine<T> {
 	private IDBConnectionPool dbPool;
 	private List<FTEntity> indexTables = new ArrayList<>();
 	private Class[] intArgsClass = new Class[] { _Session.class };
@@ -30,6 +33,33 @@ public class FTSearchEngine implements IFTIndexEngine {
 		this.dbPool = db.getConnectionPool();
 	}
 
+	@Override
+	public ViewPage<T> search(Class<T> clazz, String keyword, _Session ses, int pageNum, int pageSize) {
+		String tableName = clazz.getSimpleName();
+		if (clazz.isAnnotationPresent(Table.class)) {
+			Table tableAn = clazz.getAnnotation(Table.class);
+			String value = tableAn.name();
+			if (value != null) {
+				tableName = value;
+			}
+		}
+
+		String sql = "SELECT id FROM " + tableName + " WHERE " + FTSearchEngineDeployer.FT_INDEX_COLUMN + " @@ to_tsquery('" + keyword
+		        + "') ORDER BY reg_date DESC LIMIT 10";
+
+		Connection conn = dbPool.getConnection();
+		try {
+			PreparedStatement pst = conn.prepareStatement(sql.toString());
+			ResultSet rs = pst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Deprecated
 	@Override
 	public ViewPage<?> search(String keyWord, _Session ses, int pageNum, int pageSize) {
 		if (keyWord == null || keyWord.trim().isEmpty() || indexTables.isEmpty()) {
@@ -113,4 +143,5 @@ public class FTSearchEngine implements IFTIndexEngine {
 		}
 
 	}
+
 }

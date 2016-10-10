@@ -56,6 +56,9 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Column(name = "reg_date", nullable = false, updatable = false)
 	protected Date regDate;
 
+	@Column(name = "last_mod_date", nullable = false, updatable = false)
+	protected Date lastModifiedDate;
+
 	@Column(name = "form", nullable = false, updatable = false, length = 64)
 	protected String form;
 

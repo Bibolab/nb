@@ -7,8 +7,10 @@ start initializer(stini) * - run a initializer;
 run batch (rubat) * - run a batch file;
 show users (su) - show logged users;
 reset users (ru) - reset all logged users sessions;
-show scheduled tasks (sst) - show scheduled tasks
-show scheduler queue (ssq) - show scheduler queue 
+show scheduled tasks (sst) - show scheduled tasks;
+show scheduler queue (ssq) - show scheduler queue;
+init ft index (ifi) * - initialize FT-index for a pointed entity class;
+delete ft index (dfi) * initialize FT-index;
 import from h2 (ifh2) - import users list from H2 database;
 info (i) - show some information of the environment;
 modules info (mi) - show some information of the loaded modules;

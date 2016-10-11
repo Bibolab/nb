@@ -2,16 +2,7 @@ package com.exponentus.common.model;
 
 import java.util.UUID;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
@@ -20,10 +11,36 @@ import com.exponentus.dataengine.jpa.IAppFile;
 import com.exponentus.scripting._Session;
 import com.exponentus.user.AnonymousUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import projects.model.Project;
 
 @Entity
 @Table(name = "attachments")
+
+// doesn't work ?
+@NamedEntityGraphs({
+		@NamedEntityGraph(name = Attachment.FULL_GRAPH,
+				includeAllAttributes = true,
+				attributeNodes = {
+						@NamedAttributeNode("id"),
+						@NamedAttributeNode("fieldName"),
+						@NamedAttributeNode("realFileName"),
+						@NamedAttributeNode("extension"),
+						@NamedAttributeNode("hasThumbnail"),
+						@NamedAttributeNode("comment")
+				}
+		),
+		@NamedEntityGraph(name = Attachment.SHORT_GRAPH,
+				attributeNodes = {
+						@NamedAttributeNode("realFileName"),
+						@NamedAttributeNode("size")
+				}
+		)
+})
+
 public class Attachment extends AppEntity<UUID> implements IAppFile {
+
+	public final static String FULL_GRAPH = "Attachment.FULL_GRAPH";
+	public final static String SHORT_GRAPH = "Attachment.SHORT_GRAPH";
 
 	protected String form = "attachment";
 	protected Long author = AnonymousUser.ID;

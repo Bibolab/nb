@@ -4,7 +4,7 @@
     <sentence mode="on" keyword="workspace">
         <entry lang="ENG">Workspace</entry>
         <entry lang="RUS">Рабочая область</entry>
-        <entry lang="KAZ">Рабочая область</entry>
+        <entry lang="KAZ">Жұмыс облысы</entry>
         <entry lang="SPA">Еspacio de trabajo</entry>
         <entry lang="POR">Area de trabalho</entry>
         <entry lang="BUL">работно място</entry>
@@ -12,7 +12,7 @@
     <sentence mode="on" keyword="ACCEPTED">
         <entry lang="ENG">Accepted</entry>
         <entry lang="RUS">Принято</entry>
-        <entry lang="KAZ">Кабылданған</entry>
+        <entry lang="KAZ">Қабылданды</entry>
         <entry lang="SPA">Aceptado</entry>
         <entry lang="POR">Aceitaram</entry>
         <entry lang="BUL">Признат</entry>
@@ -20,7 +20,7 @@
     <sentence mode="on" keyword="DECLINE">
         <entry lang="ENG">Decline</entry>
         <entry lang="RUS">Отклонено</entry>
-        <entry lang="KAZ">Құлдырау</entry>
+        <entry lang="KAZ">Қабылданбады</entry>
         <entry lang="SPA">Declínio</entry>
         <entry lang="POR">Disminución</entry>
         <entry lang="BUL">Упадък</entry>
@@ -28,7 +28,7 @@
     <sentence mode="on" keyword="UNKNOWN">
         <entry lang="ENG">Unknown</entry>
         <entry lang="RUS">Не определено</entry>
-        <entry lang="KAZ">Белгісіз</entry>
+        <entry lang="KAZ">Анықталмаған</entry>
         <entry lang="SPA">Desconocido</entry>
         <entry lang="POR">Desconhecido</entry>
         <entry lang="BUL">Неизвестен</entry>
@@ -43,7 +43,7 @@
     </sentence>
     <sentence mode="on" keyword="action_completed_successfully">
         <entry lang="RUS">Действие выполнено успешно</entry>
-        <entry lang="KAZ">Действие выполнено успешно</entry>
+        <entry lang="KAZ">Әрекет сәтті орындалды</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="no_connection">
@@ -55,7 +55,7 @@
     <sentence mode="on" keyword="validation_error">
         <entry lang="ENG">Validation error</entry>
         <entry lang="RUS">Ошибка значения формы</entry>
-        <entry lang="KAZ">Ошибка значения формы</entry>
+        <entry lang="KAZ">Қате маңызы бар нысандары</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="search">
@@ -65,7 +65,7 @@
     </sentence>
     <sentence mode="on" keyword="filter">
         <entry lang="RUS">Фильтр</entry>
-        <entry lang="KAZ">Фильтр</entry>
+        <entry lang="KAZ">Сүзгі</entry>
         <entry lang="ENG">Filter</entry>
     </sentence>
     <sentence mode="on" keyword="report_file_type">
@@ -80,27 +80,27 @@
     </sentence>
     <sentence mode="on" keyword="field_is_empty">
         <entry lang="RUS">Поле не заполнено</entry>
-        <entry lang="KAZ">Поле не заполнено</entry>
+        <entry lang="KAZ">Алаң емес толтырылған</entry>
         <entry lang="ENG">The field is empty</entry>
     </sentence>
     <sentence mode="on" keyword="field_is_too_long">
         <entry lang="RUS">Содержимое поля слишком большое</entry>
-        <entry lang="KAZ">Содержимое поля слишком большое</entry>
+        <entry lang="KAZ">Мазмұн өрістері тым үлкен</entry>
         <entry lang="ENG">The field is too long</entry>
     </sentence>
     <sentence mode="on" keyword="date_format_does_not_match_to">
         <entry lang="RUS">Формат даты не соответствует шаблону</entry>
-        <entry lang="KAZ">Формат даты не соответствует шаблону</entry>
+        <entry lang="KAZ">Формат даты сай емес шаблон</entry>
         <entry lang="ENG">Date format does not match to pattern</entry>
     </sentence>
     <sentence mode="on" keyword="required">
         <entry lang="RUS">Обязательноe</entry>
-        <entry lang="KAZ">Обязательноe</entry>
+        <entry lang="KAZ">Міндетті</entry>
         <entry lang="ENG">Required</entry>
     </sentence>
     <sentence mode="on" keyword="markdown_write">
         <entry lang="RUS">Редактор</entry>
-        <entry lang="KAZ">Редактор</entry>
+        <entry lang="KAZ">Редакторы</entry>
         <entry lang="ENG">Write</entry>
     </sentence>
     <sentence mode="on" keyword="markdown_preview">
@@ -111,7 +111,7 @@
 
     <sentence mode="on" keyword="the_field">
         <entry lang="RUS">Поле</entry>
-        <entry lang="KAZ"></entry>
+        <entry lang="KAZ">Өріс</entry>
         <entry lang="ENG">The field</entry>
     </sentence>
     <sentence mode="on" keyword="has_been_not_filled">
@@ -121,22 +121,22 @@
     </sentence>
     <sentence mode="on" keyword="code_is_not_unique">
         <entry lang="RUS">Запись с таким кодом уже существует</entry>
-        <entry lang="KAZ">Запись с таким кодом уже существует</entry>
+        <entry lang="KAZ">Жазу мұндай коды бар</entry>
         <entry lang="ENG">There is a record with such code</entry>
     </sentence>
     <sentence mode="on" keyword="name_is_not_unique">
         <entry lang="RUS">Запись с таким значением поля уже существует</entry>
-        <entry lang="KAZ">Запись с таким значением поля уже существует</entry>
+        <entry lang="KAZ">Жазба осындай мәнді өріс бар</entry>
         <entry lang="ENG">There is a record with such value</entry>
     </sentence>
     <sentence mode="on" keyword="should_be_contain_value_more_than_zero">
         <entry lang="RUS">Поле должно содержать значение больше нуля</entry>
-        <entry lang="KAZ">Поле должно содержать значение больше нуля</entry>
+        <entry lang="KAZ">Өріс болуы тиіс мәні нөлден артық</entry>
         <entry lang="ENG">The fiels should be contain value more than zero</entry>
     </sentence>
     <sentence mode="on" keyword="change_skin">
         <entry lang="RUS">Изменить оформление</entry>
-        <entry lang="KAZ">Изменить оформление</entry>
+        <entry lang="KAZ">Өзгерту ресімдеу</entry>
         <entry lang="ENG">Change interface skin</entry>
     </sentence>
     <sentence mode="on" keyword="document_was_saved_succesfully">
@@ -152,7 +152,7 @@
     </sentence>
     <sentence mode="on" keyword="reg_date">
         <entry lang="RUS">Дата регистрации</entry>
-        <entry lang="KAZ"></entry>
+        <entry lang="KAZ">Тіркеу күні</entry>
         <entry lang="ENG">Registration date</entry>
         <entry lang="CHI"></entry>
     </sentence>
@@ -164,13 +164,13 @@
     </sentence>
     <sentence mode="on" keyword="status">
         <entry lang="RUS">Статус</entry>
-        <entry lang="KAZ">Статус</entry>
+        <entry lang="KAZ">Мәртебесі</entry>
         <entry lang="ENG">Status</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="comment">
         <entry lang="RUS">Комментарий</entry>
-        <entry lang="KAZ">Комментарий</entry>
+        <entry lang="KAZ">Пікір</entry>
         <entry lang="ENG">Comment</entry>
         <entry lang="CHI">Comment</entry>
     </sentence>
@@ -194,7 +194,7 @@
     </sentence>
     <sentence mode="on" keyword="cancel">
         <entry lang="RUS">Отмена</entry>
-        <entry lang="KAZ">Болдырмау</entry>
+        <entry lang="KAZ">Күшін жою</entry>
         <entry lang="ENG">Cancel</entry>
         <entry lang="CHI">廢除</entry>
     </sentence>
@@ -264,7 +264,7 @@
     </sentence>
     <sentence mode="on" keyword="just_close">
         <entry lang="RUS">Закрыть форму</entry>
-        <entry lang="KAZ">Жабу</entry>
+        <entry lang="KAZ">Нысанды жабу</entry>
         <entry lang="ENG">Just close the form</entry>
         <entry lang="CHI">关闭</entry>
     </sentence>
@@ -276,7 +276,7 @@
     </sentence>
     <sentence mode="on" keyword="just_back">
         <entry lang="RUS">Вернутся на предыдущую страницу</entry>
-        <entry lang="KAZ">Жабу</entry>
+        <entry lang="KAZ">Алдыңғы бетке қайту</entry>
         <entry lang="ENG">Return to the previous page</entry>
         <entry lang="CHI"></entry>
     </sentence>
@@ -294,12 +294,12 @@
     </sentence>
     <sentence mode="on" keyword="iin">
         <entry lang="RUS">ИИН</entry>
-        <entry lang="KAZ">ИИН</entry>
+        <entry lang="KAZ">ЖСН</entry>
         <entry lang="ENG">IIN</entry>
     </sentence>
     <sentence mode="on" keyword="bin">
         <entry lang="RUS">БИН</entry>
-        <entry lang="KAZ">БИН</entry>
+        <entry lang="KAZ">БСН</entry>
         <entry lang="ENG">BIN</entry>
     </sentence>
     <sentence mode="on" keyword="properties">
@@ -310,7 +310,7 @@
     </sentence>
     <sentence mode="on" keyword="description">
         <entry lang="RUS">Описание</entry>
-        <entry lang="KAZ">Сипаттама</entry>
+        <entry lang="KAZ">Сипаттамасы</entry>
         <entry lang="ENG">Description</entry>
     </sentence>
     <sentence mode="on" keyword="files">
@@ -421,26 +421,26 @@
     </sentence>
     <sentence mode="on" keyword="departments">
         <entry lang="RUS">Подразделения</entry>
-        <entry lang="KAZ">Бөлім</entry>
+        <entry lang="KAZ">Бөлімшелер</entry>
         <entry lang="ENG">Departments</entry>
         <entry lang="CHI">部</entry>
     </sentence>
     <sentence mode="on" keyword="department">
         <entry lang="RUS">Департамент</entry>
-        <entry lang="KAZ">Бөлім</entry>
+        <entry lang="KAZ">Департаменті</entry>
         <entry lang="ENG">Department</entry>
         <entry lang="CHI">部</entry>
     </sentence>
     <sentence mode="on" keyword="position">
         <entry lang="RUS">Должность</entry>
-        <entry lang="KAZ">Қызмет</entry>
+        <entry lang="KAZ">Лауазымы</entry>
         <entry lang="ENG">Position</entry>
         <entry lang="CHI">文章</entry>
     </sentence>
     <sentence mode="on" keyword="user_name">
         <entry lang="ENG">User name</entry>
         <entry lang="RUS">Имя пользователя</entry>
-        <entry lang="KAZ">Есімі</entry>
+        <entry lang="KAZ">Пайдаланушының аты</entry>
     </sentence>
     <sentence mode="on" keyword="login_name">
         <entry lang="ENG">Login</entry>
@@ -450,12 +450,12 @@
     <sentence mode="on" keyword="email">
         <entry lang="ENG">E-mail</entry>
         <entry lang="RUS">Электронная почта</entry>
-        <entry lang="KAZ">Электронная почта</entry>
+        <entry lang="KAZ">Электрондық пошта</entry>
     </sentence>
     <sentence mode="on" keyword="color">
         <entry lang="ENG">Color</entry>
         <entry lang="RUS">Цвет</entry>
-        <entry lang="KAZ">Түс</entry>
+        <entry lang="KAZ">Түсі</entry>
     </sentence>
     <sentence mode="on" keyword="interface_lang">
         <entry lang="RUS">Язык интерфейса</entry>
@@ -465,31 +465,31 @@
     </sentence>
     <sentence mode="on" keyword="interface">
         <entry lang="RUS">Внешний вид</entry>
-        <entry lang="KAZ">Интерфейс</entry>
+        <entry lang="KAZ">Сыртқы түрі</entry>
         <entry lang="ENG">interface</entry>
         <entry lang="CHI">它的界面</entry>
     </sentence>
     <sentence mode="on" keyword="country">
         <entry lang="ENG">Country</entry>
         <entry lang="RUS">Страна</entry>
-        <entry lang="KAZ">Страна</entry>
+        <entry lang="KAZ">Ел</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="region">
         <entry lang="RUS">Область</entry>
-        <entry lang="KAZ">Облыс</entry>
+        <entry lang="KAZ">Облысы</entry>
         <entry lang="ENG">Region</entry>
     </sentence>
     <sentence mode="on" keyword="locality">
         <entry lang="ENG">Locality</entry>
         <entry lang="RUS">Населенный пункт</entry>
-        <entry lang="KAZ">Населенный пункт</entry>
+        <entry lang="KAZ">Елді мекені</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="street">
         <entry lang="ENG">Street</entry>
         <entry lang="RUS">Улица</entry>
-        <entry lang="KAZ">Улица</entry>
+        <entry lang="KAZ">Көшесі</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="Телефон">
@@ -500,17 +500,17 @@
     <sentence mode="on" keyword="district">
         <entry lang="ENG">District</entry>
         <entry lang="RUS">Район</entry>
-        <entry lang="KAZ"></entry>
+        <entry lang="KAZ">Ауданы</entry>
         <entry lang="CHI"></entry>
     </sentence>
     <sentence mode="on" keyword="roles">
         <entry lang="RUS">Роли</entry>
-        <entry lang="KAZ">Рөлдер</entry>
+        <entry lang="KAZ">Рөлі</entry>
         <entry lang="ENG">Roles</entry>
         <entry lang="CHI">電郵通知</entry>
     </sentence>
     <sentence mode="on" keyword="code">
-        <entry lang="KAZ">Код</entry>
+        <entry lang="KAZ">Коды</entry>
         <entry lang="ENG">Code</entry>
         <entry lang="CHI">代码</entry>
     </sentence>
@@ -521,13 +521,13 @@
     </sentence>
     <sentence mode="on" keyword="reports">
         <entry lang="RUS">Отчеты</entry>
-        <entry lang="KAZ">Есептемелер</entry>
+        <entry lang="KAZ">Есептер</entry>
         <entry lang="ENG">Reports</entry>
         <entry lang="CHI">篮</entry>
     </sentence>
     <sentence mode="on" keyword="report">
         <entry lang="RUS">Отчеты</entry>
-        <entry lang="KAZ">Есептеме</entry>
+        <entry lang="KAZ">Есептер</entry>
         <entry lang="ENG">Report</entry>
         <entry lang="CHI">篮</entry>
     </sentence>
@@ -557,7 +557,7 @@
     </sentence>
     <sentence mode="on" keyword="org_category">
         <entry lang="RUS">Тип организации</entry>
-        <entry lang="KAZ">Мекеме</entry>
+        <entry lang="KAZ">Ұйым түрі</entry>
         <entry lang="ENG">Organization type</entry>
         <entry lang="CHI"></entry>
     </sentence>
@@ -568,49 +568,49 @@
     </sentence>
     <sentence mode="on" keyword="user_profile">
         <entry lang="RUS">Посмотреть свойства текущего пользователя</entry>
-        <entry lang="KAZ">Ағымдағы қолданушының қасиеттерін көру</entry>
+        <entry lang="KAZ">Көру қасиеттері ағымдағы пайдаланушының</entry>
         <entry lang="ENG">View the properties current user</entry>
         <entry lang="CHI">查看當前用戶的屬性</entry>
     </sentence>
     <sentence mode="on" keyword="no_data">
         <entry lang="ENG">There is no any data</entry>
         <entry lang="RUS">Нет данных</entry>
-        <entry lang="KAZ"></entry>
+        <entry lang="KAZ">Деректер жоқ</entry>
     </sentence>
     <sentence mode="on" keyword="ft_search_result">
         <entry lang="RUS">Найдено</entry>
-        <entry lang="KAZ"></entry>
+        <entry lang="KAZ">Табылған</entry>
         <entry lang="ENG">Search result</entry>
     </sentence>
     <sentence mode="on" keyword="back_to_doc_list">
         <entry lang="RUS">Вернуться к списку документов</entry>
-        <entry lang="KAZ">Құжаттар тізіміне оралу</entry>
+        <entry lang="KAZ">Тізімге оралу құжаттарды</entry>
         <entry lang="ENG">Return to the list of documents</entry>
     </sentence>
     <sentence mode="on" keyword="ft_search_return_null">
         <entry lang="ENG">Documnets have been not found, keyword</entry>
         <entry lang="RUS">Документы не найдены, строка поиска</entry>
-        <entry lang="KAZ">Документы не найдены, строка поиска</entry>
+        <entry lang="KAZ">Құжаттар табылмаса, іздеу жолы</entry>
     </sentence>
     <sentence mode="on" keyword="ft_search_keyword_is_empty">
         <entry lang="ENG">Keyword is empty</entry>
         <entry lang="RUS">Ключевое слово не указано</entry>
-        <entry lang="KAZ">Ключевое слово не указано</entry>
+        <entry lang="KAZ">Кілт сөз емес</entry>
     </sentence>
     <sentence mode="on" keyword="sender">
         <entry lang="ENG">Sender</entry>
         <entry lang="RUS">Отправитель</entry>
-        <entry lang="KAZ">Отправитель</entry>
+        <entry lang="KAZ">Жөнелтуші</entry>
     </sentence>
     <sentence mode="on" keyword="recipient">
         <entry lang="ENG">Recipient</entry>
         <entry lang="RUS">Получатель</entry>
-        <entry lang="KAZ">Получатель</entry>
+        <entry lang="KAZ">Алушы</entry>
     </sentence>
     <sentence mode="on" keyword="sendtime">
         <entry lang="ENG">Send time</entry>
         <entry lang="RUS">Дата отправки</entry>
-        <entry lang="KAZ">Дата отправки</entry>
+        <entry lang="KAZ">Жіберу күні</entry>
     </sentence>
     <sentence mode="on" keyword="content">
         <entry lang="RUS">Содержание</entry>
@@ -623,7 +623,7 @@
     <sentence mode="on" keyword="message_has_sent_succesfully">
         <entry lang="ENG">The message has been sent</entry>
         <entry lang="RUS">Сообщение было успешно отправлено</entry>
-        <entry lang="KAZ">The message has been sent</entry>  
+        <entry lang="KAZ">Хабарлама сәтті жіберілді</entry>  
         <entry lang="BUL">Съобщението е изпратено</entry>
         <entry lang="POR">A mensagem foi enviada</entry>
         <entry lang="SPA">El mensaje fue enviado</entry>    
@@ -631,7 +631,7 @@
     <sentence mode="on" keyword="captcha_incorrect">
         <entry lang="ENG">Captcha is incorrect</entry>
         <entry lang="RUS">Капча не верная</entry>
-        <entry lang="KAZ">Captcha is incorrect</entry>  
+        <entry lang="KAZ">Капча дұрыс емес</entry>  
         <entry lang="BUL">Капча е неправилен</entry>
         <entry lang="POR">Captcha is incorrect</entry>
         <entry lang="SPA">Captcha is incorrect</entry>    
@@ -639,7 +639,7 @@
     <sentence mode="on" keyword="message_too_short">
         <entry lang="ENG">The message is too short</entry>
         <entry lang="RUS">Сообщение слишком короткое</entry>
-        <entry lang="KAZ">The message is too short</entry>  
+        <entry lang="KAZ">Хабар тым қысқа</entry>  
         <entry lang="BUL">Посланието е твърде кратък</entry>
         <entry lang="POR">The message is too short</entry>
         <entry lang="SPA">The message is too short</entry>    
@@ -647,7 +647,7 @@
     <sentence mode="on" keyword="message_too_long">
         <entry lang="ENG">The message is too long</entry>
         <entry lang="RUS">Капча не верная</entry>
-        <entry lang="KAZ">The message is too long</entry>  
+        <entry lang="KAZ">Капча дұрыс емес</entry>  
         <entry lang="BUL">Посланието е твърде дълго</entry>
         <entry lang="POR">The message is too long</entry>
         <entry lang="SPA">The message is too long</entry>    
@@ -656,7 +656,7 @@
       <sentence mode="on" keyword="error_404">
         <entry lang="ENG">The requested resource could not be found</entry>
         <entry lang="RUS">Запрашиваемый ресурс не найден</entry>
-        <entry lang="KAZ">The requested resource could not be found</entry>
+        <entry lang="KAZ">Сұралған ресурс табылған жоқ</entry>
         <entry lang="SPA">The requested resource could not be found</entry>
         <entry lang="POR">The requested resource could not be found</entry>
         <entry lang="BUL">The requested resource could not be found</entry>      
@@ -664,7 +664,7 @@
       <sentence mode="on" keyword="error_401">
         <entry lang="ENG">Unauthorized </entry>
         <entry lang="RUS">Вы не авторизованы</entry>
-        <entry lang="KAZ">Unauthorized</entry>
+        <entry lang="KAZ">Сіз авторизациялаудан өтпедіңіз</entry>
         <entry lang="SPA">Unauthorized</entry>
         <entry lang="POR">Unauthorized</entry>
         <entry lang="BUL">Unauthorized</entry>      
@@ -672,7 +672,7 @@
        <sentence mode="on" keyword="error_400">
         <entry lang="ENG">The server cannot or will not process the request due to an apparent client error </entry>
         <entry lang="RUS">Неверный запрос</entry>
-        <entry lang="KAZ">The server cannot or will not process the request due to an apparent client error </entry>
+        <entry lang="KAZ">Дұрыс сұрау</entry>
         <entry lang="SPA">The server cannot or will not process the request due to an apparent client error </entry>
         <entry lang="POR">The server cannot or will not process the request due to an apparent client error </entry>
         <entry lang="BUL">The server cannot or will not process the request due to an apparent client error </entry>      
@@ -680,7 +680,7 @@
        <sentence mode="on" keyword="error_500">
         <entry lang="ENG">Internal Server Error</entry>
         <entry lang="RUS">Внутренняя ошибка сервера</entry>
-        <entry lang="KAZ">Internal Server Error</entry>
+        <entry lang="KAZ">Ішкі сервер қатесі</entry>
         <entry lang="SPA">Internal Server Error</entry>
         <entry lang="POR">Internal Server Error</entry>
         <entry lang="BUL">Internal Server Error</entry>      

@@ -1,4 +1,4 @@
-package com.exponentus.server;
+package com.exponentus.server.cli;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,15 +14,14 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import javax.servlet.http.HttpSession;
-
 import org.eclipse.persistence.exceptions.DatabaseException;
-import org.joda.time.DateTime;
-import org.joda.time.Minutes;
 import org.quartz.SchedulerException;
 
 import com.exponentus.appenv.AppEnv;
+import com.exponentus.dataengine.IDatabase;
+import com.exponentus.dataengine.IFTEngineDeployer;
 import com.exponentus.dataengine.jpa.deploying.InitializerHelper;
+import com.exponentus.dataengine.jpadatabase.ftengine.FTSearchEngineDeployer;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.env.ServletSessionPool;
@@ -32,11 +31,11 @@ import com.exponentus.localization.Localizator;
 import com.exponentus.localization.Vocabulary;
 import com.exponentus.scheduler.SchedulerHelper;
 import com.exponentus.scripting._Session;
+import com.exponentus.server.Server;
 import com.exponentus.util.StringUtil;
-import com.exponentus.util.TimeUtil;
 
 public class Console implements Runnable {
-	private static final String format = "%-30s%s%n";
+	public static final String format = "%-30s%s%n";
 
 	@Override
 	public void run() {
@@ -56,95 +55,22 @@ public class Console implements Runnable {
 
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void cliHandler(String command) {
 		command = command.trim();
 		System.out.println("> " + command);
 		if (command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("q")) {
 			Server.shutdown();
 		} else if (command.equalsIgnoreCase("info") || command.equalsIgnoreCase("i")) {
-			System.out.printf(format, "server version", Server.serverVersion);
-			System.out.printf(format, "os", System.getProperty("os.version") + "(" + System.getProperty("os.arch") + ")");
-			System.out.printf(format, "jvm", System.getProperty("java.version"));
-			DateTime now = DateTime.now();
-			Minutes mins = Minutes.minutesBetween(new DateTime(Environment.startTime), now);
-			System.out.printf(format, "started at",
-			        TimeUtil.dateToStringSilently(Environment.startTime) + ", duration=" + TimeUtil.timeConvert(mins.getMinutes()));
-			System.out.printf(format, "application server name", EnvConst.APP_ID);
-			System.out.printf(format, "server directory", new File("").getAbsolutePath());
-			System.out.printf(format, "officeframe directory", Environment.getOfficeFrameDir());
-			System.out.printf(format, "database name", EnvConst.DATABASE_NAME);
-			System.out.printf(format, "database", Environment.adminApplication.getDataBase().getInfo());
-			System.out.printf(format, "web server port", Environment.httpPort);
-			System.out.printf(format, "default language", EnvConst.DEFAULT_LANG);
-			System.out.printf(format, "session cookie name", EnvConst.AUTH_COOKIE_NAME);
-			System.out.printf(format, "languages", Environment.langs);
-			File file = new File(File.separator);
-			long totalSpace = file.getTotalSpace();
-			long freeSpace = file.getFreeSpace();
-			System.out.printf(format, "total disk size", totalSpace / 1024 / 1024 / 1024 + " gb");
-			System.out.printf(format, "space free", freeSpace / 1024 / 1024 / 1024 + " gb");
-			if (Environment.mailEnable) {
-				System.out.printf(format, "smtp port", Environment.smtpPort);
-				System.out.printf(format, "smtp auth", Environment.smtpAuth);
-				System.out.printf(format, "smtp server", Environment.SMTPHost);
-				System.out.printf(format, "smtp user", Environment.smtpUser);
-				System.out.printf(format, "smtp user name", Environment.smtpUserName);
-			} else {
-				System.out.printf(format, "mail agent: ", "OFF");
-			}
-			if (Environment.isDevMode()) {
-				System.out.printf(format, "developer mode: ", "ON");
-				System.out.printf(format, "external server core folder", Environment.getKernelDir());
-				System.out.printf(format, "external " + EnvConst.OFFICEFRAME + " folder", Environment.getOfficeFrameDir());
-			} else {
-				System.out.printf(format, "developer mode: ", "OFF");
-			}
-			System.out.printf(format, "temporary files", Environment.fileToDelete.size());
+			Info.showServerInfo();
 		} else if (command.equalsIgnoreCase("modules info") || command.equalsIgnoreCase("mi")) {
 			for (AppEnv app : Environment.getApplications()) {
 				System.out.printf(format, app.appName + ": ", app.getDefaultPage());
 			}
-
 		} else if (command.equalsIgnoreCase("database info") || command.equalsIgnoreCase("dbi")) {
-			System.out.println("database " + Environment.adminApplication.getDataBase().getInfo());
-			List<String[]> info = Environment.adminApplication.getDataBase().getCountsOfRec();
-			System.out.printf(format, "Table", "Count");
-			System.out.printf(format, "--------------", "-----");
-			for (String[] entry : info) {
-				System.out.printf(format, entry[0], entry[1]);
-			}
-			System.out.printf(format, "            ", "-----");
-			System.out.printf(format, "     Total  ", Environment.adminApplication.getDataBase().getCount());
+			Info.showDatabaseInfo();
 		} else if (command.equalsIgnoreCase("show users") || command.equalsIgnoreCase("su")) {
-			List<HttpSession> actualUsers = new ArrayList<>();
-			for (HttpSession entry : ServletSessionPool.getSessions().values()) {
-				try {
-					entry.getCreationTime();
-					actualUsers.add(entry);
-				} catch (IllegalStateException ise) {
-
-				}
-			}
-			if (actualUsers.size() > 0) {
-				System.out.printf(format, "User", "Description");
-				System.out.printf(format, "--------------", "-----");
-				for (HttpSession entry : actualUsers) {
-					String firstVal = "", secondVal = "";
-					_Session ses = (_Session) entry.getAttribute(EnvConst.SESSION_ATTR);
-					if (ses != null) {
-						firstVal = ses.getUser().getLogin();
-						secondVal = ses.toString();
-					} else {
-						firstVal = entry.getId();
-					}
-					secondVal += ", callingPage=" + entry.getAttribute("callingPage");
-					System.out.printf(format, firstVal, secondVal);
-				}
-				System.out.printf(format, "            ", "-----");
-				System.out.printf(format, "     Total  ", actualUsers.size());
-			} else {
-				System.out.println("There is no user sessions still");
-			}
+			Info.showUsersInfo();
 		} else if (command.equalsIgnoreCase("reset users") || command.equalsIgnoreCase("ru")) {
 			System.out.println(ServletSessionPool.flush() + " sessions were reseted");
 		} else if (command.equalsIgnoreCase("show session pool") || command.equalsIgnoreCase("ssp")) {
@@ -156,7 +82,6 @@ public class Console implements Runnable {
 
 				}
 			}
-
 		} else if (command.equalsIgnoreCase("reset rules") || command.equalsIgnoreCase("rr")) {
 			for (AppEnv env : Environment.getApplications()) {
 				env.ruleProvider.resetRules(true);
@@ -285,6 +210,55 @@ public class Console implements Runnable {
 			} else {
 				for (String ci : Environment.fileToDelete) {
 					System.out.println(ci);
+				}
+			}
+		} else if (command.startsWith("init ft index") || command.startsWith("ifi")) {
+			int start = 0;
+			if (command.contains("init ft index")) {
+				start = "init ft index".length();
+			} else if (command.startsWith("ifi")) {
+				start = "ifi".length();
+			}
+
+			String tableName = command.substring(start).trim();
+			if (tableName.trim().equals("")) {
+				System.err.println("error -entity class name is empty");
+			} else {
+				IDatabase db = Environment.adminApplication.getDataBase();
+				try {
+					Class<?> clazz = Class.forName(tableName);
+					IFTEngineDeployer ftDeployer = new FTSearchEngineDeployer(db.getConnectionPool());
+					if (ftDeployer.createIndex(clazz)) {
+						System.out.println("ft index for \"" + tableName + "\" has been created");
+					} else {
+						System.out.println("ft index for \"" + tableName + "\" has not been created");
+					}
+				} catch (ClassNotFoundException e) {
+					System.err.println("error -entity \"" + tableName + "\" has not been find");
+				}
+
+			}
+		} else if (command.startsWith("delete ft index") || command.startsWith("dfi")) {
+			int start = 0;
+			if (command.contains("drop ft index")) {
+				start = "drop ft index".length();
+			} else if (command.startsWith("dfi")) {
+				start = "dfi".length();
+			}
+
+			String tableName = command.substring(start).trim();
+			if (tableName.trim().equals("")) {
+				System.err.println("error -entity class name is empty");
+			} else {
+				IDatabase db = Environment.adminApplication.getDataBase();
+				try {
+					Class<?> clazz = Class.forName(tableName);
+					IFTEngineDeployer ftDeployer = new FTSearchEngineDeployer(db.getConnectionPool());
+					if (ftDeployer.dropIndex(clazz)) {
+						System.out.println("ft index for \"" + tableName + "\" has been deleted");
+					}
+				} catch (ClassNotFoundException e) {
+					System.err.println("error -entity \"" + tableName + "\" has not been find");
 				}
 			}
 		} else if (command.equalsIgnoreCase("import from h2") || command.equalsIgnoreCase("import from old structure")

@@ -53,7 +53,7 @@
                             Position
                         </div>
                         <div class="controls">
-                            <input type="number" name="position" value="{fields/position}" class="span2"/>
+                            <input type="number" name="position" value="{fields/position}" class="span1"/>
                         </div>
                     </div>
                 </fieldset>

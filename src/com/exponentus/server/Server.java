@@ -13,6 +13,7 @@ import com.exponentus.env.Site;
 import com.exponentus.log.ILogger;
 import com.exponentus.log.Log4jLogger;
 import com.exponentus.scheduler.PeriodicalServices;
+import com.exponentus.server.cli.Console;
 import com.exponentus.util.NetUtil;
 import com.exponentus.webserver.WebServer;
 

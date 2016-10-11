@@ -51,10 +51,12 @@ public abstract class AppEntity<K extends UUID> implements IAppEntity, IPOJOObje
 	@Transient
 	private String authorName;
 
-	// @Column(name = "reg_date", nullable = false, updatable = false,
-	// columnDefinition = "DATE DEFAULT CURRENT_DATE")
 	@Column(name = "reg_date", nullable = false, updatable = false)
 	protected Date regDate;
+
+	// TODO it need to added later
+	// @Column(name = "last_mod_date", nullable = false)
+	// protected Date lastModifiedDate = regDate;
 
 	@Column(name = "form", nullable = false, updatable = false, length = 64)
 	protected String form;
